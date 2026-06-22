@@ -1,0 +1,19 @@
+go 1.25.0
+
+// Unified workspace: all TicketsBot Go modules resolve from local source under ./go,
+// replacing the per-module version pins (the worker/dashboard go.mod files originally
+// pulled these from github). This lets the single ticketbot binary build against one
+// shared copy of each module — notably one `common` (worker pinned a newer commit than
+// dashboard; the workspace forces both onto ./go/common).
+use (
+	./go/analytics-client
+	./go/archiverclient
+	./go/autoclosedaemon
+	./go/common
+	./go/database
+	./go/dashboard
+	./go/gdl
+	./go/logarchiver
+	./go/ticketbot
+	./go/worker
+)

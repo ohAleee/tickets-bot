@@ -1,0 +1,150 @@
+package admin
+
+import (
+	"fmt"
+	"strings"
+	"time"
+
+	"github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/common/premium"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/worker/bot/command"
+	"github.com/TicketsBot-cloud/worker/bot/command/registry"
+	"github.com/TicketsBot-cloud/worker/bot/customisation"
+	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/model"
+	"github.com/TicketsBot-cloud/worker/bot/utils"
+	"github.com/TicketsBot-cloud/worker/i18n"
+)
+
+type AdminWhitelabelDataCommand struct {
+}
+
+func (AdminWhitelabelDataCommand) Properties() registry.Properties {
+	return registry.Properties{
+		Name:            "whitelabel-data",
+		Description:     i18n.HelpAdmin,
+		Type:            interaction.ApplicationCommandTypeChatInput,
+		PermissionLevel: permission.Everyone,
+		Category:        command.Settings,
+		HelperOnly:      true,
+		Arguments: command.Arguments(
+			command.NewRequiredArgument("user_id", "ID of the user who has the whitelabel subscription", interaction.OptionTypeUser, i18n.MessageInvalidArgument),
+		),
+		Timeout: time.Second * 10,
+	}
+}
+
+func (c AdminWhitelabelDataCommand) GetExecutor() interface{} {
+	return c.Execute
+}
+
+func (AdminWhitelabelDataCommand) Execute(ctx registry.CommandContext, userId uint64) {
+	tier, err := utils.PremiumClient.GetTierByUser(ctx, userId, false)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	if tier < premium.Whitelabel {
+		ctx.ReplyRaw(customisation.Red, "Subscription not found", fmt.Sprintf("User does not have a whitelabel subscription (%s)", tier.String()))
+		return
+	}
+
+	data, err := dbclient.Client.Whitelabel.GetByUserId(ctx, userId)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	var botIdFormatted = "Bot not found"
+	var publicKeyFormatted = "Not set"
+	if data.BotId != 0 {
+		botIdFormatted = fmt.Sprintf("%d (<@%d>)", data.BotId, data.BotId)
+
+		application, err := rest.GetCurrentApplication(ctx, data.Token, nil)
+		if err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		if application.VerifyKey == data.PublicKey {
+			publicKeyFormatted = "Matches"
+		} else {
+			publicKeyFormatted = "Does not match(!)"
+		}
+	}
+
+	errors, err := dbclient.Client.WhitelabelErrors.GetRecent(ctx, userId, 3)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	var errorsFormatted string
+	if len(errors) == 0 {
+		errorsFormatted = "No errors found"
+	} else {
+		strs := make([]string, len(errors))
+		for i, botError := range errors {
+			strs[i] = fmt.Sprintf("[<t:%d:f>] `%s`", botError.Time.Unix(), botError.Message)
+		}
+
+		errorsFormatted = strings.Join(strs, "\n")
+	}
+
+	guilds, err := dbclient.Client.WhitelabelGuilds.GetGuilds(ctx, data.BotId)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	var guildsFormatted string
+	if len(guilds) == 0 {
+		guildsFormatted = "No Guilds"
+	} else {
+		for _, guild := range guilds {
+			guildsFormatted += fmt.Sprintf("%d\n", guild)
+		}
+
+		guildsFormatted = strings.TrimSuffix(guildsFormatted, "\n")
+	}
+
+	tds := ""
+
+	fields := []model.Field{
+		{Name: "Subscription Tier", Value: tier.String()},
+		{Name: "Bot ID", Value: botIdFormatted},
+	}
+
+	if data.BotId != 0 {
+		fields = append(fields, model.Field{Name: "Public Key", Value: publicKeyFormatted})
+		fields = append(fields, model.Field{Name: "Guilds", Value: guildsFormatted})
+		fields = append(fields, model.Field{Name: "Last 3 Errors", Value: errorsFormatted})
+		fields = append(fields, model.Field{
+			Name:  "Invite Link",
+			Value: fmt.Sprintf("[Click Here](https://discord.com/oauth2/authorize?client_id=%d&scope=bot+applications.commands&permissions=395942816984)", data.BotId),
+		})
+	}
+
+	for i := range fields {
+		tds += fmt.Sprintf("**%s:** %s\n", fields[i].Name, fields[i].Value)
+	}
+
+	innerComponents := []component.Component{
+		component.BuildTextDisplay(component.TextDisplay{Content: "## Whitelabel"}),
+		component.BuildSeparator(component.Separator{}),
+		component.BuildTextDisplay(component.TextDisplay{
+			Content: tds,
+		}),
+	}
+
+	ctx.ReplyWith(command.NewMessageResponseWithComponents(utils.Slice(utils.BuildContainerWithComponents(
+		ctx,
+		customisation.Green,
+		"Admin - Whitelabel Data",
+		innerComponents,
+	))))
+}

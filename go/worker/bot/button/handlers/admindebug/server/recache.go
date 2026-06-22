@@ -1,0 +1,105 @@
+package server
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+	"time"
+
+	permcache "github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/worker/bot/button/registry"
+	"github.com/TicketsBot-cloud/worker/bot/button/registry/matcher"
+	"github.com/TicketsBot-cloud/worker/bot/command"
+	"github.com/TicketsBot-cloud/worker/bot/command/context"
+	"github.com/TicketsBot-cloud/worker/bot/customisation"
+	"github.com/TicketsBot-cloud/worker/bot/redis"
+	"github.com/TicketsBot-cloud/worker/bot/utils"
+)
+
+type AdminDebugServerRecacheHandler struct{}
+
+func (h *AdminDebugServerRecacheHandler) Matcher() matcher.Matcher {
+	return matcher.NewFuncMatcher(func(customId string) bool {
+		return strings.HasPrefix(customId, "admin_debug_recache")
+	})
+}
+
+func (h *AdminDebugServerRecacheHandler) Properties() registry.Properties {
+	return registry.Properties{
+		Flags:           registry.SumFlags(registry.GuildAllowed, registry.CanEdit),
+		Timeout:         time.Second * 30,
+		PermissionLevel: permcache.Support,
+		HelperOnly:      true,
+	}
+}
+
+func (h *AdminDebugServerRecacheHandler) Execute(ctx *context.ButtonContext) {
+	if !utils.IsBotHelper(ctx.UserId()) {
+		ctx.ReplyRaw(customisation.Red, "Error", "You do not have permission to use this button.")
+	}
+
+	guildId, err := strconv.ParseUint(strings.Replace(ctx.InteractionData.CustomId, "admin_debug_recache_", "", -1), 10, 64)
+
+	if onCooldown, cooldownTime := redis.GetRecacheCooldown(guildId); onCooldown {
+		ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
+			utils.BuildContainerWithComponents(
+				ctx,
+				customisation.Red,
+				"Admin - Recache",
+				[]component.Component{
+					component.BuildTextDisplay(component.TextDisplay{
+						Content: fmt.Sprintf("Recache for this guild is on cooldown. Please wait until it is available again.\n\n**Cooldown ends** <t:%d:R>", cooldownTime.Unix()),
+					}),
+				},
+			)}))
+		return
+	}
+	currentTime := time.Now()
+
+	// purge cache
+	ctx.Worker().Cache.DeleteGuild(ctx, guildId)
+	ctx.Worker().Cache.DeleteGuildChannels(ctx, guildId)
+	ctx.Worker().Cache.DeleteGuildRoles(ctx, guildId)
+
+	worker, err := utils.WorkerForGuild(ctx, ctx.Worker(), guildId)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	guild, err := worker.GetGuild(guildId)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	guildChannels, err := worker.GetGuildChannels(guildId)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	// Set the recache cooldown
+	if err := redis.SetRecacheCooldown(guildId, time.Second*30); err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
+		utils.BuildContainerWithComponents(
+			ctx,
+			customisation.Orange,
+			"Admin - Recache",
+			[]component.Component{
+				component.BuildTextDisplay(component.TextDisplay{
+					Content: fmt.Sprintf("**%s** has been recached successfully.\n\n**Guild ID:** %d\n**Time Taken:** %s", guild.Name, guildId, time.Since(currentTime).Round(time.Millisecond)),
+				}),
+				component.BuildSeparator(component.Separator{}),
+				component.BuildTextDisplay(component.TextDisplay{
+					Content: fmt.Sprintf("### Cache Stats\n**Channels:** `%d`\n**Roles:** `%d`", len(guildChannels), len(guild.Roles)),
+				}),
+			},
+		),
+	}))
+}

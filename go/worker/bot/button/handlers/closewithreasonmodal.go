@@ -1,0 +1,69 @@
+package handlers
+
+import (
+	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/worker/bot/button"
+	"github.com/TicketsBot-cloud/worker/bot/button/registry"
+	"github.com/TicketsBot-cloud/worker/bot/button/registry/matcher"
+	"github.com/TicketsBot-cloud/worker/bot/command/context"
+	"github.com/TicketsBot-cloud/worker/bot/customisation"
+	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/utils"
+	"github.com/TicketsBot-cloud/worker/i18n"
+)
+
+type CloseWithReasonModalHandler struct{}
+
+func (h *CloseWithReasonModalHandler) Matcher() matcher.Matcher {
+	return &matcher.SimpleMatcher{
+		CustomId: "close_with_reason",
+	}
+}
+
+func (h *CloseWithReasonModalHandler) Properties() registry.Properties {
+	return registry.Properties{
+		Flags:   registry.SumFlags(registry.GuildAllowed),
+		Timeout: time.Second * 3,
+	}
+}
+
+func (h *CloseWithReasonModalHandler) Execute(ctx *context.ButtonContext) {
+	ticket, err := dbclient.Client.Tickets.GetByChannelAndGuild(ctx, ctx.ChannelId(), ctx.GuildId())
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	if ticket.Id == 0 {
+		ctx.Reply(customisation.Red, i18n.Error, i18n.MessageNotATicketChannel)
+		return
+	}
+
+	if !utils.CanClose(ctx.Context, ctx, ticket) {
+		ctx.Reply(customisation.Red, i18n.Error, i18n.MessageCloseNoPermission)
+		return
+	}
+
+	ctx.Modal(button.ResponseModal{
+		Data: interaction.ModalResponseData{
+			CustomId: "close_with_reason_submit",
+			Title:    i18n.TitleClose.GetFromGuild(ctx.GuildId()),
+			Components: []component.Component{
+				component.BuildLabel(component.Label{
+					Label:       i18n.Reason.GetFromGuild(ctx.GuildId()),
+					Description: utils.Ptr(i18n.Reason.GetFromGuild(ctx.GuildId())),
+					Component: component.BuildInputText(component.InputText{
+						Style:       component.TextStyleParagraph,
+						CustomId:    "reason",
+						Placeholder: utils.Ptr(i18n.MessageCloseReasonPlaceholder.GetFromGuild(ctx.GuildId())),
+						MinLength:   nil,
+						MaxLength:   utils.Ptr(uint32(1024)),
+					}),
+				}),
+			},
+		},
+	})
+}

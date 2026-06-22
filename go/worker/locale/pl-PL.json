@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets to łatwy w obsłudze, wysoce konfigurowalny i pomocny bot.\\nSerwer wsparcia: %s\\nKomendy: Wpisz `%s`\\nAby rozpocząć wpisz `%s`",
+	"commands.add.no_members": "Musisz oznaczyć użytkowników, aby dodać ich do zgłoszenia",
+	"commands.add.no_permission": "Nie masz uprawnień, aby dodać użytkowników do tego zgłoszenia",
+	"commands.add.no_everyone": "Nie możesz dodać roli `@everyone` do zgłoszenia",
+	"commands.addadmin.no_members": "Musisz oznaczyć użytkownika lub rolę, aby przypisać mu uprawnienia administratora",
+	"commands.addadmin.owner": "Właściciel serwera jest już administratorem",
+	"commands.addsupport.no_members": "Musisz oznaczyć użytkownika lub rolę, aby przypisać im uprawnienia reprezentanta wsparcia",
+	"commands.blacklist.no_members": "Musisz oznaczyć użytkownika, aby dodać go na czarną listę",
+	"commands.blacklist.self": "Nie możesz dodać samego siebie na czarną listę",
+	"commands.claim.success": "%s zajmie się obsługą Twojego zgłoszenia",
+	"commands.invite": "[Kliknij tutaj](<%s>)",
+	"commands.language.invalid": "Musisz określić kod języka lub flagę. Dostępne języki:\\n%s",
+	"commands.open.ticket_limit": " W jednym momencie możesz otworzyć tylko %d %s",
+	"commands.open.too_many_tickets": "W tej kategorii jest zbyt dużo otwartych zgłoszeń. Poproś administrację o zamknięcie paru, przeniesienie ich do innej kategorii lub skonfigurowanie kategorii przeciążenia.\n\nTo jest limit 50 kanałów na kategorię **narzucony przez Discorda**.",
+	"commands.panel": "Odwiedź <%s>, aby skonfigurować panel",
+	"commands.premium": "Możesz kupić subskrypcje premium na <%s>.\\nPremium zapewnia wiele korzyści, takich jak:\\n```diff\\n+ Tworzenie panelów bez limitu\\n+ Własna nazwa, awatar i status (whitelabel)\\n+ Dokładne statystyki o serwerze, użytkownikach i obsłudze\\n+ Brak reklamy w stopkach wiadomości\\n+ Wspieraj rozwój i pomóż mi opłacić koszty serwera\\n```\\n\\nOpcjonalnie, możesz zagłosować na <%s> aby dostać darmowe premium na 24 godziny",
+	"commands.premium.invalid_key": "Nieprawidłowy klucz. Upewnij się, że skopiowałeś go prawidłowo.",
+	"commands.remove.no_permission": "Nie masz uprawnień, aby usuwać użytkowników z tego zgłoszenia",
+	"commands.remove.staff": "Nie możesz usunąć obsługi ze zgłoszenia",
+	"commands.removeadmin.no_members": "Musisz oznaczyć użytkownika lub rolę, aby zabrać mu uprawnienia administratora",
+	"commands.removeadmin.owner": "Właściciel serwera musi być administratorem",
+	"commands.removeadmin.self": "Nie możesz odebrać sobie uprawnień",
+	"commands.removesupport.no_members": "Musisz oznaczyć użytkownika lub rolę, aby zabrać mu uprawnienia reprezentanta wsparcia",
+	"commands.rename.missing_name": "Musisz określić nową nazwę dla tego zgłoszenia",
+	"commands.rename.success": "Nazwa zgłoszenia została zmieniona na <#%d>",
+	"commands.tags.create.already_exists": "Tag z ID `%s` już istnieje. Możesz go usunąć używając `%s`",
+	"commands.tags.create.invalid_arguments": "Musisz sprecyzować ID tagu i jego zawartość",
+	"commands.tags.create.too_long": "ID tagu nie może być dłuższe, niż 16 znaków",
+	"commands.tags.delete.invalid_arguments": "Musisz określić ID tagu, aby go usunąć",
+	"commands.tags.delete.not_exist": "Tag z ID `%s` nie został znaleziony",
+	"commands.tags.get.invalid_arguments": "Musisz określić ID tagu. Po więcej informacji na temat tagów odwiedź <%s>.",
+	"commands.tags.get.invalid_tag": "Nieprawidłowy tag. Po więcej informacji na temat tagów odwiedź <%s>.",
+	"commands.tags.list": "Lista ID tagów: \\n%s\\nAby zobaczyć zawartość tagu, napisz `%s`",
+	"commands.unclaim.not_claimed": "To zgłoszenie nie jest przejęte",
+	"commands.unclaim.not_claimer": "Tylko administracja i użytkownicy, którzy przejęli zgłoszenie mogą usunąć przypisanie",
+	"commands.unclaim.success": "Wszyscy reprezentanci wsparcia mogą teraz odpowiedzieć na zgłoszenie",
+	"commands.vote": "Kliknij przycisk poniżej, aby zagłosować na bota i otrzymać 24 godziny darmowego premium.\n\nPo zagłosowaniu użyj komendy %s, aby zrealizować kredyty za głosowanie.",
+	"generic.invalid_argument": "Nieprawidłowy argument: patrz użycie",
+	"generic.invalid_user": "Nie można znaleźć użytkownika",
+	"generic.no_permission": "Nie masz uprawnień, aby to zrobić",
+	"generic.not_ticket": "To nie jest kanał zgłoszeń",
+	"generic.owner_only": "Ta komenda jest zarezerwowana wyłącznie dla właściciela bota",
+	"help.about": "Informacje o bocie",
+	"help.add": "Dodaje użytkownika do zgłoszenia",
+	"help.addadmin": "Dodaje użytkownika lub rolę jako administratora",
+	"help.addsupport": "Dodaje rolę jako reprezentanta wsparcia",
+	"help.admin": "Zarządzanie botem",
+	"help.admin.blacklist": "Zablokuj możliwość używania bota w serwerze",
+	"help.admin.debug.server": "Debugowanie serwera",
+	"help.admin.generate_premium": "Generuje klucz premium",
+	"help.admin.unblacklist": "Usuwa serwer z czarnej listy serwerów",
+	"help.blacklist": "Ustawia, czy poszczególni użytkownicy mają mieć możliwość interakcji z botem",
+	"help.cancel": "Anuluje proces konfiguracyjny",
+	"help.claim": "Przypisuje jednego członka obsługi do zgłoszenia",
+	"help.close": "Zamyka aktualne zgłoszenie",
+	"help.help": "Pokazuje listę komend",
+	"help.invite": "Wysyła link do dodania bota",
+	"help.language": "Zmienia język bota",
+	"help.managetags": "Dodaj, usuń lub wyświetl tagi",
+	"help.open": "Otwiera nowe zgłoszenie",
+	"help.panel": "Tworzy panel umożliwiający użytkownikowi otwarcie zgłoszenia jednym kliknięciem",
+	"help.premium": "Uruchom to polecenie po zakupie premium, aby je aktywować",
+	"help.remove": "Usuwa użytkownika ze zgłoszenia",
+	"help.removeadmin": "Pozbawia użytkownika lub roli statusu administratora",
+	"help.removesupport": "Pozbawia użytkownika lub roli statusu reprezentanta wsparcia",
+	"help.rename": "Zmienia nazwę zgłoszenia",
+	"help.setup": "Umożliwia łatwą konfigurację bota",
+	"help.stats": "Pokazuje statystyki użytkowników, obsługi i serwera",
+	"help.statsserver": "Pokazuje statystyki serwera",
+	"help.tag": "Wysyła wiadomość tekstową",
+	"help.tagdelete": "Usuwa tag",
+	"help.taggadd": "Dodaje nowy tag",
+	"help.taglist": "Wyświetla tagi",
+	"help.transfer": "Przekazuje przejęte zgłoszenie innemu użytkownikowi",
+	"help.unclaim": "Cofa przejęcie zgłoszenia",
+	"help.viewstaff": "Pokazuje członków administracji i role",
+	"help.vote": "Daje link do głosowania w zamian za darmowe premium",
+	"help.gdpr": "Zarządzaj swoimi żądaniami RODO",
+	"open.success": "Otwarto nowe zgłoszenie: %s",
+	"open.outside_support_hours": {
+		"title": "Ten panel jest obecnie zamknięty",
+		"message": "Proszę spróbować ponownie w godzinach wsparcia."
+	},
+	"setup.auto.category.failure": "Nie posiadam uprawnienia `Zarządzanie kanałami`",
+	"setup.auto.category.success": "Utworzono kategorię dla zgłoszeń",
+	"setup.auto.completed": "Konfiguracja zakończona! Kliknij [tu](%s), aby skonfigurować panel reakcji i dodać role <@&%d> i <@&%d> do Twoich członków obsługi",
+	"setup.auto.roles.failure": "Nie posiadam uprawnienia `Zarządzanie rolami`",
+	"setup.auto.roles.success": "Utworzono role `Tickets Admin` i `Tickets Support`",
+	"setup.auto.transcript.failure": "Nie posiadam uprawnienia `Zarządzanie kanałem`",
+	"setup.auto.transcript.success": "Utworzono kanał <#%d>",
+	"setup.ticket_limit.success": "Limit zgłoszeń został zaktualizowany do `%d`",
+	"setup.transcript.invalid": "Musisz podać prawidłowy kanał na serwerze (np. <#%d>)\\n**Przykład:** `%s`",
+	"setup.transcript.success": "Kanał transkrypcji został zmieniony na <#%d>",
+	"commands.language.help_wanted": "Mówisz w innym języku? Dołącz do naszego [serwera wsparcia](%s), jeśli jesteś zainteresowany pomocą w tłumaczeniu bota na większą ilość języków",
+	"commands.rename.too_long": "Nazwa kanału nie może być dłuższa niż 100 znaków",
+	"commands.autoclose.configure": "Odwiedź [panel sterowania](%s), by zmienić ustawienia zamykania automatycznego",
+	"help.autoclose": "Komendy związane z automatycznym zamykaniem",
+	"help.autoclose.exclude": "Wyklucza bieżące zgłoszenie z automatycznego zamykania",
+	"help.autoclose.configure": "Edytuje ustawienia związane z automatycznym zamykaniem",
+	"commands.autoclose.exclude.success": "To zgłoszenie zostało wyłączone z automatycznego zamykania",
+	"commands.claim.no_permission": "Tylko obsługa może przejmować zgłoszenia",
+	"commands.open.from": "To zgłoszenie zostało otwarte z [tej wiadomości](%s).\n\n<@%d> napisał w <#%d>:\n```%s```",
+	"commands.open.from.moved": "Dyskusja została przeniesiona do zgłoszenia (<#%d>)",
+	"help.close_request": "Wysyła wiadomość do użytkownika z prośbą o zamknięcie zgłoszenia",
+	"close.reason_too_long": "Powód nie może być dłuższy niż 255 znaków",
+	"commands.close_request.success": "Wniosek o zamknięcie zgłoszenia wysłany pomyślnie",
+	"commands.close_request.no_reason": "<@%d> wnoskuje o zamknięcie tego zgłoszenia.\n\nProszę zaakceptować lub odrzucić używając poniższych przycisków.",
+	"commands.close_request.with_reason": "<@%d> wnioskuje o zamknięcie tego zgłoszenia. Powód:\n```\n%s\n```\nProszę zaakceptować lub odrzucić używając poniższych przycisków.",
+	"commands.close_request.no_permission": "Tylko użytkownik, który otworzył zgłoszenie może odpowiedzieć na żądanie zamknięcia",
+	"commands.close_request.denied": "<@%d> odrzucił żądanie zamknięcia",
+	"generic.error": "Błąd",
+	"feedback.disabled": "Ten serwer ma wyłączone opinie",
+	"feedback.success": "Twoja opinia została zanotowana",
+	"generic.success": "Sukces",
+	"button.guild_only": "Ten przycisk musi być używany na serwerze",
+	"button.dms_only": "Ten przycisk musi być używany w prywatnych wiadomościach",
+	"commands.tag.generic": "Tag",
+	"commands.tags.delete.success": "Tag `%s` został usunięty",
+	"generic.ticket": "Zgłoszenie",
+	"generic.title.premium_only": "Komenda tylko dla serwerów Premium",
+	"generic.admin": "Administrator",
+	"commands.tags.create.success": "Tag utworzony - możesz go użyć poprzez użycie `%s`",
+	"generic.title.about": "O Aplikacji",
+	"generic.title.vote": "Zagłosuj",
+	"generic.title.tags": "Tagi",
+	"generic.title.autoclose": "Automatyczne zamykanie",
+	"generic.title.invite": "Zaproszenie",
+	"generic.title.close": "Zamknij",
+	"generic.title.claim": "Przejmij zgłoszenie",
+	"generic.title.unclaim": "Usuń przypisanie",
+	"generic.title.blacklisted": "Dodany do czarnej listy",
+	"generic.title.blacklist": "Czarna lista",
+	"generic.error.blacklisted": "Jesteś na czarnej liście na tym serwerze",
+	"generic.error.guild_blacklisted": "Ten serwer jest na czarnej liście używania tego bota",
+	"generic.error.user_blacklisted": "Jesteś na czarnej liście używania tego bota",
+	"commands.blacklist.add.success": "<@%d> został dodany do czarnej listy",
+	"commands.blacklist.remove.success": "<@%d> został usunięty z czarnej listy",
+	"generic.title.add_admin": "Dodaj Administratora",
+	"generic.title.add_support": "Dodaj Przedstawiciela Wsparcia",
+	"generic.title.remove_admin": "Usuń Administratora",
+	"generic.title.remove_support": "Usuń Przedstawiciela Wsparcia",
+	"commands.addsupport.success": "Przedstawiciel wsparcia dodany pomyślnie: %s",
+	"generic.title.language": "Język",
+	"commands.removesupport.success": "Przedstawiciel wsparcia usunięty pomyślnie: %s",
+	"commands.addadmin.success": "Administrator dodany pomyślnie: %s",
+	"commands.removeadmin.success": "Administrator usunięty pomyślnie: %s",
+	"generic.title.setup": "Konfiguracja",
+	"generic.title.premium": "Premium",
+	"generic.title.panel": "Panel",
+	"generic.title.rename": "Zmień nazwę",
+	"generic.title.remove": "Usuń",
+	"generic.title.help": "Pomoc",
+	"generic.title.close_confirmation": "Potwierdzenie zamknięcia",
+	"close.confirmation": "Proszę, potwierdź, że chcesz zamknąć to zgłoszenie",
+	"generic.title.close_request": "Wniosek o zamknięcie zgłoszenia",
+	"commands.close_request.accept": "Zaakceptuj i zamknij",
+	"commands.close_request.deny": "Odrzuć i pozostaw otwarte",
+	"commands.premium.success": "Premium zostało aktywowane na **%d** dni",
+	"generic.title.claimed": "Przejęto zgłoszenie",
+	"generic.title.unclaimed": "Usunięto przypisanie zgłoszenia",
+	"generic.title.add": "Dodaj",
+	"commands.add.success": "<@%s> został dodany do <#%d>",
+	"commands.add.role_thread": "Ze względu na ograniczenia Discorda, role nie mogą zostać dodawane do zgłoszeń wątków",
+	"commands.remove.success": "<@%s> został usunięty z <#%d>",
+	"commands.remove.role_thread": "Ze względu na ograniczenia Discorda, role nie mogą zostać usunięte ze zgłoszeń wątków",
+	"open.ratelimited": "Zgłoszenia są otwierane za szybko na tym serwerze",
+	"open.panel_cooldown": "Jesteś w trakcie czasu odnowienia dla tego panelu. Spróbuj ponownie %s.",
+	"commands.claim.thread": "Ze względu na ograniczenia Discorda, funkcja obsługiwania zgłoszeń nie wspiera wątków",
+	"generic.join_support_server": "Dołącz do serwera wsparcia",
+	"commands.open.guild_channel_limit": "Ten serwer osiągnął limit 500 kanałów na Discordzie",
+	"commands.open.missing_form_answer": "Musisz odpowiedzieć na pytanie `%s`",
+	"close.no_permission": "Nie posiadasz uprawnień, aby zamknąć to zgłoszenie",
+	"": {
+		"generic.title.close_with_reason": "Zamknij z powodem",
+		"generic.reason": "Powód"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Powód zamknięcia zgłoszenia, np. ''Rozwiązane''"
+		},
+		"success": "Zgłoszenie zostało zamknięte przez <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "Nie możesz ocenić tego zgłoszenia, ponieważ jesteś przedstawicielem wsparcia w %s",
+				"empty": "Nie możesz ocenić tego zgłoszenia, ponieważ nie wysłałeś żadnych wiadomości"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Komenda `%s` jest wyłączona na tym serwerze: użyj panelu zgłoszeń, by otworzyć zgłoszenie",
+			"threads": {
+				"cant_see_parent_channel": "Nie można dodać <@%d> do zgłoszenia: Upewnij się, że użytkownik ma uprawnienia do przeglądania kanału nadrzędnego wątku (<#%d>)",
+				"cant_message_in_threads": "Brakuje Ci uprawnienia `Wysyłanie wiadomości w wątkach`, które jest wymagane do otwarcia zgłoszenia. Poproś administratora serwera o przyznanie Ci tego uprawnienia i spróbuj ponownie."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Nieprawidłowy panel: Musisz wybrać jeden z listy rozwijanej",
+			"success": "To zgłoszenie zostało przełączone na panel `%s` przez <@%d>",
+			"non_thread_to_thread": "Nie możesz przełączyć się na panel, który używa wątków ze zgłoszenia nieużywającego wątków",
+			"claimer_no_access_title": "Zablokowano zmianę panelu",
+			"claimer_no_access": "Osoba obsługująca to zgłoszenie (<@%d>) nie ma dostępu do wybranego panelu.",
+			"auto_unclaimed": "Bilet został przełączony do panelu `%s` przez <@%d>.\n\nBilet został automatycznie zwolniony, ponieważ <@%d> nie ma dostępu do nowego panelu."
+		},
+		"blacklist": {
+			"staff": "Obsługa nie może być na czarnej liście",
+			"add_role": {
+				"success": "<@&%d> został dodany do czarnej listy",
+				"limit": "Osiągnąłeś limit ról na czarnej liście (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> został usunięty z czarnej listy"
+			},
+			"add": {
+				"limit": "Osiągnąłeś limit czarnej listy użytkowników (%d): rozważ użycie roli"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "To zgłoszenie nie ma wiadomości powitalnej",
+			"content": "Kliknij przycisk poniżej, aby przejść do góry zgłoszenia"
+		},
+		"addsupport": {
+			"confirm": "Potwierdź, że chcesz dodać %s do domyślnego zespołu reprezentantów wsparcia",
+			"everyone": "Nie możesz dodać roli `@everyone` jako obsługi"
+		},
+		"addadmin": {
+			"confirm": "Potwierdź, że chcesz dodać %s jako administratora bota"
+		},
+		"tags": {
+			"create": {
+				"limit": "Osiągnąłeś maksymalny limit tagów (%d)"
+			},
+			"get": {
+				"requires_premium": "Premium jest wymagane do używania niestandardowych komand (aliasów tagów)"
+			}
+		},
+		"language": {
+			"content": "Dostępne języki i postęp w ich tłumaczeniu:\n%s",
+			"success": "Język serwera został zmieniony na **%s** (%s)",
+			"select": "Wybierz język (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` może zostać użyte tylko w trybie wątkowym. Odwiedź [dokumentacje](%s), aby dowiedzieć się więcej na temat wątków",
+			"success": "Jesteś teraz oznaczany w nowych zgłoszeniach",
+			"remove_success": "Już nie będziesz oznaczany w nowych zgłoszeniach"
+		},
+		"reopen": {
+			"not_found": "Nie znaleziono zgłoszenia",
+			"no_permission": "Nie masz uprawnień, aby ponownie otworzyć to zgłoszenie",
+			"already_open": "To zgłoszenie jest już otwarte",
+			"not_thread": "Tylko wątki mogą zostać otwarte ponownie",
+			"thread_deleted": "Zgłoszenie zostało trwale usunięte",
+			"success": "Zgłoszenie %d zostało otwarte ponownie: <#%d>",
+			"in_ticket": "To zgłoszenie zostało otwarte ponownie przez <#%d>"
+		},
+		"premium": {
+			"key": "Klucz",
+			"check_again": "Sprawdź ponownie",
+			"subscription_found": "Subskrybcja Znaleziona!",
+			"subscription_found_content": "Aby zastosować subskrypcję na tym serwerze, właściciel serwera (<@%d>) musi dodać Cię jako administratora **użytkownika** (role są ignorowane) za pomocą polecenia %s.\\n\\nMożesz zweryfikować, czy zostałeś dodany jako administrator poprzez uruchomienie %s.",
+			"activate_key": "Aktywuj klucz Premium",
+			"checking": "Sprawdzanie statusu Premium...",
+			"please_wait": "Proszę czekać...",
+			"success_after_check": "Premium jest teraz aktywne na tym serwerze!",
+			"link_patreon_account": "Połącz konto Patreon",
+			"no_subscription": "Nie udało się znaleźć aktywnej subskrypcji Patreon połączonej z Twoim kontem Discord. Upewnij się, że [połączyłeś swoje konta Patreon i Discord](%s), a następnie poczekaj 10 minut.",
+			"open_form": "Otwórz formularz",
+			"open_form_description": "Naciśnij poniższy przycisk, aby otworzyć ponownie formularz",
+			"use_key_anyway": "Użyj klucza Premium mimo to",
+			"already_purchased_title": "Masz już zakupioną wersje premium?",
+			"already_purchased_description": "Jeśli kupiłeś już premium, wybierz metodę płatności z listy rozwijanej, aby rozpocząć",
+			"giveaway_key": "Klucz Gratisowy",
+			"selector": {
+				"description": "Wybierz metodę, której użyłeś do otrzymania premium",
+				"key": {
+					"description": "Wybierz tę opcję, jeśli otrzymałeś klucz gratisowy"
+				},
+				"patreon": {
+					"description": "Wybierz tę opcję, jeśli dokonałeś zakupu przez Patreon"
+				},
+				"discord": {
+					"description": "Wybierz tę opcję, jeżeli dokonałeś zakupu w sklepie Discord"
+				}
+			},
+			"about": "Premium daje Ci dostęp do większej liczby paneli, statystyk, niestandardowego bota i więcej! Odwiedź naszą [stronę](%s), aby dowiedzieć się więcej.",
+			"already_activated": "Dobre wieści! Premium jest już aktywne na tym serwerze.",
+			"already_activated_whitelabel": "Dobre wieści! Premium jest już aktywne na tym serwerze.\n\nAby uzyskać pomoc w rozpoczęciu pracy z whitelabel, przeczytaj [nasz przewodnik konfiguracji whitelabel](%s).",
+			"discord": {
+				"no_subscription": "Premium może być zakupione bezpośrednio poprzez Discord. Kliknij przycisk poniżej tej wiadomości, aby otworzyć stronę zarządzania subskrypcją.\n\nPo zakupie proszę poczekać do 5 minut na wykrycie subskrypcji."
+			},
+			"subscription_found_content_modern": "Twoja subskrypcja Patreon została znaleziona. Proszę poniższy przycisk „Otwórz Selektor Serwerów”, aby otworzyć panel sterowania, gdzie wybierzesz serwery, do których chcesz zastosować subskrypcje premium.",
+			"open_server_selector": "Otwórz Selektor Serwerów"
+		},
+		"notes": {
+			"added_to_existing": "Zostałeś dodany do istniejącego wątku notatek: <#%d>",
+			"thread_name": "notatki",
+			"created": "Wątek notatek został utworzony dla tego zgłoszenia: <#%d>",
+			"channel_mode_only": "Wątki notatek są wspierane tylko w trybie kanałowym"
+		},
+		"rename": {
+			"ratelimited": "Ze względu na ograniczenia nałożone przez Discorda, nazwy zgłoszeń można zmieniać tylko dwa razy na 10 minut"
+		},
+		"vote": {
+			"redeem_credits": "Zrealizuj Kredyty",
+			"no_credits": "Realizacja nie powiodła się: nie masz żadnych kredytów za głosowanie!",
+			"redeem": {
+				"success": {
+					"plural": "Twoje kredyty za głosowanie zostały zrealizowane na **%d** dni premium!",
+					"singular": "Twoje kredyty za głosowanie zostały zrealizowane na **%d** dzień premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "Masz **%d** kredytów za głosowanie. Kliknij przycisk \"Zrealizuj Kredyty\" poniżej, aby zrealizować je za %d dni premium na tym serwerze.",
+				"singular": "Masz **%d** kredytów za głosowanie. Kliknij przycisk \"Zrealizuj Kredyty\" poniżej, aby zrealizować je za %d dzień premium na tym serwerze."
+			}
+		},
+		"viewstaff": {
+			"title": "Obsługa",
+			"admin": {
+				"users": "Administratorzy",
+				"roles": "Role Administratora",
+				"no_users": "Brak administratorów",
+				"no_roles": "Brak ról administratora"
+			},
+			"support": {
+				"users": "Użytkownicy wsparcia",
+				"roles": "Role wsparcia",
+				"no_roles": "Brak ról wsparcia",
+				"users_warning": "-# **Uwaga:** Użytkownicy w zespołach wsparcia są teraz przestarzali. Proszę migrować do roli."
+			}
+		},
+		"edit": {
+			"title": "Edytuj ustawienia zgłoszenia",
+			"description": "Poniżej możesz edytować różne ustawienia tego zgłoszenia.",
+			"labels": {
+				"title": "Edytuj etykiety",
+				"description": "Edytuj etykiety przypisane do tego zgłoszenia",
+				"update_modal": {
+					"title": "Zaktualizuj etykiety zgłoszeń",
+					"select_menu_title": "Etykiety",
+					"success": "Etykiety zgłoszenia zostały pomyślnie zaktualizowane do: %s"
+				},
+				"none_configured": "Nie skonfigurowano żadnych etykiet dla tego serwera. Możesz utworzyć etykiety w [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Panel zgłoszeń zmieniony",
+			"jump_to_top": "Przejdź do góry",
+			"reopened": "Zgłoszenie zostało otwarte ponownie",
+			"ticket_closed": "Zgłoszenie zostało zamknięte"
+		},
+		"click_here": "Kliknij tutaj",
+		"confirm": "Potwierdź",
+		"website": "Nasza strona internetowa"
+	},
+	"help": {
+		"switch_panel": "Przełącza zgłoszenie na inny panel zgłoszeń, zmieniając kategorię kanału, zespoły wsparcia itp.",
+		"jump_to_top": "Dostarcza ci przycisk, aby przejść do góry zgłoszenia",
+		"on_call": "Oznacza cię jako aktywnego, do dodania i oznaczenia we wszystkich nowych zgłoszeniach",
+		"reopen": "Ponownie otwiera zgłoszenie, które zostało wcześniej zamknięte",
+		"notes": "Tworzy wątek do prywatnych dyskusji między przedstawicielami wsparcia",
+		"edit": "Edytuj ustawienia dla bieżącego zgłoszenia"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Chcesz odkryć więcej? Nasza [dokumentacja](%s) nauczy Cię jak skonfigurować każdy aspekt bota!"
+		},
+		"threads": {
+			"no_notification_channel": "Musisz podać kanał powiadamiania o zgłoszeniach",
+			"notification_channel_type": "Kanał powiadomień o zgłoszeniach musi być kanałem tekstowym",
+			"success": "Tryb wątku został włączony",
+			"disabled": "Tryb wątku został wyłączony"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "To zgłoszenie zostało już zamknięte",
+			"no_permission": "Nie posiadasz uprawnień do przeglądania tego typu zgłoszeń",
+			"already_joined": "Już dołączyłeś do tego zgłoszenia (<#%d>)",
+			"success": "Dodano Cię do zgłoszenia: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Wątki nie mogą być utworzone w kanałach ogłoszeń",
+		"panel_force_disabled": "Ten panel został wyłączony. Poproś administratora serwera o reaktywację premium i użycie %s, aby uruchomić go ponownie.",
+		"panel_disabled": "Administratorzy serwera wyłączyli otwieranie tego typu zgłoszenia",
+		"acl": {
+			"no_allow_rules": "Dostęp do otwarcia tego typu zgłoszenia został wyłączony dla wszystkich ról",
+			"deny_listed": "Nie możesz otworzyć tego typu zgłoszenia, ponieważ masz rolę <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Potrzebujesz jednej z następujących ról, aby otworzyć ten typ zgłoszenia: %s",
+				"single": "Potrzebujesz następującej roli, aby otworzyć ten typ zgłoszenia: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Wybierz typ żądania RODO, które chcesz złożyć:",
+		"section": {
+			"transcript": "### **Opcje usuwania transkryptów**\n-# _Usuń transkrypty z serwerów, które posiadasz_",
+			"message": "### **Opcje anonimizacji wiadomości**\n-# _Anonimizuj swoje wiadomości z transkryptów na wybranych serwerach"
+		},
+		"warning": "### **Ważne informacje**\n* Usunięcie jest **stałe** i nie może być cofnięte\n* Możesz usunąć tylko transkrypty z serwerów które **Ty ** posiadasz\n* Tylko **Twoje** wiadomości mogą zostać zanonimizowane w transkryptach\n* Żądanie może zająć do **30 dni** do wykonania\n* Twoje żądanie będzie przetwarzane w **kolejce**",
+		"resources": "### **Zasoby**\n[Co to jest RODO?](%s)\n[Prawo do Usunięcia](%s)\n[Prawo do Dostępu](%s)",
+		"button": {
+			"all_transcripts": "Wszystkie transkrypty z serwerów",
+			"specific_transcripts": "Określone transkrypty",
+			"all_messages": "Wszystkie Twoje wiadomości w serwerach",
+			"specific_messages": "Twoje wiadomości w określonych zgłoszeniach"
+		},
+		"language_option": "Język",
+		"modal": {
+			"all_transcripts": "Usuń wszystkie transkrypty z serwerów",
+			"specific_transcripts": "Usuń określone transkrypty",
+			"all_messages": "Anonimizuj swoje wiadomości w serwerach",
+			"specific_messages": "Anonimizuj swoje wiadomości w określonych zgłoszeniach",
+			"select_server": "Wybierz serwer",
+			"select_servers": "Wybierz jeden lub więcej serwerów",
+			"server_id": {
+				"label": "ID Serwera",
+				"placeholder": "Wprowadź ID serwera"
+			},
+			"server_ids": {
+				"label": "ID Serwerów",
+				"placeholder": "Wprowadź ID serwerów oddzielone przecinkami (np. 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "ID Zgłoszeń",
+				"placeholder": "Wprowadź ID zgłoszeń oddzielone przecinkami (np. 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "Wymagane potwierdzenie RODO",
+			"all_transcripts": "**Typ żądania:** Usuń wszystkie transkrypty z serwera który posiadasz\n**Serwer:** %s",
+			"all_transcripts_multi": "**Typ żądania:** Usuń wszystkie transkrypty z serwerów które posiadasz\n**Serwery:**\n* %s",
+			"specific_transcripts": "**Typ żądania:** Usuń konkretne transkrypty z serwera\n**Serwer:** %s\n**ID zgłoszenia:** %s",
+			"all_messages": "**Typ żądania:** Anonimizuj wszystkie wiadomości na wybranym serwerze\n**Serwer:** %s",
+			"all_messages_multi": "**Typ żądania:** Anonimizuj wszystkie wiadomości na wybranych serwerach\n**Serwery:**\n* %s",
+			"specific_messages": "**Typ żądania:** Anonimizacja twoich wiadomości w określonych zgłoszeniach\n**Serwer:** %s\n**ID zgłoszenia:** %s",
+			"warning": "\n\n⚠️ **Ostrzeżenie:** Ta akcja jest permanentna i nie może zostać cofnięta.\n\nCzy rozumiesz i akceptujesz, że ta akcja jest permanentna?",
+			"button": "Potwierdzam - Rozumiem"
+		},
+		"queued": {
+			"title": "Żądanie RODO zostało zakolejkowane",
+			"all_transcripts": "**Typ żądania:** Usuń wszystkie transkrypty z serwera\n**Serwer:** %s",
+			"all_transcripts_multi": "**Typ żądania:** Usuń wszystkie transkrypty z serwerów\n**Serwery:**\n* %s",
+			"specific_transcripts": "**Typ żądania:** Usuń konkretne transkrypty\n**Serwer:** %s\n**ID zgłoszenia:** %s",
+			"all_messages": "**Typ żądania:** Anonimizuj wszystkie wiadomości na serwerze\n**Serwer:** %s",
+			"all_messages_multi": "**Typ żądania:** Anonimizuj wszystkie wiadomości na serwerach\n**Serwery:**\n* %s",
+			"specific_messages": "**Typ żądania:** Anonimizacja twoich wiadomości w określonych zgłoszeniach\n**Serwer:** %s\n**ID zgłoszenia:** %s",
+			"footer": "\n\nTwoje żądanie zostało zakolejkowane do przetworzenia.\nPrzetwarzanie może zająć trochę czasu w zależności od ilości transkryptów."
+		},
+		"completed": {
+			"title": "Żądanie RODO zostało zakończone",
+			"all_transcripts": "**Typ żądania:** Usuń wszystkie transkrypty z serwera\n**Serwer:** %s\n**Transkrypty Usunięte:** %d",
+			"all_transcripts_multi": "**Typ żądania:** Usuń wszystkie transkrypty z serwerów\n**Serwery:**\n* %s\n**Transkrypty Usunięte:** %d",
+			"specific_transcripts": "**Typ żądania:** Usuń konkretne transkrypty\n**Serwer:** %s\n**Transkrypty Usunięte:** %d",
+			"all_messages": "**Typ żądania:** Anonimizacja wszystkich twoich wiadomości w serwerze\n**Serwer:** %s\n**Wiadomości zanonimizowane:** %d",
+			"all_messages_multi": "**Typ żądania:** Anonimizacja wszystkich twoich wiadomości w serwerach\n**Serwery:**\n* %s\n**Wiadomości zanonimizowane:** %d",
+			"specific_messages": "**Typ żądania:** Anonimizacja twoich wiadomości w określonych zgłoszeniach\n**Serwer:** %s\n**Wiadomości zanonimizowane:** %d",
+			"error": "\n\n**⚠️ Błąd:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Twoje żądanie RODO napotkało błąd: %s",
+			"no_data": "ℹ️ Twoje żądanie RODO zostało przetworzone. Nie znaleziono danych.",
+			"success": "✅ Twoje żądanie RODO zostało przetworzone pomyślnie."
+		},
+		"error": {
+			"no_servers": "Nie znaleziono serwerów, w których jesteś właścicielem i masz transkrypty.",
+			"invalid_server_id": "Podano nieprawidłowe ID serwera.",
+			"invalid_ticket_ids": "Podano nieprawidłowe ID zgłoszenia. Proszę wprowadzić numeryczne ID zgłoszenia oddzielone przecinkami (np. 123, 456, 789).",
+			"not_owner": "Musisz być właścicielem serwera, aby usunąć transkrypty.",
+			"server_not_found": "Nie znaleziono serwera.",
+			"queue_failed": "Nie udało się zakolejkować żądania RODO. Proszę spróbować później.",
+			"worker_offline": "Usługa przetwarzania RODO jest obecnie niedostępna. Spróbuj ponownie później lub skontaktuj się z pomocą techniczną, jeśli problem trwa dłużej."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Nie można znaleźć wymaganego kanału: musiał zostać usunięty.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i sprawdzenie poprawności konfiguracji wszystkich ustawień kanału.",
+		"unknown_guild": "Nie znaleziono serwera.",
+		"unknown_member": "Nie udało się znaleźć użytkownika. Mogli opuścić serwer lub zostać zbanowani.",
+		"unknown_message": "Wiadomość, z którą próbujesz interaktować, została usunięta.\n\nSpróbuj ponownie z inną wiadomością.",
+		"unknown_user": "nie udało się znaleźć użytkownika.",
+		"unknown_role": "Rola wymagana dla tej akcji już nie istnieje.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i ponowne skonfigurowanie ustawień roli.",
+		"unknown_category": "Nie można znaleźć wymaganej kategorii: musiała zostać usunięta.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i przypiszanie poprawnej kategorii kanałów do tego panelu zgłoszeń.",
+		"unknown_interaction": "Ta interakcja wygasła.\n\nProszę spróbować ponownie.",
+		"max_webhooks": "Serwer osiągnął maksymalną liczbę webhooków.\n\nPoproś administratora serwera o usunięcie nieużywanych webhooków i spróbuj ponownie.",
+		"max_channels": "Twoje zgłoszenie nie może zostać otwarte, ponieważ ten serwer osiągnął limit kanałów Discorda (500).\n\nPoproś administratora serwera o zamknięcie niektórych zgłoszeń lub usunięcie kilka nieużywanych kanałów przed otwarciem nowego zgłoszenia.",
+		"interaction_acknowledged": "Ta interakcja została już przetworzona.\n\nJeśli chcesz wykonać tę akcję ponownie, rozpocznij nową interakcję.",
+		"missing_permissions": {
+			"title": "Brakuje mi następujących uprawnień wymaganych do wykonania tej akcji",
+			"body": "Proszę przypisać te uprawnienia do bota lub ewentualnie uprawnienie `Administrator` i spróbuj ponownie.\nOdwiedź naszą [dokumentację](%s) aby uzyskać wyjaśnienie, dlaczego każde uprawnienie jest wymagane."
+		},
+		"missing_access": "Brakuje mi uprawnień wymaganych do wykonania tej operacji.\n\nProszę przypisać niezbędne uprawnienia do bota lub ewentualnie uprawnienie `Administrator` i spróbuj ponownie.\nOdwiedź naszą [dokumentację](%s) aby uzyskać wyjaśnienie, dlaczego każde uprawnienie jest wymagane.",
+		"invalid_length": "Jedno lub więcej pól jest zbyt krótkie lub zbyt długie.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i zweryfikowanie że wszystkie pola spełniają wymagane ograniczenia długości.",
+		"required_field": "Wymagane pole jest brakujące lub puste.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i sprawdzenie, że wszystkie wymagane pola są wypełnione.",
+		"invalid_channel_type": "Typ kanału jest nieprawidłowy dla tej operacji.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i przypisanie prawidłowego kanału do panelu zgłoszeń.",
+		"invalid_category": "Kategoria kanału jest nieprawidłowa, musiała zostać usunięta.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i przypisanie poprawnej kategorię do panelu zgłoszeń.",
+		"invalid_id": "W konfiguracji bota podano nieprawidłowy ID.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i sprawdzenie, czy wszystkie ID kategorii, kanałów i ról są poprawne.",
+		"invalid_characters": "Podana wartość zawiera nieprawidłowe znaki.\n\nProszę używać tylko liter, cyfr, myślników i podkreślników.",
+		"invalid_choice": "Podano nieprawidłową opcję.\n\nPoproś administratora serwera o odwiedzenie [panelu sterowania](%s) i sprawdzenie poprawności wszystkich ustawień.",
+		"invalid_form": "Akcja nie mogła zostać zakończona z powodu nieprawidłowego wartości.",
+		"thread_locked": "Twoje zgłoszenie nie mogło zostać otwarte, ponieważ wątek zgłoszenia jest zablokowany.\n\nPoproś administratora serwera o odblokowanie wątku zgłoszenia.",
+		"max_active_threads": "Twoje zgłoszenie nie może zostać otwarte, ponieważ osiągnięto maksymalną liczbę aktywnych wątków na tym kanale.\n\nPoproś administratora serwera o zamknięcie kilku zgłoszeń lub wątków.",
+		"timed_out": "Upłynął limit czasu operacji, spróbuj jeszcze raz.",
+		"rate_limited": "Twoja częstotliwość zapytań została ograniczona. Proszę spróbować %s.",
+		"rate_limited_global": "Discord doświadcza duże obciążenie (globalne ograniczenie zapytań). Proszę spróbować %s.",
+		"general": "Podczas wykonywania tej akcji wystąpił błąd.",
+		"error_id": "ID błędu"
+	}
+}

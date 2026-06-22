@@ -1,0 +1,513 @@
+{
+	"commands.about": "Mae Tickets yn fot hawdd i'w ddefnyddio ac yn hawdd ei addasu ar gyfer cymorth. \\nGweinydd cymorth: %s\\nGorchmynion: Teipiwch '%s'\\nCychwynna drwy redeg '%s'",
+	"commands.add.no_members": "Mae'n rhaid i ti enwi aelodau i'w ychwanegu at y tocyn",
+	"commands.add.no_permission": "Does gennyt ti ddim caniatâd i ychwanegu pobl at y tocyn",
+	"commands.add.no_everyone": "You cannot add the `@everyone` role to a ticket",
+	"commands.addadmin.no_members": "Mae'n rhaid i ti enwi defnyddiwr neu rôl i rhoi caniatâd gweinyddwr iddyn nhw",
+	"commands.addadmin.owner": "Mae perchennog y gweinydd yn weinyddwr yn barod",
+	"commands.addsupport.no_members": "Mae'n rhaid i ti enwi defnyddiwr neu rôl i roi breintiau cynrychiolydd cymorth iddyn nhw",
+	"commands.blacklist.no_members": "Mae'n rhaid i ti enwi defnyddiwr i newid statws y rhestr ddu ar ei cyfer",
+	"commands.blacklist.self": "Alli di ddim rhoi dy hun ar y rhestr ddu",
+	"commands.claim.success": "Bydd dy docyn yn cael ei drin gan %s",
+	"commands.invite": "[Cliciwch yma](<%s>)",
+	"commands.language.invalid": "Mae'n rhaid i ti nodi côd iaith neu faner. Ieithoedd sydd ar gael:\\n%s",
+	"commands.open.ticket_limit": "Dim ond %d %s wyt ti'n gallu ei hagor ar unwaith",
+	"commands.open.too_many_tickets": "Mae gormod o docynnau yn y categori tocynnau. Gofynnwch i weinyddwr gau rhai, symud nhw i gategori arall, neu sefydlu categori drosflwyddiad.\n\nMae hyn yn **gyfyngiad wedi'i osod gan Discord** o 50 sianel yn y categori.",
+	"commands.panel": "Ewch i <%s> i ffurfweddu panel",
+	"commands.premium": "Gallwch brynu tanysgrifiad premiwm o <%s>.\\nPremiwm yn cynnig llawer o fanteision, fel:\\n```diff\\n+ Creu paneli tocyn di-gyfyng\\n+ Addasu enw’r bot, ei lun proffil a’i statws (whitelabel)\\n+ Ystadegau manwl am y gweinydd, defnyddwyr a staff cymorth\\n+ Dim brandio yn y troedyn negeseuon\\n+ Cefnogi datblygiad a helpu talu costau’r gweinydd\\n```\\n\\nFel arall, gallwch bleidleisio yn <%s> i gael premiwm am ddim am 24 awr",
+	"commands.premium.invalid_key": "Allwedd anghywir. Sicrhewch eich bod wedi'i gopio'n gywir.",
+	"commands.remove.no_permission": "Does gennyt ti ddim caniatâd i dynnu pobl o'r tocyn hwn",
+	"commands.remove.staff": "Alli di ddim tynnu staff o docyn",
+	"commands.removeadmin.no_members": "Mae'n rhaid i ti enwi defnyddiwr neu rôl i ddiddymu breintiau gweinyddwr oddi wrthyn nhw",
+	"commands.removeadmin.owner": "Mae'n rhaid i'r berchennog fod yn weinyddwr",
+	"commands.removeadmin.self": "Alli di ddim diddymu dy freintiau dy hun",
+	"commands.removesupport.no_members": "Mae'n rhaid i ti enwi defnyddiwr neu rôl i roi breintiau cynrychiolydd cymorth iddyn nhw",
+	"commands.rename.missing_name": "Mae'n rhaid i ti nodi enw newydd ar gyfer y tocyn hwn",
+	"commands.rename.success": "Mae tocyn yma wedi cael ei ail-enwi i <#%d>",
+	"commands.tags.create.already_exists": "Mae tag gyda'r ID `%s` yn bodoli yn farod. Gallwch ddileu'r tag gan ddefnyddio `%s`",
+	"commands.tags.create.invalid_arguments": "Mae'n rhaid i ti nodi ID tag ac ei chynnwys",
+	"commands.tags.create.too_long": "Ni all IDau tag fod yn fwy na 16 llythyren",
+	"commands.tags.delete.invalid_arguments": "Mae'n rhaid i ti nodi ID tag i'w ddileu",
+	"commands.tags.delete.not_exist": "Ni ellid dod o hyd i tag gyda'r ID `%s`",
+	"commands.tags.get.invalid_arguments": "Mae'n rhaid i ti roi ID y tag. Am fwy o gymorth gyda thagiau, ewch i <%s>.",
+	"commands.tags.get.invalid_tag": "Tag anghywir. Am fwy o gymorth gyda thagiau, ewch i <%s>.",
+	"commands.tags.list": "IDau pob tag: \\n%s\\nI weld cynnwys tag, rhedwch `%s`",
+	"commands.unclaim.not_claimed": "Nid yw'r tocyn hwn wedi ei hawlio",
+	"commands.unclaim.not_claimer": "Dim ond gweinyddwyr a'r defnyddiwr sydd wedi hawlio'r tocyn sy'n gallu rhoi'r hawliad yn ôl",
+	"commands.unclaim.success": "Gal pob cynrychiolydd cymorth nawr ymateb i'r tocyn",
+	"commands.vote": "Cliciwch y botwm isod i bleidleisio dros y bot a chael 24 awr o bremiwm am ddim.\n\nUnwaith i ti bleidleisio, rheda'r gorchymyn %s eto i hawlio dy gredydau pleidleisio.",
+	"generic.invalid_argument": "Dadleuyn annilys: cyfeiriwch at y defnydd",
+	"generic.invalid_user": "Methwyd dod o hyd i'r defnyddir targed",
+	"generic.no_permission": "Does gen ti ddim caniatâd ar gyfer hyn",
+	"generic.not_ticket": "Nid yw hwn yn sianel tocyn",
+	"generic.owner_only": "Mae'r gorchymyn hwn ar gyfer perchennog y bot yn unig",
+	"help.about": "Yn dweud wrthyt wybodaeth am y bot",
+	"help.add": "Yn ychwanegu defnyddiwr at y docyn",
+	"help.addadmin": "Yn rhoi breintiau gweinyddwr i ddefnyddir neu rôl",
+	"help.addsupport": "Yn ychwanegu rôl fel cynrychiolydd cymorth",
+	"help.admin": "Rheoli'r bot",
+	"help.admin.blacklist": "Rhestru gweinydd at y rhes ddu i atal defnydd or bot",
+	"help.admin.debug.server": "Debug a server",
+	"help.admin.generate_premium": "Creu allweddi premiwm",
+	"help.admin.unblacklist": "Yn tynnu gweinydd o'r rhestr ddu",
+	"help.blacklist": "Yn toglo os yw defnyddwyr yn cael rhyngweithio hefo yr bot",
+	"help.cancel": "Yn canslo'r broses sefydlu",
+	"help.claim": "Yn neilltuo un aelod o staff i docyn",
+	"help.close": "Yn cau'r tocyn presennol",
+	"help.help": "Yn dangos rhestr o'r gorchmynion i ti",
+	"help.invite": "Yn darparu dolen wahoddiad ar gyfer y bot",
+	"help.language": "Yn newid iaith y bot",
+	"help.managetags": "Yn ychwanegu, dileu neu restru tagiau",
+	"help.open": "Yn agor tocyn newydd",
+	"help.panel": "Yn creu panel i alluogi defnyddwyr i agor tocyn gyda un clic",
+	"help.premium": "Rhedwch y gorchymyn hwn ar ôl prynu premiwm i'w actifadu",
+	"help.remove": "Yn tynnu defnyddiwr o docyn",
+	"help.removeadmin": "Yn tynnu breintiau gweinyddwr oddi wrth ddefnyddiwr neu rôl",
+	"help.removesupport": "Yn tynnu breintiau cynrychiolydd cymorth oddi wrth ddefnyddiwr neu rôl",
+	"help.rename": "Yn ail-enwi yr tocyn presennol",
+	"help.setup": "Yn caniatau i ti ffurfweddu'r bot yn hawdd",
+	"help.stats": "Yn dangos i ti ystadegau am ddefnyddwyr, staff cymorth a'r gweinydd",
+	"help.statsserver": "Yn dangos i ti ystadegau am y gweinydd",
+	"help.tag": "Yn anfon darn o neges",
+	"help.tagdelete": "Yn dileu tag",
+	"help.taggadd": "Yn ychwanegu tag newydd",
+	"help.taglist": "Yn rhestru'r holl dagiau",
+	"help.transfer": "Yn trosglwyddo tocyn a hawliwyd i defnyddiwr arall",
+	"help.unclaim": "Yn tynnu'r hawlied oddi ar y tocyn presennol",
+	"help.viewstaff": "Yn rhestru yr aelodau staff ac rolau",
+	"help.vote": "Yn rhoi dolen i ti i bleidleisio am bremiwm am ddim",
+	"help.gdpr": "Rheoli eich ceisiadau data GDPR",
+	"open.success": "Tocyn newydd wedi'i agor: %s",
+	"open.outside_support_hours": {
+		"title": "This panel is currently closed",
+		"message": "Please try again during our support hours."
+	},
+	"setup.auto.category.failure": "Does gen i ddim y caniatâd `Manage Channels`",
+	"setup.auto.category.success": "Categori tocynnau wedi'i greu",
+	"setup.auto.completed": "Sefydlu wedi'i gwblhau! Cliciwch [yma](%s) i osod panel adwaith, ac ychwanega'r rolau <@&%d> a <@&%d> at dy aelodau staff",
+	"setup.auto.roles.failure": "Does gen i ddim y caniatâd `Manage Roles`",
+	"setup.auto.roles.success": "Wedi creu y rolau `Tickets Admin` ac `Tickets Support`",
+	"setup.auto.transcript.failure": "Does gen i ddim y caniatâd `Manage Channels`",
+	"setup.auto.transcript.success": "Sianel <#%d> wedi'i chreu",
+	"setup.ticket_limit.success": "Mae'r terfyn tocynnau wedi'i ddiweddaru i `%d`",
+	"setup.transcript.invalid": "Mae’n rhaid i ti sôn am sianel ddilys ar y gweinydd (e.e. <#%d>)\\n**Enghraifft**`%s`",
+	"setup.transcript.success": "Mae'r sianel trawsgrifiadau wedi'i newid i <#%d>",
+	"commands.language.help_wanted": "Wyt ti'n siarad iaith arall? Ymuno a ein [gweinydd cymorth](%s) os wyt ti'n awyddus i helpu gyfieithu'r bot i fwy o ieithoedd",
+	"commands.rename.too_long": "Ni all enwau sianel fod yn fwy na 100 o llythyrau",
+	"commands.autoclose.configure": "Ewch i'r [dangosfwrdd](%s) i newid gosodiadau cau awtomatig",
+	"help.autoclose": "Gorchmynion sy'n ymwneud efo chau awtomatig",
+	"help.autoclose.exclude": "Yn eithrio'r tocyn presennol rhag cael ei gau'n awtomatig",
+	"help.autoclose.configure": "Golygu gosodiadau cau awtomatig",
+	"commands.autoclose.exclude.success": "Mae'r tocyn hwn wedi'i eithrio rhag cael ei gau'n awtomatig",
+	"commands.claim.no_permission": "Dim ond aelodau staff sy'n gallu hawlio tocynnau",
+	"commands.open.from": "Agorwyd y tocyn hwn o'r [neges hon](%s).\n\nDywedodd <@%d> yn <#%d>:\n```%s```",
+	"commands.open.from.moved": "Mae'r sgwrs wedi'i symud i docyn (<#%d>)",
+	"help.close_request": "Yn anfon neges yn gofyn i'r defnyddiwr i gadarnhau bod modd cau'r tocyn",
+	"close.reason_too_long": "Ni all y rheswm fod yn hirach na 255 llythyren",
+	"commands.close_request.success": "Cafodd y cais cau ei anfon yn llwyddiannus",
+	"commands.close_request.no_reason": "Mae <@%d> wedi gofyn i cau'r tocyn hwn.\n\nDerbyn neu wrthod gan ddefnyddio'r botymau isod.",
+	"commands.close_request.with_reason": "Mae <@%d> wedi gofyn i cau'r tocyn hwn. Rheswm:\n```\n%s\n```\nDerbyn neu wrthod gan ddefnyddio'r botymau isod.",
+	"commands.close_request.no_permission": "Dim ond y defnyddiwr wnaeth agor y tocyn sy'n gallu ymateb i'r cais cau",
+	"commands.close_request.denied": "Gwrthododd <@%d> y cais cau",
+	"generic.error": "Gwall",
+	"feedback.disabled": "Mae adborth wedi'i analluogi ar y gweinydd hwn",
+	"feedback.success": "Mae dy adborth wedi'i gofnodi",
+	"generic.success": "Llwyddiant",
+	"button.guild_only": "Rhaid defnyddio'r botwm hwn mewn gweinydd",
+	"button.dms_only": "Rhaid defnyddio'r botwm hwn mewn negeseuon uniongyrchol",
+	"commands.tag.generic": "Tag",
+	"commands.tags.delete.success": "Mae'r tag `%s` wedi'i ddileu",
+	"generic.ticket": "Tocyn",
+	"generic.title.premium_only": "Gorchymyn i Ddefnyddwyr Premiwm yn Unig",
+	"generic.admin": "Gweinyddwr",
+	"commands.tags.create.success": "Tag wedi'i greu - rwyt ti'n gallu ei defnyddio trwy rhedeg `%s`",
+	"generic.title.about": "Ynglŷn",
+	"generic.title.vote": "Pleidleisio",
+	"generic.title.tags": "Tagiau",
+	"generic.title.autoclose": "Cau Awtomatig",
+	"generic.title.invite": "Gwahoddiad",
+	"generic.title.close": "Cau",
+	"generic.title.claim": "Hawlio",
+	"generic.title.unclaim": "Unclaim",
+	"generic.title.blacklisted": "Ar y Rhestr Ddu",
+	"generic.title.blacklist": "Rhestr Ddu",
+	"generic.error.blacklisted": "Rwyt ti ar y rhestr ddu yn y gweinydd hwn",
+	"generic.error.guild_blacklisted": "This server is blacklisted from using this bot",
+	"generic.error.user_blacklisted": "You are blacklisted from using this bot",
+	"commands.blacklist.add.success": "Mae <@%d> wedi'i roi ar y rhestru ddu",
+	"commands.blacklist.remove.success": "Mae <@%d> wedi'i dynnu oddi ar y rhestru ddu",
+	"generic.title.add_admin": "Ychwanegu Gweinyddwr",
+	"generic.title.add_support": "Ychwanegu Cymorth",
+	"generic.title.remove_admin": "Tynnu Gweinyddwr",
+	"generic.title.remove_support": "Tynnu Cymorth",
+	"commands.addsupport.success": "Cynrychiolydd cymorth wedi’i ychwanegu’n llwyddiannus: %s",
+	"generic.title.language": "Iaith",
+	"commands.removesupport.success": "Cynrychiolydd cymorth wedi’i tynnu'n llwyddiannus: %s",
+	"commands.addadmin.success": "Gweinyddwr wedi'i ychwanegu'n llwyddiannus: %s",
+	"commands.removeadmin.success": "Gweinyddwr wedi'i tynnu'n llwyddiannus: %s",
+	"generic.title.setup": "Sefydlu",
+	"generic.title.premium": "Premiwm",
+	"generic.title.panel": "Panel",
+	"generic.title.rename": "Ail-enwi",
+	"generic.title.remove": "Tynnu",
+	"generic.title.help": "Cymorth",
+	"generic.title.close_confirmation": "Cadarnhad Cau",
+	"close.confirmation": "Cadarnha dy fod eisiau cau'r tocyn hwn, os gwelwch yn dda",
+	"generic.title.close_request": "Cais Cau",
+	"commands.close_request.accept": "Derbyn a Chau",
+	"commands.close_request.deny": "Gwrthod a Gadw'n Agored",
+	"commands.premium.success": "Mae Premiwm wedi'i actifadu am **%d** diwrnod",
+	"generic.title.claimed": "Tocyn Hawliwyd",
+	"generic.title.unclaimed": "Tocyn Heb Ei Hawlio",
+	"generic.title.add": "Ychwanegu",
+	"commands.add.success": "<@%s> has been added to <#%d>",
+	"commands.add.role_thread": "Due to Discord limitations, roles cannot be added to thread tickets",
+	"commands.remove.success": "<@%s> has been removed from <#%d>",
+	"commands.remove.role_thread": "Due to Discord limitations, roles cannot be removed from thread tickets",
+	"open.ratelimited": "Mae tocynnau'n cael ei hagor rhy gyflym ar y gweinydd hwn",
+	"open.panel_cooldown": "You are on cooldown for this panel. Please try again %s.",
+	"commands.claim.thread": "Oherwydd cyfyngiadau Discord, nid yn hawlio'n cefnogi edafedd",
+	"generic.join_support_server": "Ymuno â’r Gweinydd Cymorth",
+	"commands.open.guild_channel_limit": "Mae'r gweinydd hwn wedi cyrraedd terfyn Discord o 500 sianel",
+	"commands.open.missing_form_answer": "Rhaid i ti ateb y cwestiwn `%s`",
+	"close.no_permission": "Nid oes gen ti ganiatâd i gau'r tocyn hwn",
+	"": {
+		"generic.title.close_with_reason": "Cau Hefo Rheswm",
+		"generic.reason": "Rheswm"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Rheswm dros gau'r tocyn, e.e. \"Wedi'i ddatrys\""
+		},
+		"success": "Cafodd y tocyn ei gau gan <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "Alli di ddim sgorio'r tocyn hwn oherwydd rwyt ti'n gynrychiolydd cymorth yn %s",
+				"empty": "Alla di ddim sgorio'r tocyn hwn oherwydd nad wnest ti anfon unrhyw negeseuon"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Mae'r gorchymyn `%s` wedi'i analluogi yn y gweinydd hwn: defnyddio banel tocynnau i agor tocyn",
+			"threads": {
+				"cant_see_parent_channel": "Methu ychwanegu <@%d> at y tocyn: Sicrhewch fod ganddyn nhw ganiatâd i weld sianel rhiant yr edefyn (<#%d>)",
+				"cant_message_in_threads": "Rwyt ti ddim hefo yr caniatâd `Send Messages in Threads`, sydd ei angen i agor tocyn. Gofynna i weinyddwr y gweinydd roi'r caniatâd hwn i ti, ac roi gynnig arall arni."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Panel annilys: Rhaid i ti ddewis un o'r gwymplen",
+			"success": "Mae'r tocyn hwn wedi'i newid i banel `%s` gan <@%d>",
+			"non_thread_to_thread": "You cannot switch to a panel that uses threads from a non-thread ticket",
+			"claimer_no_access_title": "Panel Switch Blocked",
+			"claimer_no_access": "The ticket claimer (<@%d>) does not have access to the selected panel.",
+			"auto_unclaimed": "The ticket has been switched to the `%s` panel by <@%d>.\n\nThe ticket has been automatically unclaimed, as <@%d> does not have access to the new panel."
+		},
+		"blacklist": {
+			"staff": "Methu rhoi aelodau staff ar y rhestr ddu",
+			"add_role": {
+				"success": "Mae <@%d> wedi'i roi ar y rhestr ddu",
+				"limit": "Rwyt ti wedi cyrraedd terfyn y rhestr ddu ar gyfer rolau (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> has been unblacklisted"
+			},
+			"add": {
+				"limit": "Rwyt ti wedi cyrraedd terfyn y rhestr ddu ar gyfer defnyddiwr (%d): ystyriwch ddefnyddio rôl yn ei lle"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Does gan yr tocyn hwn ddim neges groeso",
+			"content": "Clicia'r botwm isod i neidio i dop y tocyn"
+		},
+		"addsupport": {
+			"confirm": "Cadarnha dy fod eisiau ychwanegu %s at y dim cynrychiolwyr cymorth rhagosodedig",
+			"everyone": "Methu ychwanegu’r rôl `@everyone` fel staff"
+		},
+		"addadmin": {
+			"confirm": "Cadarnha dy fod eisiau ychwanegu %s fel gweinyddwr y bot"
+		},
+		"tags": {
+			"create": {
+				"limit": "Rwyt ti wedi cyrraedd terfyn y tagiau (%d)"
+			},
+			"get": {
+				"requires_premium": "Mae angen Premiwm i ddefnyddio gorchmynion personol (aliau tag)"
+			}
+		},
+		"language": {
+			"content": "Dyma'r ieithoedd sydd ar gael a'u cynnydd cyfieithu: %s",
+			"success": "Mae iaith y gweinydd wedi'i newid i **%s** (%s)",
+			"select": "Dewisiwch Iaith (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "Dim ond yn y modd edefyn y gellir defnyddio `%s`. Ewch i'n [dogfennau](%s) i ddysgu mwy am edafedd",
+			"success": "Rwyt ti nawr ar alwad",
+			"remove_success": "Rwyt ti ddim ar alwad bellach"
+		},
+		"reopen": {
+			"not_found": "Tocyn heb ei ganfod",
+			"no_permission": "Nid oes gen ti ganiatâd i ail-agor y tocyn hwn",
+			"already_open": "Mae'r tocyn hwn ar agor yn barod",
+			"not_thread": "Dim ond edafedd sy'n gallu cael ei ail-agor",
+			"thread_deleted": "Mae'r tocyn wedi cael ei ddileu yn parhaol",
+			"success": "Tocyn %d wedi’i ail-agor: <#%d>",
+			"in_ticket": "Mae’r tocyn yma wedi’i ail-agor gan <@%d>"
+		},
+		"premium": {
+			"key": "Allwedd",
+			"check_again": "Gwiriwch Eto",
+			"subscription_found": "Tanysgrifiad Wedi'i Ddod o Hyd!",
+			"subscription_found_content": "I gyflwyno dy danysgrifiad i'r gweinydd hwn, mae'n rhaid i berchennog y gweinydd (<@%d>) dy ychwanegu di fel gweinyddwr **defnyddiwr** (anwybyddir rolau) drwy ddefnyddio'r gorchymyn %s.\\n\\nGallwch wirio dy fod wedi cael dy ychwanegu fel gweinyddwr trwy redeg %s.",
+			"activate_key": "Gweithredu Allwedd Premiwm",
+			"checking": "Yn gwirio statws Premiwm...",
+			"please_wait": "Arhoswch...",
+			"success_after_check": "Mae Premiwm yn weithredol yn y gweinydd hwn nawr!",
+			"link_patreon_account": "Cyswllt Cyfrif Patreon",
+			"no_subscription": "Ni lwyddwyd i ddod o hyd i danysgrifiad Patreon gweithredol wedi'i gysylltu hefo dy gyfrif Discord. Sicirhewch fod [dy gyfrif Patreon a Discord wedi ei cysylltu](%s), ac arhoswch am 10 munud pellach.",
+			"open_form": "Agor Ffurflen",
+			"open_form_description": "Pwyswch y botwm isod i ailagor y ffurflen",
+			"use_key_anyway": "Defnyddio Allwedd Premiwm Beth bynnag",
+			"already_purchased_title": "Wedi prynu Premiwm yn barod?",
+			"already_purchased_description": "Os wyt ti wedi prynu Premiwm yn barod, dewiswch y dull talu o'r rhestr i ddechrau",
+			"giveaway_key": "Allwedd Rhodd",
+			"selector": {
+				"description": "Dewiswch pa ddull wnest ti ddefnyddio i cael Premiwm",
+				"key": {
+					"description": "Dewiswch y dewis hwn os cafodd allwedd rhodd ei roi i ti"
+				},
+				"patreon": {
+					"description": "Dewiswch y dewis hwn os gwnaethoch brynu ar Patreon"
+				},
+				"discord": {
+					"description": "Dewisiwch yr opsiwn hwn os gwnaethoch brynu drwy siop fewnol Discord"
+				}
+			},
+			"about": "Mae Premiwm yn rhoi mynediad i fwy o baneli, ystadegau, bot personol a mwy! Ewch i'n [gwefan](%s) i ddysgu mwy.",
+			"already_activated": "Newyddion da! Mae premiwm yn weithredol yn y gweinydd hwn yn barod.",
+			"already_activated_whitelabel": "Newyddion da! Mae premiwm yn weithredol yn y gweinydd hwn yn barod.\n\nI gael cymorth i ddechrau gyda whitelabel, darllenwch ein [canllaw sefydlu whitelabel](%s).",
+			"discord": {
+				"no_subscription": "Gellir prynu Premiwm yn uniongyrchol o fewn Discord. Clicia'r botwm isod i agor tudalen rheoli'r tanysgrifiad.\n\nAr ôl prynu, gall gymryd hyd at 5 munud i ganfod y tanysgrifiad."
+			},
+			"subscription_found_content_modern": "Mae dy danysgrifiad Patreon wedi'i ganfod. Clicia'r botwm \"Agor Dewisydd Gweinydd\" isod i agor y dangosfwrdd a dewis pa weinyddion wyt ti am ddefnyddio dy danysgrifiad Premiwm arnyn nhw.",
+			"open_server_selector": "Agor Dewisydd Gweinydd"
+		},
+		"notes": {
+			"added_to_existing": "Rwyt ti wedi cael dy ychwanegu at yr edefyn nodiadau presennol: <#%d>",
+			"thread_name": "nodiadau",
+			"created": "Mae edefyn nodiadau wedi'i greu ar gyfer y tocyn hwn: <#%d>",
+			"channel_mode_only": "Dim ond yn y modd sianel mae edafedd nodiadau'n cael eu cefnogi"
+		},
+		"rename": {
+			"ratelimited": "Oherwydd cyfyngiadau gan Discord, dim ond dwywaith bob 10 munud y gellir ailenwi tocynnau"
+		},
+		"vote": {
+			"redeem_credits": "Echdynnu Credydau",
+			"no_credits": "Methwyd echdynnu: does gennyt ti ddim credydau pleidleisio!",
+			"redeem": {
+				"success": {
+					"plural": "Mae dy gredydau pleidleisio wedi'u hechdynnu am **%d** diwrnod o Premiwm!",
+					"singular": "Mae dy gredydau pleidleisio wedi'u hechdynnu am **%d** diwrnod o Premiwm!"
+				}
+			},
+			"with_credits": {
+				"plural": "Mae gennyt ti **%d** credyd pleidleisio. clicia'r botwm \"Echdynnu Credydau\" isod i'w defnyddio am %d diwrnod o Premiwm yn y gweinydd hwn.",
+				"singular": "Mae gennyt ti **%d** credyd pleidleisio. clicia'r botwm \"Echdynnu Credydau\" isod i'w defnyddio am %d diwrnod o Premiwm yn y gweinydd hwn."
+			}
+		},
+		"viewstaff": {
+			"title": "Staff",
+			"admin": {
+				"users": "Defnyddwyr gweinyddwr",
+				"roles": "Rolau gweinyddwr",
+				"no_users": "Dim defnyddwyr gweinyddwr",
+				"no_roles": "Dim rolau gweinyddwr"
+			},
+			"support": {
+				"users": "Defnyddwyr cymorth",
+				"roles": "Rolau cymorth",
+				"no_roles": "Dim rolau cymorth",
+				"users_warning": "-# **Rhybudd:** Mae defnyddwyr mewn timau cymorth bellach wedi darfod. Symudwch drosodd i ddefnyddio rolau."
+			}
+		},
+		"edit": {
+			"title": "Edit Ticket Settings",
+			"description": "Below you can edit various settings for this ticket.",
+			"labels": {
+				"title": "Edit Labels",
+				"description": "Edit the labels assigned to this ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels have been successfully updated to: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Panel Tocynnau Wedi Newid",
+			"jump_to_top": "Neidio i'r Brig",
+			"reopened": "Tocyn wedi Ail-agor",
+			"ticket_closed": "Tocyn Wedi'i Gau"
+		},
+		"click_here": "Cliciwch Yma",
+		"confirm": "Cadarnhau",
+		"website": "Ein Wefan"
+	},
+	"help": {
+		"switch_panel": "Yn newid tocyn i banel tocynnau arall, gan newid categori'r sianel, timau cymorth ac ati.",
+		"jump_to_top": "Yn rhoi botwm i ti neidio i frig y tocyn",
+		"on_call": "Yn dynodi dy fod ar alwad, i gael dy ychwanegu a tagio mewn pob tocyn newydd",
+		"reopen": "Yn ail-agor tocyn oedd wedi cael ei gau o'r blaen",
+		"notes": "Yn creu edefyn ar gyfer trafodaeth breifat rhwng cynrychiolwyr cymorth",
+		"edit": "Edits settings for the current ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Eisiau archwilio mwy? Fydd ein [dogfennaeth](%s) yn dysgu i ti sut i ffurfweddu pop agwedd y bot!"
+		},
+		"threads": {
+			"no_notification_channel": "Mae'n rhaid i ti ddarparu sianel hysbysu tocynnau",
+			"notification_channel_type": "Rhaid i'r sianel hysbysu tocynnau fod yn sianel destun",
+			"success": "Mae modd edefyn wedi'i alluogi",
+			"disabled": "Mae modd edefyn wedi'i analluogi"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Mae'r tocyn yma wedi'i gau barod",
+			"no_permission": "Does gen ti ddim caniatâd i weld y math hwn o docyn",
+			"already_joined": "Rwyt ti wedi ymuno â’r tocyn hwn yn barod (<#%d>)",
+			"success": "Wyt ti wedi cael dy ychwanegu at y tocyn: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Ni ellir creu edefynnau mewn sianeli hysbysiadau",
+		"panel_force_disabled": "Mae'r panel hwn wedi'i analluogi. Gofynnwch i weinyddwr y gweinydd adfer premiwm, a rhedwch %s i ail-alluogi'r panel hwn.",
+		"panel_disabled": "Mae gweinyddwyr y gweinydd wedi analluogi agor y math hwn o docyn",
+		"acl": {
+			"no_allow_rules": "Mae mynediad i agor math hwn o docyn wedi'i analluogi i bob rôl",
+			"deny_listed": "Ni allwch agor y mat hwn o docyn oherwydd bod gennych y rôl <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Mae angen un o'r rolau canlynol arnat ti i agor y math hwn o docyn: %s",
+				"single": "Mae angen y rôl ganlynol arnat ti i agor y math hwn o docyn: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Dewiswch y math o gais GDPR yr hoffech ei wneud:",
+		"section": {
+			"transcript": "### **Dewisiadau Dileu Trawsgrifiadau**\n-# _Dileu trawsgrifiadau o weinyddoedd ydych chi’n eu berchen_",
+			"message": "### **Dewisiadau Anhysbysu Negeseuon**\n-# _Anhysbysu eich negeseuon o drawsgrifiadau mewn gweinyddoedd dethol_"
+		},
+		"warning": "### **Gwybodaeth Bwysig**\n* Mae dileu yn **barhaol** ac ni ellir ei ddadwneud\n* Dim ond trawsgrifiadau o weinyddoedd **chi** sy’n berchen arnynt y gallwch eu dileu\n* Dim ond **eich** negeseuon sydd yn cael eu gwneud yn anhysbys mewn trawsgrifiadau\n* Gall y cais gymryd hyd at **30 diwrnod** i’w gwblhau\n* Bydd eich cais yn cael ei brosesu mewn **ciw**",
+		"resources": "### **Adnoddau**\n[Beth yw GDPR?](%s)\n[Hawl i Ddileu](%s)\n[Hawl i Fynediad](%s)",
+		"button": {
+			"all_transcripts": "Pob trawsgrifiad o weinyddoedd",
+			"specific_transcripts": "Trawsgrifiadau penodol",
+			"all_messages": "Pob un o’ch negeseuon mewn gweinyddoedd",
+			"specific_messages": "Eich negeseuon mewn tocynnau penodol"
+		},
+		"language_option": "Iaith",
+		"modal": {
+			"all_transcripts": "Dileu Pob Trawsgrifiad o Weinyddoedd",
+			"specific_transcripts": "Dileu Trawsgrifiadau Penodol",
+			"all_messages": "Anhysbysu eich negeseuon mewn gweinyddoedd",
+			"specific_messages": "Anhysbysu Eich Negeseuon mewn Tocynnau Penodol",
+			"select_server": "Dewiswch weinydd",
+			"select_servers": "Dewiswch un neu fwy o weinyddoedd",
+			"server_id": {
+				"label": "ID Gweinydd",
+				"placeholder": "Rhowch ID y gweinydd"
+			},
+			"server_ids": {
+				"label": "IDau Gweinydd",
+				"placeholder": "Rhowch IDau gweinydd wedi’u gwahanu gan goma (e.e. 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "IDau Tocynnau",
+				"placeholder": "Rhowch IDau tocynnau wedi’u gwahanu gan goma (e.e. 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "Angen Cadarnhad GDPR",
+			"all_transcripts": "**Math o Gais:** Dileu pob trawsgrifiad o weinydd ydych chi’n berchen arno\n**Gweinydd:** %s",
+			"all_transcripts_multi": "**Math o Gais:** Dileu pob trawsgrifiad o weinydd ydych chi’n berchen arno\n**Gweinydd:**\n* %s",
+			"specific_transcripts": "**Math o Gais:** Dileu trawsgrifiadau penodol o weinydd\n**Gweinydd:** %s\n**IDau Tocynnau:** %s",
+			"all_messages": "**Math o Gais** Anhysbysu pob un o’ch negeseuon yn y gweinydd dethol\n**Gweinydd:** %s",
+			"all_messages_multi": "**Math o Gais:** Anhysbysu pob un o’ch negeseuon yn y gweinyddoedd dethol\n**Gweinyddoedd:**\n* %s",
+			"specific_messages": "**Math o Gais:** Anhysbysu eich negeseuon mewn tocynnau penodol\n**Gweinydd:** %s\n**IDau Tocynnau:** %s",
+			"warning": "\n\n⚠️ **Rhybudd:** Mae’r gweithred hon yn barhaol ac ni ellir ei ddadwneud.\n\nA ydych chi’n deall ac yn derbyn bod y gweithred hon yn barhaol?",
+			"button": "Cadarnhau - Rwy’n deall"
+		},
+		"queued": {
+			"title": "Cais GDPR wedi’i roi mewn ciw",
+			"all_transcripts": "**Math o Gais:** Dileu pob trawsgrifiad o weinydd\n**Gweinydd:** %s",
+			"all_transcripts_multi": "**Math o Gais:** Dileu pob trawsgrifiad o weinyddoedd\n**Gweinyddoedd:**\n* %s",
+			"specific_transcripts": "**Math o Gais:** Dileu trawsgrifiadau penodol\n**Gweinydd:** %s\n**IDau Tocynnau:** %s",
+			"all_messages": "**Math o Gais** Anhysbysu pob un o’ch negeseuon yn y gweinydd\n**Gweinydd:** %s",
+			"all_messages_multi": "**Math o Gais:** Anhysbysu pob un o’ch negeseuon yn y gweinyddoedd\n**Gweinyddoedd:**\n* %s",
+			"specific_messages": "**Math o Gais:** Anhysbysu eich negeseuon mewn tocynnau penodol\n**Gweinydd:** %s\n**IDau Tocynnau:** %s",
+			"footer": "\n\nMae eich cais wedi’i roi mewn ciw ar gyfer prosesu.\nGall prosesu gymryd peth amser yn dibynnu ar nifer y trawsgrifiadau."
+		},
+		"completed": {
+			"title": "Cais GDPR wedi’i gwblhau",
+			"all_transcripts": "**Math o Gais:** Dileu pob trawsgrifiad o weinydd\n**Gweinydd:** %s\n**Trawsgrifiadau Wedi’u Dileu:** %d",
+			"all_transcripts_multi": "**Math o Gais:** Dileu pob trawsgrifiad o weinyddoedd\n**Gweinyddoedd:**\n* %s\n**Trawsgrifiadau Wedi’u Dileu:** %d",
+			"specific_transcripts": "**Math o Gais:** Dileu trawsgrifiadau penodol\n**Gweinydd:** %s\n**Trawsgrifiadau Wedi’u Dileu:** %d",
+			"all_messages": "**Math o Gais:** Anhysbysu pob un o’ch negeseuon yn y gweinydd\n**Gweinydd:** %s\n**Negeseuon Wedi’u Anhysbysu:** %d",
+			"all_messages_multi": "**Math o Gais:** Anhysbysu pob un o’ch negeseuon yn y gweinyddoedd\n**Gweinyddoedd:**\n* %s\n**Negeseuon Wedi’u Anhysbysu:** %d",
+			"specific_messages": "**Math o Gais:** Anhysbysu eich negeseuon mewn tocynnau penodol\n**Gweinydd:** %s\n**Negeseuon Wedi’u Anhysbysu:** %d",
+			"error": "\n\n**⚠️ Gwall:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Cafodd eich cais GDPR wall: %s",
+			"no_data": "ℹ️ Mae eich cais GDPR wedi’i brosesu. Ni chanfuwyd unrhyw ddata.",
+			"success": "✅ Mae eich cais GDPR wedi’i brosesu’n llwyddiannus."
+		},
+		"error": {
+			"no_servers": "Ni chanfuwyd unrhyw weinyddoedd lle rydych chi’n berchen ac sydd â thrawsgrifiadau.",
+			"invalid_server_id": "Darparwyd ID gweinydd annilys.",
+			"invalid_ticket_ids": "Darparwyd IDau tocynnau annilys. Rhowch IDau tocynnau rhifol wedi’u gwahanu gan goma (e.e. 123, 456, 789).",
+			"not_owner": "Rhaid i chi fod yn berchen ar y gweinydd i ddileu trawsgrifiadau.",
+			"server_not_found": "Ni chanfuwyd y gweinydd.",
+			"queue_failed": "Methwyd â rhoi’r cais GDPR mewn ciw. Rhowch gynnig arall yn ddiweddarach.",
+			"worker_offline": "Mae gwasanaeth prosesu GDPR ar hyn o bryd ddim ar gael. Rhowch gynnig arall yn ddiweddarach neu cysylltwch â chymorth os bydd y broblem yn parhau."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Ni ellir dod o hyd i sianel sydd ei hangen: mae’n debygol ei bod wedi’i dileu.\n\nGofynnwch i weinyddwr weinydd ymweld â’r [dangosfwrdd](%s) a sicrhau bod pob gosodiad sianel wedi’i ffurfweddu’n gywir.",
+		"unknown_guild": "Ni ellir dod o hyd i’r gweinydd.",
+		"unknown_member": "Ni ellir dod o hyd i’r defnyddiwr. Mae’n bosibl ei fod wedi gadael y gweinydd neu wedi’i wahardd.",
+		"unknown_message": "Mae’r neges rydych chi’n ceisio rhyngweithio â hi wedi’i dileu. \n\nRhowch gynnig arall ar y gweithred gyda neges wahanol.",
+		"unknown_user": "ni ellir dod o hyd i’r defnyddiwr.",
+		"unknown_role": "Ni chafodd y rôl sydd ei hangen ar gyfer y gweithred hon ei chadw.\n\nGofynnwch i weinyddwr weinydd ymweld â’r [dangosfwrdd](%s) a ffurfweddu gosodiadau’r rôl eto.",
+		"unknown_category": "Ni ellir dod o hyd i’r categori sydd ei hangen: mae’n debygol ei fod wedi’i dileu.\n\nGofynnwch i weinyddwr weinydd ymweld â’r [dangosfwrdd](%s) a neilltuo categori sianel ddilys i’r panel tocyn hwn.",
+		"unknown_interaction": "Mae’r rhyngweithiad hwn wedi dod i ben.\n\nRhowch gynnig arall ar y gweithred.",
+		"max_webhooks": "Mae’r gweinydd wedi cyrraedd y nifer uchaf o wefannau gwe.\n\nGofynnwch i weinyddwr weinydd dynnu rhai gwefannau gwe heb eu defnyddio a rhowch gynnig arall.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "Mae’r rhyngweithiad hwn wedi cael ei brosesu eisoes.\n\nOs oes angen i chi berfformio’r gweithred hon eto, dechreuwch rhyngweithiad newydd.",
+		"missing_permissions": {
+			"title": "Rwy’n colli’r caniatâd canlynol sydd ei angen i berfformio’r gweithred hon",
+			"body": "Neilltuwch y caniatâdau hyn i’r bot, neu yn lle hynny, rhoi’r caniatâd `Gweinyddwr` a rhowch gynnig arall.\n\nEwch i’n [dogfennau](%s) am esboniad pam fod pob caniatâd yn angenrheidiol."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "One or more fields are too short or too long.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all inputs and ensure all fields meet the required length constraints.",
+		"required_field": "A required field is missing or empty.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all required fields are filled out.",
+		"invalid_channel_type": "The channel type is invalid for this operation.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel to the ticket panel.",
+		"invalid_category": "The channel category is invalid, it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid category to the ticket panel.",
+		"invalid_id": "An invalid ID was provided in the bot configuration.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all category, channel, and role IDs are correct.",
+		"invalid_characters": "The input contains invalid characters.\n\nPlease use only letters, numbers, hyphens, and underscores.",
+		"invalid_choice": "An invalid option was provided.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all settings are correct.",
+		"invalid_form": "Ni ellir cwblhau’r gweithred oherwydd mewnbwn annilys.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "Cafodd y gweithred amser allan, rhowch gynnig arall.",
+		"rate_limited": "You're being rate limited. Please try again %s.",
+		"rate_limited_global": "Discord is experiencing high load (global rate limit). Please try again %s.",
+		"general": "Digwyddodd gwall wrth berfformio’r gweithred hon.",
+		"error_id": "ID Wall"
+	}
+}

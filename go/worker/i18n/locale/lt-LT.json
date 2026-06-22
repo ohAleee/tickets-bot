@@ -1,0 +1,513 @@
+{
+	"commands.about": "Bilietai, tai lengvai naudojamas ir konfiguruojamas pagalbos įrankis. \\nServeris prireikus pagalbos: %s\\nKomandos: Parašykite `%s`\\nPradėti galite parašius `%s`",
+	"commands.add.no_members": "Jūs turite paminėti vartotojus, kad pridėtumėte prie bilieto",
+	"commands.add.no_permission": "Jūs neturite privilegijų, kad galėtumėte pridėti vartotojus prie bilieto",
+	"commands.add.no_everyone": "Jūs negalite pridėti '@everyone' rolės prie bilieto",
+	"commands.addadmin.no_members": "Jūs turite paminėti vartotoją arba rolę, kad suteiktumėte administratoriaus privilegijas",
+	"commands.addadmin.owner": "Šio serverio savininkas jau turi administratoriaus privilegijas",
+	"commands.addsupport.no_members": "Jūs turite paminėti vartotoją arba rolę, kad suteiktumėte pagalbos nario privilegijas",
+	"commands.blacklist.no_members": "Jūs turite paminėti vartotoja, kad įtrauktumėte į juodąjį šąrašą",
+	"commands.blacklist.self": "Jūs negalite savęs įtraukti į juodąjį sąrašą",
+	"commands.claim.success": "Jūsų bilietu apsiims %s",
+	"commands.invite": "[Paspauskite čia](<%s>)",
+	"commands.language.invalid": "Jūs turite nurodyti kalbos kodą arba vėliavėlę. Galimos kalbos:\\n%s",
+	"commands.open.ticket_limit": "Vienu metu galite atidaryti tik %d %s",
+	"commands.open.too_many_tickets": "Bilietų kategorijoje yra per daug bilietų. Paprašykite administracijos, kad uždarytų kelis arba perkeltų į kitą kategoriją.\n\nTai yra **Discord nustatytas limitas**, 50 kanalų vienoje kategorijoje.",
+	"commands.panel": "Apsilankykite <%s>, kad sukonfiguruotumėte skydelį",
+	"commands.premium": "Galite įsigyti premium prenumeratą iš <%s>.\\nPremium suteikia daug papildomų privalumų, tokių kaip:\\n```diff\\n+ Galėsite sukurti neribotą kiekį skydelių \\n+ Galėsite pakeisti roboto pavadinimą, paveikslėlį ir būsėną į jums patinkantį\\n+ Detali statistika apie serverį, vartotojus ir pagalbos narius\\n+ Pranešime nebus mūsų žymėjimo\\n+ Prisidėsite prie plėtros ir padėtis išlaikyti roboto išlaidas\\n```\\n\\nGalite prabalsuoti nuėję į <%s>, kad gautumėte premium nemokamai 24 valandom",
+	"commands.premium.invalid_key": "Neteisingas kodas. Įsitikinkite, kad nukopijavote teisingai.",
+	"commands.remove.no_permission": "Jūs neturite privilegijos, kad galėtumėte pašalinti vartotoją iš šio bilieto",
+	"commands.remove.staff": "Jūs negalite pašalinti pagalbą suteikiančių narių iš šio bilieto",
+	"commands.removeadmin.no_members": "Jūs turite paminėti vartotoja arba rolę, kad galėtumėte pašalinti administracijos privilegijas",
+	"commands.removeadmin.owner": "Serverio savininkas turi būti administratorius",
+	"commands.removeadmin.self": "Jūs negalite pašalinti savo privilegijų",
+	"commands.removesupport.no_members": "Jūs privalote paminėti vartotoją arba rolę, kad pašalintumėte pagalbos nario privilegijas",
+	"commands.rename.missing_name": "Turite nurodyti naują šio bilieto pavadinimą",
+	"commands.rename.success": "Šis bilietas buvo pervadintas į <#%d>",
+	"commands.tags.create.already_exists": "Žymą su ID `%s` jau yra. Galite panaikinti žymą naudojant `%s`",
+	"commands.tags.create.invalid_arguments": "Jūs turite nurodyti žymos ID ir turinį",
+	"commands.tags.create.too_long": "Žymos ID negali būti ilgesnis nei 16 simbolių",
+	"commands.tags.delete.invalid_arguments": "Jūs turite nurodyti žymos ID, kad galėtumėte panaikinti",
+	"commands.tags.delete.not_exist": "Nepavyko rasti žymos, kurios ID `%s`",
+	"commands.tags.get.invalid_arguments": "Jūs turite nurodyti žymos ID. Jeigu reikia daugiau pagalbos, aplankykite <%s>.",
+	"commands.tags.get.invalid_tag": "Netinkama žyma. Jeigu reikia daugiau pagalbos, apsilankykite <%s>.",
+	"commands.tags.list": "Visų žymų ID: \\n%s\\nKad peržiūrėtumėte žymos turinį, naudokite `%s`",
+	"commands.unclaim.not_claimed": "Dar niekas neapsiėmė šiuo bilietu",
+	"commands.unclaim.not_claimer": "Tik administracija ir vartotojai kurie apsiėmė šiuo bilietu gali juo nebeapsiimti",
+	"commands.unclaim.success": "Dabar visi pagalbos nariai gali atsakyti į šį bilietą",
+	"commands.vote": "Click the button below to vote for the bot and receive 24 hours of premium for free.\n\nOnce you have voted, run the %s command again to redeem your vote credits.",
+	"generic.invalid_argument": "Netinkamas argumentas: nurodykite tinkamą",
+	"generic.invalid_user": "Nepavyko rasti nurodyto vartotojo",
+	"generic.no_permission": "Jūs neturite privilegijų tam atlikti",
+	"generic.not_ticket": "Tai ne bilieto kanalas",
+	"generic.owner_only": "Ši komanda skirta tik roboto savininkui",
+	"help.about": "Pateikiama informacija apie robotą",
+	"help.add": "Prideda vartotoją prie bilieto",
+	"help.addadmin": "Suteikia vartotojui arba rolei administracijos privilegijas",
+	"help.addsupport": "Prideda palaikymo atstovo rolę",
+	"help.admin": "Roboto valdymas",
+	"help.admin.blacklist": "Įtraukite serverį į juodąjį sąrašą, kad negalėtu naudoti šio roboto",
+	"help.admin.debug.server": "Atlikti serverio derinimą",
+	"help.admin.generate_premium": "Generuoti premium kodus",
+	"help.admin.unblacklist": "Panaikinti serverį iš juodojo sąrašo",
+	"help.blacklist": "Įjungia ar vartotojai gali sąveikauti su robotu",
+	"help.cancel": "Atšaukia konfiguracijos procesą",
+	"help.claim": "Priskiria vieną narį prie bilieto",
+	"help.close": "Uždaro dabartinį bilietą",
+	"help.help": "Parodo jums komandų sąrašą",
+	"help.invite": "Suteikia nuorodą, kad pakviestumėte robotą",
+	"help.language": "Pakeičia kalbą, kuria naudoja robotas",
+	"help.managetags": "Pridėti, panaikinti arba parodyti žymes",
+	"help.open": "Atidaro naują bilietą",
+	"help.panel": "Sukuria skydelį, kad vartotojai galėtu atidaryti bilietą vienu paspaudimu",
+	"help.premium": "Panaudokite šią komanda po premium prenumeratos įsigijimo, kad aktyvuotumėte",
+	"help.remove": "Pašalina vartotoja iš bilieto",
+	"help.removeadmin": "Pašalina varototojo ar rolės administracijos privilegijas",
+	"help.removesupport": "Pašalina vartotojo ar rolės pagalbos privilegijas",
+	"help.rename": "Pervadina dabartinį bilietą",
+	"help.setup": "Leidžia jums lengvai konfiguruoti šį robotą",
+	"help.stats": "Parodo statistiką apie vartotojus, pagalbos narius ir serverį",
+	"help.statsserver": "Parodo statistiką apie serverį",
+	"help.tag": "Išsiunčia žinutės turinį",
+	"help.tagdelete": "Panaikina žymą",
+	"help.taggadd": "Prideda naują žymą",
+	"help.taglist": "Visų žymų sąrašas",
+	"help.transfer": "Perleisti apsiimtą bilietą kitam vartotojui",
+	"help.unclaim": "Nebeapsiimti dabartiniu bilietu",
+	"help.viewstaff": "Pagalbos narių ir rolių sąrašas",
+	"help.vote": "Suteikia nuorodą, kad prabalsuotuvėte už nemokamą premium prenumeratą",
+	"help.gdpr": "Tvarkyti GDPR duomenų užklausas",
+	"open.success": "Atidarytas naujas bilietas: %s",
+	"open.outside_support_hours": {
+		"title": "This panel is currently closed",
+		"message": "Please try again during our support hours."
+	},
+	"setup.auto.category.failure": "Man trūksta `Tvarkyti kanalus (Manage Channels)` privilegijų",
+	"setup.auto.category.success": "Sukurta bilietų kategorija",
+	"setup.auto.completed": "Konfiguracija pabaigta! Paspauskite [here](%s), kad sukonfiguruotumėte reakcijos skydelį ir pridėtumėte <@&%d> ir <@&%d> roles prie pagalbos narių",
+	"setup.auto.roles.failure": "Man trūksta `Tvarkyti roles (Manage Roles)` privilegijų",
+	"setup.auto.roles.success": "Sukurtos `Bilietų administracija` ir `Bilietų pagalba` rolės",
+	"setup.auto.transcript.failure": "Man trūksta `Tvarkyti kanalus (Manage Channels)` privilegijų",
+	"setup.auto.transcript.success": "Sukurtas <#%d> kanalas",
+	"setup.ticket_limit.success": "Bilietų limitas buvo atnaujintas į `%d`",
+	"setup.transcript.invalid": "Jūs turite nurodyti jau sukurtą kanalą (pvz., <#%d>)\\n**Pavyzdys:** `%s`",
+	"setup.transcript.success": "Įrašų kanalas buvo pakeistas į <#%d>",
+	"commands.language.help_wanted": "Ar tu kalbi kita kalba? Prisijunk prie mūsų [pagalbos serverio](%s) jeigu tau įdomu ir nori mums padėti išversti mūsų robota į daugiau kalbų",
+	"commands.rename.too_long": "Kanalo pavadinimas negali būti ilgesnis nei 100 simbolių",
+	"commands.autoclose.configure": "Apsilankykite mūsų [dashboard](%s), kad pakeistumėte automatinio uždarymo nustatymus",
+	"help.autoclose": "Susijusios komandos su automatiniu uždarymu",
+	"help.autoclose.exclude": "Dabartinis bilietas nebus automatiškai uždarytas",
+	"help.autoclose.configure": "Redaguoti su automatiniu uždarymu susijusius nustatymus",
+	"commands.autoclose.exclude.success": "Šis bilietas negali būti automatiškai uždarytas",
+	"commands.claim.no_permission": "Tik pagalbos nariai gali apsiimti bilietais",
+	"commands.open.from": "Šis bilietas atidarytas iš [šio pranešimo](%s).\n\n<@%d> Parašė į <#%d>:\n```%s```",
+	"commands.open.from.moved": "Pokalbis buvo perkeltas į bilietą (<#%d>)",
+	"help.close_request": "Nusiunčia pranešima vartotojui, kad patvirtintų ar galima uždaryti bilietą",
+	"close.reason_too_long": "Priežastis negali būti ilgesnė nei 255 simboliai",
+	"commands.close_request.success": "Uždarymo užklausa buvo išsiųsta sėkmingai",
+	"commands.close_request.no_reason": "<@%d> prašo uždaryti bilietą.\n\nPriimkite arba atmeskite prašymą naudodami žemiau esančius mygtukus.",
+	"commands.close_request.with_reason": "<@%d> prašo uždaryti bilietą. Priežastis:\n```\n%s\n```\nPriimkite arba atmeskite prašymą naudodami žemiau esančius mygtukus.",
+	"commands.close_request.no_permission": "Tik vartotojas kuris atidarė bilietą gali atsakyti į prašymą",
+	"commands.close_request.denied": "<@%d> atmetė prašymą uždaryti bilietą",
+	"generic.error": "Klaida",
+	"feedback.disabled": "Šiame serveryje atsiliepimai yra išjungti",
+	"feedback.success": "Jūsų atsiliepimas buvo įrašytas",
+	"generic.success": "Sėkmingai",
+	"button.guild_only": "Šis mygtukas turi būti naudojamas serveryje",
+	"button.dms_only": "Šis mygtukas turi būti naudojamas tiesioginėje žinutėje",
+	"commands.tag.generic": "Žyma",
+	"commands.tags.delete.success": "Žyma `%s` buvo pašalinta",
+	"generic.ticket": "Bilietas",
+	"generic.title.premium_only": "Komanda tik Premium prenumeratoriams",
+	"generic.admin": "Administratorius",
+	"commands.tags.create.success": "Žyma sukurta – galite ją panaudoti `%s`",
+	"generic.title.about": "Apie",
+	"generic.title.vote": "Balsuoti",
+	"generic.title.tags": "Žymės",
+	"generic.title.autoclose": "Automatinis uždarymas",
+	"generic.title.invite": "Pakviesti",
+	"generic.title.close": "Uždaryti",
+	"generic.title.claim": "Apsiimti",
+	"generic.title.unclaim": "Nuimti priskyrimą",
+	"generic.title.blacklisted": "Įrašytas į juodąjį sąrašą",
+	"generic.title.blacklist": "Juodasis sąrašas",
+	"generic.error.blacklisted": "Jūs esate įtrauktas į juodąjį sąrašą šiame serveryje",
+	"generic.error.guild_blacklisted": "Šiam serveriui uždrausta naudotis šiuo botu, nes jis yra juodajame sąraše",
+	"generic.error.user_blacklisted": "Jums yra uždrausta naudotis šiuo botu, nes jis yra juodajame sąraše",
+	"commands.blacklist.add.success": "<@%d> buvo įtrauktas į juodąjį sąrašą",
+	"commands.blacklist.remove.success": "<@%d> buvo pašalintas iš juodojo sąrašo",
+	"generic.title.add_admin": "Pridėti administratorių",
+	"generic.title.add_support": "Pridėti pagalbos narį",
+	"generic.title.remove_admin": "Pašalinti administratorių",
+	"generic.title.remove_support": "Pašalinti pagalbos narį",
+	"commands.addsupport.success": "Palaikymo atstovas pridėtas sėkmingai: %s",
+	"generic.title.language": "Kalba",
+	"commands.removesupport.success": "Palaikymo atstovas pašalintas sėkmingai: %s",
+	"commands.addadmin.success": "Administratorius pridėtas sėkmingai: %s",
+	"commands.removeadmin.success": "Administratorius pašalintas sėkmingai: %s",
+	"generic.title.setup": "Konfiguruoti",
+	"generic.title.premium": "Premium",
+	"generic.title.panel": "Panelė",
+	"generic.title.rename": "Pervardyti",
+	"generic.title.remove": "Pašalinti",
+	"generic.title.help": "Pagalba",
+	"generic.title.close_confirmation": "Patvirtinti bilieto uždarymą",
+	"close.confirmation": "Prašome patvirtinti, jog norite uždaryti bilietą",
+	"generic.title.close_request": "Klausti dėl bilieto uždarymo",
+	"commands.close_request.accept": "Priimti ir uždaryti",
+	"commands.close_request.deny": "Atmesti ir palikti atidaryta",
+	"commands.premium.success": "Premium buvo aktyvuotas **%d** dienom(-ų)",
+	"generic.title.claimed": "Apsiimtas bilietas",
+	"generic.title.unclaimed": "Neapsiimtas bilietas",
+	"generic.title.add": "Pridėti",
+	"commands.add.success": "<#%s> buvo pridėtas prie <#%d>",
+	"commands.add.role_thread": "Dėl Discord ribojimų rolės negalima pridėti prie teminių bilietų",
+	"commands.remove.success": "<@%s> buvo pašalintas nuo <#%d>",
+	"commands.remove.role_thread": "Dėl Discord apribojimų rolės negali būti pašalinamos iš teminių bilietų",
+	"open.ratelimited": "Šiame serveryje bilietai buvo atidaryti per greitai",
+	"open.panel_cooldown": "You are on cooldown for this panel. Please try again %s.",
+	"commands.claim.thread": "Dėl Discord apribojimų negalima apsiimti gijų",
+	"generic.join_support_server": "Prisijunkite į pagalbos serverį",
+	"commands.open.guild_channel_limit": "Šis serveris pasiekė Discord 500 kanalų limitą",
+	"commands.open.missing_form_answer": "Turite atsakyti į klausimą `%s`",
+	"close.no_permission": "Jūs negalite uždaryti bilieto",
+	"": {
+		"generic.title.close_with_reason": "Uždaryti su priežastimi",
+		"generic.reason": "Priežastis"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Priežastis kodėl uždarote bilieta, pvz., \"Išspręsta\""
+		},
+		"success": "Šį bilietą uždarė <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "Jūs negalite įvertinti šio bilieto, kadangi esate pagalbininkas %s",
+				"empty": "Jūs negalite įvertinti šio bilieto, kadangi nesiuntėte jokio pranešimo"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "`%s` komanda yra išjungta šiame serveryje, prašome naudotis bilietų kanale sukurtu mygtuku",
+			"threads": {
+				"cant_see_parent_channel": "Nepavyko pridėti <@%d> prie bilieto. Įsitikinkite, kad jie turi leidimą peržiūrėti pagrindinį grupės kanalą (<#%d>)",
+				"cant_message_in_threads": "Jums trūksta \"Send Messages in Threads\" leidimo, kuris yra reikalingas, jog atidarytumėte bilietą. Kreipkitės į serverio administratorių ir bandykite dar kartą."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Netinkamas skydelis: turite pasirinkti vieną iš meniu",
+			"success": "This ticket has been switched to the `%s` panel by <@%d>",
+			"non_thread_to_thread": "Jūs negalite pakeisti į skydelį kuris naudoja gijas nuo bilieto kuris nenaudoja gijų",
+			"claimer_no_access_title": "Panel Switch Blocked",
+			"claimer_no_access": "The ticket claimer (<@%d>) does not have access to the selected panel.",
+			"auto_unclaimed": "The ticket has been switched to the `%s` panel by <@%d>.\n\nThe ticket has been automatically unclaimed, as <@%d> does not have access to the new panel."
+		},
+		"blacklist": {
+			"staff": "Komandos nariai negali būti įtraukti į juodąjį sąrašą",
+			"add_role": {
+				"success": "<@&%d> buvo įtrauktas į juodąjį sąrašą",
+				"limit": "Pasiekėte juodojo sąrašo rolių limitą (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> has been unblacklisted"
+			},
+			"add": {
+				"limit": "Jūs pasiekėte juodojo sąrašo vartotojų limitą (%d): apsvarstykite galimybę naudoti rolę"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Šis bilietas neturi pasisveikinimo žinutės",
+			"content": "Spustelėkite žemiau esantį mygtuką, kad pereitumėte į bilieto viršų"
+		},
+		"addsupport": {
+			"confirm": "Patvirtinkite, kad tikrai norite pridėti %s prie pagalbos narių komandos",
+			"everyone": "Negalite pridėti `@everyone` rolės prie pagalbos komandos"
+		},
+		"addadmin": {
+			"confirm": "Patvirtinkite, kad norite %s pridėti prie bilietų administracijos narių"
+		},
+		"tags": {
+			"create": {
+				"limit": "Jūs pasiekėte žymų limitą (%d)"
+			},
+			"get": {
+				"requires_premium": "Premium yra būtinas, kad naudoti custom komandas (žymų slapyvardžius)"
+			}
+		},
+		"language": {
+			"content": "Galimos kalbos ir jų vertimo eiga yra tokia:\n%s",
+			"success": "Serverio kalba buvo pakeista į **%s** (%s)",
+			"select": "Pasirinkite kalbą (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` gali būti naudojamas tik gijų režime. Apsilankykite mūsų [docs](%s), kad rastumėte daugiau informacijos apie gijas",
+			"success": "Dabar jūs esate budėjime",
+			"remove_success": "Dabar jūs nebesate budėjime"
+		},
+		"reopen": {
+			"not_found": "Bilietas nerastas",
+			"no_permission": "Jūs neturite privilegijų, kad atidarytumėte iš naujo šį bilietą",
+			"already_open": "Šis bilietas jau atidarytas",
+			"not_thread": "Tik gijos gali būti iš naujos atidarytos",
+			"thread_deleted": "Šis bilietas buvo ištrintas visam laikui",
+			"success": "Bilietas %d buvo atidarytas iš naujo: <#%d>",
+			"in_ticket": "Šį bilietą atidarė iš naujo: <@%d>"
+		},
+		"premium": {
+			"key": "Raktas",
+			"check_again": "Patikrinkite iš naujo",
+			"subscription_found": "Rasta prenumerata!",
+			"subscription_found_content": "Kad aktyvuotumėte savo prenumeratą šiame serveryje, savininkas (<@%d>) turi pridėti jus kaip administruojantį vartotoją (rolės yra ignoruojamos) su komanda %s.\\n\\nJūs galite pasitikrinti, kad jūs buvote pridėtas kaip administruojantis vartotojas, parašydami %s.",
+			"activate_key": "Aktyvuokite Premium raktą",
+			"checking": "Tikrinamas Premium statusas...",
+			"please_wait": "Prašome palaukti...",
+			"success_after_check": "Premium yra aktyvuotas šiame serveryje!",
+			"link_patreon_account": "Susieti Patreon paskyrą",
+			"no_subscription": "Nepavyko rasti aktyvios Patreon prenumeratos, susietos su jūsų Discord paskyra. Įsitikinkite, kad jūs [susiejote savo Patreon ir Discord paskyras](%s) ir palaukėte 10 minučių.",
+			"open_form": "Atidaryti formą",
+			"open_form_description": "Paspauskite mygtuka esantį žemiau, kad atidarytumėte formą",
+			"use_key_anyway": "Bet kokiu atveju naudokite Premium Key",
+			"already_purchased_title": "Jau įsigijote premium?",
+			"already_purchased_description": "Jei jau įsigijote premium, norėdami pradėti, atidarytame meniu pasirinkite mokėjimo metodą",
+			"giveaway_key": "Padovanoti raktą",
+			"selector": {
+				"description": "Pasirinkite būdą, kurį naudojote norėdami gauti premium",
+				"key": {
+					"description": "Pasirinkite šią parinktį, jei jums buvo padovanotas raktas"
+				},
+				"patreon": {
+					"description": "Pasirinkite šią parinktį, jei pirkote per Patreon"
+				},
+				"discord": {
+					"description": "Pasirinkite šį variantą jei pirkote per Discord platformą"
+				}
+			},
+			"about": "Premium suteikia prieigą prie daugiau skydelių, statistikos, koreaguojamo roboto ir dar daugiau! Apsilankykite mūsų [website](%s), kad pasiskaitytumėte daugiau.",
+			"already_activated": "Geros naujienos! Premium jau aktyvuotas serveryje.",
+			"already_activated_whitelabel": "Geros naujienos! Premium jau yra aktyvus šiame serveryje.\n\nSiekiant gauti pagalbos pradžioje, perskaitykite [pradžios sąranką](%s).",
+			"discord": {
+				"no_subscription": "Premium gali būti perkamas tiesiogiai per Discord. Paspauskite mygtuką po pranešimu, jog atidarytumėte pirkimo langą.\n\nNusipirkus prašome palaukti iki 5 minučių, jog prenumerata būtų aptikta."
+			},
+			"subscription_found_content_modern": "Jūsų Pateron prenumerata buvo rasta. Prašome paspausti ant \"Atidaryti serverių pasirinkimą\" mygtuko žemiau siekiant atidaryti panelę ir pasirinkti serverį kuriame norite aktyvuoti premium prenumeratą.",
+			"open_server_selector": "Atidaryti serverių pasirinkimą"
+		},
+		"notes": {
+			"added_to_existing": "Jūs buvote pridėtas į giją <#%d>",
+			"thread_name": "užrašai",
+			"created": "Užrašų gija buvo sukurta bilietui: <#%d>",
+			"channel_mode_only": "Pastabų gijos yra palaikomos tik kanalo režimu"
+		},
+		"rename": {
+			"ratelimited": "Dėl Discord limitų bilietai gali būti pervadinti du kartus per 10 minučių"
+		},
+		"vote": {
+			"redeem_credits": "Atsiimti kreditus",
+			"no_credits": "Atsiėmimas nepavyko: jūs neturite jokių kreditų!",
+			"redeem": {
+				"success": {
+					"plural": "Jūsų balsavimo kreditai buvo iškeisti į **%d** dienų Premium prenumeratos!",
+					"singular": "Jūsų balsavimo kreditai buvo iškeisti į **%d** dieną Premium prenumeratos!"
+				}
+			},
+			"with_credits": {
+				"plural": "Jūs turite **%d** balsavimo kreditų. Spauskite \"Atsiimti kreditus\" mygtuką žemiau, jog atsiimtumėte juos dėl %d dienų Premium prenumeratos šiame serveryje.",
+				"singular": "Jūs turite **%d** balsavimo kreditų. Spauskite \"Atsiimti kreditus\" mygtuką žemiau, jog atsiimtumėte juos dėl %d dienos Premium prenumeratos šiame serveryje."
+			}
+		},
+		"viewstaff": {
+			"title": "Personalas",
+			"admin": {
+				"users": "Administratorių Naudotojai",
+				"roles": "Administratorių Rolės",
+				"no_users": "Nėra Administratorių Naudotojų",
+				"no_roles": "Nėra administratorių rolių"
+			},
+			"support": {
+				"users": "Pagalbos Naudotojai",
+				"roles": "Pagalbos Rolės",
+				"no_roles": "Nėra pagalbos rolių",
+				"users_warning": "-# **Įspėjimas:** Naudotojai pagalbos komandose dabar nebenaudojami. Prašome pereiti prie rolės naudojimo."
+			}
+		},
+		"edit": {
+			"title": "Edit Ticket Settings",
+			"description": "Below you can edit various settings for this ticket.",
+			"labels": {
+				"title": "Edit Labels",
+				"description": "Edit the labels assigned to this ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels have been successfully updated to: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Bilieto skydelis pakeistas",
+			"jump_to_top": "Persikelti į viršų",
+			"reopened": "Bilietas atidarytas iš naujo",
+			"ticket_closed": "Bilietas uždarytas"
+		},
+		"click_here": "Spauskite čia",
+		"confirm": "Patvirtinti",
+		"website": "Mūsų puslapis"
+	},
+	"help": {
+		"switch_panel": "Perjungia bilietą į kitą bilietų skydelį, keičia kanalo kategoriją, pagalbos komandas ir kt.",
+		"jump_to_top": "Pateikiamas mygtukas, leidžiantis pereiti į bilieto viršų",
+		"on_call": "Pažymi, kad esate budėjime, kad būtumėte pridėtas ir paminėtas visuose naujuose bilietuose",
+		"reopen": "Atidaro iš naujo bilietą, kuris anksčiau buvo uždarytas",
+		"notes": "Sukuria giją privačiai diskusijai tarp pagalbos narių",
+		"edit": "Edits settings for the current ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Nori sužinoti daugiau? Mūsų [documentation](%s) išmokys tave kaip viską sukonfiguruoti!"
+		},
+		"threads": {
+			"no_notification_channel": "Turite nurodyti bilietų pranešimų kanalą",
+			"notification_channel_type": "Bilietų pranešimų kanalas privalo būti teksto kanalas",
+			"success": "Gijų rėžimas buvo įjungtas",
+			"disabled": "Gijų rėžimas buvo išjungtas"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Šis bilietas jau buvo uždarytas",
+			"no_permission": "Tu neturi leidimų, kad galėtum peržiūrėti tokio tipo bilietus",
+			"already_joined": "Jūs jau prisijungėte prie šio bilieto (<#%d>)",
+			"success": "Pridėjo jus prie bilieto: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Gijos negali būti sukurtos pranešimų kanaluose",
+		"panel_force_disabled": "Šis skydelis buvo išjungtas. Paprašykite serverio administracijos, kad iš naujo aktyvuotu premium ir paleistu %s, kad įjungtu skydelį.",
+		"panel_disabled": "Serverio administracija išjungė tokio tipo bilietų atidarymą",
+		"acl": {
+			"no_allow_rules": "Prieiga atidaryti šio tipo bilietą buvo išjungta visoms rolėms",
+			"deny_listed": "Jūs negalite atidaryti šio tipo bilieto nes jūs turite rolę <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Jums reikia vienos iš paminėtų rolių, jog atidarytumėte šio tipo bilietą: %s",
+				"single": "Jums reikia paminėtos rolės, jog atidarytumėte šio tipo bilietą: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Pasirinkite GDPR užklausos tipą, kurį norite pateikti:",
+		"section": {
+			"transcript": "### **Transkriptų šalinimo parinktys**\n\n-# _Šalinti transkriptus iš serverių, kurių savininkas esate_",
+			"message": "### **Žinučių anonimizavimo parinktys**\n\n-# _Anonimizuoti savo žinutes transkriptuose pasirinktuose serveriuose_"
+		},
+		"warning": "### **Svarbi Informacija**\n* Šalinimas yra **galutinis** ir jo negalima atšaukti\n* Galite šalinti transkriptus tik iš serverių, kurių savininkas esate **jūs**\n* Tik **jūsų** žinutės gali būti anonimizuotos transkriptuose\n* Užklausa gali būti apdorota per iki **30 dienų**\n* Jūsų užklausa bus apdorojama **eilėje**",
+		"resources": "### **Šaltiniai**\n[Kas yra GDRP?](%s)\n[Teisė į pašalinimą](%s)\n[Prieigos teisė](%s)",
+		"button": {
+			"all_transcripts": "Visi transkriptai iš serverių",
+			"specific_transcripts": "Konkretūs transkriptai",
+			"all_messages": "Visos jūsų žinutės serveriuose",
+			"specific_messages": "Jūsų žinutės konkrečiuose bilietuose"
+		},
+		"language_option": "Kalba",
+		"modal": {
+			"all_transcripts": "Pašalinti visus transkriptus iš serverių",
+			"specific_transcripts": "Pašalinti konkrečius transkriptus",
+			"all_messages": "Anonimizuoti savo žinutes serveriuose",
+			"specific_messages": "Anonimizuoti savo žinutes konkrečiose bilietus",
+			"select_server": "Pasirinkite serverį",
+			"select_servers": "Pasirinkite vieną ar daugiau serverių",
+			"server_id": {
+				"label": "Serverio ID",
+				"placeholder": "Įveskite serverio ID"
+			},
+			"server_ids": {
+				"label": "Serverių ID",
+				"placeholder": "Įveskite serverių ID atskirta kableliais (pvz., 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Bilietų ID",
+				"placeholder": "Įveskite bilietų ID atskirta kableliais (pvz., 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "GDPR Reikalingas Patvirtinimas",
+			"all_transcripts": "**Užklausos Tipas:** Pašalinti visus transkriptus serveryje kuriame jūs esate savininkas\n**Serveris:** %s",
+			"all_transcripts_multi": "**Užklausos Tipas:** Pašalinti visus transkriptus serveriuose kuriuose jūs esate savininkas\n**Serveriai:**\n* %s",
+			"specific_transcripts": "**Prašymo Tipas:** Pašalinti konkrečius transkriptus serveryje\n**Serveris:** %s\n**Bilietų ID:** %s",
+			"all_messages": "**Prašymo Tipas:** Anonimizuoti visas jūsų žinutes pasirinktame serveryje\n**Serveris:** %s",
+			"all_messages_multi": "**Prašymo Tipas:** Anonimizuoti visas jūsų žinutes pasirinktame serveryje\n**Serveris:** %s",
+			"specific_messages": "**Prašymo Tipas:** Anonimizuoti jūsų žinutes konkrečiose bilietuose \n**Serveris:** %s\n**Bilietų ID:** %s",
+			"warning": "\n\n**⚠️ Įspėjimas:** šis veiksmas yra negrįžtamas ir negali būti atšauktas.\n\nAr suprantate ir sutinkate, kad šis veiksmas yra negrįžtamas?",
+			"button": "Patvirtinti - Aš suprantu"
+		},
+		"queued": {
+			"title": "GDRP Užklausa įtraukta į eilę",
+			"all_transcripts": "**Užklausos Tipas:** Pašalinti visus transkriptus serveryje \n**Serveris:** %s",
+			"all_transcripts_multi": "**Prašymo Tipas:** Pašalinti visus transkriptus nuo serverių\n**Serveriai:**\n* %s",
+			"specific_transcripts": "**Prašymo Tipas:** Pašalinti konkrečius transkirptus\n**Serveris** %s\n**Bilietų ID:** %s",
+			"all_messages": "**Prašymo Tipas:** Anonimizuoti visas jūsų žinutes serveryje\n**Serveris:** %s",
+			"all_messages_multi": "**Prašymo Tipas:** Anonimizuoti visas jūsų žinutes serveriuose\n**Serveriai:** \n* %s",
+			"specific_messages": "**Prašymo Tipas:** Anonimizuoti jūsų žinutes konkrečiose bilietuose\n**Serveris:** %s\n**Bilietų ID** %s",
+			"footer": "\n\nJūsų užklausa buvo įtraukta į apdorojimo eilę. Apdorojimas gali užtrukti šiek tiek laiko, priklausomai nuo transkripcijų skaičiaus."
+		},
+		"completed": {
+			"title": "GDRP Užklausa Įvykdyta",
+			"all_transcripts": "**Užklausos Tipas:** Pašalinti visus transkriptus serveryje\n**Serveris:** %s\n**Transkriptų Pašalinta:** %d",
+			"all_transcripts_multi": "**Užklausos Tipas:** Pašalinti visus transkriptus serveriuose\n**Serveriai:**\n* %s\n**Transkriptų Pašalinta:** %d",
+			"specific_transcripts": "**Prašymo Tipas:** Pašalinti konkrečius transkirptus\n**Serveris** %s\n**Ištrinti transkriptai:** %d",
+			"all_messages": "**Prašymo Tipas:** Anonimizuoti visas jūsų žinutes serveryje\n**Serveris:** %s\n**Žinučių Anonimizuoti:** %d",
+			"all_messages_multi": "**Prašymo Tipas:** Anonimizuoti visas jūsų žinutes serveriuose\n**Serveriai:** \n* %s\n**Žinutės Anonimizuotos:** %d",
+			"specific_messages": "**Prašymo Tipas:** Anonimizuoti jūsų žinutes konkrečiose bilietuose \n**Serveris:** %s\n**Žinutės Anonimizuotos:** %d",
+			"error": "\n\n** ⚠️ Klaida.** %s"
+		},
+		"followup": {
+			"error": "⚠️ Jūsų GDPR užklausoje įvyko klaida: %s",
+			"no_data": "ℹ️ Jūsų GDPR užklausa buvo apdorota. Duomenų nerasta.",
+			"success": "✅ Jūsų GDRP užklausa buvo apdorota sėkmingai."
+		},
+		"error": {
+			"no_servers": "Nerasta serverių kuriuose jūs esate savininkas ir turi transkriptus.",
+			"invalid_server_id": "Neteisingas serverio ID įvestas.",
+			"invalid_ticket_ids": "Neteisingi bilietų ID įvesti. Prašau įvesti skaitinius bilietų ID atskirtus kableliu (pvz., 123, 456, 789).",
+			"not_owner": "Jūs turite būti serverio savininkas, kad pašalintumėte transkriptus.",
+			"server_not_found": "Serveris nerastas.",
+			"queue_failed": "Nepavyko įtraukti GDPR užklausos į eilę. Bandykite vėliau.",
+			"worker_offline": "GDPR apdorojimo paslauga šiuo metu neprieinama. Bandykite vėliau arba susisiekite su pagalba, jei problema išlieka."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Nepavyko rasti privalomo kanalo: jis tikriausiai buvo ištrintas.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir patikrinti, ar visi kanalo nustatymai yra tinkamai sukonfigūruoti.",
+		"unknown_guild": "Nebuvo rastas serveris.",
+		"unknown_member": "Vartotojo nepavyko rasti. Jis galėjo palikti serverį arba būti užblokuotas.",
+		"unknown_message": "Žinutė, su kuria bandote sąveikauti, buvo ištrinta.\n\nPrašome pabandyti atlikti veiksmą su kita žinute.",
+		"unknown_user": "vartotojas nebuvo rastas.",
+		"unknown_role": "Veiksmui atlikti reikalinga rolė nebeegzistuoja.\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir iš naujo sukonfigūruoti rolės nustatymus.",
+		"unknown_category": "Nepavyko rasti reikalingos kategorijos: ji greičiausiai buvo ištrinta.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir priskirti galiojančią kanalo kategoriją šiam bilieto paneliui.",
+		"unknown_interaction": "Ši sąveika pasibaigė.\n\nPrašome bandyti veiksmą dar kartą.",
+		"max_webhooks": "Serveris pasiekė maksimalų leistiną žiniatinklio skaičių.\n\nPrašome paprašyti serverio administratoriaus pašalinti nenaudojamą žiniatinklį ir bandyti dar kartą.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "Ši sąveika jau buvo apdorota.\n\nJei norite atlikti šį veiksmą dar kartą, pradėkite naują sąveiką.",
+		"missing_permissions": {
+			"title": "Man trūksta šių leidimų, reikalingų šiam veiksmui atlikti",
+			"body": "Prašome suteikti šiuos leidimus botui arba, alternatyviai, leidimą `Administratorius`, ir bandyti dar kartą.\nDaugiau informacijos apie kiekvieno leidimo poreikį rasite mūsų [dokumentacijoje](%s)."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "Viena ar kelios sritys yra per trumpos arba per ilgos.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s), patikrinti visus įvesties laukus ir įsitikinti, kad jų ilgis atitinka reikalavimus.",
+		"required_field": "Trūksta privalomos srities arba ji yra tuščia.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir įsitikinti, kad visos privalomos sritys yra užpildytos.",
+		"invalid_channel_type": "Šio kanalo tipas netinkamas šiai operacijai.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir priskirti galiojantį kanalą bilietų skydeliui.",
+		"invalid_category": "Kanalo kategorija yra netinkama, ji tikriausiai buvo ištrinta.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir priskirti galiojančią kategoriją bilietų skydeliui.",
+		"invalid_id": "Netinkamas ID buvo pateiktas roboto konfigūracijoje.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir patikrinti, ar visi kategorijų, kanalų ir vaidmenų ID yra teisingi.",
+		"invalid_characters": "Įvestyje yra netinkamų simbolių.\n\nNaudokite tik raides, skaičius, brūkšnelius ir pabraukimus.",
+		"invalid_choice": "Pateikta netinkama parinktis.\n\nPrašome paprašyti serverio administratoriaus apsilankyti [valdymo skydelyje](%s) ir patikrinti, ar visi nustatymai yra teisingi.",
+		"invalid_form": "Šis veiksmas negalėjo būti pabaigtas dėl neteisingo įvedimo.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "Operacijos laikas baigėsi, prašome bandyti dar kartą.",
+		"rate_limited": "Jums taikomas užklausų ribojimas. Prašome bandyti dar kartą %s.",
+		"rate_limited_global": "Discord šiuo metu patiria didelę apkrovą (globalus užklausų limitas). Prašome bandyti dar kartą %s.",
+		"general": "Klaida nutiko atlikinėjant šį veiksmą.",
+		"error_id": "Klaidos ID"
+	}
+}

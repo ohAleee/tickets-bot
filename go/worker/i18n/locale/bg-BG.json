@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets е лесен за използване и високо-функционален бот. \nСъпорт за него може да откриете тук %s\nИзползвайте `%s` за лист с команди\nЗапочнете настройка с `%s`",
+	"commands.add.no_members": "Трябва да споменете членовете, които желаете да добавите",
+	"commands.add.no_permission": "Нямате привилегии да добавяте потребители към този тикет",
+	"commands.add.no_everyone": "You cannot add the `@everyone` role to a ticket",
+	"commands.addadmin.no_members": "Трябва да споменете името на потребителя или името на ролята, на която желаете да дадете админ привилегии",
+	"commands.addadmin.owner": "Собственикът вече е админстратор",
+	"commands.addsupport.no_members": "Трябва да споменете потребителя или името на ролята, на която да дадете привилегията \"Съпорт\"",
+	"commands.blacklist.no_members": "Трябва да споменете потребителя, на който желаете да дадете блеклист",
+	"commands.blacklist.self": "Не можете да блеклистнете себе си",
+	"commands.claim.success": "Вашият билет ще бъде поет от %s",
+	"commands.invite": "[Натисни тук](<%s>)",
+	"commands.language.invalid": "You need to specify a language code or flag. Available languages:\\n%s",
+	"commands.open.ticket_limit": "Вие можете да отворите само %d %s тикет наведнъж",
+	"commands.open.too_many_tickets": "Има твърде много тикети в тази категорията. Помолете администратор да затвори няколко или да ги премести в друга категория",
+	"commands.panel": "Посетете <%s>, за да можете да конфигурирате панела",
+	"commands.premium": "Можете да си закупите премиум абонамент от %s\nПремумът Ви дава повече възможности, като: \n- Неограничени тикет панели\n- Възможност да модифицирате името на бота и статуса му (Важи само за Whitelabel) \n- Детайлни статистики за сървъра, потребителите му и елипа му\n- Премахнати имена на бота и икони в съобщенята, които изпраща\n- Подпомагате бъдещото развитие на бота\n\nАко желаете, можете да гласувате за бота на %s за да получите безплатен премум за 24 часа",
+	"commands.premium.invalid_key": "Неправилен бутон, моля уверете се, че е копиран правилно.",
+	"commands.remove.no_permission": "Нямате привилегии да премахвате потребители от този тикет",
+	"commands.remove.staff": "Не можете да премахнете член на екипа от тикет",
+	"commands.removeadmin.no_members": "Трябва да споменете потребител или името на ролята, от която желаете да махнете администраторските привилегии",
+	"commands.removeadmin.owner": "Собственикът на сървъра трябва да е администратор",
+	"commands.removeadmin.self": "Не можете да премахнете собствените си привилегии",
+	"commands.removesupport.no_members": "Трябва да споменете потребител или име на роля, на когото желаете да дадете привилегиите за съпорт",
+	"commands.rename.missing_name": "Трябва да поясните новото име за този тикет",
+	"commands.rename.success": "Тикетът беше преименуван на <#%d>",
+	"commands.tags.create.already_exists": "Таг с ИД `%s` вече съществува. Можете да го изтриете, използвайки `%s`",
+	"commands.tags.create.invalid_arguments": "Трябва да поясните ИД на тага и съдържанието му",
+	"commands.tags.create.too_long": "Таг ИД-то не може да бъде повече от 16 символа",
+	"commands.tags.delete.invalid_arguments": "Трябва да поясните ИД-то на тага, който желаете да изтриете",
+	"commands.tags.delete.not_exist": "Таг с ИД `%s` не е намерен",
+	"commands.tags.get.invalid_arguments": "Трябва да поясните ИД-то на тага. За съдействие с таговете, посетете <%s>.",
+	"commands.tags.get.invalid_tag": "Невалиден таг. За помощ с тагове посетете <%s>.",
+	"commands.tags.list": "Идентификатори за всички тагове: \\n%s\\n За да видите съдържанията в един таг, използвайте `%s`",
+	"commands.unclaim.not_claimed": "Този тикет не е поет",
+	"commands.unclaim.not_claimer": "Само администраторите или потребителят, поел тикета може да отнеме поемането",
+	"commands.unclaim.success": "Всички потребители с привилегии съпорт вече могат да отговарят на тикета",
+	"commands.vote": "Click the button below to vote for the bot and receive 24 hours of premium for free.\n\nOnce you have voted, run the %s command again to redeem your vote credits.",
+	"generic.invalid_argument": "Неправилна употреба",
+	"generic.invalid_user": "Не може да се открие споменатия потребител",
+	"generic.no_permission": "Нямате привилегия за това",
+	"generic.not_ticket": "Това не е тикет канал",
+	"generic.owner_only": "Тази команда е само за собственика на бота",
+	"help.about": "Дава информация за бота",
+	"help.add": "Добавя потребител/и към тикета",
+	"help.addadmin": "Дава админстраторски привилегии на потребител или роля",
+	"help.addsupport": "Adds a role as a support representative",
+	"help.admin": "Управление на бота",
+	"help.admin.blacklist": "Поставяне на забрана даден сървър да използва бота",
+	"help.admin.debug.server": "Debug a server",
+	"help.admin.generate_premium": "Генерира премиум ключове",
+	"help.admin.unblacklist": "Премахва сървър от листа със забрани",
+	"help.blacklist": "Включване / изкючване на възможността хората да комуникират с бота чрез команди",
+	"help.cancel": "Преустановява процеса по настройване",
+	"help.claim": "Добавя един член на екипа към тикета",
+	"help.close": "Затваря текущия тикет",
+	"help.help": "Показва лист с команди",
+	"help.invite": "Дава инвайт линк за бота",
+	"help.language": "Сменя езика, който бота използва",
+	"help.managetags": "Добавя, изтрива или изброява тагове",
+	"help.open": "Отваря нов тикет",
+	"help.panel": "Създава панел за отваряне на тикет само с 1 клик",
+	"help.premium": "Използвай тази команда, след като си закупил премиум, за да го активираш",
+	"help.remove": "Премахва потребител от тикет",
+	"help.removeadmin": "Премахва администраторски привилегии на потребител или роля",
+	"help.removesupport": "Премахва съпорт привилегиите от потребител или роля",
+	"help.rename": "Преименува текущия тикет",
+	"help.setup": "Разрешава Ви лесно да конфигурирате бота",
+	"help.stats": "Показва статистики за потребителите, екипа и сървъра",
+	"help.statsserver": "Показва Ви статистики за сървъра",
+	"help.tag": "Изпраща черново съобщение",
+	"help.tagdelete": "Изтрива таг",
+	"help.taggadd": "Добавя нов таг",
+	"help.taglist": "Изброява всички тагове",
+	"help.transfer": "Прехвърля поет тикет към друг потребител",
+	"help.unclaim": "Премахва поемането на текущия тикет",
+	"help.viewstaff": "Показва членовете на екипа и ролите",
+	"help.vote": "Дава Ви линк да гласувате за безплатен премиум",
+	"help.gdpr": "Manage your GDPR data requests",
+	"open.success": "Отворен е нов тикет: %s",
+	"open.outside_support_hours": {
+		"title": "This panel is currently closed",
+		"message": "Please try again during our support hours."
+	},
+	"setup.auto.category.failure": "Нямам привилегия `Manage Channels`",
+	"setup.auto.category.success": "Създадена е катеогрия Билети",
+	"setup.auto.completed": "Сетъп-а е готов! Натисни [тук](%s) to, за да създадеш панел с реакции, и добави <@&%d> и <@&%d> роли за твоя екип",
+	"setup.auto.roles.failure": "Нямам привилегия `Manage Roles`",
+	"setup.auto.roles.success": "Направени са Tickets Admin & Tickets Support роли",
+	"setup.auto.transcript.failure": "Нямам привилегия `Manage Channels`",
+	"setup.auto.transcript.success": "Направен е каналът <#%d>",
+	"setup.ticket_limit.success": "Тикет лимита беше променен на `%d`",
+	"setup.transcript.invalid": "Трябва да споменете валиден канал в сървъра (Пример <#%d>)\nНапример: `%s`",
+	"setup.transcript.success": "Каналът за тикет логове е променен на <#%d>",
+	"commands.language.help_wanted": "Говорите друг език? Може да посетите дискорда ни %s ако имате интерес да помогнете в превода на бота на повече езици",
+	"commands.rename.too_long": "Имената на каналите не трябва да са повече от 100 символа",
+	"commands.autoclose.configure": "Посетете [dashboard](%s), за да промените настройките на автоматичното затваряне",
+	"help.autoclose": "Подобни команди на autoclose",
+	"help.autoclose.exclude": "Добавя изключение този тикет да не бъде затварян автоматично",
+	"help.autoclose.configure": "Модифициране на настройките на autoclose",
+	"commands.autoclose.exclude.success": "Тикетът беше добавен като изключение за автоматичните затваряния",
+	"commands.claim.no_permission": "Само членове на екипа могат да поемат тикети",
+	"commands.open.from": "Този тикет беше отворен от следното съобщение (%s)\n\n<@%d> написа в <#%d>:\n```%s```",
+	"commands.open.from.moved": "Дискусията беше преместена в тикет (<#%d>)",
+	"help.close_request": "Изпраща съобщение със запитване дали текущия тикет да бъде затворен",
+	"close.reason_too_long": "Причината не може да е по-дълга от 255 символа",
+	"commands.close_request.success": "Close request was sent successfully",
+	"commands.close_request.no_reason": "<@%d> заяви затваряне на този тикет\n\nМоля потвърдете, че проблемът е решен, използвайки бутоните отдолу",
+	"commands.close_request.with_reason": "<@%d> заяви затваряне на този тикет\nПричина: ```%s```\nМоля потвърдете, че проблемът е решен, използвайки бутоните отдолу",
+	"commands.close_request.no_permission": "Само човекът, който е отворил тикета може да отговори на заявката",
+	"commands.close_request.denied": "<@%d> отхвърли заявката за затваряне на тикета",
+	"generic.error": "Грешка",
+	"feedback.disabled": "Този сървър няма функция за изпращане на обратна връзка",
+	"feedback.success": "Вашето мнение е записано, благодарим Ви!",
+	"generic.success": "Успешно",
+	"button.guild_only": "Този бутон трябва да бъде използван в сървъра",
+	"button.dms_only": "Този бутон трябва да се използва в директните съобщения",
+	"commands.tag.generic": "Таг",
+	"commands.tags.delete.success": "Тагът `%s` беше премахнат",
+	"generic.ticket": "Тикет",
+	"generic.title.premium_only": "Команда само за премиум потребители",
+	"generic.admin": "Администратор",
+	"commands.tags.create.success": "Тагът е създаден - можете да го използвате, като изпълните команда `%s`",
+	"generic.title.about": "За нас",
+	"generic.title.vote": "Гласуване за бота",
+	"generic.title.tags": "Тагове",
+	"generic.title.autoclose": "Автоматично затваряне",
+	"generic.title.invite": "Покана",
+	"generic.title.close": "Затваряне",
+	"generic.title.claim": "Поемане на тикет",
+	"generic.title.unclaim": "Unclaim",
+	"generic.title.blacklisted": "Забрана",
+	"generic.title.blacklist": "Постави забрана",
+	"generic.error.blacklisted": "Вие имате поставена забрана в този сървър",
+	"generic.error.guild_blacklisted": "This server is blacklisted from using this bot",
+	"generic.error.user_blacklisted": "You are blacklisted from using this bot",
+	"commands.blacklist.add.success": "<@%d> му беше поставена забрана",
+	"commands.blacklist.remove.success": "Забраната на <@%d> беше премахната",
+	"generic.title.add_admin": "Добавяне на администратор",
+	"generic.title.add_support": "Добавяне на съпорт",
+	"generic.title.remove_admin": "Премахване на администратор",
+	"generic.title.remove_support": "Премахване на съпорт",
+	"commands.addsupport.success": "Support representative added successfully: %s",
+	"generic.title.language": "Език",
+	"commands.removesupport.success": "Support representative removed successfully: %s",
+	"commands.addadmin.success": "Admin added successfully: %s",
+	"commands.removeadmin.success": "Admin removed successfully: %s",
+	"generic.title.setup": "Настройка",
+	"generic.title.premium": "Премиум",
+	"generic.title.panel": "Панел",
+	"generic.title.rename": "Преименуване",
+	"generic.title.remove": "Премахване",
+	"generic.title.help": "Помощ",
+	"generic.title.close_confirmation": "Потвърждение за затваряне на тикет",
+	"close.confirmation": "Моля потвърдете, че желаете да затворите този тикет",
+	"generic.title.close_request": "Заявка за затваряне на тикет",
+	"commands.close_request.accept": "Затваряне на тикет",
+	"commands.close_request.deny": "Оставяне на тикет отворен",
+	"commands.premium.success": "Премиумът е активиран за **%d** дни",
+	"generic.title.claimed": "Поет тикет",
+	"generic.title.unclaimed": "Поемането на тикета е отхвърено",
+	"generic.title.add": "Добавяне",
+	"commands.add.success": "<@%s> has been added to <#%d>",
+	"commands.add.role_thread": "Due to Discord limitations, roles cannot be added to thread tickets",
+	"commands.remove.success": "<@%s> has been removed from <#%d>",
+	"commands.remove.role_thread": "Due to Discord limitations, roles cannot be removed from thread tickets",
+	"open.ratelimited": "Тикетите в този сървър се отварят много бързо, моля изчакайте...",
+	"open.panel_cooldown": "You are on cooldown for this panel. Please try again %s.",
+	"commands.claim.thread": "Поради ограничения, claim-ването не се поддържа под-темите",
+	"generic.join_support_server": "Присъединете се към сървъра за поддръжка",
+	"commands.open.guild_channel_limit": "Този сървър достигна лимита на Discord от 500 канала",
+	"commands.open.missing_form_answer": "Трябва да отговорите на този въпрос `%s`",
+	"close.no_permission": "Нямате право да затваряте този билет",
+	"": {
+		"generic.title.close_with_reason": "Затвори с причина",
+		"generic.reason": "Причина"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Причина за затваряне на билета, п.р \"Проблема е решен\""
+		},
+		"success": "Билета беше затворен от <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "Не може да оцените този тикет, защото сте представител на екипа в %s",
+				"empty": "Не можете да оцените този тикет, защото не сте изпращали съобщения"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Командата `%s` е премахната в този сървър: моля използвайте тикет панел, за да отворите билет",
+			"threads": {
+				"cant_see_parent_channel": "Не мога да добавя <@%d> в билета: моля уверете се, че те имат правата да гледат този канал (<#%d>)",
+				"cant_message_in_threads": "You are missing the `Send Messages in Threads` permission, which is required to open a ticket. Please ask a server administrator to grant this permission to you, and try again."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Невалиден панел: Вие трябва да изберете една от опциите по- долу",
+			"success": "Панела на билета беше преместен в `%s`, от <@%d>",
+			"non_thread_to_thread": "You cannot switch to a panel that uses threads from a non-thread ticket",
+			"claimer_no_access_title": "Panel Switch Blocked",
+			"claimer_no_access": "The ticket claimer (<@%d>) does not have access to the selected panel.",
+			"auto_unclaimed": "The ticket has been switched to the `%s` panel by <@%d>.\n\nThe ticket has been automatically unclaimed, as <@%d> does not have access to the new panel."
+		},
+		"blacklist": {
+			"staff": "Хората от екипа не могат да бъдат сложени в черния списък",
+			"add_role": {
+				"success": "<@&%d> беше добавен в черния списък",
+				"limit": "Ти достигна лимитът за ролята (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> has been unblacklisted"
+			},
+			"add": {
+				"limit": "Ти достигна лимитът за добавяне в черния списък хора (%d): вместо това опитай с роля"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Билета няма съобщение за добре дошли",
+			"content": "Натисни бутона долу, за да достигнеш най-отгоре на билета"
+		},
+		"addsupport": {
+			"confirm": "Моля потвърди, че искаш да добавиш %s към нормалния съпорт екип",
+			"everyone": "Не можеш да добавиш `@everyone` като роля за екип"
+		},
+		"addadmin": {
+			"confirm": "Моля потвърди, това че искаш да добавиш %s като бот администратор "
+		},
+		"tags": {
+			"create": {
+				"limit": "Достигнали сте таг лимитът (%d)"
+			},
+			"get": {
+				"requires_premium": "Премиум е нужен за изпълнение на пресонализирани команди (tag aliases)"
+			}
+		},
+		"language": {
+			"content": "Езиците, които са достъпни и техния напредък в превода са: %s",
+			"success": "Езика на сървъра беше сменен на **%s** (%s)",
+			"select": "Избери език (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` може да се използва само в теми. Посети нашия [docs](%s), за да намериш повече относно темите",
+			"success": "Ти сега говориш ",
+			"remove_success": "Ти вече не говориш"
+		},
+		"reopen": {
+			"not_found": "Билетът не е намерен",
+			"no_permission": "Нямате позволение да отворите наново този билет",
+			"already_open": "Билета вече е отворен ",
+			"not_thread": "Само темите могат да бъдат отворени наново",
+			"thread_deleted": "Билета беше изтрит завинаги ",
+			"success": "Тикет %d бе отворен наново <#%d>",
+			"in_ticket": "Този билет беше отворен наново от <@%d>"
+		},
+		"premium": {
+			"key": "Ключ",
+			"check_again": "Провери отново ",
+			"subscription_found": "Абонаментът е намерен!",
+			"subscription_found_content": "Ако искаш да сложиш абонаментът ти в този сървър, собственикът на сървъра <(@%d)> трябва да ви направи като администраторен **човек** (роли не се броят) през командата %s.\n\\n\\n Може да се верифицираш, че си добавен като админ от командата  %s.",
+			"activate_key": "Активирай премиум ключа",
+			"checking": "Проверява се премиум статус...",
+			"please_wait": "Моля изчакайте...",
+			"success_after_check": "Премиум е вече активен за този сървър!",
+			"link_patreon_account": "Свържи Patreon акаунт",
+			"no_subscription": "Не мога да намеря активен Patreon абонамент, свързан с твоя дискорд акаунт. Увери се, че [Си свързал Patreon и дискорд акаунта си]. \n (%s),\nизчакайте 10 минути.",
+			"open_form": "Отворена форма",
+			"open_form_description": "Натисни бутона долу, за да отворите наново формата",
+			"use_key_anyway": "А пак използвай премиум кей",
+			"already_purchased_title": "Вече закупуш премиум?",
+			"already_purchased_description": "Ако вече си закупил премиум, избери метода за плащане чрез долу опциите, за да започнем",
+			"giveaway_key": "Ключ за раздаване",
+			"selector": {
+				"description": "Избери кой метод си използвал за премиум",
+				"key": {
+					"description": "Избери тази опция, ако са ги дали ключ за раздаване"
+				},
+				"patreon": {
+					"description": "Избери тази опция, ако си направил покупката чрез Patreon"
+				},
+				"discord": {
+					"description": "Select this option if you made your purchase within the Discord in-app store"
+				}
+			},
+			"about": "Премиум, Ви дава възможност за повече панели, статистики, къстъм бот и още много неща! Посети нашия [website](%s), за да научиш повече.",
+			"already_activated": "Добри новини! Премиум вече е активен в този сървър.",
+			"already_activated_whitelabel": "Добри новини! Премиум вече е активен в този сървър.\nЗа да получите помощ при стартиране с whitelabel, прочетете [нашия whitelabel сетъп](%s).",
+			"discord": {
+				"no_subscription": "Premium can be purchased within Discord directly. Click the button below this message to open the subscription management page.\r\n\r\nOne purchased, please allow up to 5 minutes for the subscription to be detected."
+			},
+			"subscription_found_content_modern": "Your Patreon subscription has been found. Please click on the \"Open Server Selector\" button below in order to open the dashboard to select which servers you wish to apply your premium subscription to.",
+			"open_server_selector": "Open Server Selector"
+		},
+		"notes": {
+			"added_to_existing": "Ти беше добавен в тази вече съществуваща се тема: <#%d>",
+			"thread_name": "бележки",
+			"created": "Бележки в темата бяха създадени за този тикет: <#%d>",
+			"channel_mode_only": "Note threads are only supported in channel mode"
+		},
+		"rename": {
+			"ratelimited": "Поради ограничения на Дискорд, тикетите могат да се преименуват веднъж на всеки 10 минути"
+		},
+		"vote": {
+			"redeem_credits": "Redeem Credits",
+			"no_credits": "Redemption failed: you do not have any vote credits!",
+			"redeem": {
+				"success": {
+					"plural": "Your vote credits have been redeemed for **%d** days of premium!",
+					"singular": "Your vote credits have been redeemed for **%d** day of premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "You have **%d** vote credits. Click the \"Redeem Credits\" button below to redeem them for %d days of premium in this server.",
+				"singular": "You have **%d** vote credit. Click the \"Redeem Credits\" button below to redeem them for %d day of premium in this server."
+			}
+		},
+		"viewstaff": {
+			"title": "Staff",
+			"admin": {
+				"users": "Admin Users",
+				"roles": "Admin Roles",
+				"no_users": "No admin users",
+				"no_roles": "No admin roles"
+			},
+			"support": {
+				"users": "Support Users",
+				"roles": "Support Roles",
+				"no_roles": "No support roles",
+				"users_warning": "-# **Warning:** Users in support teams are now deprecated. Please migrate to roles."
+			}
+		},
+		"edit": {
+			"title": "Edit Ticket Settings",
+			"description": "Below you can edit various settings for this ticket.",
+			"labels": {
+				"title": "Edit Labels",
+				"description": "Edit the labels assigned to this ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels have been successfully updated to: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Панела е сменен",
+			"jump_to_top": "Отиди до горе",
+			"reopened": "Тикетът е отворен отново",
+			"ticket_closed": "Билетът - затворен"
+		},
+		"click_here": "Натисни Тук",
+		"confirm": "Потвърди",
+		"website": "Нашия уебсайт"
+	},
+	"help": {
+		"switch_panel": "Сменя билета в друг панел, сменя категорията на канала, сменя и съпорт тиймовете, други.",
+		"jump_to_top": "Осигурява ви бутон, с който да се качите най-отгоре на билета",
+		"on_call": "Маркира ви в разговор, да бъде добавен и тагван във всички нови билети",
+		"reopen": "Отваря наново билет, който преди това е затворен ",
+		"notes": "Направи тема за лични дискусии със екип мембърите",
+		"edit": "Edits settings for the current ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Искаш да научиш повече? Нашата [documentation](%s), ще ви научи как да конфигурирате всичко възможно на бота!"
+		},
+		"threads": {
+			"no_notification_channel": "Трябва да направиш канал за известия на тикетите",
+			"notification_channel_type": "Канала за известия, трябва да може да се пише в него",
+			"success": "Тема-мода е активиран",
+			"disabled": "Тема-мода е деактивиран"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Този билет, вече е затворен",
+			"no_permission": "Нямате разрешение да гледате този вид билети",
+			"already_joined": "Вие вече сте се присъединили в този билет (<#%d>)",
+			"success": "Добави те в билета <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Темите не могат да бъдат създадени в канали за известия",
+		"panel_force_disabled": "Този панел вече е изключен. Моля попитайте админ, за да включите отново премиум и да изпълните %s в сметка да пуснете този панел наново.",
+		"panel_disabled": "Сървър админите са премахнали отварянето на такъв вид билети",
+		"acl": {
+			"no_allow_rules": "Достъпът за отваряне на този тип билет е деактивиран за всички роли",
+			"deny_listed": "Не можете да отворите този тип билет, защото имате ролята <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Имате нужда от една от следните роли, за да отворите този тип билет: %s",
+				"single": "Имате нужда от една от следните роли, за да отворите този тип билет: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Select the type of GDPR request you would like to make:",
+		"section": {
+			"transcript": "### **Transcript Deletion Options**\n-# _Delete transcripts from servers you own_",
+			"message": "### **Message Anonymization Options**\n-# _Anonymize your messages from transcripts in selected servers_"
+		},
+		"warning": "### **Important Information**\n* Deletion is **permanent** and cannot be undone\n* You can only delete transcripts from servers **you** own\n* Only **your** messages can be anonymized in transcripts\n* The request may take up to **30 days** to complete\n* Your request will be processed in a **queue**",
+		"resources": "### **Resources**\n[What is GDPR?](%s)\n[Right to Erasure](%s)\n[Right of Access](%s)",
+		"button": {
+			"all_transcripts": "All transcripts from servers",
+			"specific_transcripts": "Specific transcripts",
+			"all_messages": "All your messages in servers",
+			"specific_messages": "Your messages in specific tickets"
+		},
+		"language_option": "Language",
+		"modal": {
+			"all_transcripts": "Delete All Transcripts from Servers",
+			"specific_transcripts": "Delete Specific Transcripts",
+			"all_messages": "Anonymize Your Messages in Servers",
+			"specific_messages": "Anonymize Your Messages in Specific Tickets",
+			"select_server": "Select a server",
+			"select_servers": "Select one or more servers",
+			"server_id": {
+				"label": "Server ID",
+				"placeholder": "Enter the server ID"
+			},
+			"server_ids": {
+				"label": "Server IDs",
+				"placeholder": "Enter server IDs separated by commas (e.g., 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Ticket IDs",
+				"placeholder": "Enter ticket IDs separated by commas (e.g., 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "GDPR Confirmation Required",
+			"all_transcripts": "**Request Type:** Delete all transcripts from a server you own\n**Server:** %s",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers you own\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts from server\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Request Type:** Anonymize all your messages in the selected server\n**Server:** %s",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in the selected servers\n**Servers:**\n* %s",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"warning": "\n\n⚠️ **Warning:** This action is permanent and cannot be undone.\n\nDo you understand and accept that this action is permanent?",
+			"button": "Confirm - I understand"
+		},
+		"queued": {
+			"title": "GDPR Request Queued",
+			"all_transcripts": "**Request Type:** Delete all transcripts from server\n**Server:** %s",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Request Type:** Anonymize all your messages in server\n**Server:** %s",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in servers\n**Servers:**\n* %s",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"footer": "\n\nYour request has been queued for processing.\nProcessing may take some time depending on the number of transcripts."
+		},
+		"completed": {
+			"title": "GDPR Request Completed",
+			"all_transcripts": "**Request Type:** Delete all transcripts from server\n**Server:** %s\n**Transcripts Deleted:** %d",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers\n**Servers:**\n* %s\n**Transcripts Deleted:** %d",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts\n**Server:** %s\n**Transcripts Deleted:** %d",
+			"all_messages": "**Request Type:** Anonymize all your messages in server\n**Server:** %s\n**Messages Anonymized:** %d",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in servers\n**Servers:**\n* %s\n**Messages Anonymized:** %d",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Messages Anonymized:** %d",
+			"error": "\n\n**⚠️ Error:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Your GDPR request encountered an error: %s",
+			"no_data": "ℹ️ Your GDPR request has been processed. No data was found.",
+			"success": "✅ Your GDPR request has been processed successfully."
+		},
+		"error": {
+			"no_servers": "No servers found where you are the owner and have transcripts.",
+			"invalid_server_id": "Invalid server ID provided.",
+			"invalid_ticket_ids": "Invalid ticket IDs provided. Please enter numeric ticket IDs separated by commas (e.g., 123, 456, 789).",
+			"not_owner": "You must be the server owner to delete transcripts.",
+			"server_not_found": "Server not found.",
+			"queue_failed": "Failed to queue GDPR request. Please try again later.",
+			"worker_offline": "The GDPR processing service is currently unavailable. Please try again later or contact support if this issue persists."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Could not find a required channel: it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all channel settings are configured correctly.",
+		"unknown_guild": "Could not find the server.",
+		"unknown_member": "The user could not be found. They may have left the server or been banned.",
+		"unknown_message": "The message you're trying to interact with has been deleted.\n\nPlease try the action again with a different message.",
+		"unknown_user": "user could not be found.",
+		"unknown_role": "The role required for this action no longer exists.\n\nPlease ask a server administrator to visit the [dashboard](%s) and reconfigure role settings.",
+		"unknown_category": "Could not find a required category: it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel category to this ticket panel.",
+		"unknown_interaction": "This interaction has expired.\n\nPlease try the action again.",
+		"max_webhooks": "The server has reached the maximum number of webhooks.\n\nPlease ask a server administrator to remove some unused webhooks and try again.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "This interaction has already been processed.\n\nIf you need to perform this action again, please start a new interaction.",
+		"missing_permissions": {
+			"title": "I am missing the following permissions required to perform this action",
+			"body": "Please assign these permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "One or more fields are too short or too long.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all inputs and ensure all fields meet the required length constraints.",
+		"required_field": "A required field is missing or empty.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all required fields are filled out.",
+		"invalid_channel_type": "The channel type is invalid for this operation.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel to the ticket panel.",
+		"invalid_category": "The channel category is invalid, it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid category to the ticket panel.",
+		"invalid_id": "An invalid ID was provided in the bot configuration.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all category, channel, and role IDs are correct.",
+		"invalid_characters": "The input contains invalid characters.\n\nPlease use only letters, numbers, hyphens, and underscores.",
+		"invalid_choice": "An invalid option was provided.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all settings are correct.",
+		"invalid_form": "The action could not be completed due to invalid input.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "The operation timed out, please try again.",
+		"rate_limited": "You're being rate limited. Please try again %s.",
+		"rate_limited_global": "Discord is experiencing high load (global rate limit). Please try again %s.",
+		"general": "An error occurred while performing this action.",
+		"error_id": "Error ID"
+	}
+}

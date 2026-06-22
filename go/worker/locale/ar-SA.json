@@ -1,0 +1,513 @@
+{
+	"commands.about": "تيكت بوت (Tickets) هو بوت للدعم الفني في سيرفرك الديسكورد, حيث يعد سهل الاستخدام وقابل للتخصيص والتعديل بشكل كبير\nتستطيع الدخول إلى سيرفر ديسكورد الدعم الفني الخاص بالبوت: %s\nلمعرفة جميع الأوامر استخدم كوماند: `%s`\nولتبدأ بإستخدام البوت استخدم كوماند: `%s`",
+	"commands.add.no_members": "تحتاج إلى ذكر الأعضاء لإضافتهم إلى التذكرة",
+	"commands.add.no_permission": "ليس لديك صلاحية لإضافة أشخاص إلى هذه التذكرة",
+	"commands.add.no_everyone": "You cannot add the `@everyone` role to a ticket",
+	"commands.addadmin.no_members": "عليك ان تذكر اسم المستخدم او اسم الرتبة لمنح امتيازات الاّدمن إلى ",
+	"commands.addadmin.owner": "مالك الخادم هو بالفعل مسؤول",
+	"commands.addsupport.no_members": "عليك ان تذكر اسم المستخدم او اسم رتبة الموظف للحصول على المساعدة",
+	"commands.blacklist.no_members": "تحتاج إلى ذكر مستخدم لتبديل حالة القائمة السوداء من أجل",
+	"commands.blacklist.self": "لا يمكنك وضع نفسك في القائمة السوداء",
+	"commands.claim.success": " %s سيتم التعامل مع تذكرتك من قبل ",
+	"commands.invite": "[انقر هنا](<%s>)",
+	"commands.language.invalid": "\n%s :الرجاء تحديد رمز اللغة او علم . اللغات المتوفرة",
+	"commands.open.ticket_limit": "في الوقت ذاته %d %s يمكن فتح ",
+	"commands.open.too_many_tickets": "هناك عدد كبير من التذاكر في فئة التذاكر هذه. اطلب من الاّدمن إغلاق البعض أو نقلهم إلى فئة أخرى",
+	"commands.panel": "افتح <%s> لتعديل لوحة",
+	"commands.premium": "للحصول على النسخة المميزة لمدة 24 ساعة <%s> ولكن يمكنك التصويت في  \n```\n\n تدعم مطورينا وتدعمنا ماديا \n+ خالي من الاعلانات \n+ ومعلومات دقيقة عن السيرفر والمستخدمين والموظفين (whitelabel)\n+ يمكنك تخصيص اسم البوت والصورة والحالة \n+يمكنك عمل لوحات لتذاكر بشكل لانهائي  \n```diff\n+  :الإشتراك المميز لديه العديد من الخواص ,مثل \n <%s> يمكنك شراء اشتراك مميز من ",
+	"commands.premium.invalid_key": "الرمز غير صالح .الرجاء التأكد من نسخخها بشكل صحيح ",
+	"commands.remove.no_permission": "لا تملك الصلاحية لإزالة أشخاص من هذه التذكرة ",
+	"commands.remove.staff": "لا يمكنك إزالة الموظف من التذكرة",
+	"commands.removeadmin.no_members": "عليك ان تذكر اسم المستخدم او اسم رتبة الموظف لإزالة الخواص ",
+	"commands.removeadmin.owner": "يجب أن يكون مالك السيرفر اّدمن",
+	"commands.removeadmin.self": "لا يمكنك إلغاء خواصك ",
+	"commands.removesupport.no_members": "عليك ان تذكر اسم المستخدم او اسم رتبة الموظف للحصول على المساعدة",
+	"commands.rename.missing_name": "الرجاء تحديد إسم جديد لهذه التذكرة ",
+	"commands.rename.success": "<#%d> هذه ألتذكرة تم تغير أسمها ل ",
+	"commands.tags.create.already_exists": "التاج الذي يحمل الايدي %s موجود بالفعل , يمكن حذف التاق بأستخدام كوماند `%s`",
+	"commands.tags.create.invalid_arguments": "ومحتوياته IDعليك تحديد شعار ال",
+	"commands.tags.create.too_long": "ان يكون اطول من 16 حرف IDsلا يمكن لشعار ال",
+	"commands.tags.delete.invalid_arguments": "لحذفه IDيجب عليك تحديد شعار ال",
+	"commands.tags.delete.not_exist": "لم يتم العثور عليه `%s` لشعار معين ID ",
+	"commands.tags.get.invalid_arguments": "للمزيد من المساعدة بالشعار , قم بزيارة <%s>.  .الشعار IDعليك تزويدنا ب ",
+	"commands.tags.get.invalid_tag": " شعار غير صالح.  للمزيد من المساعدة ، قم بزيارة <%s>.",
+	"commands.tags.list": "IDs for all tags: \\n%s\\nTo view the contents of a tag, run `%s`",
+	"commands.unclaim.not_claimed": "هذه التذكرة لم تؤخذ بعد ",
+	"commands.unclaim.not_claimer": " فقط الموظفيين (الاّدمن) والمستخدمين من امتلكوا التذكرة يمكنهم تركها",
+	"commands.unclaim.success": "جميع الموظفين يمكنهم الان الرد على هذه التذكرة ",
+	"commands.vote": "Click the button below to vote for the bot and receive 24 hours of premium for free.\n\nOnce you have voted, run the %s command again to redeem your vote credits.",
+	"generic.invalid_argument": " حجة غير صالحة : إشارة إلى الإستخدام",
+	"generic.invalid_user": "لم يتم العثور على المستخدم المحدد",
+	"generic.no_permission": "ليس لديك صلاحية بذلك",
+	"generic.not_ticket": "هذه ليست قناة للتذاكر",
+	"generic.owner_only": "هذا الأمر محجوز لمالك البوت فقط ",
+	"help.about": "تخبرك بمعلومات عن البوت",
+	"help.add": "تضيف مستخدم الى التذكرة",
+	"help.addadmin": "تمنح امتيازات للمستخدم او لرتبة الموظف ",
+	"help.addsupport": "يضيف دورًا كممثل دعم",
+	"help.admin": "إدارة البوت",
+	"help.admin.blacklist": "وضع خادم في القائمة السوداء من استخدام البوت",
+	"help.admin.debug.server": "تصحيح أخطاء الخادم",
+	"help.admin.generate_premium": "إنشاء رموز بريميوم",
+	"help.admin.unblacklist": "إزالة خادم من القائمة السوداء",
+	"help.blacklist": "تفعيل خاصية السماح للمستخدمين بإستخدام البوت",
+	"help.cancel": "يلغي عملية الإعداد",
+	"help.claim": "إستلام التذكرة من قبل اّدمن واحد فقط",
+	"help.close": "إغلاق التذكرة الحالية",
+	"help.help": "إظهار لائحة الأوامر لك",
+	"help.invite": "يقدم رابط دعوة للبوت",
+	"help.language": "تغيير لغة البوت",
+	"help.managetags": "إضافة او إزالة او عرض شعارات",
+	"help.open": "إفتتاح تذكرة جديدة",
+	"help.panel": "إنشاء لوحة لإعطاء المستخدمين القدرة لفتح تذكرة بنقرة واحدة",
+	"help.premium": "قم بإستخدام هذا الامر بعد شراء خطة البريميوم للتفعيل",
+	"help.remove": "إزالة مستخدم من التذكرة",
+	"help.removeadmin": "إزالة مميزات ورتبة الاّدمن",
+	"help.removesupport": "إزالة مميزات ورتبة الموظف",
+	"help.rename": "تغيير اسم التذكرة الحالية",
+	"help.setup": "تمكينك من تعديل البوت بسهولة",
+	"help.stats": "تظهر معلومات وإحصائيات عن السيرفر والمستخدم والموظف",
+	"help.statsserver": "تظهر معلومات وإحصائيات عن السيرفر",
+	"help.tag": "إرسال رسالة قصيرة",
+	"help.tagdelete": "إزالة شعار",
+	"help.taggadd": "إضافة شعار جديد",
+	"help.taglist": "عرض كل الشعارات",
+	"help.transfer": "تنقل التذكرة الى اّدمن اّخر",
+	"help.unclaim": "إزالة الإمتلاك من هذه التذكرة",
+	"help.viewstaff": "عرض الموظفيين والرتب",
+	"help.vote": "تعطيك الرابط للتصويت للإشتراك المجاني",
+	"help.gdpr": "إدارة طلبات بيانات GDPR",
+	"open.success": "تم فتح تذكرة جديدة: %s",
+	"open.outside_support_hours": {
+		"title": "هذه اللوحة مغلقة حاليا",
+		"message": "الرجاء المحاولة مرة أخرى خلال ساعات الدعم الخاصة بنا."
+	},
+	"setup.auto.category.failure": "انا افتقد إذن \"إدارة القنوات\"",
+	"setup.auto.category.success": "تم إنشاء فئة التذاكر",
+	"setup.auto.completed": "Setup complete! Click [here](%s) to setup a reaction panel, and add the <@&%d> and <@&%d> roles to your staff members",
+	"setup.auto.roles.failure": "انا افتقد إذن \"إدارة الأدوار\"",
+	"setup.auto.roles.success": "تم انشاء أدوار `مشرف التذاكر` & `دعم التذاكر`",
+	"setup.auto.transcript.failure": "انا افتقد إذن \"إدارة القنوات\"",
+	"setup.auto.transcript.success": "تم إنشاء قناة <#%d>",
+	"setup.ticket_limit.success": "تم تحديث حد التَّذْكِرَة إلى `%d`",
+	"setup.transcript.invalid": "يجب أن تذكر قناة صالحة في الخادم (على سبيل المثال <#%d>)\\n**مثال:** `%s`",
+	"setup.transcript.success": "تم تغيير قناة النصوص إلى <#%d>",
+	"commands.language.help_wanted": "هل تتحدث لغة أخرى؟ انضم إلى [خادم الدعم](%s) الخاص بنا إذا كنت مهتما بترجمة البوت إلى لغات أكثر",
+	"commands.rename.too_long": "اسماء القنوات لا يمكن ان تكون اطول من 100 حرف",
+	"commands.autoclose.configure": "قم بزيارة [dashboard](%s) لتغيير إعدادات الإغلاق التلقائي",
+	"help.autoclose": "إغلاق تلقائي للإوامر ذات الصلة",
+	"help.autoclose.exclude": "يستبعد التذكرة الحالية من أن تغلق تلقائياً",
+	"help.autoclose.configure": "تعديل إعدادات الإغلاق التلقائي",
+	"commands.autoclose.exclude.success": "تم استبعاد هذه التذكرة من الإغلاق التلقائي",
+	"commands.claim.no_permission": "الموظفون فقط يمكنهم المطالبة بالتذاكر",
+	"commands.open.from": "تم فتح هذه التذكرة من [هذه الرسالة](%s).\n\n<@%d> قيل في <#%d>:\n```%s```",
+	"commands.open.from.moved": "تم نقل المحادثة إلى تذكرة (<%d#>)",
+	"help.close_request": "يرسل رسالة يطلب من المستخدم تأكيد أن التذكرة يمكن أن تكون مغلقة",
+	"close.reason_too_long": "السبب لا يمكن ان يكون أطول من 255 حرف",
+	"commands.close_request.success": "تم إرسال طلب الإغلاق بنجاح",
+	"commands.close_request.no_reason": "لقد طلب <@%d> إغلاق هذه التذكرة.\n\nالرجاء القبول أو الرفض باستخدام الأزرار أدناه.",
+	"commands.close_request.with_reason": "لقد طلب <@%d> إغلاق هذه التذكرة. السبب:\n```\n%s\n```\nيرجى القبول أو الرفض باستخدام الأزرار أدناه.",
+	"commands.close_request.no_permission": "فقط المستخدم الذي فتح التذكرة يمكنه الرد على طلب الإغلاق",
+	"commands.close_request.denied": "<@%d> رفض طلب الإغلاق",
+	"generic.error": "خطأ",
+	"feedback.disabled": "تم تعطيل التعليقات لهذا الخادم",
+	"feedback.success": "تم تسجيل تعليقك",
+	"generic.success": "نجاح",
+	"button.guild_only": "يجب استخدام هذا الزر في خادم",
+	"button.dms_only": "يجب استخدام هذا الزر في الرسائل المباشرة",
+	"commands.tag.generic": "الوسم (التاغ)",
+	"commands.tags.delete.success": "تم حذف التاغ : %s",
+	"generic.ticket": "تذكرة",
+	"generic.title.premium_only": "أمر بريميوم فقط",
+	"generic.admin": "مشرف",
+	"commands.tags.create.success": "تم انشاء الوسم - تستطيع استخدامه من خلال استخدام امر `%s`",
+	"generic.title.about": "حول",
+	"generic.title.vote": "تصويت",
+	"generic.title.tags": "الوسوم (التاغات)",
+	"generic.title.autoclose": "الإغلاق التلقائي",
+	"generic.title.invite": "دعوة",
+	"generic.title.close": "إغلاق",
+	"generic.title.claim": "أستلام",
+	"generic.title.unclaim": "إلغاء",
+	"generic.title.blacklisted": "مدرج بالقائمة السوداء",
+	"generic.title.blacklist": "القائمة السوداء",
+	"generic.error.blacklisted": "أنت مدرج في القائمة السوداء في هذا الخادم",
+	"generic.error.guild_blacklisted": "هذا الخادم هو قائمة سوداء من استخدام هذا ألبوة",
+	"generic.error.user_blacklisted": "أنت في القائمة السوداء من استخدام هذا ألبوة",
+	"commands.blacklist.add.success": "تم إدراج <@%d> في القائمة السوداء",
+	"commands.blacklist.remove.success": "لقد تم إزالة القائمة السوداء عن <@%d>",
+	"generic.title.add_admin": "إضافة مشرف",
+	"generic.title.add_support": "إضافة دعم",
+	"generic.title.remove_admin": "إزالة المشرف",
+	"generic.title.remove_support": "إزالة الدعم",
+	"commands.addsupport.success": "تمت إزالة ممثل الدعم بنجاح: %s",
+	"generic.title.language": "لغة",
+	"commands.removesupport.success": "تمت إزالة ممثل الدعم بنجاح: %s",
+	"commands.addadmin.success": "تمت إضافة المشرف بنجاح: %s",
+	"commands.removeadmin.success": "تمت إزالة المسؤول بنجاح: %s",
+	"generic.title.setup": "الإعداد",
+	"generic.title.premium": "بريميوم",
+	"generic.title.panel": "اللوحة",
+	"generic.title.rename": "إعادة تسمية",
+	"generic.title.remove": "إزالة",
+	"generic.title.help": "مساعدة",
+	"generic.title.close_confirmation": "تأكيد الإغلاق",
+	"close.confirmation": "الرجاء تأكيد أنك تريد إغلاق هذه التذكرة",
+	"generic.title.close_request": "إغلاق الطلب",
+	"commands.close_request.accept": "قبول وإغلاق",
+	"commands.close_request.deny": "رفض & الابقاء مفتوح",
+	"commands.premium.success": "تم تفعيل البريميوم لـ**%d** يوم",
+	"generic.title.claimed": "تَذْكِرَة مستلمة",
+	"generic.title.unclaimed": "تذكرة غير مستلمة",
+	"generic.title.add": "إضافة",
+	"commands.add.success": "تمت إضافة <@%s> إلى <#%d>",
+	"commands.add.role_thread": "بسبب قيود ديس كورد",
+	"commands.remove.success": "تمت إضافة <@%s> إلى <#%d>",
+	"commands.remove.role_thread": "بسبب قيود ديس كورد",
+	"open.ratelimited": "يتم فتح التذاكر بسرعة كبيرة في هذا الخادم",
+	"open.panel_cooldown": "أنت في حالة تبريد لهذه اللوحة. الرجاء المحاولة مرة أخرى %s.",
+	"commands.claim.thread": "بسبب قيود الديسكورد، المطالبة لا تدعم المواضيع",
+	"generic.join_support_server": "الانضمام إلى خادم الدعم",
+	"commands.open.guild_channel_limit": "هذا الخادم وصل إلى حد ديسكورد 500 قناة",
+	"commands.open.missing_form_answer": "يجب عليك الإجابة على السؤال `%s`",
+	"close.no_permission": "لا يسمح لك بإغلاق هذه التذكرة",
+	"": {
+		"generic.title.close_with_reason": "إغلاق مع سبب",
+		"generic.reason": "سبب"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "سبب إغلاق التذاكرة، على سبيل المثال \"تم الحل\""
+		},
+		"success": "تم إغلاق التذكرة من قبل <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "لا يمكنك تقييم هذه التَّذْكِرَة لأنك ممثل دعم في %s",
+				"empty": "You cannot rate this ticket because you did not send any messages"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "الامر %s غير مفعل في هذا السيرفر, تستطيع استخدام لوحة التذاكر لفتح تذكرة جديدة",
+			"threads": {
+				"cant_see_parent_channel": "تعذر اضافة <@%d> على التذكرة, تأكد من انه يملك صلاحية رؤية الروم الرئيسي لهذا الموضوع (الثريد) (<#%d>)",
+				"cant_message_in_threads": "أنت تفتقد إذن إرسال رسائل في المواضيع، الذي مطلوب لفتح تَذْكِرَة. الرجاء طلب من مسؤول الخادم منح هذا الإذن لك، وحاول مرة أخرى."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "لوحة غير صالحة: يجب عليك اختيار واحدة من القائمة التالية",
+			"success": "لقد تم نقل هذه التذكرة الى لوحة `%s` من قبل <@%d>",
+			"non_thread_to_thread": "لا يمكنك التبديل إلى لوحة تستخدم المواضيع من تَذْكِرَة",
+			"claimer_no_access_title": "Panel Switch Blocked",
+			"claimer_no_access": "The ticket claimer (<@%d>) does not have access to the selected panel.",
+			"auto_unclaimed": "The ticket has been switched to the `%s` panel by <@%d>.\n\nThe ticket has been automatically unclaimed, as <@%d> does not have access to the new panel."
+		},
+		"blacklist": {
+			"staff": "لا يمكنك إدارج اعضاء الفريق في القائمة السوداء",
+			"add_role": {
+				"success": "تم إضافة <@&%d> على القائمة السوداء",
+				"limit": "لقد وصلت للحد الاعلى للقائمة السوداء للرتبة (%d)"
+			},
+			"remove_role": {
+				"success": "تم إزالة <@&%d> من القائمة السوداء"
+			},
+			"add": {
+				"limit": "لقد وصلت الى الاحد الاعلى للقائمة السوادء للمستخدم (%d), علما انك تستطيع استخدام القائمة السوداء للرتب بدلا من ذلك"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "هذه التذكرة لا تحتوي على رسالة ترحيبية",
+			"content": "اضغط على الزر ادناه للإنتقال الى اعلى التذكرة"
+		},
+		"addsupport": {
+			"confirm": "الرجاء التأكيد على انك تريد اضافة %s على انه الممثل الإفتراضي لفريق الدعم الفني",
+			"everyone": "لا تستطيع اضافة رتبة @everyone على انها رتبة ادارية او رتبة فريق"
+		},
+		"addadmin": {
+			"confirm": "الرجاء التأكيد على انك تريد اضافة %s على انه مسؤول للبوت (جميع الصلاحيات)"
+		},
+		"tags": {
+			"create": {
+				"limit": "لقد وصلت الحد الاقصى للوسوم (التاغات) : (%d)"
+			},
+			"get": {
+				"requires_premium": "مطلوب مميز لاستخدام الأوامر المخصصة (أسماء مستعارة وسم)"
+			}
+		},
+		"language": {
+			"content": "اللغات المتاحة حاليا ونسبة الإنجاز بها :\n%s",
+			"success": "تم تغيير لغة السيرفر الى **%s** (%s)",
+			"select": "اختر لغة (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "تستطيع استخدام امر `%s` فقط في المواضيع (الثريدات), قم بزيادة [docs](%s) لإكتشاف المزيد عن المواضيع (الثريدات)",
+			"success": "انت الأن في مكالمة",
+			"remove_success": "انت لم تعد في مكالمة"
+		},
+		"reopen": {
+			"not_found": "لم يتم العثور على التذكرة",
+			"no_permission": "ليس لديك صلاحية لإعادة فتح هذه التذكرة",
+			"already_open": "هذه التذكرة مفتوحة بالفعل",
+			"not_thread": "فقط المواضيع (الثريدات) تستطيع اعادة فتحهم",
+			"thread_deleted": "لقد تم حذف التذكرة بشكل نهائي",
+			"success": "تم اعادة فتح التذكرة %d : \n <#%d>",
+			"in_ticket": "تم اعادة فتح هذه التذكرة من قبل : <@%d>"
+		},
+		"premium": {
+			"key": "مفتاح",
+			"check_again": "تحقق مرة اخرى",
+			"subscription_found": "تم العثور على اشتراك!",
+			"subscription_found_content": "من أجل تفعيل الاشتراك الخاص بك على هذا السيرفر, يجب ان يقوم صاحب السيرفر (<@%d>) بإضافتك كمشرف (ادمن) \n**user** (roles are ignored)\nمن خلال استخدام امر %s\nتستطيع التأكد من انه تم اضافتك كمشرف من خلال استخدام امر : %s",
+			"activate_key": "قم بتفعيل البريميوم من خلال مفتاح (كي)",
+			"checking": "جاري التحقق من حالة البريميوم",
+			"please_wait": "الرجاء الإنتظار...",
+			"success_after_check": "تم تفعيل البريميوم لهذا السيرفر",
+			"link_patreon_account": "قم بربط حساب باتريون",
+			"no_subscription": "تعذر العثور على اشتراك باتريون فعال مربوط مع حسابك الديسكورد. تأكد انك قمت بربط حسابك الديسكورد مع الباتريون (%s) , وانتظر بعدها 10 دقائق.",
+			"open_form": "فتح نموذج (فورم)",
+			"open_form_description": "قم بالضغط على الزر ادناه لإعادة فتح النموذج",
+			"use_key_anyway": "استخدام مفتاح البريميوم على اي حال",
+			"already_purchased_title": "هل انت بالفعل قمت بشراء البريميوم ؟",
+			"already_purchased_description": "اذا قمت بالفعل بشراء البريميوم, اختار طريقة الدفع من هذه القائمة للبدء",
+			"giveaway_key": "مفتاح جيف اواي (جيف اواي كي)",
+			"selector": {
+				"description": "حدد الطريقة التي استخدمتها للحصول على البريميوم",
+				"key": {
+					"description": "استخدم هذا الخيار في حال مُنحت مفتاح هدية"
+				},
+				"patreon": {
+					"description": "قم بإختيار هذا الخيار فيه حال قم بالشراء من خلال باتريون"
+				},
+				"discord": {
+					"description": "حدد هذا الخِيار"
+				}
+			},
+			"about": "البريموم يعطيك الصلاحية للمزيد من اللوحات والاحصائيات , وبوت خاص بك , والمزيد!\nقم بزيارة الموقع الإلكتروني الخاص بنا (%s) لإكتشاف المزيد",
+			"already_activated": "أخبار جيدة! بريميوم نشط بالفعل في هذا الخادم.",
+			"already_activated_whitelabel": "أخبار سارّة! تم بالفعل تفعيل البريميوم لهذا السيرفر\n\nللحصول على مساعدة في البدء بالتخصيص, قم بقراءة [الدليل الخاص بنا لاستخدام التخصيص](%s).",
+			"discord": {
+				"no_subscription": "يمكن شراء الاشتراك المميز مباشرةً من داخل ديس كورد.\nانقر على الزر الموجود أسفل هذه الرسالة لفتح صفحة إدارة الاشتراك.\n\nبعد إتمام عملية الشراء، يُرجى الانتظار لمدة تصل إلى 5 دقائق حتى يتم التعرّف على الاشتراك."
+			},
+			"subscription_found_content_modern": "تم العثور على اشتراكك في باترين. الرجاء النقر على زر \"فتح منتقي الخادم\" أدناه من أجل فتح لوحة التحكم لتحديد الخوادم التي ترغب في تطبيق اشتراكك المميز.",
+			"open_server_selector": "فتح مُنتق الخادم"
+		},
+		"notes": {
+			"added_to_existing": "لقد تم اضافتك الى موضوع الملاحظات الحالية: <#%d>",
+			"thread_name": "ملاحظة",
+			"created": "تم إنشاء موضوع ملاحظات لهذه التذكرة: <#%d>",
+			"channel_mode_only": "نُقَط الملاحظة مدعومة فقط في وضع القناة"
+		},
+		"rename": {
+			"ratelimited": "بسبب القيود التي يفرضها ديس كورد، لا يمكن تغيير اسم التذاكر إلا مرتين كل 10 دقائق"
+		},
+		"vote": {
+			"redeem_credits": "استيراد الرصيد",
+			"no_credits": "فشل الاسترداد: ليس لديك أي اعتمادات للتصويت!",
+			"redeem": {
+				"success": {
+					"plural": "تم استبدال رصيد التصويت الخاص بك لمدة **%d** أيام من المميز!",
+					"singular": "تم استبدال رصيد التصويت الخاص بك لمدة **%d** أيام من المميز!"
+				}
+			},
+			"with_credits": {
+				"plural": "لديك **%d** رصيد صوت. انقر فوق الزر \"استبدال الاعتمادات\" أدناه لاستردادهم لـ %d أيام من الحساب المميز في هذا الخادم.",
+				"singular": "لديك **%d** رصيد صوت. انقر فوق الزر \"استبدال الاعتمادات\" أدناه لاستردادهم لـ %d يوم من الحساب المميز في هذا الخادم."
+			}
+		},
+		"viewstaff": {
+			"title": "الموظفون",
+			"admin": {
+				"users": "المستخدمون المُشرفون",
+				"roles": "أدوار المسؤول",
+				"no_users": "لا يوجد مستخدمين مشرفين",
+				"no_roles": "لا توجد أدوار مشرف"
+			},
+			"support": {
+				"users": "دعم المستخدمين",
+				"roles": "دور الدعم",
+				"no_roles": "لا توجد أدوار دعم",
+				"users_warning": "-# **تحذير:** المستخدمون في فرق الدعم مهملون الآن. الرجاء الانتقال إلى الأدوار."
+			}
+		},
+		"edit": {
+			"title": "تعديل إعدادات التذكرة",
+			"description": "يمكنك في الأسفل تعديل مختلف الإعدادات لهذه التَّذْكِرَة.",
+			"labels": {
+				"title": "تغيير التسمية",
+				"description": "تعديل التسميات المعينة لهذه التَّذْكِرَة",
+				"update_modal": {
+					"title": "تحديث تسميات التَّذْكِرَة",
+					"select_menu_title": "بطاقات",
+					"success": "تم تحديث تسميات التذكرة بنجاح إلى: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "تم تبديل لوحة التذكرة",
+			"jump_to_top": "انتقل إلى الأعلى",
+			"reopened": "تم إعادة فتح التذكرة",
+			"ticket_closed": "تم إغلاق التذكرة"
+		},
+		"click_here": "إضغط هنا",
+		"confirm": "تأكيد",
+		"website": "الموقع الإلكتروني الخاص بنا"
+	},
+	"help": {
+		"switch_panel": "قم بتبديل تذكرة إلى لوحة تذكرة أخرى، تغيير فئة القناة، فرق الدعم، إلخ.",
+		"jump_to_top": "يوفر لك زر للإنتقال الى اعلى التذكرة",
+		"on_call": "وضع علامة عليك كأنك داخل مكالمة , حتى يتم اضافتك وتنبيهك في جميع التذاكر الجديدة",
+		"reopen": "اعادة فتح تذكرة تم إغلاقها سابقاً",
+		"notes": "يقوم بإنشاء موضوع للمناقشة الخاصة بين ممثلي الدعم",
+		"edit": "تعديل إعدادات التذكرة الحالية"
+	},
+	"setup": {
+		"auto": {
+			"docs": "هل تريد إكتشاف المزيد ؟ [documentation](%s) ستجد بها جميع الشروحات التي تخص اعداد وتشغيل البوت"
+		},
+		"threads": {
+			"no_notification_channel": "يجب عليك توفير قناة إشعار التذكرة",
+			"notification_channel_type": "يجب أن تكون قناة إشعار التذكرة عبارة عن قناة نصية",
+			"success": "تم تفعيل وضع الموضوع",
+			"disabled": "تم تعطيل وضع الموضوع"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "تم إغلاق هذه التذكرة فعلًا",
+			"no_permission": "ليس لديك إذن لعرض هذا النوع من التذاكر",
+			"already_joined": "لقد انضممت فعلًا إلى هذه التذكرة (<#%d>)",
+			"success": "أضافك إلى التذكرة <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "لا تستطيع إنشاء موضوع (ثريد) في رومات الاعلانات",
+		"panel_force_disabled": "تم ايقاف هذه اللوحة, قم بطلب من مشرف السيرفر ان يقوم بإعادة تفعيل البريميوم, واستخدام كوماند %s لإعادة تفعيل هذه اللوحة",
+		"panel_disabled": "قاموا مشرفين السيرفر بمنع فتح هذا النوع من التذاكر",
+		"acl": {
+			"no_allow_rules": "تم تعطيل الوصول لفتح هذا النوع من التذكرة لجميع الأدوار",
+			"deny_listed": "لا يمكنك فتح هذا النوع من التذكرة لأنك تملك الدور <@&%d>",
+			"not_allow_listed": {
+				"multiple": "تحتاج إلى واحد من الأدوار التالية لفتح هذا النوع من التذكرة: %s",
+				"single": "أنت بحاجة إلى الدور التالي لفتح هذا النوع من التذاكر: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "حدد نوع طلب GDPR الذي ترغب في القيام به:",
+		"section": {
+			"transcript": "### **خيارات حذف النص النصي**\n-# _حذف النصوص من الخوادم التي تملكها _",
+			"message": "### **خيارات إخفاء هُوِيَّة الرسائل**\n-# _إخفاء هُوِيَّة رسائلك من النصوص في الخوادم المحددة_"
+		},
+		"warning": "### **معلومات هامة**\n* الحذف **دائم** ولا يمكن التراجع عنه\n* يمكنك فقط حذف النصوص من الخوادم **أنت** الخاصة بك\n* فقط **لك** رسائل يمكن إخفاء هويتها في النصوص\n* وقد يستغرق الطلب ما يصل إلى **30 يوم** لإكمال\n* سيتم معالجة طلبك في **قائمة الانتظار**",
+		"resources": "### **الموارد**\n[ما GDPR؟](%s)\n[الحق في الإكراه](%s)\n[حق الوصول]]%s)",
+		"button": {
+			"all_transcripts": "جميع النصوص من الخوادم",
+			"specific_transcripts": "محاضر محددة",
+			"all_messages": "جميع رسائلك في الخوادم",
+			"specific_messages": "الرسائل الخاصة بك في تذاكر محددة"
+		},
+		"language_option": "لغة",
+		"modal": {
+			"all_transcripts": "جميع النصوص من الخوادم",
+			"specific_transcripts": "محاضر محددة",
+			"all_messages": "إخفاء هُوِيَّة رسائلك في الخوادم",
+			"specific_messages": "إخفاء هُوِيَّة رسائلك في الخوادم",
+			"select_server": "اختر خادمًا",
+			"select_servers": "حدد خادم واحد أو أكثر",
+			"server_id": {
+				"label": "معرف الخادم",
+				"placeholder": "أدخل معرف الخادم"
+			},
+			"server_ids": {
+				"label": "معرف الخادم",
+				"placeholder": "أدخل معرفات الخادم مفصولة بفواصل (على سبيل المثال، 1071167333265047653، 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "بطاقة هُوِيَّة",
+				"placeholder": "أدخل معرفات الخادم مفصولة بفواصل (على سبيل،, 789 123، 456)"
+			}
+		},
+		"confirm": {
+			"title": "مطلوب تأكيد GDPR",
+			"all_transcripts": "**نوع الطلب:** حذف جميع النصوص من الخادم الذي تملكه\n**الخادم:** %s",
+			"all_transcripts_multi": "**نوع الطلب:** حذف جميع النصوص من الخادم الذي تملكه\n**الخادم:**\n* %s",
+			"specific_transcripts": "**نوع الطلب:** حذف النصوص النصية المحددة من الخادم\n**الخادم:** %s\n**معرفات التذاكر:** %s",
+			"all_messages": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم المحدد\n**الخادم:** %s",
+			"all_messages_multi": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم المحدد\n**الخادم:**\n* %s",
+			"specific_messages": "**نوع الطلب:** إخفاء هُوِيَّة رسائلك في تذاكر محددة\n**الخادم:** %s\n**معرفات التذاكر:** %s",
+			"warning": "\n\n⚠️ تحذير: هذا الإجراء دائم ولا يمكن التراجع عنه.\n\nهل تفهم وتقبل أن هذا الإجراء دائم؟",
+			"button": "تأكيد - أفهم"
+		},
+		"queued": {
+			"title": "طلب GDPR قائمة الانتظار",
+			"all_transcripts": "**نوع الطلب:** حذف جميع النصوص من الخادم الذي تملكه\n**الخادم:** %s",
+			"all_transcripts_multi": "**نوع الطلب:** حذف جميع النصوص من الخادم الذي تملكه\n**الخادم:**\n* %s",
+			"specific_transcripts": "**نوع الطلب:** حذف النصوص النصية المحددة من الخادم\n**الخادم:** %s\n**معرفات التذاكر:** %s",
+			"all_messages": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم المحدد\n**الخادم:** %s",
+			"all_messages_multi": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم المحدد\n**الخادم:**\n* %s",
+			"specific_messages": "**نوع الطلب:** إخفاء هُوِيَّة رسائلك في تذاكر محددة\n**الخادم:** %s\n**معرفات التذاكر:** %s",
+			"footer": "\n\nتم وضع طلبك في قائمة الانتظار للمعالجة.\nقد تستغرق المعالجة بعض الوقت حسب عدد النصوص."
+		},
+		"completed": {
+			"title": "طلب GDPR قائمة الانتظار",
+			"all_transcripts": "**نوع الطلب:** حذف النصوص النصية المحددة من الخادم\n**الخادم:** %s\n**معرفات التذاكر:** %d",
+			"all_transcripts_multi": "**نوع الطلب:** حذف النصوص النصية المحددة من الخادم\n**الخادم:**\n* %s\n**معرفات التذاكر:** %d",
+			"specific_transcripts": "**نوع الطلب:** حذف النصوص النصية المحددة من الخادم\n**الخادم:** %s\n**معرفات التذاكر:** %d",
+			"all_messages": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم\n**الخادم:** %s\n**إخفاء هُوِيَّة الرسائل:** %d",
+			"all_messages_multi": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم\n**الخادم:**\n* %s\n**إخفاء هُوِيَّة الرسائل:** %d",
+			"specific_messages": "**نوع الطلب:** إخفاء هُوِيَّة جميع رسائلك في الخادم\n**الخادم:** %s\n**إخفاء هُوِيَّة الرسائل:** %d",
+			"error": "\n\n⚠️ خطأ: %s"
+		},
+		"followup": {
+			"error": "⚠️ واجهت طلبك GDPR خطأ: %s",
+			"no_data": "ℹ️ تم معالجة طلب GDPR الخاص بك. لم يتم العثور على أية بيانات.",
+			"success": "✅ تمت معالجة طلب GDPR بنجاح."
+		},
+		"error": {
+			"no_servers": "لم يتم العثور على خوادم حيث أنت المالك ولديها نصوص نصية.",
+			"invalid_server_id": "معرف الخادم غير صالح.",
+			"invalid_ticket_ids": "معرف التَّذْكِرَة غير صالح. الرجاء إدخال معرفات التَّذْكِرَة الرقمية مفصولة بفواصل (على سبيل المثال 123، 456، 789).",
+			"not_owner": "يجب أن تكون مالك الخادم لحذف النصوص النصية.",
+			"server_not_found": "لم يعثر على الخادم.",
+			"queue_failed": "أخفق قائمة الانتظار لطلب GDPR. الرجاء المحاولة مرة أخرى لاحقاً.",
+			"worker_offline": "خدمة المعالجة GDPR غير متوفرة حاليا. الرجاء المحاولة مرة أخرى لاحقاً أو الاتصال بالدعم إذا استمرت هذه المشكلة."
+		}
+	},
+	"errors": {
+		"unknown_channel": "تعذر العثور على قناة مطلوبة: يجب أن يكون قد تم حذفها.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) والتحقق من جميع إعدادات القناة تم تكوينها بشكل صحيح.",
+		"unknown_guild": "تعذر العثور على الخادم.",
+		"unknown_member": "تعذر العثور على المستخدم. ربما غادروا الخادم أو تم حظرهم.",
+		"unknown_message": "تم حذف الرسالة التي تحاول التفاعل معها.\n\nيرجى محاولة الإجراء مرة أخرى باستخدام رسالة مختلفة.",
+		"unknown_user": "لا يمكن العثور على المستخدم.",
+		"unknown_role": "ولم يعد هناك دور مطلوب للقيام بهذا العمل.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) وإعادة تكوين إعدادات الأدوار.",
+		"unknown_category": "تعذر العثور على قناة مطلوبة: يجب أن يكون قد تم حذفها.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) والتحقق من جميع إعدادات القناة تم تكوينها بشكل صحيح.",
+		"unknown_interaction": "انتهت صَلاحِيَة هذا التفاعل.\n\nيرجى محاولة الإجراء مرة أخرى.",
+		"max_webhooks": "وصل الخادم إلى الحد الأقصى لعدد نُقَط الويب هوسك.\n\nيرجى طلب من مسؤول الخادم إزالة بعض نُقَط الويب غير المستخدمة ثم المحاولة مرة أخرى.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "تمت معالجة هذا التفاعل فعلًا.\nإذا كنت بحاجة إلى تنفيذ هذا الإجراء مرة أخرى، يرجى بَدْء تفاعل جديد.",
+		"missing_permissions": {
+			"title": "أنا مفقود ولأذانات التالية المطلوبة لتنفيذ هذا الإجراء",
+			"body": "الرجاء تعيين هذه الصلاحيات للبوة أو بدلاً من ذلك إذن \"المسؤول\" وحاول مرة أخرى.\nالرجاء زيارة [docs](%s) للحصول على شرح لسبب طلب كل إذن."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "واحد أو أكثر من الحقول قصيرة جداً أو طويلة جداً.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) والتحقق من جميع المدخلات والتأكد من أن جميع الحقول تفي بقيود الطول المطلوبة.",
+		"required_field": "الحقل المطلوب مفقود أو فارغ.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) والتحقق من ملء جميع الحقول المطلوبة.",
+		"invalid_channel_type": "نوع القناة غير صالح لهذه العملية.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) وتعيين قناة صالحة إلى لوحة التذاكر.",
+		"invalid_category": "نوع القناة غير صالح لهذه العملية.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) وتعيين قناة صالحة إلى لوحة التذاكر.",
+		"invalid_id": "تم توفير معرف غير صالح في تكوين ألبوة.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) والتحقق من جميع الفئات والقناة وهويات الأدوار صحيحة.",
+		"invalid_characters": "المدخل يحتوي على أحرف غير صالحة.\n\nيرجى استخدام الحروف، والأرقام، والشرطات -، والشرطات السفلية _ فقط.",
+		"invalid_choice": "تم توفير خِيار غير صالح.\n\nالرجاء الطلب من مسؤول الخادم زيارة [dashboard](%s) والتحقق من صحة جميع الإعدادات.",
+		"invalid_form": "تعذر إكمال الإجراء بسبب إدخال غير صالح.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "انتهت مهلة العملية، يرجى المحاولة مرة أخرى.",
+		"rate_limited": "أنت قيد التقييم محدود. الرجاء المحاولة مرة أخرى %s.",
+		"rate_limited_global": "يشاهد ديس كورد حملا عاليا (حد المعدل العام). الرجاء المحاولة مرة أخرى %s.",
+		"general": "حدث خطأ في أثناء تنفيذ هذا الإجراء.",
+		"error_id": "معرف الخطأ"
+	}
+}

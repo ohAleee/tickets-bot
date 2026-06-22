@@ -1,0 +1,9 @@
+[package]
+name = "global-resolver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tower = "0.4"
+trust-dns-resolver = "0.21"
+hyper = { version = "0.14", features = ["client", "tcp"] }

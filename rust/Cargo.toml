@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = [
+    "patreon-proxy",
+    "sharder",
+    "cache",
+    "model",
+    "common",
+    "database",
+    "vote_listener",
+    "http-gateway",
+    "bot-list-updater",
+    "server-counter",
+    "stats-channel-updater",
+    "global-resolver",
+    "image-proxy",
+    "secure-proxy",
+    "event-stream",
+    "cache-sync-service"
+]

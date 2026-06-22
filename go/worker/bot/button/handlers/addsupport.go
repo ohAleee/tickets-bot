@@ -1,0 +1,272 @@
+package handlers
+
+import (
+	"errors"
+	"fmt"
+	"regexp"
+	"strconv"
+	"strings"
+	"time"
+
+	permcache "github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/database"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/permission"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
+	"github.com/TicketsBot-cloud/worker/bot/button/registry"
+	"github.com/TicketsBot-cloud/worker/bot/button/registry/matcher"
+	"github.com/TicketsBot-cloud/worker/bot/command"
+	"github.com/TicketsBot-cloud/worker/bot/command/context"
+	cmdregistry "github.com/TicketsBot-cloud/worker/bot/command/registry"
+	"github.com/TicketsBot-cloud/worker/bot/customisation"
+	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/logic"
+	"github.com/TicketsBot-cloud/worker/bot/utils"
+	"github.com/TicketsBot-cloud/worker/i18n"
+)
+
+type AddSupportHandler struct{}
+
+func (h *AddSupportHandler) Matcher() matcher.Matcher {
+	return matcher.NewFuncMatcher(func(customId string) bool {
+		return strings.HasPrefix(customId, "addsupport")
+	})
+}
+
+func (h *AddSupportHandler) Properties() registry.Properties {
+	return registry.Properties{
+		Flags:   registry.SumFlags(registry.GuildAllowed, registry.CanEdit),
+		Timeout: time.Second * 30,
+	}
+}
+
+var addSupportPattern = regexp.MustCompile(`addsupport-(\d)-(\d+)`)
+
+func (h *AddSupportHandler) Execute(ctx *context.ButtonContext) {
+	// Permission check
+	permLevel, err := ctx.UserPermissionLevel(ctx)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	if permLevel < permcache.Admin {
+		ctx.Reply(customisation.Red, i18n.Error, i18n.MessageNoPermission)
+		return
+	}
+
+	// Extract data from custom ID
+	groups := addSupportPattern.FindStringSubmatch(ctx.InteractionData.CustomId)
+	if len(groups) < 3 {
+		return
+	}
+
+	mentionableTypeRaw, err := strconv.Atoi(groups[1])
+	if err != nil {
+		return
+	}
+
+	mentionableType := context.MentionableType(mentionableTypeRaw)
+
+	id, err := strconv.ParseUint(groups[2], 10, 64)
+	if err != nil {
+		return
+	}
+
+	if mentionableType == context.MentionableTypeUser {
+		ctx.ReplyRaw(customisation.Red, "Error", "Users in support teams are now deprecated. Please use roles instead.")
+		return
+
+		/* TODO: Remove if Discord does not resolve the performance issues
+
+		// Guild owner doesn't need to be added
+		guild, err := ctx.Guild()
+		if err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		if guild.OwnerId == id {
+			ctx.Reply(customisation.Red, i18n.Error, i18n.MessageOwnerIsAlreadyAdmin)
+			return
+		}
+
+		if err := dbclient.Client.Permissions.AddSupport(ctx.GuildId(), id); err != nil {
+			sentry.ErrorWithContext(err, ctx.ToErrorContext())
+		}
+
+		if err := utils.ToRetriever(ctx.Worker()).Cache().SetCachedPermissionLevel(ctx.GuildId(), id, permcache.Support); err != nil {
+			ctx.HandleError(err)
+			return
+		}
+		*/
+	} else if mentionableType == context.MentionableTypeRole {
+		if id == ctx.GuildId() {
+			ctx.Reply(customisation.Red, i18n.Error, i18n.MessageAddSupportEveryone)
+			return
+		}
+
+		if err := dbclient.Client.RolePermissions.AddSupport(ctx, ctx.GuildId(), id); err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		if err := utils.ToRetriever(ctx.Worker()).Cache().SetCachedPermissionLevel(ctx, ctx.GuildId(), id, permcache.Support); err != nil {
+			ctx.HandleError(err)
+			return
+		}
+	} else {
+		ctx.HandleError(fmt.Errorf("invalid mentionable type: %d", mentionableType))
+		return
+	}
+
+	mention := fmt.Sprintf("<@&%d>", id)
+
+	e := utils.BuildEmbed(ctx, customisation.Green, i18n.TitleAddSupport, i18n.MessageAddSupportSuccess, nil, mention)
+	ctx.Edit(command.NewEphemeralEmbedMessageResponse(e))
+
+	updateChannelPermissions(ctx, id, mentionableType)
+}
+
+func updateChannelPermissions(ctx cmdregistry.CommandContext, id uint64, mentionableType context.MentionableType) {
+	settings, err := ctx.Settings()
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	// Get member and target name once for reuse in audit reasons
+	member, err := ctx.Member()
+	hasMember := err == nil
+
+	// Get the name of the user/role being added
+	var targetName string
+	if mentionableType == context.MentionableTypeUser {
+		if targetMember, err := ctx.Worker().GetGuildMember(ctx.GuildId(), id); err == nil {
+			targetName = targetMember.User.Username
+		}
+	} else if mentionableType == context.MentionableTypeRole {
+		if roles, err := ctx.Worker().GetGuildRoles(ctx.GuildId()); err == nil {
+			for _, role := range roles {
+				if role.Id == id {
+					targetName = role.Name
+					break
+				}
+			}
+		}
+	}
+
+	// Add user / role to thread notification channel
+	if settings.TicketNotificationChannel != nil {
+		auditReason := "Added support member/role"
+		if hasMember && targetName != "" {
+			auditReason = fmt.Sprintf("Added support %s (%s) by %s", mentionableType, targetName, member.User.Username)
+		} else if hasMember {
+			auditReason = fmt.Sprintf("Added support member/role by %s", member.User.Username)
+		}
+
+		reasonCtx := request.WithAuditReason(ctx, auditReason)
+		_ = ctx.Worker().EditChannelPermissions(reasonCtx, *settings.TicketNotificationChannel, channel.PermissionOverwrite{
+			Id:    id,
+			Type:  mentionableType.OverwriteType(),
+			Allow: permission.BuildPermissions(permission.ViewChannel, permission.UseApplicationCommands, permission.ReadMessageHistory),
+			Deny:  0,
+		})
+	}
+
+	openTickets, err := dbclient.Client.Tickets.GetGuildOpenTicketsExcludeThreads(ctx, ctx.GuildId())
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	panels, err := dbclient.Client.Panel.GetByGuild(ctx, ctx.GuildId())
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	// Update permissions for existing tickets
+	for _, ticket := range openTickets {
+		if ticket.ChannelId == nil || ticket.IsThread {
+			continue
+		}
+
+		if ticket.PanelId != nil {
+			var panel *database.Panel
+			for _, p := range panels {
+				if p.PanelId == *ticket.PanelId {
+					panel = &p
+					break
+				}
+			}
+
+			if panel == nil {
+				continue
+			}
+
+			if !panel.WithDefaultTeam {
+				continue
+			}
+		}
+
+		ch, err := ctx.Worker().GetChannel(*ticket.ChannelId)
+		if err != nil {
+			// Check if the channel has been deleted
+			var restError request.RestError
+			if errors.As(err, &restError) {
+				if restError.StatusCode == 404 {
+					if err := dbclient.Client.Tickets.CloseByChannel(ctx, *ticket.ChannelId); err != nil {
+						ctx.HandleError(err)
+						return
+					}
+
+					continue
+				} else if restError.StatusCode == 403 {
+					break
+				}
+			}
+
+			continue
+		}
+
+		// Apply overwrites to existing channels
+		overwrites := append(ch.PermissionOverwrites, channel.PermissionOverwrite{
+			Id:    id,
+			Type:  mentionableType.OverwriteType(),
+			Allow: permission.BuildPermissions(logic.StandardPermissions[:]...),
+			Deny:  0,
+		})
+
+		data := rest.ModifyChannelData{
+			PermissionOverwrites: overwrites,
+			Position:             ch.Position,
+		}
+
+		ticketAuditReason := fmt.Sprintf("Added support to ticket %d", ticket.Id)
+		if hasMember && targetName != "" {
+			ticketAuditReason = fmt.Sprintf("Added support %s (%s) to ticket %d by %s", mentionableType, targetName, ticket.Id, member.User.Username)
+		} else if hasMember {
+			ticketAuditReason = fmt.Sprintf("Added support to ticket %d by %s", ticket.Id, member.User.Username)
+		}
+
+		ticketReasonCtx := request.WithAuditReason(ctx, ticketAuditReason)
+		if _, err = ctx.Worker().ModifyChannel(ticketReasonCtx, *ticket.ChannelId, data); err != nil {
+			var restError request.RestError
+			if errors.As(err, &restError) {
+				if restError.StatusCode == 403 {
+					break
+				} else if restError.StatusCode == 404 {
+					continue
+				} else {
+					ctx.HandleError(err)
+				}
+			} else {
+				ctx.HandleError(err)
+			}
+
+			return
+		}
+	}
+}

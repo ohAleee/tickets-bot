@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets é um bot de tickets e suporte fácil de utilizar e altamente configurável.\\nServidor de apoio: %s\\n Comandos: Escreve `%s`\\nComeça por executar `%s`",
+	"commands.add.no_members": "Tu precisas de mencionar membros para adicionar ao bilhete",
+	"commands.add.no_permission": "Não tens permissões para adicionar pessoa(s) a este ticket",
+	"commands.add.no_everyone": "Tu não podes adicionar o cargo '@everyone' a um bilhete",
+	"commands.addadmin.no_members": "Tu precisas de mencionar um utilizador ou nomear um cargo para lhe concederes privilégios de administrador",
+	"commands.addadmin.owner": "O dono do servidor já é um administrador",
+	"commands.addsupport.no_members": "Tu precisas de mencionar um utilizador ou nomear um cargo para lhe concederes privilégios de representante de suporte",
+	"commands.blacklist.no_members": "Tu precisas de mencionar um utilizador para alterar o estado da lista negra para",
+	"commands.blacklist.self": "Não te podes colocar a ti mesmo na lista negra",
+	"commands.claim.success": "O teu bilhete será tratado por %s",
+	"commands.invite": "[Clica aqui](<%s>)",
+	"commands.language.invalid": "Tu precisas de especificar um código de idioma ou bandeira. Idiomas disponíveis:\\n%s",
+	"commands.open.ticket_limit": "Tu só podes abrir %d %s de uma só vez",
+	"commands.open.too_many_tickets": "Há muitos bilhetes na categoria de bilhetes. Pede a um administrador para fechar alguns, movê-los para outra categoria ou configura uma categoria de saída.\n\nEste é um **limite imposto pelo Discord** de 50 canais por categoria.",
+	"commands.panel": "Visita <%s> para configurar um painel",
+	"commands.premium": "Tu podes comprar uma assinatura premium de <%s>.\\nO premium fornece muitos benefícios, tais como:\\n```diff\\n+ Criar painéis de bilhete ilimitados\\n+ Personalizar o nome do bot, avatar e estado (whitelabel)\\n+ Estatísticas detalhadas sobre o servidor, utilizadores e equipe de suporte\\n+ Sem marca no rodapé de mensagens\\n+ Apoiar o desenvolvimento e ajudar-me a pagar o servidor custa\\n```\\n\\nAlternadamente, tu podes votar <%s> para ganhares premium grátis por 24 horas",
+	"commands.premium.invalid_key": "Chave inválida. Assegura-te que a copiaste corretamente.",
+	"commands.remove.no_permission": "Tu não tens permissões para remover pessoas deste bilhete",
+	"commands.remove.staff": "Tu não podes remover membros da equipa de um bilhete",
+	"commands.removeadmin.no_members": "Tu precisas de mencionar um utilizador ou nomear um cargo para lhe anulares os privilégios de administrador",
+	"commands.removeadmin.owner": "O dono do servidor precisa de ser um administrador",
+	"commands.removeadmin.self": "Tu não podes anular os teus próprios privilégios",
+	"commands.removesupport.no_members": "Tu precisas de mencionar um utilizador ou nomear um cargo para lhe conceder privilégios de representante de suporte",
+	"commands.rename.missing_name": "Tu precisas de especificar um novo nome para este bilhete",
+	"commands.rename.success": "Este bilhete foi renomeado para <#%d>",
+	"commands.tags.create.already_exists": "A etiqueta com o ID `%s` já existe. Tu podes eliminar a etiqueta usando `%s`",
+	"commands.tags.create.invalid_arguments": "Tu tens que especificar o ID de uma etiqueta e conteúdos",
+	"commands.tags.create.too_long": "IDs de etiquetas não podem ter mais de 16 caracteres",
+	"commands.tags.delete.invalid_arguments": "Tu tens que especificar o ID de uma etiqueta para apagar",
+	"commands.tags.delete.not_exist": "Uma etiqueta com o ID `%s` não pôde ser encontrada",
+	"commands.tags.get.invalid_arguments": "Tu tens de fornecer o ID da etiqueta. Para mais ajuda com etiquetas, visita <%s>.",
+	"commands.tags.get.invalid_tag": "Etiqueta inválida. Para mais ajuda com etiquetas, visita <%s>.",
+	"commands.tags.list": "IDs para todas as etiquetas: \\n%s\\nPara ver o conteúdo de uma etiqueta, executa `%s`",
+	"commands.unclaim.not_claimed": "Este bilhete não foi reivindicado",
+	"commands.unclaim.not_claimer": "Apenas administradores e o utilizador que reivindicou o bilhete podem cancelar a reivindicação do bilhete",
+	"commands.unclaim.success": "Todos os representantes do suporte podem agora responder ao bilhete",
+	"commands.vote": "Clica no botão abaixo para votar no bot e receber 24 horas de premium grátis.\n\nQuando votares, executa o comando %s novamente para resgatares os teus créditos de voto.",
+	"generic.invalid_argument": "Argumento inválido: refere-se ao uso",
+	"generic.invalid_user": "Não foi possível encontrar o utilizador",
+	"generic.no_permission": "Não tens permissão para isto",
+	"generic.not_ticket": "Isto não é um canal de bilhetes",
+	"generic.owner_only": "Este comando está reservado somente para o dono do bot",
+	"help.about": "Dá-te informação sobre o bot",
+	"help.add": "Adiciona um utilizador a um bilhete",
+	"help.addadmin": "Concede a um utilizador ou cargo privilégios de administrador",
+	"help.addsupport": "Adiciona um cargo como um representante do suporte",
+	"help.admin": "Gestão do bot",
+	"help.admin.blacklist": "Coloca um servidor na lista negra de utilização do bot",
+	"help.admin.debug.server": "Depurar um servidor",
+	"help.admin.generate_premium": "Gerar chaves premium",
+	"help.admin.unblacklist": "Remove um servidor da lista negra de servidores",
+	"help.blacklist": "Altera se os utilizadores podem interagir com o bot",
+	"help.cancel": "Cancela o processo de configuração",
+	"help.claim": "Atribui um único membro da equipa a um bilhete",
+	"help.close": "Fecha o bilhete atual",
+	"help.help": "Mostra uma lista de comandos",
+	"help.invite": "Fornece um link de convite para o bot",
+	"help.language": "Altera o idioma que o bot usa",
+	"help.managetags": "Adicionar, apagar ou listar etiquetas",
+	"help.open": "Abre um novo bilhete",
+	"help.panel": "Cria um painel para permitir que os utilizadores abram um bilhete com 1 clique",
+	"help.premium": "Executa este comando depois de comprares o premium para ativá-lo",
+	"help.remove": "Remove um utilizador de um bilhete",
+	"help.removeadmin": "Retira os privilégios de administrador de um utilizador ou cargo",
+	"help.removesupport": "Retira os privilégios de representante de suporte de um utilizador ou cargo",
+	"help.rename": "Renomeia o bilhete atual",
+	"help.setup": "Permite-te configurar o bot facilmente",
+	"help.stats": "Mostra-te estatísticas sobre utilizadores, pessoal do suporte e servidor",
+	"help.statsserver": "Mostra-te estatísticas sobre o servidor",
+	"help.tag": "Envia um fragmento da mensagem",
+	"help.tagdelete": "Apaga uma etiqueta",
+	"help.taggadd": "Adiciona uma nova etiqueta",
+	"help.taglist": "Lista de etiquetas",
+	"help.transfer": "Transfere um bilhete reivindicado para outro utilizador",
+	"help.unclaim": "Remove a reivindicação do bilhete atual",
+	"help.viewstaff": "Lista dos membros da equipa e cargos",
+	"help.vote": "Fornece-te um link para votares para obteres premium grátis",
+	"help.gdpr": "Gerir os teus pedidos de dados GDPR",
+	"open.success": "Foi aberto um novo bilhete: %s",
+	"open.outside_support_hours": {
+		"title": "Este painel está atualmente fechado",
+		"message": "Por favor, tenta novamente durante as nossas horas de apoio."
+	},
+	"setup.auto.category.failure": "Eu não tenho a permissão `Gerir Canais`",
+	"setup.auto.category.success": "Categoria de bilhetes criada",
+	"setup.auto.completed": "Configuração concluída! Clica [aqui](%s) para configurar um painel de reação, e adicionar os cargos <@&%d> e <@&%d> aos teus membros da equipa",
+	"setup.auto.roles.failure": "Eu não tenho a permissão `Gerir Cargos`",
+	"setup.auto.roles.success": "Os cargos `Tickets Admin` & `Tickets Support` foram criados",
+	"setup.auto.transcript.failure": "Eu não tenho a permissão `Gerir Canais`",
+	"setup.auto.transcript.success": "Canal <#%d> criado",
+	"setup.ticket_limit.success": "O limite de bilhetes foi atualizado para `%d`",
+	"setup.transcript.invalid": "Tu tens que mencionar um canal válido no servidor (p.ex. <#%d>)\\n**Exemplo:** `%s`",
+	"setup.transcript.success": "O canal das transcrições foi alterado para <#%d>",
+	"commands.language.help_wanted": "Tu falas outra língua? Entra no nosso [servidor de suporte](%s) se estiveres interessado em ajudar a traduzir o bot para mais línguas",
+	"commands.rename.too_long": "Os nomes dos canais não podem ter mais de 100 caracteres",
+	"commands.autoclose.configure": "Visita o [dashboard](%s) para mudar as configurações de encerramento automático",
+	"help.autoclose": "Comandos relacionados com o fecho automático",
+	"help.autoclose.exclude": "Exclui o bilhete atual de ser fechado automaticamente",
+	"help.autoclose.configure": "Edita definições relacionadas com o fecho automático",
+	"commands.autoclose.exclude.success": "Este bilhete foi excluído de ser fechado automaticamente",
+	"commands.claim.no_permission": "Só membros da equipa podem reivindicar bilhetes",
+	"commands.open.from": "Este bilhete foi aberto a partir [desta mensagem](%s).\n\n<@%d> disse em <#%d>:\n```%s```",
+	"commands.open.from.moved": "A conversa foi movida para um bilhete (<#%d>)",
+	"help.close_request": "Envia uma mensagem ao utilizador a pedir que confirme que o bilhete pode ser fechado",
+	"close.reason_too_long": "A razão não pode ter mais de 255 caracteres",
+	"commands.close_request.success": "Pedido de encerramento enviado com sucesso",
+	"commands.close_request.no_reason": "<@%d> pediu para fechar este bilhete.\n\nPor favor, aceita ou recusa utilizando os botões abaixo.",
+	"commands.close_request.with_reason": "<@%d> pediu para fechar este bilhete. Razão:\n```\n%s\n```\nPor favor, aceita ou recusa utilizando os botões abaixo.",
+	"commands.close_request.no_permission": "Só o utilizador que abriu este bilhete pode responder ao pedido de encerramento",
+	"commands.close_request.denied": "<@%d> recusou o pedido de encerramento",
+	"generic.error": "Erro",
+	"feedback.disabled": "Este servidor desativou o feedback",
+	"feedback.success": "O teu feedback foi enviado",
+	"generic.success": "Sucesso",
+	"button.guild_only": "Este botão deve ser usado em um servidor",
+	"button.dms_only": "Este botão deve ser usado em mensagens diretas",
+	"commands.tag.generic": "Etiqueta",
+	"commands.tags.delete.success": "A etiqueta `%s` foi eliminada",
+	"generic.ticket": "Bilhete",
+	"generic.title.premium_only": "Comando Apenas de Premium",
+	"generic.admin": "Administrador",
+	"commands.tags.create.success": "Etiqueta criada - tu podes usá-la executando `%s`",
+	"generic.title.about": "Sobre",
+	"generic.title.vote": "Votar",
+	"generic.title.tags": "Etiquetas",
+	"generic.title.autoclose": "Fecho automático",
+	"generic.title.invite": "Convidar",
+	"generic.title.close": "Fechar",
+	"generic.title.claim": "Reivindicar",
+	"generic.title.unclaim": "Desreivindicar",
+	"generic.title.blacklisted": "Na lista negra",
+	"generic.title.blacklist": "Lista negra",
+	"generic.error.blacklisted": "Tu estás na lista negra deste servidor",
+	"generic.error.guild_blacklisted": "Este servidor está proibido de usar este bot",
+	"generic.error.user_blacklisted": "Tu estás proibido de utilizar este bot",
+	"commands.blacklist.add.success": "<@%d> foi colocado/a na lista negra",
+	"commands.blacklist.remove.success": "<@%d> foi retirado/a da lista negra",
+	"generic.title.add_admin": "Adicionar Administrador",
+	"generic.title.add_support": "Adicionar Suporte",
+	"generic.title.remove_admin": "Remover Administrador",
+	"generic.title.remove_support": "Remover Suporte",
+	"commands.addsupport.success": "Representante do suporte adicionado com sucesso: %s",
+	"generic.title.language": "Idioma",
+	"commands.removesupport.success": "Representante do suporte removido com sucesso: %s",
+	"commands.addadmin.success": "Administrador adicionado com sucesso: %s",
+	"commands.removeadmin.success": "Administrador removido com sucesso: %s",
+	"generic.title.setup": "Configuração",
+	"generic.title.premium": "Premium",
+	"generic.title.panel": "Painel",
+	"generic.title.rename": "Renomear",
+	"generic.title.remove": "Remover",
+	"generic.title.help": "Ajuda",
+	"generic.title.close_confirmation": "Confirmação de fecho",
+	"close.confirmation": "Por favor, confirma que queres fechar este bilhete",
+	"generic.title.close_request": "Fechar Pedido",
+	"commands.close_request.accept": "Aceitar & Fechar",
+	"commands.close_request.deny": "Recusar & Continuar Aberto",
+	"commands.premium.success": "O premium foi ativado por **%d** dias",
+	"generic.title.claimed": "Bilhete Reivindicado",
+	"generic.title.unclaimed": "Bilhete Não Reivindicado",
+	"generic.title.add": "Adicionar",
+	"commands.add.success": "<@%s> foi adicionado a <#%d>",
+	"commands.add.role_thread": "Devido a limitações do Discord, cargos não podem ser adicionados aos bilhetes por tópicos",
+	"commands.remove.success": "<@%s> foi removido com sucesso de <#%d>",
+	"commands.remove.role_thread": "Devido a limitações do Discord, cargos não podem ser removidos dos bilhetes por tópicos",
+	"open.ratelimited": "Bilhetes estão a ser abertos demasiado rápido neste servidor",
+	"open.panel_cooldown": "Tu estás em cooldown para este painel. Por favor, tenta novamente %s.",
+	"commands.claim.thread": "Devido a limitações do Discord, reivindicar não é possível em tópicos",
+	"generic.join_support_server": "Entrar no servidor de suporte",
+	"commands.open.guild_channel_limit": "Este servidor atingiu o limite do Discord de 500 canais",
+	"commands.open.missing_form_answer": "Tu tens que responder à questão `%s`",
+	"close.no_permission": "Tu não tens permissão para fechar este bilhete",
+	"": {
+		"generic.title.close_with_reason": "Fechar Com Razão",
+		"generic.reason": "Razão"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Razão para fechar o bilhete, p.ex. \"Resolvido\""
+		},
+		"success": "O bilhete foi fechado por <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "Tu não podes avaliar este bilhete porque tu és um representante do apoio em %s",
+				"empty": "Tu não podes avaliar este bilhete porque tu não enviaste nenhuma mensagem"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "O comando `%s` está desativado neste servidor: por favor, usa um painel de bilhete para abrir um bilhete",
+			"threads": {
+				"cant_see_parent_channel": "Não foi possível adicionar <@%d> a este bilhete: Assegura-te que ele/a tem permissão para ver o canal principal do tópico (<#%d>)",
+				"cant_message_in_threads": "Tu não tens a permissão de `Enviar Mensagens Em Tópicos`, o que é necessário para abrir um bilhete. Por favor, pede a um administrador do servidor para te dar permissão e tenta outra vez."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Painel inválido: Tu tens que selecionar um do menu suspenso",
+			"success": "Este bilhete foi mudado para o painel `%s` por <@%d>",
+			"non_thread_to_thread": "Tu não podes mudar de um bilhete que não usa tópicos para um que usa",
+			"claimer_no_access_title": "Mudança de painel bloqueada",
+			"claimer_no_access": "A pessoa que reinvidicou o bilhete (<@%d>) não tem acesso ao painel selecionado.",
+			"auto_unclaimed": "O bilhete foi mudado para o `%s` painel de <@%d>.\n\nO bilhete foi automaticamente desreinvidicado, pelo que <@%d> não tem acesso ao novo painel."
+		},
+		"blacklist": {
+			"staff": "Membros da equipa não podem estar na lista negra",
+			"add_role": {
+				"success": "<@&%d> foi colocado/a na lista negra",
+				"limit": "Tu atingiste o limite de lista negra de cargos (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> foi removido da lista negra"
+			},
+			"add": {
+				"limit": "Tu atingiste o limite de lista negra de utilizadores (%d): considera utilizar um cargo em vez disso"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Este bilhete não tem uma mensagem de boas-vindas",
+			"content": "Clica no botão abaixo para ires para o topo do bilhete"
+		},
+		"addsupport": {
+			"confirm": "Por favor, confirma que tu queres adicionar %s para a equipa padrão de representantes do suporte",
+			"everyone": "Tu não podes adicionar o cargo `@everyone` como equipa"
+		},
+		"addadmin": {
+			"confirm": "Por favor, confirma que tu queres adicionar %s como um administrador do bot"
+		},
+		"tags": {
+			"create": {
+				"limit": "Atingiste o limite de etiquetas (%d)"
+			},
+			"get": {
+				"requires_premium": "O premium é necessário para usar comandos customizados (alcunhas de tag)"
+			}
+		},
+		"language": {
+			"content": "Os idiomas disponíveis e o teu progresso de tradução são os seguintes:\n%s",
+			"success": "O idioma do servidor foi alterado para **%s** (%s)",
+			"select": "Seleciona um idioma (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` só pode ser utilizado no modo de tópico. Visita o nosso [docs](%s) para saberes mais sobre tópicos",
+			"success": "Tu estás agora em alerta",
+			"remove_success": "Tu não estás mais em alerta"
+		},
+		"reopen": {
+			"not_found": "Bilhete não encontrado",
+			"no_permission": "Tu não tens permissão para reabrir este bilhete",
+			"already_open": "Este bilhete já está aberto",
+			"not_thread": "Só tópicos podem ser reabertos",
+			"thread_deleted": "O bilhete foi apagado permanentemente",
+			"success": "Bilhete %d reaberto: <#%d>",
+			"in_ticket": "Este bilhete foi reaberto por <@%d>"
+		},
+		"premium": {
+			"key": "Chave",
+			"check_again": "Verifica Novamente",
+			"subscription_found": "Subscrição Encontrada!",
+			"subscription_found_content": "Para aplicares a tua subscrição a este servidor, o dono do servidor (<@%d>) tem que te adicionar como um **utilizador** administrador (cargos são ignorados) através do comando %s.\\n\\nTu podes verificar que tu foste adicionado como um utilizador administrador através do comando %s.",
+			"activate_key": "Ativa Uma Chave Premium",
+			"checking": "A Verificar o Estado do Premium...",
+			"please_wait": "Por favor, aguarde...",
+			"success_after_check": "O premium agora está ativado neste servidor!",
+			"link_patreon_account": "Vincular Conta Patreon",
+			"no_subscription": "Não foi possível encontrar uma subscrição Patreon ativa vinculada à tua conta de Discord. Assegura-te que tu [vinculaste as tuas contas Patreon e Discord](%s), e mais 10 minutos à espera.",
+			"open_form": "Abrir Formulário",
+			"open_form_description": "Pressiona o botão abaixo para reabrir o formulário",
+			"use_key_anyway": "Usar Chave Premium Mesmo Assim",
+			"already_purchased_title": "Já compraste o premium?",
+			"already_purchased_description": "Se tu já compraste o premium, seleciona o método de pagamento do menu suspenso para começar",
+			"giveaway_key": "Chave do Sorteio",
+			"selector": {
+				"description": "Seleciona qual método utilizaste para obteres o premium",
+				"key": {
+					"description": "Seleciona esta opção se te foi fornecida uma chave de sorteio"
+				},
+				"patreon": {
+					"description": "Seleciona esta opção se tu fizeste a tua compra no Patreon"
+				},
+				"discord": {
+					"description": "Seleciona esta opção se tu fizeste a tua compra pela loja do Discord"
+				}
+			},
+			"about": "O premium fornece-te acesso a mais painéis, estatísticas, um bot personalizado e mais! Visita o nosso [website](%s) para saberes mais.",
+			"already_activated": "Boas notícias! O premium já está ativado neste servidor.",
+			"already_activated_whitelabel": "Boas notícias! O premium já está ativado neste servidor.\n\nPara ajuda ao começar com whitelabel, lê [o nosso guia de configuração do whitelabel](%s).",
+			"discord": {
+				"no_subscription": "O premium pode ser comprado diretamente pelo Discord. Clica no botão abaixo para abrires a página de gestão da subscrição.\n\nUma vez comprada, por favor espera até 5 minutos para a subscrição ser detetada."
+			},
+			"subscription_found_content_modern": "A tua subscrição no Patreon foi detetada. Por favor clica no botão \"Abrir o Selecionador do Servidor\" abaixo para abrires a dashboard para selecionares os servidores em que desejas aplicar a tua subscrição do premium.",
+			"open_server_selector": "Abrir o Selecionador do Servidor"
+		},
+		"notes": {
+			"added_to_existing": "Tu foste adicionado ao tópico de notas existente: <#%d>",
+			"thread_name": "notas",
+			"created": "Um tópico de notas foi criado para este bilhete: <#%d>",
+			"channel_mode_only": "Tópicos de notas só estão suportados no modo de canal"
+		},
+		"rename": {
+			"ratelimited": "Devido a limitações impostas pelo Discord, os bilhetes só podem ser renomeados a cada 10 minutos"
+		},
+		"vote": {
+			"redeem_credits": "Resgatar Créditos",
+			"no_credits": "Falha no resgate: tu não tens nenhum crédito de voto!",
+			"redeem": {
+				"success": {
+					"plural": "Os vossos créditos de voto foram resgatados para **%d** dias de premium!",
+					"singular": "Os teus créditos de voto foram resgatados para **%d** dias de premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "Vocês têm **%d** créditos de voto. Clica no botão de \"Resgatar Créditos\" para resgatá-los por %d dias de premium neste servidor.",
+				"singular": "Tu tens **%d** créditos de voto. Clica no botão de \"Resgatar Créditos\" para resgatá-los por %d dias de premium neste servidor."
+			}
+		},
+		"viewstaff": {
+			"title": "Suporte",
+			"admin": {
+				"users": "Utilizadores Administradores",
+				"roles": "Cargos de Administrador",
+				"no_users": "Nenhum utilizador administrador",
+				"no_roles": "Nenhum cargo de administrador"
+			},
+			"support": {
+				"users": "Utilizadores de suporte",
+				"roles": "Cargos de Suporte",
+				"no_roles": "Nenhum cargo de suporte",
+				"users_warning": "-# **Aviso:** Utilizadores em equipas de suporte estão obsoletos. Por favor, migra para cargos."
+			}
+		},
+		"edit": {
+			"title": "Editar Definições de Bilhete",
+			"description": "Abaixo tu podes editar várias definições para este bilhete.",
+			"labels": {
+				"title": "Editar Etiquetas",
+				"description": "Edita as etiquetas atribuídas a este bilhete",
+				"update_modal": {
+					"title": "Atualizar Etiquetas do Bilhete",
+					"select_menu_title": "Etiquetas",
+					"success": "Etiquetas do bilhete foram atualizadas com sucesso para: %s"
+				},
+				"none_configured": "Nenhuma etiqueta foi configurada para este servidor. Tu podes criar etiquetas no [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Painel do Bilhete Alterado",
+			"jump_to_top": "Ir para o topo",
+			"reopened": "Bilhete reaberto",
+			"ticket_closed": "Bilhete fechado"
+		},
+		"click_here": "Clica aqui",
+		"confirm": "Confirmar",
+		"website": "O nosso website"
+	},
+	"help": {
+		"switch_panel": "Muda o bilhete para outro painel de bilhete, mudando a categoria do canal, equipas de suporte, etc.",
+		"jump_to_top": "Fornece-te um botão para ires para o topo do bilhete",
+		"on_call": "Marca-te como em alerta, para seres adicionado/a e mencionado/a em todos os novos bilhetes",
+		"reopen": "Reabre um bilhete que estava previamente fechado",
+		"notes": "Cria um tópico de discussão privada entre representantes do suporte",
+		"edit": "Edita definições para o bilhete atual"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Queres explorar mais? A nossa [documentation](%s) vai ensinar-te como configurar qualquer aspeto do bot!"
+		},
+		"threads": {
+			"no_notification_channel": "Tu tens que fornecer um canal de notificação de bilhetes",
+			"notification_channel_type": "O canal de notificação do bilhete tem de ser um canal de texto",
+			"success": "O modo de tópico foi ativado",
+			"disabled": "O modo de tópico foi desativado"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Este bilhete já foi fechado",
+			"no_permission": "Tu não tens permissão para ver este tipo de bilhete",
+			"already_joined": "Tu já entraste neste ticket (<#%d>)",
+			"success": "Adicionou-te ao ticket: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Não é possível criar tópicos nos canais de anúncios",
+		"panel_force_disabled": "Este painel foi desativado. Por favor, pede a um administrador do servidor para reativar o premium, e executa %s para reativar este painel.",
+		"panel_disabled": "Os administradores do servidor desativaram a abertura deste tipo de bilhetes",
+		"acl": {
+			"no_allow_rules": "Acesso para abrir este tipo de bilhetes foi desativado para todos os cargos",
+			"deny_listed": "Tu não consegues abrir este tipo de ticket porque tu tens o cargo <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Tu necessitas um dos seguintes cargos para abrir este tipo de bilhete: %s",
+				"single": "Tu necessitas do seguinte cargo para abrir este tipo de bilhete: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Selecion o tipo de pedido GDPR que gostarias de fazer:",
+		"section": {
+			"transcript": "### **Opções de Exclusão de Transcrição**\n-# _Apagar transcrições dos servidores que tu possuis_",
+			"message": "### **Opções de Anonimização de Mensagens**\n-# _Anonimiza as tuas mensagens das transcrições nos servidores selecionados_"
+		},
+		"warning": "### **Informação Importante**\n* A exclusão é **permanente** e não pode ser revertida\n* Tu só podes apagar transcrições de servidores que **tu** possuis\n* Só **as tuas** mensagens podem ser anonimizadas nas transcrições\n* O pedido pode demorar até **30 dias** até ser completo\n* O teu pedido será processado numa **fila**",
+		"resources": "### **Recursos**\n[O que é o GDPR?](%s)\n[Direito ao Esquecimento](%s)\n[Direito ao Acesso](%s)",
+		"button": {
+			"all_transcripts": "Todas as transcrições de servidores",
+			"specific_transcripts": "Transcrições específicas",
+			"all_messages": "Todas as tuas mensagens em servidores",
+			"specific_messages": "As tuas mensagens em bilhetes específicos"
+		},
+		"language_option": "Idioma",
+		"modal": {
+			"all_transcripts": "Apagar Todos as Transcrições de Servidores",
+			"specific_transcripts": "Apagar Transcrições Específicas",
+			"all_messages": "Anonimizar as tuas Mensagens em Servidores",
+			"specific_messages": "Anonimizar as tuas Mensagens em Bilhetes Específicos",
+			"select_server": "Seleciona um servidor",
+			"select_servers": "Seleciona um ou mais servidores",
+			"server_id": {
+				"label": "ID do servidor",
+				"placeholder": "Introduz o ID do servidor"
+			},
+			"server_ids": {
+				"label": "IDs de Servidor",
+				"placeholder": "Introduz os IDs de servidor separado por vírgulas (por exemplo, 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "IDs dos Bilhetes",
+				"placeholder": "Introduz os IDs dos bilhetes separados por vírgulas (por exemplo, 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "Confirmação do GDPR Necessária",
+			"all_transcripts": "**Tipo de Pedido:** Apagar todas as transcrições de um servidor que tu possuis\n**Servidor:** %s",
+			"all_transcripts_multi": "**Tipo de Pedido:** Apagar todas as transcrições de servidores que tu possuis\n**Servidores:**\n* %s",
+			"specific_transcripts": "**Tipo de Pedido:** Apagar transcrições específicas de um servidor\n**Servidor:** %s\n** IDs dos Bilhetes:** %s",
+			"all_messages": "**Tipo de Pedido:** Anonimizar todas as tuas mensagens no servidor selecionado\n**Servidor:** %s",
+			"all_messages_multi": "**Tipo de Pedido:** Anonimizar todas as tuas mensagens nos servidores selecionados\n**Servidores:**\n* %s",
+			"specific_messages": "**Tipo de Pedido:** Anonimizar as tuas mensagens em bilhetes específicos\n**Servidor:** %s\n**IDs dos Bilhetes:** %s",
+			"warning": "\n\n⚠️ **Aviso:** Esta ação é permanente e não pode ser revertida.\n\nTu entendes e aceitas que esta ação é permanente?",
+			"button": "Confirmar - Eu entendo"
+		},
+		"queued": {
+			"title": "Pedido de GDPR em fila",
+			"all_transcripts": "**Tipo de Pedido** Apagar todas as transcrições de um servidor\n**Servidor:** %s",
+			"all_transcripts_multi": "**Tipo de Pedido:** Apagar todas as transcrições de servidores\n**Servidores:**\n* %s",
+			"specific_transcripts": "**Tipo de Pedido:** Apagar transcrições específicas\n**Servidor:** %s\n**IDs dos Bilhetes:** %s",
+			"all_messages": "**Tipo de Pedido:** Anonimizar todas as tuas mensagens num servidor\n**Servidor:** %s",
+			"all_messages_multi": "**Tipo de Pedido:** Anonimizar todas as tuas mensagens em servidores\n**Servidores:**\n* %s",
+			"specific_messages": "**Tipo de Pedido:** Anonimizar as tuas mensagens em bilhetes específicos\n**Servidor:** %s\n**IDs dos Bilhetes:** %s",
+			"footer": "\n\nO teu pedido foi colocado na fila para processamento.\nO processamento pode levar algum tempo dependendo do número de transcrições."
+		},
+		"completed": {
+			"title": "Pedido de GDPR Completo",
+			"all_transcripts": "**Tipo de Pedido:** Apagar todas as transcrições de um servidor\n**Servidor:** %s\n**Transcrições Apagadas:** %d",
+			"all_transcripts_multi": "**Tipo de Pedido:** Apagar todas as transcrições de servidores\n**Servidores:**\n* %s\n**Transcrições Apagadas:** %d",
+			"specific_transcripts": "**Tipo de Pedido:** Apagar transcrições específicas\n**Servidor:** %s\n**Transcrições Apagadas:** %d",
+			"all_messages": "**Tipo de Pedido:** Anonimizar todas as tuas mensagens no servidor\n**Servidor:** %s\n**Mensagens Anonimizadas:** %d",
+			"all_messages_multi": "**Tipo de Pedido:** Anonimizar todas as tuas mensagens em servidores\n**Servidores:**\n* %s\n**Mensagens Anonimizadas:** %d",
+			"specific_messages": "**Tipo de Pedido:** Anonimizar as tuas mensagens em bilhetes específicos\n**Servidor:** %s\n**Mensagens Anonimizadas:** %d",
+			"error": "\n\n**⚠️ Erro:** %s"
+		},
+		"followup": {
+			"error": "⚠️ O teu pedido de GDPR encontrou um erro: %s",
+			"no_data": "ℹ️O teu pedido de GDPR foi processado. Nenhum dado encontrado.",
+			"success": "✅ O teu pedido de GDPR foi processado com sucesso."
+		},
+		"error": {
+			"no_servers": "Nenhum servidor encontrado onde tu és o dono e que tenha transcrições.",
+			"invalid_server_id": "ID de servidor inválido.",
+			"invalid_ticket_ids": "IDs de bilhetes inválidos. Por favor introduz IDs de servidor numéricos (por exemplo, 123, 456, 789).",
+			"not_owner": "Tu tens de ser o dono do servidor para apagar transcrições.",
+			"server_not_found": "Servidor não encontrado.",
+			"queue_failed": "Falha em agendar o teu pedido GDPR. Por favor, tenta novamente mais tarde.",
+			"worker_offline": "O serviço de processamento do GDPR encontra-se atualmente indisponível. Por favor, tenta mais tarde ou contacta o apoio se o problema persistir."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Não foi encontrado um canal obrigatório: deve ter sido apagado.\n\nPor favor, pede a um administrador do servidor para visitar o [dashboard](%s) e verificar se todas as definições dos canais estão configuradas corretamente.",
+		"unknown_guild": "Não consegui encontrar o servidor.",
+		"unknown_member": "O utilizador não pôde ser encontrado. Pode ter deixado o servidor ou ter sido banido.",
+		"unknown_message": "A mensagem com que estás a interagir foi apagada.\n\nPor favor, tenta a ação novamente com uma mensagem diferente.",
+		"unknown_user": "utilizador não encontrado.",
+		"unknown_role": "O cargo necessário para esta ação não existe mais.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e reconfigurar as definições dos cargos.",
+		"unknown_category": "Não consegui encontrar uma categoria obrigatória: deve ter sido apagada.\n\nPor favor, pede a um administrador do servidor para visitar o [dashboard](%s) e atribuir uma categoria de canal válida a este painel do bilhete.",
+		"unknown_interaction": "Esta interação expirou.\n\nPor favor, tenta a ação mais tarde.",
+		"max_webhooks": "O servidor atingiu o máximo de webhooks.\n\nPor favor, pede a um administrador do servidor para remover alguns webhooks inutilizados e tenta novamente.",
+		"max_channels": "O teu bilhete não pôde ser aberto porque esteve servidor atingiu o limite de canais do Discord (500).\n\nPor favor, pede a um administrador do servidor para fechar alguns bilhetes ou apagar alguns canais inutilizados antes de abrir um novo bilhete.",
+		"interaction_acknowledged": "Esta interação já foi processada.\n\nSe tiveres de processar esta ação novamente, por favor, tenta uma nova interação.",
+		"missing_permissions": {
+			"title": "Estou sem as seguintes permissões necessárias para executar esta ação",
+			"body": "Por favor, atribui estas permissões ao bot, ou, como alternativa, a permissão `Administrador` e tenta novamente.\nPor favor, visita a nossa [documentação](%s) para uma explicação do porquê de cada permissão ser necessária."
+		},
+		"missing_access": "Eu não tenho as seguintes permissões necessárias para executar esta ação.\n\nPor favor, atribui as permissões necessárias para o bot, ou, como alternativa, a permissão `Administrador` e tenta novamente.\nPor favor, visita a nossa [documentação](%s) para uma explicação do porquê de cada permissão ser necessária.",
+		"invalid_length": "Um ou mais campos são demasiados curtos ou compridos.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e verificar todas as opções e verificar se todos os campos têm o comprimento adequado.",
+		"required_field": "Um campo obrigatório está a faltar ou está vazio.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e verificar se todos os campos estão preenchidos.",
+		"invalid_channel_type": "Este tipo de canal é inválido para esta operação.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e atribuir um canal válido ao painel do bilhete.",
+		"invalid_category": "Esta categoria do canal é inválida, deve ter sido apagada.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e atribuir uma categoria válida ao painel do bilhete.",
+		"invalid_id": "Um ID inválido foi introduzido na configuração do bot.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e verificar se todos os IDs das categorias, canais e cargos estão certos.",
+		"invalid_characters": "O campo introduzido contém caracteres inválidos.\n\nPor favor, usa só letras, números, hífenes e sublinhados.",
+		"invalid_choice": "Uma opção inválida foi introduzida.\n\nPor favor, pede a um administrador do servidor para visitar a [dashboard](%s) e verificar se todas as definições estão corretas.",
+		"invalid_form": "A ação não pôde ser completada devido a um campo inválido.",
+		"thread_locked": "O teu bilhete não pôde ser aberto porque o tópico do bilhete está trancado.\n\nPor favor, pede a um administrador do servidor para destrancar o tópico do bilhete.",
+		"max_active_threads": "O teu bilhete não pôde ser aberto porque o número máximo de tópicos ativos chegou ao seu limite neste canal.\n\nPor favor, pede a um administrador do servidor para fechar alguns bilhetes ou tópicos.",
+		"timed_out": "Tempo de limite excedido, por favor, tenta novamente.",
+		"rate_limited": "As tuas ações estão a ser limitadas. Por favor, tenta novamente %s.",
+		"rate_limited_global": "O Discord está a experienciar uma carga elevada (taxa limite global). Por favor, tenta novamente %s.",
+		"general": "Um erro ocorreu ao executar esta ação.",
+		"error_id": "ID de erro"
+	}
+}

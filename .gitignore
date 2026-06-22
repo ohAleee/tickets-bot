@@ -1,0 +1,23 @@
+# Build output
+/bin/
+*.exe
+__debug_bin*
+
+# Local env
+.env
+*.env.local
+
+# Go workspace sum (regenerated in-build)
+go.work.sum
+
+# Rust
+rust/target/
+
+# Node / frontend build
+frontend/node_modules/
+frontend/public/build/
+
+# Runtime data volumes (created by docker-compose)
+/pgdata/
+/redis_data/
+/s3data/

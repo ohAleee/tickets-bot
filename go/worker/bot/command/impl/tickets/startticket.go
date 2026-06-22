@@ -1,0 +1,209 @@
+package tickets
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+
+	permcache "github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/database"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
+	"github.com/TicketsBot-cloud/worker/bot/command"
+	"github.com/TicketsBot-cloud/worker/bot/command/context"
+	"github.com/TicketsBot-cloud/worker/bot/command/registry"
+	"github.com/TicketsBot-cloud/worker/bot/constants"
+	"github.com/TicketsBot-cloud/worker/bot/customisation"
+	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/logic"
+	"github.com/TicketsBot-cloud/worker/bot/utils"
+	"github.com/TicketsBot-cloud/worker/i18n"
+)
+
+type StartTicketCommand struct {
+}
+
+func (StartTicketCommand) Properties() registry.Properties {
+	return registry.Properties{
+		Name:             "Start Ticket",
+		Type:             interaction.ApplicationCommandTypeMessage,
+		PermissionLevel:  permcache.Everyone, // Customisable level
+		Category:         command.Tickets,
+		InteractionOnly:  true,
+		DefaultEphemeral: true,
+		Timeout:          constants.TimeoutOpenTicket,
+	}
+}
+
+func (c StartTicketCommand) GetExecutor() interface{} {
+	return c.Execute
+}
+
+func (StartTicketCommand) Execute(ctx registry.CommandContext) {
+	interaction, ok := ctx.(*context.SlashCommandContext)
+	if !ok {
+		return
+	}
+
+	settings, err := ctx.Settings()
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	userPermissionLevel, err := ctx.UserPermissionLevel(ctx)
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	if userPermissionLevel < permcache.PermissionLevel(settings.ContextMenuPermissionLevel) {
+		ctx.Reply(customisation.Red, i18n.Error, i18n.MessageNoPermission)
+		return
+	}
+
+	messageId := interaction.Interaction.Data.TargetId
+
+	msg, ok := interaction.ResolvedMessage(messageId)
+	if err != nil {
+		ctx.HandleError(errors.New("Message missing from resolved data"))
+		return
+	}
+
+	var panel *database.Panel
+	var outOfHoursTitle *string
+	var outOfHoursWarning *string
+	var outOfHoursColour *int
+	if settings.ContextMenuPanel != nil {
+		p, err := dbclient.Client.Panel.GetById(ctx, *settings.ContextMenuPanel)
+		if err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		panel = &p
+
+		// Validate panel access
+		canProceed, warningTitle, warning, colour, err := logic.ValidatePanelAccess(interaction, p)
+		if err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		if !canProceed {
+			return
+		}
+
+		outOfHoursTitle = warningTitle
+		outOfHoursWarning = warning
+		outOfHoursColour = colour
+	}
+
+	ticket, err := logic.OpenTicket(ctx, interaction, panel, msg.Content, nil, outOfHoursTitle, outOfHoursWarning, outOfHoursColour)
+	if err != nil {
+		// Already handled
+		return
+	}
+
+	if ticket.ChannelId != nil {
+		sendTicketStartedFromMessage(ctx, ticket, msg)
+
+		if settings.ContextMenuAddSender {
+			if err := addMessageSender(ctx, ticket, msg); err != nil {
+				ctx.HandleError(err)
+			}
+
+			sendMovedMessage(ctx, ticket, msg)
+			if err := dbclient.Client.TicketMembers.Add(ctx, ticket.GuildId, ticket.Id, msg.Author.Id); err != nil {
+				ctx.HandleError(err)
+				return
+			}
+		}
+	}
+}
+
+// Send info message
+func sendTicketStartedFromMessage(ctx registry.CommandContext, ticket database.Ticket, msg message.Message) {
+	// format
+	messageLink := fmt.Sprintf("https://discord.com/channels/%d/%d/%d", ctx.GuildId(), ctx.ChannelId(), msg.Id)
+	contentFormatted := strings.ReplaceAll(utils.StringMax(msg.Content, 2048, "..."), "`", "\\`")
+
+	msgEmbed := utils.BuildEmbed(
+		ctx, customisation.Green, i18n.Ticket, i18n.MessageTicketStartedFrom, nil,
+		messageLink, msg.Author.Id, ctx.ChannelId(), contentFormatted,
+	)
+
+	if _, err := ctx.Worker().CreateMessageEmbed(*ticket.ChannelId, msgEmbed); err != nil {
+		ctx.HandleError(err)
+		return
+	}
+}
+
+func addMessageSender(ctx registry.CommandContext, ticket database.Ticket, msg message.Message) error {
+	// If the sender was the ticket opener, or staff, they already have access
+	// However, support teams makes this tricky
+	if msg.Author.Id == ticket.UserId {
+		return nil
+	}
+
+	if ticket.IsThread {
+		if err := ctx.Worker().AddThreadMember(*ticket.ChannelId, msg.Author.Id); err != nil {
+			if err, ok := err.(request.RestError); ok && (err.ApiError.Code == 50001 || err.ApiError.Code == 50013) {
+				ch, err := ctx.Worker().GetChannel(ctx.ChannelId())
+				if err != nil {
+					return err
+				}
+
+				ctx.Reply(customisation.Red, i18n.Error, i18n.MessageOpenCantSeeParentChannel, msg.Author.Id, ch.ParentId.Value)
+				return nil
+			} else {
+				return err
+			}
+		}
+	} else {
+		// Get perms
+		ch, err := ctx.Worker().GetChannel(*ticket.ChannelId)
+		if err != nil {
+			return err
+		}
+
+		for _, overwrite := range ch.PermissionOverwrites {
+			// Check if already present
+			if overwrite.Id == msg.Author.Id {
+				return nil
+			}
+		}
+
+		// Build permissions
+		additionalPermissions, err := dbclient.Client.TicketPermissions.Get(ctx, ctx.GuildId())
+		if err != nil {
+			return err
+		}
+
+		overwrite := logic.BuildUserOverwrite(msg.Author.Id, additionalPermissions)
+		auditReason := fmt.Sprintf("Started ticket %d for user %s", ticket.Id, msg.Author.Username)
+		reasonCtx := request.WithAuditReason(ctx, auditReason)
+		if err := ctx.Worker().EditChannelPermissions(reasonCtx, *ticket.ChannelId, overwrite); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func sendMovedMessage(ctx registry.CommandContext, ticket database.Ticket, msg message.Message) {
+	reference := &message.MessageReference{
+		MessageId:       msg.Id,
+		ChannelId:       ctx.ChannelId(),
+		GuildId:         ctx.GuildId(),
+		FailIfNotExists: false,
+	}
+
+	msgEmbed := utils.BuildEmbed(ctx, customisation.Green, i18n.Ticket, i18n.MessageMovedToTicket, nil, *ticket.ChannelId)
+
+	if _, err := ctx.Worker().CreateMessageEmbedReply(msg.ChannelId, msgEmbed, reference); err != nil {
+		ctx.HandleError(err)
+		return
+	}
+}

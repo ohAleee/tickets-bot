@@ -1,0 +1,513 @@
+{
+	"commands.about": "\"Tickets\" је лако користити и врло конфигуративне карте и подршка бот. \\nПодршка серверу: %s\\n Команде: Тип `%s`\\n Започните писањем `%s`",
+	"commands.add.no_members": "Мораш да поменеш чланове да додаш на карту",
+	"commands.add.no_permission": "Немаш дозволу да додајеш људе на ову карту",
+	"commands.add.no_everyone": "You cannot add the `@everyone` role to a ticket",
+	"commands.addadmin.no_members": "Морате да поменете корисника или да именујете улогу која ће дати административне привилегије",
+	"commands.addadmin.owner": "Власник сервера је већ администратор",
+	"commands.addsupport.no_members": "Морате да поменете корисника или да именујете улогу да дате привилегије представника подршке",
+	"commands.blacklist.no_members": "Мораш да поменеш корисника да промени стање црне листе за",
+	"commands.blacklist.self": "Не можеш се ставити на црну листу",
+	"commands.claim.success": "Ваш улазницу ће носити %s",
+	"commands.invite": "[Кликни овде](<%s>)",
+	"commands.language.invalid": "Мораш да одредиш језик или заставу. Доступни језици:\\n%s",
+	"commands.open.ticket_limit": "Можеш само да отвориш %d %s cместа",
+	"commands.open.too_many_tickets": "Има превише карата у категорији карата. Замолите администрацију да затвори неке, или да их пребаци у другу категорију",
+	"commands.panel": "Visit <%s> to configure a panel",
+	"commands.premium": "Претплату можете купити на <%s>\\nПремија пружа многе предности, као што су:\\n```diff\\n+ Створите неограничене карте.\\n+ Име робота, аватар и статус (whitelabel)\\n+ Детаљна статистика о серверу, корисницима и помоћном особљу\\n+ Нема жигосања у подножју порука\\n+Подржи развој и помози ми да платим трошкове сервера\\n```\\n\\nКао алтернативу, можете гласати на <%s> Да добијемо премију бесплатно 24 сата",
+	"commands.premium.invalid_key": "Неважећи кључ. Увери се да си га добро ископирао.",
+	"commands.remove.no_permission": "Немаш дозволу да уклониш људе са ове карте",
+	"commands.remove.staff": "Не можете уклонити особље из казне",
+	"commands.removeadmin.no_members": "Морате да поменете корисника или да именујете улогу која ће дати административне привилегије",
+	"commands.removeadmin.owner": "Vlasnik servera mora da je administrator",
+	"commands.removeadmin.self": "Не можеш да повучеш своје привилегије",
+	"commands.removesupport.no_members": "Морате да поменете корисника или да именујете улогу да дате привилегије представника подршке",
+	"commands.rename.missing_name": "Yоу цаннот ревоке yоур оwн привилегес",
+	"commands.rename.success": "Ова карта је преименована у <#%d>",
+	"commands.tags.create.already_exists": "Етикета са идентификацијом `%s` bећ постоји. Можете избрисати етикету користећи `%s`",
+	"commands.tags.create.invalid_arguments": "Морате одредити идентификацију и садржај",
+	"commands.tags.create.too_long": "Идентификација не може бити дужа од 16 знакова",
+	"commands.tags.delete.invalid_arguments": "Морате одредити идентификацију и садржај",
+	"commands.tags.delete.not_exist": "Етикета са идентификацијом `%s` цоулд нот бе фоунд",
+	"commands.tags.get.invalid_arguments": "Морате да ми дате идентификацију етикете. За више помоћи са ознаком, посетите <%s>.",
+	"commands.tags.get.invalid_tag": "Неважећа ознака. За више помоћи с ознакама, посјетите <%s>.",
+	"commands.tags.list": "Исправе за све ознаке:\\n%s\\nДа бисте видели садржај етикете, бежите. `%s`",
+	"commands.unclaim.not_claimed": "Ова карта се не тражи",
+	"commands.unclaim.not_claimer": "Само администратори и корисник који је тражио карту могу да одбију карту",
+	"commands.unclaim.success": "Сви представници подршке сада могу одговорити на карту",
+	"commands.vote": "Click the button below to vote for the bot and receive 24 hours of premium for free.\n\nOnce you have voted, run the %s command again to redeem your vote credits.",
+	"generic.invalid_argument": "Неважећи аргумент: Обраћај се на употребу",
+	"generic.invalid_user": "Нисам могао да нађем циљног корисника",
+	"generic.no_permission": "Nemate dozvolu da dodajete ovde",
+	"generic.not_ticket": "Ово није канал за карте",
+	"generic.owner_only": "Ова команда је резервисана само за власника робота",
+	"help.about": "Покажи информацију о боту",
+	"help.add": "Дода корисника на карту",
+	"help.addadmin": "Даје повластице кориснику или администратору улога",
+	"help.addsupport": "Adds a role as a support representative",
+	"help.admin": "Управљање Бат-ом",
+	"help.admin.blacklist": "Црна листа сервера који користи робота",
+	"help.admin.debug.server": "Debug a server",
+	"help.admin.generate_premium": "Генеришите кључеве од премије",
+	"help.admin.unblacklist": "Уклоните сервер са црне листе сервера",
+	"help.blacklist": "Да ли је корисницима дозвољено да комуницирају са роботом",
+	"help.cancel": "Поништава процес постављања",
+	"help.claim": "Додијељује карту једном особљу",
+	"help.close": "Затвара тренутну карту",
+	"help.help": "Показује вам листу команди",
+	"help.invite": "Даје позивницу за бот",
+	"help.language": "Мења језик који бот користи",
+	"help.managetags": "Додај, избриши или попиши ознаке",
+	"help.open": "Отвара нову карту",
+	"help.panel": "Ствара панел који омогућава корисницима да отворе карту са 1 кликом",
+	"help.premium": "Покрени ову команду након куповине да је активираш",
+	"help.remove": "Уклања корисника са карте",
+	"help.removeadmin": "Даје повластице кориснику или администратору улога",
+	"help.removesupport": "Поништава привилегије корисника или представника улоге",
+	"help.rename": "Преименује садашњу карту",
+	"help.setup": "Омогућава вам да лако конфигуришете бот",
+	"help.stats": "Показује статистику о корисницима, помоћном особљу и серверу",
+	"help.statsserver": "Показује статистику о серверу",
+	"help.tag": "Шаље поруку",
+	"help.tagdelete": "Избрише етикету",
+	"help.taggadd": "Дода нову ознаку",
+	"help.taglist": "Списак свих ознака",
+	"help.transfer": "Пребацује пријављену карту другом кориснику",
+	"help.unclaim": "Уклања право на садашњу карту",
+	"help.viewstaff": "Списак чланова особља и улога",
+	"help.vote": "Даје ти везу да гласаш за бесплатну премију",
+	"help.gdpr": "Manage your GDPR data requests",
+	"open.success": "Отворила је нову карту: %s",
+	"open.outside_support_hours": {
+		"title": "This panel is currently closed",
+		"message": "Please try again during our support hours."
+	},
+	"setup.auto.category.failure": "Spisak članova osoblja i uloga `Manage Channels`",
+	"setup.auto.category.success": "Креирана категорија карата",
+	"setup.auto.completed": "Setup complete! Click [here](%s) to setup a reaction panel, and add the <@&%d> and <@&%d> roles to your staff members",
+	"setup.auto.roles.failure": "Недостаје ми дозвола за \"Manages Roles\"",
+	"setup.auto.roles.success": "Створене су улоге 'Управе за карте' и 'Подршке за карте'",
+	"setup.auto.transcript.failure": "Недостаје ми дозвола за \"руковање каналима\"",
+	"setup.auto.transcript.success": "Креиран <#%d> канала",
+	"setup.ticket_limit.success": "Лимит карата је ажуриран на `%d`",
+	"setup.transcript.invalid": "Morate spomenuti valjan kanal na serveru (e.g. <#%d>)\\n**Example:** `%s`",
+	"setup.transcript.success": "Канал транскрипата је промењен на <#%d>",
+	"commands.language.help_wanted": "Govoriš li još jedan jezik? Придружите се нашем [подржавајућем серверу](%s) Ако сте заинтересовани да помогнете у преводу робота на више језика",
+	"commands.rename.too_long": "Идентификација не може бити дужа од 100 знакова",
+	"commands.autoclose.configure": "Visit the [dashboard](%s) to change autoclose settings",
+	"help.autoclose": "Аутоматско затварање повезаних команди",
+	"help.autoclose.exclude": "Искључује аутоматско затварање тренутне карте",
+	"help.autoclose.configure": "Прилагоди аутоматско затварање",
+	"commands.autoclose.exclude.success": "Ова карта је искључена из аутоматског затварања",
+	"commands.claim.no_permission": "Само чланови особља могу тражити улазнице",
+	"commands.open.from": "Ова карта је отворена од [ова порука](%s).\n\n<@%d> said in <#%d>:\n```%s```",
+	"commands.open.from.moved": "Разговор је пребачен на карту (<#%d>)",
+	"help.close_request": "Шаље поруку кориснику да потврди да је карта затворена",
+	"close.reason_too_long": "Идентификација не може бити дужа од 255 знакова",
+	"commands.close_request.success": "Close request was sent successfully",
+	"commands.close_request.no_reason": "<@%d> Затражио је да затворимо ову карту.\n\nМолим вас, прихватите или одбијте да користите дугмад испод.",
+	"commands.close_request.with_reason": "<@%d> Затражио је да затворимо ову карту.\n```\n%s\n```\nМолим вас, прихватите или одбијте да користите дугмад испод.",
+	"commands.close_request.no_permission": "Само корисник који је отворио карту може да одговори на захтев",
+	"commands.close_request.denied": "<@%d> Одбијен захтев за затварање",
+	"generic.error": "Грешка",
+	"feedback.disabled": "Овај сервер је онеспособљен",
+	"feedback.success": "Ваша повратна информација је снимљена",
+	"generic.success": "Успех",
+	"button.guild_only": "Ово дугме мора да се користи на серверу",
+	"button.dms_only": "Ово дугме мора да се користи на серверу",
+	"commands.tag.generic": "Ознака",
+	"commands.tags.delete.success": "Ознака `%s` избрисана",
+	"generic.ticket": "Пријава",
+	"generic.title.premium_only": "Команда Само Премијера",
+	"generic.admin": "Админ",
+	"commands.tags.create.success": "Таг је створен - можете га користити трчањем `%s`",
+	"generic.title.about": "У вези",
+	"generic.title.vote": "Гласајте",
+	"generic.title.tags": "Ознаке",
+	"generic.title.autoclose": "Ауто затварање",
+	"generic.title.invite": "Позови",
+	"generic.title.close": "Затвори",
+	"generic.title.claim": "Zahtevajte",
+	"generic.title.unclaim": "Unclaim",
+	"generic.title.blacklisted": "На Црној Листи",
+	"generic.title.blacklist": "Црна листа",
+	"generic.error.blacklisted": "На црној сте листи на овом серверу",
+	"generic.error.guild_blacklisted": "This server is blacklisted from using this bot",
+	"generic.error.user_blacklisted": "You are blacklisted from using this bot",
+	"commands.blacklist.add.success": "<@%d> Је на црној листи",
+	"commands.blacklist.remove.success": "<@%d> hије на црној листи",
+	"generic.title.add_admin": "Додај админ",
+	"generic.title.add_support": "Додај подршку",
+	"generic.title.remove_admin": "Опозови админи права",
+	"generic.title.remove_support": "Уклони подршку",
+	"commands.addsupport.success": "Support representative added successfully: %s",
+	"generic.title.language": "Језик",
+	"commands.removesupport.success": "Support representative removed successfully: %s",
+	"commands.addadmin.success": "Admin added successfully: %s",
+	"commands.removeadmin.success": "Admin removed successfully: %s",
+	"generic.title.setup": "Поставке",
+	"generic.title.premium": "Премиум",
+	"generic.title.panel": "Панел",
+	"generic.title.rename": "Преименуј",
+	"generic.title.remove": "Склањај се",
+	"generic.title.help": "Помозите",
+	"generic.title.close_confirmation": "Затварање потврде",
+	"close.confirmation": "Молим потврдите да желите да затворите ову карту",
+	"generic.title.close_request": "Затворени захтев",
+	"commands.close_request.accept": "Прихвати и затвори",
+	"commands.close_request.deny": "Негирај и остани отворен",
+	"commands.premium.success": "Премија је активирана за **%d** Данима",
+	"generic.title.claimed": "Захтјев за улазницу",
+	"generic.title.unclaimed": "Нетражена карта",
+	"generic.title.add": "Додај",
+	"commands.add.success": "<@%s> has been added to <#%d>",
+	"commands.add.role_thread": "Due to Discord limitations, roles cannot be added to thread tickets",
+	"commands.remove.success": "<@%s> has been removed from <#%d>",
+	"commands.remove.role_thread": "Due to Discord limitations, roles cannot be removed from thread tickets",
+	"open.ratelimited": "Улазнице се отварају пребрзо на овом серверу",
+	"open.panel_cooldown": "You are on cooldown for this panel. Please try again %s.",
+	"commands.claim.thread": "Због ограничења неслагања, тврдња не подржава нити",
+	"generic.join_support_server": "Придружи се серверу подршке",
+	"commands.open.guild_channel_limit": "Овај сервер је достигао границу од 500 канала",
+	"commands.open.missing_form_answer": "Мораш да одговориш на питање `%s`",
+	"close.no_permission": "Vi nemate dozvolu da zatvorite ovaj ticket",
+	"": {
+		"generic.title.close_with_reason": "Затвори са разлогом",
+		"generic.reason": "Разлог"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Разлог за затварање карте, пример \"Ресолвед\""
+		},
+		"success": "Карта је била затворена <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "You cannot rate this ticket because you are a support representative in %s",
+				"empty": "You cannot rate this ticket because you did not send any messages"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Наредба '%s' је искључена на овом серверу: Молимо вас да користите таблу за улазнице за отварање улазница",
+			"threads": {
+				"cant_see_parent_channel": "Није могао да дода <@%d> на карту: Осигурајте да имају дозволу за гледање матичног канала нити (<#%d>)",
+				"cant_message_in_threads": "You are missing the `Send Messages in Threads` permission, which is required to open a ticket. Please ask a server administrator to grant this permission to you, and try again."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Неважећи панел: Мораш да изабереш једну од њих",
+			"success": "Ова карта је замењена за `%s` panel by <@%d>",
+			"non_thread_to_thread": "You cannot switch to a panel that uses threads from a non-thread ticket",
+			"claimer_no_access_title": "Panel Switch Blocked",
+			"claimer_no_access": "The ticket claimer (<@%d>) does not have access to the selected panel.",
+			"auto_unclaimed": "The ticket has been switched to the `%s` panel by <@%d>.\n\nThe ticket has been automatically unclaimed, as <@%d> does not have access to the new panel."
+		},
+		"blacklist": {
+			"staff": "Чланови особља не могу бити на црној листи",
+			"add_role": {
+				"success": "<@&%d> jе на црној листи",
+				"limit": "Достигао си црну листу улога (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> has been unblacklisted"
+			},
+			"add": {
+				"limit": "Дошли сте до црне листе корисника (%d): Размислите о улози"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Ова карта нема поруку добродошлице",
+			"content": "Кликни дугме испод да скочиш на врх карте"
+		},
+		"addsupport": {
+			"confirm": "Молимо потврдите да желите да додате %s у основни репрезентативни тим",
+			"everyone": "Не можете додати `@everyone` као особље"
+		},
+		"addadmin": {
+			"confirm": "Молимо потврдите да желите додати %s као бот администратор"
+		},
+		"tags": {
+			"create": {
+				"limit": "Достигао си границу (%d)"
+			},
+			"get": {
+				"requires_premium": "Premium is required to use custom commands (tag aliases)"
+			}
+		},
+		"language": {
+			"content": "Доступни језици и њихов напредак у преводу су следећи:\n%s",
+			"success": "Jezik servera je promenjen na **%s** (%s)",
+			"select": "Изабери језик (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` се може користити само у начину. Посетите наше [docs](%s) да сазнате више о нити",
+			"success": "Сада сте на дужности",
+			"remove_success": "Ниси више на дужности"
+		},
+		"reopen": {
+			"not_found": "Карта није пронађена",
+			"no_permission": "Немате дозволу да поново отворите ову карту",
+			"already_open": "Ова карта је већ отворена",
+			"not_thread": "Само се влакна могу поново отворити",
+			"thread_deleted": "Карта је трајно избрисана",
+			"success": "Карта %d поново отворена: <#%d>",
+			"in_ticket": "Ова карта је поново отворена од стране <@%d>"
+		},
+		"premium": {
+			"key": "Ključ",
+			"check_again": "Провери поново",
+			"subscription_found": "Претплата пронађена!",
+			"subscription_found_content": "Да би применили претплату на овај сервер, власник сервера (<@%d>) мора да вас дода као администратора **корисника** (улоге се игноришу) преко команде %s.\\n\\nМожете да проверите да ли сте додани као администраторски корисник покренувши %s.",
+			"activate_key": "Активирајте премијерни кључ",
+			"checking": "Проверавам премијерни статус...",
+			"please_wait": "Сачекајте...",
+			"success_after_check": "Премија је сада активна на овом серверу!",
+			"link_patreon_account": "Рачуни за повезивање Патреон",
+			"no_subscription": "Нисам могао да нађем активну претплату Патреон повезану са твојим рачуном. Побрини се да повежеш своје рачуне Патреон и Дисцорд.(%s), и даље чекао 10 минута.",
+			"open_form": "Отвори образац",
+			"open_form_description": "Притисните дугме испод да поново отворите образац",
+			"use_key_anyway": "Употријеби Први кључ",
+			"already_purchased_title": "Већ имате премијум?",
+			"already_purchased_description": "Ако сте већ купили премију, изаберите начин плаћања од пада за почетак",
+			"giveaway_key": "Одај кључ",
+			"selector": {
+				"description": "Изаберите који сте начин користили да добијете премију",
+				"key": {
+					"description": "Изабери ову опцију ако ти је дат кључ"
+				},
+				"patreon": {
+					"description": "Изаберите ову опцију ако сте купили Патреон"
+				},
+				"discord": {
+					"description": "Select this option if you made your purchase within the Discord in-app store"
+				}
+			},
+			"about": "Премија ти даје приступ више панела, статистике, робот по наруџби и више! Посетите нас да сазнате више. [website](%s).",
+			"already_activated": "Good news! Premium is already active in this server.",
+			"already_activated_whitelabel": "Good news! Premium is already active in this server.\n\nFor help getting started with whitelabel, read [our whitelabel setup guide](%s).",
+			"discord": {
+				"no_subscription": "Premium can be purchased within Discord directly. Click the button below this message to open the subscription management page.\r\n\r\nOne purchased, please allow up to 5 minutes for the subscription to be detected."
+			},
+			"subscription_found_content_modern": "Your Patreon subscription has been found. Please click on the \"Open Server Selector\" button below in order to open the dashboard to select which servers you wish to apply your premium subscription to.",
+			"open_server_selector": "Open Server Selector"
+		},
+		"notes": {
+			"added_to_existing": "You have been added to the existing notes thread: <#%d>",
+			"thread_name": "notes",
+			"created": "A notes thread has been created for this ticket: <#%d>",
+			"channel_mode_only": "Note threads are only supported in channel mode"
+		},
+		"rename": {
+			"ratelimited": "Due to limitations imposed by Discord, tickets can only be renamed twice every 10 minutes"
+		},
+		"vote": {
+			"redeem_credits": "Redeem Credits",
+			"no_credits": "Redemption failed: you do not have any vote credits!",
+			"redeem": {
+				"success": {
+					"plural": "Your vote credits have been redeemed for **%d** days of premium!",
+					"singular": "Your vote credits have been redeemed for **%d** day of premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "You have **%d** vote credits. Click the \"Redeem Credits\" button below to redeem them for %d days of premium in this server.",
+				"singular": "You have **%d** vote credit. Click the \"Redeem Credits\" button below to redeem them for %d day of premium in this server."
+			}
+		},
+		"viewstaff": {
+			"title": "Staff",
+			"admin": {
+				"users": "Admin Users",
+				"roles": "Admin Roles",
+				"no_users": "No admin users",
+				"no_roles": "No admin roles"
+			},
+			"support": {
+				"users": "Support Users",
+				"roles": "Support Roles",
+				"no_roles": "No support roles",
+				"users_warning": "-# **Warning:** Users in support teams are now deprecated. Please migrate to roles."
+			}
+		},
+		"edit": {
+			"title": "Edit Ticket Settings",
+			"description": "Below you can edit various settings for this ticket.",
+			"labels": {
+				"title": "Edit Labels",
+				"description": "Edit the labels assigned to this ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels have been successfully updated to: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Плоча за карте замењена",
+			"jump_to_top": "Скочи на врх",
+			"reopened": "Карта је поново отворена",
+			"ticket_closed": "Карта је затворена"
+		},
+		"click_here": "Kliknite ovde",
+		"confirm": "Потврди",
+		"website": "Naš websajt"
+	},
+	"help": {
+		"switch_panel": "Пребацује карту на други панел, мења категорију канала, тимове за подршку, итд.",
+		"jump_to_top": "Пружа ти дугме да скочиш на врх карте",
+		"on_call": "Označava te kao dežurnog, da dodaš i upišeš sve nove karte",
+		"reopen": "Поново отвара карту која је раније била затворена",
+		"notes": "Creates a thread for private discussion between support representatives",
+		"edit": "Edits settings for the current ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Хоћеш да истражујемо? Наш [documentation](%s) Научићу те како да конфигуришеш сваки аспект робота!"
+		},
+		"threads": {
+			"no_notification_channel": "Морате да обезбедите канал за обавештавање о картама",
+			"notification_channel_type": "Канал за пријављивање карата мора да је текстуални канал",
+			"success": "Режим је укључен",
+			"disabled": "Режим је искључен"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Ова карта је већ затворена",
+			"no_permission": "Немате дозволу да видите ову страницу",
+			"already_joined": "Већ си се придружио овој карти (<#%d>)",
+			"success": "Додао сам те на карту: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Нити се не могу креирати у каналима за најаве",
+		"panel_force_disabled": "This panel has been disabled. Please ask a server admin to reactivate premium, and run %s in order to re-enable this panel.",
+		"panel_disabled": "The server admins have disabled opening this type of ticket",
+		"acl": {
+			"no_allow_rules": "Access to open this type of ticket has been disabled for all roles",
+			"deny_listed": "You are unable to open this type of ticket because you have the role <@&%d>",
+			"not_allow_listed": {
+				"multiple": "You need one of the following roles to open this type of ticket: %s",
+				"single": "You need the following role to open this type of ticket: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Select the type of GDPR request you would like to make:",
+		"section": {
+			"transcript": "### **Transcript Deletion Options**\n-# _Delete transcripts from servers you own_",
+			"message": "### **Message Anonymization Options**\n-# _Anonymize your messages from transcripts in selected servers_"
+		},
+		"warning": "### **Important Information**\n* Deletion is **permanent** and cannot be undone\n* You can only delete transcripts from servers **you** own\n* Only **your** messages can be anonymized in transcripts\n* The request may take up to **30 days** to complete\n* Your request will be processed in a **queue**",
+		"resources": "### **Resources**\n[What is GDPR?](%s)\n[Right to Erasure](%s)\n[Right of Access](%s)",
+		"button": {
+			"all_transcripts": "All transcripts from servers",
+			"specific_transcripts": "Specific transcripts",
+			"all_messages": "All your messages in servers",
+			"specific_messages": "Your messages in specific tickets"
+		},
+		"language_option": "Language",
+		"modal": {
+			"all_transcripts": "Delete All Transcripts from Servers",
+			"specific_transcripts": "Delete Specific Transcripts",
+			"all_messages": "Anonymize Your Messages in Servers",
+			"specific_messages": "Anonymize Your Messages in Specific Tickets",
+			"select_server": "Select a server",
+			"select_servers": "Select one or more servers",
+			"server_id": {
+				"label": "Server ID",
+				"placeholder": "Enter the server ID"
+			},
+			"server_ids": {
+				"label": "Server IDs",
+				"placeholder": "Enter server IDs separated by commas (e.g., 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Ticket IDs",
+				"placeholder": "Enter ticket IDs separated by commas (e.g., 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "GDPR Confirmation Required",
+			"all_transcripts": "**Request Type:** Delete all transcripts from a server you own\n**Server:** %s",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers you own\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts from server\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Request Type:** Anonymize all your messages in the selected server\n**Server:** %s",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in the selected servers\n**Servers:**\n* %s",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"warning": "\n\n⚠️ **Warning:** This action is permanent and cannot be undone.\n\nDo you understand and accept that this action is permanent?",
+			"button": "Confirm - I understand"
+		},
+		"queued": {
+			"title": "GDPR Request Queued",
+			"all_transcripts": "**Request Type:** Delete all transcripts from server\n**Server:** %s",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Request Type:** Anonymize all your messages in server\n**Server:** %s",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in servers\n**Servers:**\n* %s",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"footer": "\n\nYour request has been queued for processing.\nProcessing may take some time depending on the number of transcripts."
+		},
+		"completed": {
+			"title": "GDPR Request Completed",
+			"all_transcripts": "**Request Type:** Delete all transcripts from server\n**Server:** %s\n**Transcripts Deleted:** %d",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers\n**Servers:**\n* %s\n**Transcripts Deleted:** %d",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts\n**Server:** %s\n**Transcripts Deleted:** %d",
+			"all_messages": "**Request Type:** Anonymize all your messages in server\n**Server:** %s\n**Messages Anonymized:** %d",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in servers\n**Servers:**\n* %s\n**Messages Anonymized:** %d",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Messages Anonymized:** %d",
+			"error": "\n\n**⚠️ Error:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Your GDPR request encountered an error: %s",
+			"no_data": "ℹ️ Your GDPR request has been processed. No data was found.",
+			"success": "✅ Your GDPR request has been processed successfully."
+		},
+		"error": {
+			"no_servers": "No servers found where you are the owner and have transcripts.",
+			"invalid_server_id": "Invalid server ID provided.",
+			"invalid_ticket_ids": "Invalid ticket IDs provided. Please enter numeric ticket IDs separated by commas (e.g., 123, 456, 789).",
+			"not_owner": "You must be the server owner to delete transcripts.",
+			"server_not_found": "Server not found.",
+			"queue_failed": "Failed to queue GDPR request. Please try again later.",
+			"worker_offline": "The GDPR processing service is currently unavailable. Please try again later or contact support if this issue persists."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Could not find a required channel: it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all channel settings are configured correctly.",
+		"unknown_guild": "Could not find the server.",
+		"unknown_member": "The user could not be found. They may have left the server or been banned.",
+		"unknown_message": "The message you're trying to interact with has been deleted.\n\nPlease try the action again with a different message.",
+		"unknown_user": "user could not be found.",
+		"unknown_role": "The role required for this action no longer exists.\n\nPlease ask a server administrator to visit the [dashboard](%s) and reconfigure role settings.",
+		"unknown_category": "Could not find a required category: it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel category to this ticket panel.",
+		"unknown_interaction": "This interaction has expired.\n\nPlease try the action again.",
+		"max_webhooks": "The server has reached the maximum number of webhooks.\n\nPlease ask a server administrator to remove some unused webhooks and try again.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "This interaction has already been processed.\n\nIf you need to perform this action again, please start a new interaction.",
+		"missing_permissions": {
+			"title": "I am missing the following permissions required to perform this action",
+			"body": "Please assign these permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "One or more fields are too short or too long.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all inputs and ensure all fields meet the required length constraints.",
+		"required_field": "A required field is missing or empty.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all required fields are filled out.",
+		"invalid_channel_type": "The channel type is invalid for this operation.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel to the ticket panel.",
+		"invalid_category": "The channel category is invalid, it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid category to the ticket panel.",
+		"invalid_id": "An invalid ID was provided in the bot configuration.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all category, channel, and role IDs are correct.",
+		"invalid_characters": "The input contains invalid characters.\n\nPlease use only letters, numbers, hyphens, and underscores.",
+		"invalid_choice": "An invalid option was provided.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all settings are correct.",
+		"invalid_form": "The action could not be completed due to invalid input.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "The operation timed out, please try again.",
+		"rate_limited": "You're being rate limited. Please try again %s.",
+		"rate_limited_global": "Discord is experiencing high load (global rate limit). Please try again %s.",
+		"general": "An error occurred while performing this action.",
+		"error_id": "Error ID"
+	}
+}

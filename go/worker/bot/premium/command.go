@@ -1,0 +1,148 @@
+package premium
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/TicketsBot-cloud/common/model"
+	"github.com/TicketsBot-cloud/database"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/worker/bot/command"
+	"github.com/TicketsBot-cloud/worker/bot/command/registry"
+	"github.com/TicketsBot-cloud/worker/bot/customisation"
+	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/utils"
+	"github.com/TicketsBot-cloud/worker/config"
+	"github.com/TicketsBot-cloud/worker/i18n"
+	"github.com/jackc/pgx/v4"
+)
+
+const PremiumStoreSku uint64 = 1274473638065606656
+
+func BuildKeyModal(guildId uint64) interaction.ModalResponseData {
+	return interaction.ModalResponseData{
+		CustomId: "premium_key_modal",
+		Title:    i18n.GetMessageFromGuild(guildId, i18n.MessagePremiumActivateKey),
+		Components: []component.Component{
+			component.BuildLabel(component.Label{
+				Label:       i18n.GetMessageFromGuild(guildId, i18n.MessagePremiumKey),
+				Description: utils.Ptr(i18n.GetMessageFromGuild(guildId, i18n.MessagePremiumKey)),
+				Component: component.BuildInputText(component.InputText{
+					Style:       component.TextStyleShort,
+					CustomId:    "key",
+					Placeholder: utils.Ptr("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
+					MinLength:   utils.Ptr(uint32(36)),
+					MaxLength:   utils.Ptr(uint32(36)),
+				}),
+			}),
+		},
+	}
+}
+
+func BuildPatreonSubscriptionFoundMessage(ctx registry.CommandContext, legacyEntitlement *database.LegacyPremiumEntitlement) (command.MessageResponse, error) {
+	if legacyEntitlement == nil {
+		return BuildPatreonNotLinkedMessage(ctx), nil
+	}
+
+	guild, err := ctx.Guild()
+	if err != nil {
+		return command.MessageResponse{}, err
+	}
+
+	var sku *model.SubscriptionSku
+	if err := dbclient.Client.WithTx(ctx, func(tx pgx.Tx) (err error) {
+		sku, err = dbclient.Client.SubscriptionSkus.GetSku(ctx, tx, legacyEntitlement.SkuId)
+		return
+	}); err != nil {
+		return command.MessageResponse{}, err
+	}
+
+	// Infallible
+	if sku == nil {
+		return command.MessageResponse{}, fmt.Errorf("sku %s not found", legacyEntitlement.SkuId)
+	}
+
+	if sku.IsGlobal { // Legacy entitlements
+		commands, err := command.LoadCommandIds(ctx.Worker(), ctx.Worker().BotId)
+		if err != nil {
+			return command.MessageResponse{}, err
+		}
+
+		components := utils.Slice(component.BuildActionRow(
+			component.BuildButton(component.Button{
+				Label:    ctx.GetMessage(i18n.MessagePremiumCheckAgain),
+				CustomId: "premium_check_again",
+				Style:    component.ButtonStylePrimary,
+				Emoji:    utils.BuildEmoji("🔎"),
+			}),
+			component.BuildButton(component.Button{
+				Label: ctx.GetMessage(i18n.MessageJoinSupportServer),
+				Style: component.ButtonStyleLink,
+				Emoji: utils.BuildEmoji("❓"),
+				Url:   utils.Ptr(strings.ReplaceAll(config.Conf.Bot.SupportServerInvite, "\n", "")),
+			}),
+		))
+
+		addAdminCommand := fmt.Sprintf("<%s:%d>", "/addadmin", commands["addadmin"])
+		viewStaffCommand := fmt.Sprintf("<%s:%d>", "/viewstaff", commands["viewstaff"])
+
+		embed := utils.BuildEmbed(ctx, customisation.Red, i18n.MessagePremiumSubscriptionFound, i18n.MessagePremiumSubscriptionFoundContent, nil, guild.OwnerId, addAdminCommand, viewStaffCommand)
+		return command.NewEphemeralEmbedMessageResponseWithComponents(embed, components), nil
+	} else { // Modern entitlements
+		components := utils.Slice(component.BuildActionRow(
+			component.BuildButton(component.Button{
+				Label: ctx.GetMessage(i18n.MessagePremiumOpenServerSelector),
+				Style: component.ButtonStyleLink,
+				Emoji: utils.BuildEmoji("🔗"),
+				Url:   utils.Ptr(fmt.Sprintf("%s/premium/select-servers", config.Conf.Bot.DashboardUrl)),
+			}),
+			component.BuildButton(component.Button{
+				Label:    ctx.GetMessage(i18n.MessagePremiumCheckAgain),
+				CustomId: "premium_check_again",
+				Style:    component.ButtonStylePrimary,
+				Emoji:    utils.BuildEmoji("🔎"),
+			}),
+		))
+
+		embed := utils.BuildEmbed(ctx, customisation.Red, i18n.MessagePremiumSubscriptionFound, i18n.MessagePremiumSubscriptionFoundContentModern, nil)
+		return command.NewEphemeralEmbedMessageResponseWithComponents(embed, components), nil
+	}
+}
+
+func BuildPatreonNotLinkedMessage(ctx registry.CommandContext) command.MessageResponse {
+	components := utils.Slice(component.BuildActionRow(
+		component.BuildButton(component.Button{
+			Label:    ctx.GetMessage(i18n.MessagePremiumCheckAgain),
+			CustomId: "premium_check_again",
+			Style:    component.ButtonStylePrimary,
+			Emoji:    utils.BuildEmoji("🔎"),
+		}),
+		component.BuildButton(component.Button{
+			Label: ctx.GetMessage(i18n.MessagePremiumLinkPatreonAccount),
+			Style: component.ButtonStyleLink,
+			Emoji: ctx.SelectValidEmoji(customisation.EmojiPatreon, "🔗"),
+			Url:   utils.Ptr("https://support.patreon.com/hc/en-us/articles/212052266-Get-my-Discord-role"),
+		}),
+		component.BuildButton(component.Button{
+			Label: ctx.GetMessage(i18n.MessageJoinSupportServer),
+			Style: component.ButtonStyleLink,
+			Emoji: utils.BuildEmoji("❓"),
+			Url:   utils.Ptr(strings.ReplaceAll(config.Conf.Bot.SupportServerInvite, "\n", "")),
+		}),
+	))
+
+	embed := utils.BuildEmbed(ctx, customisation.Red, i18n.TitlePremium, i18n.MessagePremiumNoSubscription, nil, "https://support.patreon.com/hc/en-us/articles/212052266-Get-my-Discord-role")
+	return command.NewEphemeralEmbedMessageResponseWithComponents(embed, components)
+}
+
+func BuildDiscordNotFoundMessage(ctx registry.CommandContext) command.MessageResponse {
+	embed := utils.BuildEmbed(ctx, customisation.Red, i18n.TitlePremium, i18n.MessagePremiumDiscordNoSubscription, nil)
+
+	return command.NewEphemeralEmbedMessageResponseWithComponents(embed, utils.Slice(component.BuildActionRow(
+		component.BuildButton(component.Button{
+			Style: component.ButtonStylePremium,
+			SkuId: utils.Ptr(PremiumStoreSku),
+		}),
+	)))
+}

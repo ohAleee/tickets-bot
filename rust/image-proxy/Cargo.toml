@@ -1,0 +1,37 @@
+[package]
+name = "image-proxy"
+version = "0.1.0"
+edition = "2021"
+default-run = "image-proxy"
+
+[dependencies]
+global-resolver = { path = "../global-resolver" }
+tokio = { version = "1", features = ["full"] }
+axum = { version = "0.5" }
+tower = "0.4"
+tower-http = { version = "0.3", features = ["cors", "compression-full", "decompression-full"] }
+jwt = "0.16"
+hmac = "0.12"
+sha2 = "0.10"
+url = "2"
+hyper = { version = "0.14", features = ["client", "http1", "http2", "stream"] }
+hyper-rustls = { version = "0.23", features = ["http2", "webpki-roots"] }
+dashmap = "5"
+uuid = { version = "1.1", features = ["v4"] }
+serde = { version = "1.0", features = ["derive"] }
+envy = "0.4"
+log = "0.4"
+env_logger = "0.9"
+clap = { version = "3", features = ["derive"], optional = true } # generator only
+
+[features]
+default = []
+generator = ["clap"]
+
+[[bin]]
+name = "image-proxy"
+path = "src/bin/main.rs"
+
+[[bin]]
+name = "generator"
+required-features = ["generator"]

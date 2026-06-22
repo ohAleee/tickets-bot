@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets ek easy to use aur highly configurable ticket aur support bot hai.\\nSupport server:\n%s\\nCommands: `%s` type kare\\nShuru karne ke liye `%s` run kare",
+	"commands.add.no_members": "Ticket mein members ko add karne ke liye aapko unhe mention karna hoga",
+	"commands.add.no_permission": "Aapke paas is ticket mein logo ko add karne ki permission nahi hai",
+	"commands.add.no_everyone": "Aap `@everyone` role ko ticket mein add nahi kar sakte",
+	"commands.addadmin.no_members": "Aapko admin privileges dene ke liye kisi user ko mention karna hoga ya kisi role ka naam likhna hoga",
+	"commands.addadmin.owner": "Server owner pehle se hi administrator hai",
+	"commands.addsupport.no_members": "Aapko support privileges dene ke liye kisi user ko mention karna hoga ya kisi role ka naam likhna hoga",
+	"commands.blacklist.no_members": "Aapko blacklist toggle karne ke liye kisi user ko mention karna hoga",
+	"commands.blacklist.self": "Aap apne aap ko blacklist nahi kar sakte",
+	"commands.claim.success": "Aapka ticket %s handle karenge",
+	"commands.invite": "[Yahan click kare](<%s>)",
+	"commands.language.invalid": "Aapko ek language code ya flag specify karna hoga. Available languages ye hain:\\n%s",
+	"commands.open.ticket_limit": "Aap ek baar mein sirf %d %s hi open kar sakte hain",
+	"commands.open.too_many_tickets": "Ticket category mein bohot saare tickets ho gaye hain. Kisi admin se kuch tickets close karne, doosri category mein move karne, ya overflow category setup karne ke liye kahein.\n\nYe **Discord ki limit** hai ki ek category mein sirf 50 channels hi ho sakte hain.",
+	"commands.panel": "Panel ko configure karne ke liye <%s> par jayein",
+	"commands.premium": "Aap premium subscription yahan se purchase kar sakte hain: <%s>.\\nPremium ke bohot saare benefits hain, jaise:\\n```diff\\n+ Unlimited ticket panels create kare\\n+ Bot ka naam, avatar aur status customize karein (whitelabel)\\n+ Server, users aur support staff ki detailed statistics payein\\n+ Messages ke footer mein koi branding nahi hogi\\n+ Development ko support karein aur server costs pay karne mein help karein\\n```\\n\\nIske ilawa, aap <%s> par vote karke 24 hours ke liye free premium paa sakte hain",
+	"commands.premium.invalid_key": "Invalid key. Check kar lein ki aapne ise sahi se copy kiya hai ya nahi.",
+	"commands.remove.no_permission": "Aapke paas is ticket se logo ko remove karne ki permission nahi hai",
+	"commands.remove.staff": "Aap ticket se staff members ko remove nahi kar sakte",
+	"commands.removeadmin.no_members": "Aapko admin privileges wapas lene ke liye kisi user ko mention karna hoga ya role ka naam likhna hoga",
+	"commands.removeadmin.owner": "Guild owner ka admin hona zaroori hai",
+	"commands.removeadmin.self": "Aap apne khud ke privileges wapis nahi kar sakte",
+	"commands.removesupport.no_members": "Aapko support privileges dene ke liye kisi user ko mention karna hoga ya kisi role ka naam likhna hoga",
+	"commands.rename.missing_name": "Aapko is ticket ke liye ek naya naam specify karna hoga",
+	"commands.rename.success": "Is ticket ka naam badal kar <#%d> kar diya gaya hai",
+	"commands.tags.create.already_exists": "ID `%s` wala tag pehle se hi exist karta hai. Aap `%s` use karke us tag ko delete kar sakte hain",
+	"commands.tags.create.invalid_arguments": "Aapko ek tag ID aur content specify karna hoga",
+	"commands.tags.create.too_long": "Tag IDs 16 characters se zyada lambi nahi ho sakti hain",
+	"commands.tags.delete.invalid_arguments": "Aapko delete karne ke liye ek tag ID specify karni hogi",
+	"commands.tags.delete.not_exist": "ID `%s` wala tag nahi mil saka",
+	"commands.tags.get.invalid_arguments": "Aapko tag ki ID provide karni hogi. Tags ki help ke liye <%s> par jaye.",
+	"commands.tags.get.invalid_tag": "Invalid tag. Tags ki aur help ke liye <%s> par jaye.",
+	"commands.tags.list": "Sabhi tags ki IDs: \\n%s\\nKisi tag ke contents dekhne ke liye, `%s` run karein",
+	"commands.unclaim.not_claimed": "Yeh ticket claimed nahi hai",
+	"commands.unclaim.not_claimer": "Sirf admins aur jis user ne ticket claim kiya hai, wahi ise unclaim kar sakte hai",
+	"commands.unclaim.success": "Ab sabhi support representatives is ticket ka respond kar sakte hai",
+	"commands.vote": "Bot ko vote karne ke liye neeche diye gaye button par click karein aur 24 hours ka premium free paayein.\n\nEk baar vote karne ke baad, apne vote credits redeem karne ke liye %s command fir se run karein।",
+	"generic.invalid_argument": "Invalid argument: usage refer kare",
+	"generic.invalid_user": "Target user nahi mila",
+	"generic.no_permission": "Aapke paas iske liye permission nahi hai",
+	"generic.not_ticket": "Yeh ticket channel nahi hai",
+	"generic.owner_only": "Yeh command sirf bot owner ke liye reserved hai",
+	"help.about": "Bot ke baare mein information deta hai",
+	"help.add": "User ko ticket mein add karta hai",
+	"help.addadmin": "User ya role ko admin privileges deta hai",
+	"help.addsupport": "Role ko support representative ke roop mein add karta hai",
+	"help.admin": "Bot management",
+	"help.admin.blacklist": "Guild ko bot use karne se blacklist karta hai",
+	"help.admin.debug.server": "Server ko debug karta hai",
+	"help.admin.generate_premium": "Premium keys generate karta hai",
+	"help.admin.unblacklist": "Guild ko guild blacklist se remove karta hai",
+	"help.blacklist": "Toggle karta hai ki users bot se interact kar sakte hain ya nahi",
+	"help.cancel": "Setup process ko cancel karta hai",
+	"help.claim": "Ticket mein ek single staff member ko assign karta hai",
+	"help.close": "Current ticket ko close karta hai",
+	"help.help": "Commands ki ek list dikhata hai",
+	"help.invite": "Bot ke liye ek invite link provide karta hai",
+	"help.language": "Bot ki language change karta hai",
+	"help.managetags": "Tags ko add, delete ya list karta hai",
+	"help.open": "Ek naya ticket open karta hai",
+	"help.panel": "Ek panel create karta hai taaki users 1 click mein ticket open kar sake",
+	"help.premium": "Premium purchase karne ke baad ise activate karne ke liye yeh command run kare",
+	"help.remove": "User ko ticket se remove karta hai",
+	"help.removeadmin": "User ya role ke admin privileges ko revoke karta hai",
+	"help.removesupport": "User ya role ke support representative privileges ko revoke karta hai",
+	"help.rename": "Current ticket ko rename karta hai",
+	"help.setup": "Aapko bot ko aasani se configure karne deta hai",
+	"help.stats": "Aapko users, support staff aur server ke statistics dikhata hai",
+	"help.statsserver": "Aapko server ke statistics dikhata hai",
+	"help.tag": "Ek message snippet bhejta hai",
+	"help.tagdelete": "Tag ko delete karta hai",
+	"help.taggadd": "Tag ko add karta hai",
+	"help.taglist": "Sabhi tags ko list karta hai",
+	"help.transfer": "Claimed ticket ko kisi dusre user ko transfer karta hai",
+	"help.unclaim": "Current ticket se claim ko remove karta hai",
+	"help.viewstaff": "Staff members aur roles ko list karta hai",
+	"help.vote": "Free premium ke liye vote karne ka link deta hai",
+	"help.gdpr": "Apne GDPR data requests ko manage kare",
+	"open.success": "Ek naya ticket open kiya: %s",
+	"open.outside_support_hours": {
+		"title": "Ye panel abhi band hai",
+		"message": "Kripya hamare support hours ke dauran fir se try kare."
+	},
+	"setup.auto.category.failure": "Mere paas `Manage Channels` permission nahi hai",
+	"setup.auto.category.success": "Tickets category create ho gayi hai",
+	"setup.auto.completed": "Setup complete! Reaction panel setup karne ke liye [yahan click kare](%s), aur apne staff members ko <@&%d> aur <@&%d> roles add kare",
+	"setup.auto.roles.failure": "Mere paas `Manage Roles` permission nahi hai",
+	"setup.auto.roles.success": "`Tickets Admin` aur `Tickets Support` roles create ho gaye hai",
+	"setup.auto.transcript.failure": "Mere paas `Manage Channels` permission nahi hai",
+	"setup.auto.transcript.success": "<#%d> channel create ho gaya hai",
+	"setup.ticket_limit.success": "Ticket limit badhkar `%d` ho gayi hai",
+	"setup.transcript.invalid": "Aapko server mein ek valid channel mention karna hoga (jaise ki <#%d>)\\n**Example:** `%s`",
+	"setup.transcript.success": "Transcripts channel badalkar <#%d> ho gaya hai",
+	"commands.language.help_wanted": "Kya aap koi aur language bolte hain? Agar aap bot ko aur languages mein translate karne mein help karna chahte hain, toh hamara [support server](%s) join kare",
+	"commands.rename.too_long": "Channel names 100 characters se lambe nahi ho sakte",
+	"commands.autoclose.configure": "Autoclose settings change karne ke liye [dashboard](%s) par visit kare",
+	"help.autoclose": "Autoclose se related commands",
+	"help.autoclose.exclude": "Is ticket ko automatically close hone se exclude karta hai",
+	"help.autoclose.configure": "Autoclose related settings ko edit kare",
+	"commands.autoclose.exclude.success": "Is ticket ko automatically close hone se exclude kar diya gaya hai",
+	"commands.claim.no_permission": "Sirf staff members hi tickets claim kar sakte hain",
+	"commands.open.from": "Yeh ticket [is message](%s) se open kiya gaya tha.\n\n<@%d> ne <#%d> mei kaha:\n```%s```",
+	"commands.open.from.moved": "Conversation ko ek ticket (<#%d>) mein move kar diya gaya hai",
+	"help.close_request": "User ko ek message bhejta hai confirm karne ke liye ki ticket close kiya ja sakta hai ya nahi",
+	"close.reason_too_long": "Reason 255 characters se lamba nahi ho sakta",
+	"commands.close_request.success": "Close request successfully bhej di gayi hai",
+	"commands.close_request.no_reason": "<@%d> ne is ticket ko close karne ki request ki hai.\n\nKripya neeche diye gaye buttons use karke accept ya deny kare.",
+	"commands.close_request.with_reason": "<@%d> ne is ticket ko close karne ki request ki hai. Reason:\n```\n%s\n```\nKripya neeche diye gaye buttons use karke accept ya deny kare.",
+	"commands.close_request.no_permission": "Sirf wahi user close request ka respond kar sakta hai jisne ticket open kiya tha",
+	"commands.close_request.denied": "<@%d> ne close request deny kar di",
+	"generic.error": "Error",
+	"feedback.disabled": "Is server mein feedback disabled hai",
+	"feedback.success": "Aapka feedback record kar liya gaya hai",
+	"generic.success": "Success",
+	"button.guild_only": "Yeh button ek server mein hi use hona chahiye",
+	"button.dms_only": "Yeh button direct messages mein hi use hona chahiye",
+	"commands.tag.generic": "Tag",
+	"commands.tags.delete.success": "Tag `%s` delete kar diya gaya hai",
+	"generic.ticket": "Ticket",
+	"generic.title.premium_only": "Premium Only Command",
+	"generic.admin": "Admin",
+	"commands.tags.create.success": "Tag create ho gaya hai - aap ise `%s` run karke use kar sakte hai",
+	"generic.title.about": "About",
+	"generic.title.vote": "Vote",
+	"generic.title.tags": "Tags",
+	"generic.title.autoclose": "Autoclose",
+	"generic.title.invite": "Invite",
+	"generic.title.close": "Close",
+	"generic.title.claim": "Claim",
+	"generic.title.unclaim": "Unclaim",
+	"generic.title.blacklisted": "Blacklisted",
+	"generic.title.blacklist": "Blacklist",
+	"generic.error.blacklisted": "Aap is server mein blacklist ho chuke hai",
+	"generic.error.guild_blacklisted": "Yeh server is bot ko use karne ke liye blacklist kiya gaya hai",
+	"generic.error.user_blacklisted": "Aap is bot ko use karne ke liye blacklist ho chuke hai",
+	"commands.blacklist.add.success": "<@%d> ko blacklisted kar diya gaya hai",
+	"commands.blacklist.remove.success": "<@%d> ko unblacklisted kar diya gaya hai",
+	"generic.title.add_admin": "Admin add kare",
+	"generic.title.add_support": "Support add kare",
+	"generic.title.remove_admin": "Admin remove kare",
+	"generic.title.remove_support": "Support remove kare",
+	"commands.addsupport.success": "Support representative successfully add kar diya gaya hai: %s",
+	"generic.title.language": "Language",
+	"commands.removesupport.success": "Support representative successfully remove kar diya gaya hai: %s",
+	"commands.addadmin.success": "Admin successfully add kar diya gaya hai: %s",
+	"commands.removeadmin.success": "Admin successfully remove kar diya gaya hai: %s",
+	"generic.title.setup": "Setup",
+	"generic.title.premium": "Premium",
+	"generic.title.panel": "Panel",
+	"generic.title.rename": "Rename",
+	"generic.title.remove": "Remove",
+	"generic.title.help": "Help",
+	"generic.title.close_confirmation": "Close Confirmation",
+	"close.confirmation": "Please confirm karein ki aap ye ticket close karna chahte hai",
+	"generic.title.close_request": "Close Request",
+	"commands.close_request.accept": "Accept aur close kare",
+	"commands.close_request.deny": "Deny karein aur khula rakhe",
+	"commands.premium.success": "Premium **%d** days ke liye activate ho gaya hai",
+	"generic.title.claimed": "Ticket claim kar liya gaya hai",
+	"generic.title.unclaimed": "Ticket unclaimed hai",
+	"generic.title.add": "Add",
+	"commands.add.success": "<@%s> ko <#%d> mein add kar diya gaya hai",
+	"commands.add.role_thread": "Discord limitations ki wajah se, thread tickets mein roles add nahi kiye ja sakte",
+	"commands.remove.success": "<@%s> ko <#%d> se remove kar diya gaya hai",
+	"commands.remove.role_thread": "Discord limitations ki wajah se, thread tickets se roles remove nahi kiye ja sakte",
+	"open.ratelimited": "Is server mein tickets bahut jaldi-jaldi open ho rahe hai",
+	"open.panel_cooldown": "Aap is panel ke liye cooldown par hain. Please %s baad phir se try kare.",
+	"commands.claim.thread": "Discord limitations ki wajah se, claiming threads ko support nahi karti hai",
+	"generic.join_support_server": "Support server join kare",
+	"commands.open.guild_channel_limit": "Is server ne Discord ki 500 channels ki limit reach kar li hai",
+	"commands.open.missing_form_answer": "Aapko question `%s` ka answer dena hoga",
+	"close.no_permission": "Aapke paas is ticket ko close karne ki permission nahi hai",
+	"": {
+		"generic.title.close_with_reason": "Reason ke saath close kare",
+		"generic.reason": "Reason"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Ticket close karne ka reason, e.g. \"Resolved\""
+		},
+		"success": "Ticket <@%d> ne close kar diya",
+		"rate": {
+			"not_allowed": {
+				"staff": "Aap is ticket ko rate nahi kar sakte kyunki aap %s mein ek support representative hai",
+				"empty": "Aap is ticket ko rate nahi kar sakte kyunki aapne koi message nahi bheja hai"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Is server mein `%s` command disabled hai: please ticket kholne ke liye ticket panel use kare",
+			"threads": {
+				"cant_see_parent_channel": "Ticket mein <@%d> ko add nahi kiya ja saka: Ensure karein ki unke paas thread ke parent channel (<#%d>) ko dekhne ki permission hai",
+				"cant_message_in_threads": "Aapke paas Send Messages in Threads permission missing hai, jo ticket kholne ke liye jaroori hai. Please server admin se ye permission maangein aur phir se try kare."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Invalid panel: Aapko dropdown se ek select karna hoga",
+			"success": "Is ticket ko <@%[2]d> ne `%[1]s` panel par switch kar diya hai",
+			"non_thread_to_thread": "Aap non-thread ticket se threads use karne waale panel par switch nahi kar sakte",
+			"claimer_no_access_title": "Panel switch block ho gaya hai",
+			"claimer_no_access": "Ticket claimer (<@%d>) ke paas selected panel ka access nahi hai.",
+			"auto_unclaimed": "Ticket ko <@%d> ne %s panel par switch kar diya hai.\n\nTicket automatically unclaim ho gaya hai, kyunki <@%d> ke paas naye panel ka access nahi hai."
+		},
+		"blacklist": {
+			"staff": "Staff members ko blacklist nahi kiya ja sakta",
+			"add_role": {
+				"success": "<@&%d> ko blacklist kar diya gaya hai",
+				"limit": "Aap role blacklist limit (%d) tak pahunch gaye hai"
+			},
+			"remove_role": {
+				"success": "<@&%d> ko unblacklist kar diya gaya hai"
+			},
+			"add": {
+				"limit": "Aap user blacklist limit (%d) tak pahunch gaye ho: consider karein ki aap iski jagah ek role use kare"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Is ticket mein koi welcome message nahi hai",
+			"content": "Ticket ke top par jaane ke liye neeche diye gaye button par click kare"
+		},
+		"addsupport": {
+			"confirm": "Please confirm karein ki aap %s ko default support representative team mein add karna chahte hain",
+			"everyone": "Aap `@everyone` role ko staff ki tarah add nahi kar sakte"
+		},
+		"addadmin": {
+			"confirm": "Please confirm karein ki aap %s ko bot administrator ki tarah add karna chahte hai"
+		},
+		"tags": {
+			"create": {
+				"limit": "Aap tag limit (%d) tak pahunch gaye hai"
+			},
+			"get": {
+				"requires_premium": "Custom commands (tag aliases) use karne ke liye Premium zaroori hai"
+			}
+		},
+		"language": {
+			"content": "Available languages aur unka translation progress is tarah hai:\n%s",
+			"success": "Server language ko change karke **%s** (%s) kar diya gaya hai",
+			"select": "Ek language select kare (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` sirf thread mode mein use ho sakta hai. Zyada janne ke liye humare [docs](%s) visit kare\"",
+			"success": "Ab aap on call ho",
+			"remove_success": "Ab aap on call nahi ho"
+		},
+		"reopen": {
+			"not_found": "Ticket nahi mila",
+			"no_permission": "Aapke paas is ticket ko reopen karne ki permission nahi hai",
+			"already_open": "Yeh ticket pehle se hi open hai",
+			"not_thread": "Sirf threads hi reopen kiye ja sakte hain",
+			"thread_deleted": "Ticket permanently delete kar diya gaya hai",
+			"success": "Ticket %d reopen ho gaya hai: <#%d>",
+			"in_ticket": "Is ticket ko <@%d> dwara reopen kar diya gaya hai"
+		},
+		"premium": {
+			"key": "Key",
+			"check_again": "Phir se check kare",
+			"subscription_found": "Subscription mil gayi hai!",
+			"subscription_found_content": "Is server par apni subscription apply karne ke liye, server owner (<@%d>) ko aapko %s command ke jariye ek admin **user** (roles ko ignore kiya jata hai) ke roop mein add karna hoga.\\n\\nAap %s run karke verify kar sakte hain ki aapko admin user ke roop mein add kiya gaya hai ya nahi.",
+			"activate_key": "Premium key activate kare",
+			"checking": "Premium status check kiya ja raha hai...",
+			"please_wait": "Kripya wait kare...",
+			"success_after_check": "Is server mein ab Premium active ho gaya hai!",
+			"link_patreon_account": "Patreon account link kare",
+			"no_subscription": "Aapke Discord account se linked koi active Patreon subscription nahi mili. Ensure karein ki aapne apne [Patreon aur Discord accounts ko link kiya hai](%s), aur 10 minutes aur wait kiya hai.",
+			"open_form": "Form khole",
+			"open_form_description": "Form ko reopen karne ke liye neeche diye gaye button ko press kare",
+			"use_key_anyway": "Phir bhi Premium key use kare",
+			"already_purchased_title": "Pehle se hi premium purchase kar liya hai?",
+			"already_purchased_description": "Agar aapne pehle se hi premium purchase kar liya hai, toh shuru karne ke liye dropdown se payment method select karein",
+			"giveaway_key": "Giveaway Key",
+			"selector": {
+				"description": "Select karein ki aapne premium lene ke liye kaun sa method use kiya tha",
+				"key": {
+					"description": "Agar aapko giveaway key mili thi, toh is option ko select kare"
+				},
+				"patreon": {
+					"description": "Agar aapne Patreon par purchase kiya tha, toh is option ko select kare"
+				},
+				"discord": {
+					"description": "Select this option if you made your purchase within the Discord in-app store"
+				}
+			},
+			"about": "Premium gives you access to more panels, statistics, a custom bot and more! Visit our [website](%s) to find out more.",
+			"already_activated": "Good news! Premium is already active in this server.",
+			"already_activated_whitelabel": "Good news! Premium is already active in this server.\n\nFor help getting started with whitelabel, read [our whitelabel setup guide](%s).",
+			"discord": {
+				"no_subscription": "Premium can be purchased within Discord directly. Click the button below this message to open the subscription management page.\r\n\r\nOne purchased, please allow up to 5 minutes for the subscription to be detected."
+			},
+			"subscription_found_content_modern": "Your Patreon subscription has been found. Please click on the \"Open Server Selector\" button below in order to open the dashboard to select which servers you wish to apply your premium subscription to.",
+			"open_server_selector": "Open Server Selector"
+		},
+		"notes": {
+			"added_to_existing": "You have been added to the existing notes thread: <#%d>",
+			"thread_name": "notes",
+			"created": "A notes thread has been created for this ticket: <#%d>",
+			"channel_mode_only": "Note threads are only supported in channel mode"
+		},
+		"rename": {
+			"ratelimited": "Due to limitations imposed by Discord, tickets can only be renamed twice every 10 minutes"
+		},
+		"vote": {
+			"redeem_credits": "Redeem Credits",
+			"no_credits": "Redemption failed: you do not have any vote credits!",
+			"redeem": {
+				"success": {
+					"plural": "Your vote credits have been redeemed for **%d** days of premium!",
+					"singular": "Your vote credits have been redeemed for **%d** day of premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "You have **%d** vote credits. Click the \"Redeem Credits\" button below to redeem them for %d days of premium in this server.",
+				"singular": "You have **%d** vote credit. Click the \"Redeem Credits\" button below to redeem them for %d day of premium in this server."
+			}
+		},
+		"viewstaff": {
+			"title": "Staff",
+			"admin": {
+				"users": "Admin Users",
+				"roles": "Admin Roles",
+				"no_users": "No admin users",
+				"no_roles": "No admin roles"
+			},
+			"support": {
+				"users": "Support Users",
+				"roles": "Support Roles",
+				"no_roles": "No support roles",
+				"users_warning": "-# **Warning:** Users in support teams are now deprecated. Please migrate to roles."
+			}
+		},
+		"edit": {
+			"title": "Edit Ticket Settings",
+			"description": "Below you can edit various settings for this ticket.",
+			"labels": {
+				"title": "Edit Labels",
+				"description": "Edit the labels assigned to this ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels have been successfully updated to: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Ticket Panel Switched",
+			"jump_to_top": "Jump To Top",
+			"reopened": "Ticket Reopened",
+			"ticket_closed": "Ticket Closed"
+		},
+		"click_here": "Click Here",
+		"confirm": "Confirm",
+		"website": "Our Website"
+	},
+	"help": {
+		"switch_panel": "Switches a ticket to another ticket panel, changing the channel category, support teams, etc.",
+		"jump_to_top": "Provides you with a button to jump to the top of the ticket",
+		"on_call": "Marks you as on call, to be added and pinged in all new tickets",
+		"reopen": "Reopens a ticket that was previously closed",
+		"notes": "Creates a thread for private discussion between support representatives",
+		"edit": "Edits settings for the current ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Want to explore more? Our [documentation](%s) will teach you how to configure every aspect of the bot!"
+		},
+		"threads": {
+			"no_notification_channel": "You must provide a ticket notification channel",
+			"notification_channel_type": "The ticket notification channel must be a text channel",
+			"success": "Thread mode has been enabled",
+			"disabled": "Thread mode has been disabled"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "This ticket has already been closed",
+			"no_permission": "You do not have permission to view this type of ticket",
+			"already_joined": "You have already joined this ticket (<#%d>)",
+			"success": "Added you to the ticket: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Threads cannot be created in announcement channels",
+		"panel_force_disabled": "This panel has been disabled. Please ask a server admin to reactivate premium, and run %s in order to re-enable this panel.",
+		"panel_disabled": "The server admins have disabled opening this type of ticket",
+		"acl": {
+			"no_allow_rules": "Access to open this type of ticket has been disabled for all roles",
+			"deny_listed": "You are unable to open this type of ticket because you have the role <@&%d>",
+			"not_allow_listed": {
+				"multiple": "You need one of the following roles to open this type of ticket: %s",
+				"single": "You need the following role to open this type of ticket: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Select the type of GDPR request you would like to make:",
+		"section": {
+			"transcript": "### **Transcript Deletion Options**\n-# _Delete transcripts from servers you own_",
+			"message": "### **Message Anonymization Options**\n-# _Anonymize your messages from transcripts in selected servers_"
+		},
+		"warning": "### **Important Information**\n* Deletion is **permanent** and cannot be undone\n* You can only delete transcripts from servers **you** own\n* Only **your** messages can be anonymized in transcripts\n* The request may take up to **30 days** to complete\n* Your request will be processed in a **queue**",
+		"resources": "### **Resources**\n[What is GDPR?](%s)\n[Right to Erasure](%s)\n[Right of Access](%s)",
+		"button": {
+			"all_transcripts": "All transcripts from servers",
+			"specific_transcripts": "Specific transcripts",
+			"all_messages": "All your messages in servers",
+			"specific_messages": "Your messages in specific tickets"
+		},
+		"language_option": "Language",
+		"modal": {
+			"all_transcripts": "Delete All Transcripts from Servers",
+			"specific_transcripts": "Delete Specific Transcripts",
+			"all_messages": "Anonymize Your Messages in Servers",
+			"specific_messages": "Anonymize Your Messages in Specific Tickets",
+			"select_server": "Select a server",
+			"select_servers": "Select one or more servers",
+			"server_id": {
+				"label": "Server ID",
+				"placeholder": "Enter the server ID"
+			},
+			"server_ids": {
+				"label": "Server IDs",
+				"placeholder": "Enter server IDs separated by commas (e.g., 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Ticket IDs",
+				"placeholder": "Enter ticket IDs separated by commas (e.g., 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "GDPR Confirmation Required",
+			"all_transcripts": "**Request Type:** Delete all transcripts from a server you own\n**Server:** %s",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers you own\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts from server\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Request Type:** Anonymize all your messages in the selected server\n**Server:** %s",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in the selected servers\n**Servers:**\n* %s",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"warning": "\n\n⚠️ **Warning:** This action is permanent and cannot be undone.\n\nDo you understand and accept that this action is permanent?",
+			"button": "Confirm - I understand"
+		},
+		"queued": {
+			"title": "GDPR Request Queued",
+			"all_transcripts": "**Request Type:** Delete all transcripts from server\n**Server:** %s",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Request Type:** Anonymize all your messages in server\n**Server:** %s",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in servers\n**Servers:**\n* %s",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"footer": "\n\nYour request has been queued for processing.\nProcessing may take some time depending on the number of transcripts."
+		},
+		"completed": {
+			"title": "GDPR Request Completed",
+			"all_transcripts": "**Request Type:** Delete all transcripts from server\n**Server:** %s\n**Transcripts Deleted:** %d",
+			"all_transcripts_multi": "**Request Type:** Delete all transcripts from servers\n**Servers:**\n* %s\n**Transcripts Deleted:** %d",
+			"specific_transcripts": "**Request Type:** Delete specific transcripts\n**Server:** %s\n**Transcripts Deleted:** %d",
+			"all_messages": "**Request Type:** Anonymize all your messages in server\n**Server:** %s\n**Messages Anonymized:** %d",
+			"all_messages_multi": "**Request Type:** Anonymize all your messages in servers\n**Servers:**\n* %s\n**Messages Anonymized:** %d",
+			"specific_messages": "**Request Type:** Anonymize your messages in specific tickets\n**Server:** %s\n**Messages Anonymized:** %d",
+			"error": "\n\n**⚠️ Error:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Your GDPR request encountered an error: %s",
+			"no_data": "ℹ️ Your GDPR request has been processed. No data was found.",
+			"success": "✅ Your GDPR request has been processed successfully."
+		},
+		"error": {
+			"no_servers": "No servers found where you are the owner and have transcripts.",
+			"invalid_server_id": "Invalid server ID provided.",
+			"invalid_ticket_ids": "Invalid ticket IDs provided. Please enter numeric ticket IDs separated by commas (e.g., 123, 456, 789).",
+			"not_owner": "You must be the server owner to delete transcripts.",
+			"server_not_found": "Server not found.",
+			"queue_failed": "Failed to queue GDPR request. Please try again later.",
+			"worker_offline": "The GDPR processing service is currently unavailable. Please try again later or contact support if this issue persists."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Could not find a required channel: it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all channel settings are configured correctly.",
+		"unknown_guild": "Could not find the server.",
+		"unknown_member": "The user could not be found. They may have left the server or been banned.",
+		"unknown_message": "The message you're trying to interact with has been deleted.\n\nPlease try the action again with a different message.",
+		"unknown_user": "user could not be found.",
+		"unknown_role": "The role required for this action no longer exists.\n\nPlease ask a server administrator to visit the [dashboard](%s) and reconfigure role settings.",
+		"unknown_category": "Could not find a required category: it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel category to this ticket panel.",
+		"unknown_interaction": "This interaction has expired.\n\nPlease try the action again.",
+		"max_webhooks": "The server has reached the maximum number of webhooks.\n\nPlease ask a server administrator to remove some unused webhooks and try again.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "This interaction has already been processed.\n\nIf you need to perform this action again, please start a new interaction.",
+		"missing_permissions": {
+			"title": "I am missing the following permissions required to perform this action",
+			"body": "Please assign these permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "One or more fields are too short or too long.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all inputs and ensure all fields meet the required length constraints.",
+		"required_field": "A required field is missing or empty.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all required fields are filled out.",
+		"invalid_channel_type": "The channel type is invalid for this operation.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid channel to the ticket panel.",
+		"invalid_category": "The channel category is invalid, it must have been deleted.\n\nPlease ask a server administrator to visit the [dashboard](%s) and assign a valid category to the ticket panel.",
+		"invalid_id": "An invalid ID was provided in the bot configuration.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all category, channel, and role IDs are correct.",
+		"invalid_characters": "The input contains invalid characters.\n\nPlease use only letters, numbers, hyphens, and underscores.",
+		"invalid_choice": "An invalid option was provided.\n\nPlease ask a server administrator to visit the [dashboard](%s) and verify all settings are correct.",
+		"invalid_form": "The action could not be completed due to invalid input.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "The operation timed out, please try again.",
+		"rate_limited": "You're being rate limited. Please try again %s.",
+		"rate_limited_global": "Discord is experiencing high load (global rate limit). Please try again %s.",
+		"general": "An error occurred while performing this action.",
+		"error_id": "Error ID"
+	}
+}

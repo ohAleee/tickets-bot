@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets és un bot de tiquets i suport fàcil d'utilitzar i altament configurable.\\nServidor de suport: %s\\nOrdres: Escriu `%s`\\nComença executant `%s`",
+	"commands.add.no_members": "Has de mencionar els membres que vols afegir al tiquet",
+	"commands.add.no_permission": "No tens permís per afegir persones a aquest tiquet",
+	"commands.add.no_everyone": "No es pot afegir el rol `@everyone` a un tiquet",
+	"commands.addadmin.no_members": "Has de mencionar un usuari o rol per concedir-li privilegis d'administració",
+	"commands.addadmin.owner": "El propietari del servidor ja és administrador",
+	"commands.addsupport.no_members": "Has de mencionar un usuari o rol per concedir-li privilegis d'equip de suport",
+	"commands.blacklist.no_members": "Has de mencionar un usuari per commutar-li l'estat de llista negra",
+	"commands.blacklist.self": "No et pots posar a tu mateix/a a la llista negra",
+	"commands.claim.success": "El teu tiquet serà atès per %s",
+	"commands.invite": "[Clica aquí](<%s>)",
+	"commands.language.invalid": "Has d'especificar un codi o etiqueta d'idioma. Idiomes disponibles:\\n%s",
+	"commands.open.ticket_limit": "Només pots obrir %d %s a la vegada",
+	"commands.open.too_many_tickets": "Hi ha massa tiquets en aquesta categoria. Demana a un administrador que en tanqui alguns, els mogui a una altra categoria, o configuri una categoria de sobreeiximent.\n\nHi ha un **límit establert per Discord** de 50 canals per categoria.",
+	"commands.panel": "Visita <%s> per configurar un panell",
+	"commands.premium": "Pots comprar una subscripció prèmium a <%s>.\\nLa subscripció prèmium aporta molts beneficis, com:\\n```diff\\n+ Crear panells de tiquets il·limitats\\n+ Personalitzar el nom, la imatge i l'estat del bot (marca blanca)\\n+ Estadístiques detallades del servidor, usuaris i equip de suport\\n+ Sense informació del bot al peu dels missatges\\n+ Mostrar el teu suport al desenvolupament i ajudar a pagar els costos de servidor\\n```\\n\\nDe forma alternativa, pots votar a <%s> per aconseguir 24 hores prèmium gratis",
+	"commands.premium.invalid_key": "Codi no vàlid. Assegura't que l'has copiat correctament.",
+	"commands.remove.no_permission": "No tens permís per treure persones d'aquest tiquet",
+	"commands.remove.staff": "No pots treure l'equip de suport d'un tiquet",
+	"commands.removeadmin.no_members": "Has de mencionar un usuari o rol per retirar-li privilegis d'administració",
+	"commands.removeadmin.owner": "El propietari del servidor ha de ser un administrador",
+	"commands.removeadmin.self": "No pots treure't els teus propis privilegis",
+	"commands.removesupport.no_members": "Has de mencionar un usuari o rol per concedir-li privilegis d'equip de suport",
+	"commands.rename.missing_name": "Has de proporcionar un nou nom pel tiquet",
+	"commands.rename.success": "El tiquet ha estat reanomenat com a <#%d>",
+	"commands.tags.create.already_exists": "Ja existeix una etiqueta amb l'identificador `%s`. Pots eliminar l'etiqueta utilitzant `%s`",
+	"commands.tags.create.invalid_arguments": "Has de proporcionar l'identificador i el contingut de l'etiqueta",
+	"commands.tags.create.too_long": "L'identificador de l'etiqueta no pot tenir més de 16 caràcters",
+	"commands.tags.delete.invalid_arguments": "Has de proporcionar l'identificador de l'etiqueta que vols eliminar",
+	"commands.tags.delete.not_exist": "No s'ha trobat cap etiqueta amb l'identificador `%s`",
+	"commands.tags.get.invalid_arguments": "Has de proporcionar l'identificador per l'etiqueta. Per més ajuda sobre les etiquetes, visita <%s>.",
+	"commands.tags.get.invalid_tag": "Etiqueta no vàlida. Per més ajuda sobre les etiquetes, visita <%s>.",
+	"commands.tags.list": "Identificadors de totes les etiquetes: \\n%s\\nPer veure el contingut d'una etiqueta, executeu `%s`",
+	"commands.unclaim.not_claimed": "Aquest tiquet no ha estat reclamat",
+	"commands.unclaim.not_claimer": "Només els administradors i usuaris que hagin reclamat el tiquet el poden alliberar",
+	"commands.unclaim.success": "Ara, tots els integrants de suport poden respondre al tiquet",
+	"commands.vote": "Clica el botó de sota per tenir 24 hores gratis de Prèmium.\n\nQuan hagis votat, fes servir l'ordre %s altre cop per reclamar els crèdits.",
+	"generic.invalid_argument": "Argument no vàlid: consulta l'ajuda d'ús",
+	"generic.invalid_user": "No s'ha trobat l'usuari especificat",
+	"generic.no_permission": "No teniu permís per això",
+	"generic.not_ticket": "Aquest canal no pertany a un tiquet",
+	"generic.owner_only": "Aquesta ordre només la pot fer servir el propietari del bot",
+	"help.about": "Et proporciona informació del bot",
+	"help.add": "Afegeix un usuari a un tiquet",
+	"help.addadmin": "Proporciona privilegis d'administració a un usuari o rol",
+	"help.addsupport": "Afegeix un rol com a equip de suport",
+	"help.admin": "Gestió del bot",
+	"help.admin.blacklist": "Posa un servidor a la llista negra del bot",
+	"help.admin.debug.server": "Depurar un servidor",
+	"help.admin.generate_premium": "Generar codis Premium",
+	"help.admin.unblacklist": "Treu un servidor de la llista negra de servidors",
+	"help.blacklist": "Commuta que l'usuari pugui interactuar amb el bot o no",
+	"help.cancel": "Cancel·la el procés de configuració",
+	"help.claim": "Assigna un sol membre de l'equip al tiquet",
+	"help.close": "Tanca el tiquet actual",
+	"help.help": "Et mostra la llista d'ordres",
+	"help.invite": "Proporciona l'enllaç per convidar el bot",
+	"help.language": "Canvia l'idioma que utilitza el bot",
+	"help.managetags": "Afegeix, elimina o mostra les etiquetes",
+	"help.open": "Obre un nou tiquet",
+	"help.panel": "Crea un panell per permetre als usuaris obrir un tiquet amb 1 clic",
+	"help.premium": "Executa aquesta ordre després de comprar una subscripció Premium per activar-la",
+	"help.remove": "Treu un usuari d'un tiquet",
+	"help.removeadmin": "Treu els privilegis d'administració d'un usuari o rol",
+	"help.removesupport": "Retira els privilegis d'equip de suport a un usuari o rol",
+	"help.rename": "Reanomena el tiquet actual",
+	"help.setup": "Et permet configurar el bot amb facilitat",
+	"help.stats": "Et mostra les estadístiques sobre usuaris, l'equip de suport i el servidor",
+	"help.statsserver": "Et mostra estadístiques del servidor",
+	"help.tag": "Envia un missatge preestablert",
+	"help.tagdelete": "Elimina l'etiqueta",
+	"help.taggadd": "Afegeix una nova etiqueta",
+	"help.taglist": "Llista totes les etiquetes",
+	"help.transfer": "Transfereix un tiquet reclamat a un altre usuari",
+	"help.unclaim": "Treu el reclam del tiquet actual",
+	"help.viewstaff": "Llista els membres i rols de l'equip",
+	"help.vote": "Proporciona un enllaç per votar i tenir Premium gratis",
+	"help.gdpr": "Gestionar les teves peticions de dades GDPR",
+	"open.success": "S'ha obert un nou tiquet: %s",
+	"open.outside_support_hours": {
+		"title": "Actualment, aquest panell està tancat",
+		"message": "Si us plau, torna-ho a provar durant les hores que oferim suport."
+	},
+	"setup.auto.category.failure": "Trobo a faltar el permís per gestionar canals (`Manage Channels`)",
+	"setup.auto.category.success": "S'ha creat la categoria de Tickets",
+	"setup.auto.completed": "Configuració completada! Clica [aquí](%s) per configurar un panell on reaccionar, i afegeix els rols <@&%d> i <@&%d> els membres del teu equip",
+	"setup.auto.roles.failure": "Trobo a faltar el permís per gestionar rols `Manage Roles`",
+	"setup.auto.roles.success": "S'ha creat els rols `Tickets Admin` i `Tickets Support`",
+	"setup.auto.transcript.failure": "Trobo a faltar el permís per gestionar canals `Manage Channels`",
+	"setup.auto.transcript.success": "Canal <#%d> creat",
+	"setup.ticket_limit.success": "El límit de tiquets s'ha actualitzat a `%d`",
+	"setup.transcript.invalid": "Has de mencionar un canal vàlid del server (p.e. <#%d>)\\n**Exemple:** `%s`",
+	"setup.transcript.success": "El canal de transcripcions s'ha actualitzat a <#%d>",
+	"commands.language.help_wanted": "Parles un altre idioma? Uneix-te al nostre [servidor de suport](%s) si t'interessa ajudar a traduir el bot a altres idiomes",
+	"commands.rename.too_long": "Els noms dels canals no poden tenir més de 100 caràcters",
+	"commands.autoclose.configure": "Visita el [tauler de control](%s) per canviar la configuració de tancament automàtic",
+	"help.autoclose": "Ordres relacionades amb el tancament automàtic",
+	"help.autoclose.exclude": "Exclou el tiquet actual del tancament automàtic",
+	"help.autoclose.configure": "Editar la configuració del tancament automàtic",
+	"commands.autoclose.exclude.success": "Aquest tiquet s'ha exclòs del tancament automàtic",
+	"commands.claim.no_permission": "Només els membres de l'equip poden reclamar tiquets",
+	"commands.open.from": "Aquest tiquet s'ha obert des d'[aquest missatge](%s).\n\n<@%d> ha dit <#%d>:\n```%s```",
+	"commands.open.from.moved": "La conversa s'ha desplaçat a un tiquet (<#%d>)",
+	"help.close_request": "Envia un missatge preguntant a l'usuari que confirmi si el tiquet es pot tancar",
+	"close.reason_too_long": "La raó no pot superar els 255 caràcters",
+	"commands.close_request.success": "La petició de tancament s'ha enviat correctament",
+	"commands.close_request.no_reason": "<@%d> Ha demanat tancar el tiquet.\n\nSi us plau, accepta o rebutja la petició amb els botons de sota.",
+	"commands.close_request.with_reason": "<@%d> ha demanat tancar el tiquet. Raó proporcionada:\n```\n%s\n```\nSi us plau, accepta o rebutja la petició amb els botons de sota.",
+	"commands.close_request.no_permission": "Només l'usuari que ha obert el tiquet pot respondre la petició de tancament",
+	"commands.close_request.denied": "<@%d> ha rebutjat tancar el tiquet",
+	"generic.error": "Error",
+	"feedback.disabled": "Aquest servidor té les valoracions desactivades",
+	"feedback.success": "La teva valoració ha estat registrada",
+	"generic.success": "Èxit",
+	"button.guild_only": "Aquest botó s'ha d'utilitzar en un servidor",
+	"button.dms_only": "Aquest botó s'ha d'utilitzar en missatges privats",
+	"commands.tag.generic": "Etiqueta",
+	"commands.tags.delete.success": "L'etiqueta `%s` ha estat eliminada",
+	"generic.ticket": "Tiquet",
+	"generic.title.premium_only": "Ordre exclusiva Premium",
+	"generic.admin": "Administrador",
+	"commands.tags.create.success": "Etiqueta creada - pots utilitzar-la fent servir `%s`",
+	"generic.title.about": "Quant a",
+	"generic.title.vote": "Votar",
+	"generic.title.tags": "Etiquetes",
+	"generic.title.autoclose": "Tancament automàtic",
+	"generic.title.invite": "Convidar",
+	"generic.title.close": "Tancar",
+	"generic.title.claim": "Reclamar",
+	"generic.title.unclaim": "No reclamar",
+	"generic.title.blacklisted": "A la llista negra",
+	"generic.title.blacklist": "Llista negra",
+	"generic.error.blacklisted": "Estàs a la llista negra del servidor",
+	"generic.error.guild_blacklisted": "Aquest servidor està a la llista negra del bot",
+	"generic.error.user_blacklisted": "El teu usuari està a la llista negra del bot",
+	"commands.blacklist.add.success": "<@%d> ha estat afegit a la llista negra",
+	"commands.blacklist.remove.success": "<@%d> s'ha tret de la llista negra",
+	"generic.title.add_admin": "Afegir Administrador",
+	"generic.title.add_support": "Afegir Suport",
+	"generic.title.remove_admin": "Treure Administrador",
+	"generic.title.remove_support": "Retirar Suport",
+	"commands.addsupport.success": "Representant de suport afegit correctament: %s",
+	"generic.title.language": "Idioma",
+	"commands.removesupport.success": "Representant de suport tret correctament: %s",
+	"commands.addadmin.success": "Administrador afegit correctament: %s",
+	"commands.removeadmin.success": "Administrador tret correctament: %s",
+	"generic.title.setup": "Configuració",
+	"generic.title.premium": "Prèmium",
+	"generic.title.panel": "Panell",
+	"generic.title.rename": "Reanomena",
+	"generic.title.remove": "Treu",
+	"generic.title.help": "Ajuda",
+	"generic.title.close_confirmation": "Confirmació de tancament",
+	"close.confirmation": "Si us plau, confirma si vols tancar aquest tiquet",
+	"generic.title.close_request": "Petició de tancament",
+	"commands.close_request.accept": "Acceptar & Tancar",
+	"commands.close_request.deny": "Denegar & Mantenir Obert",
+	"commands.premium.success": "S'ha activat Premium per **%d** dies",
+	"generic.title.claimed": "Tiquet Reclamat",
+	"generic.title.unclaimed": "Tiquet Alliberat",
+	"generic.title.add": "Afegir",
+	"commands.add.success": "<@%s> ha estat afegit a <#%d>",
+	"commands.add.role_thread": "Degut a limitacions de Discord, els rols no poden ser afegits a tiquets tipus fils",
+	"commands.remove.success": "<@%s> ha estat tret de <#%d>",
+	"commands.remove.role_thread": "Degut a limitacions de Discord, els rols no poden ser trets de tiquets tipus fils",
+	"open.ratelimited": "S'estan obrint tiquets massa ràpid en aquest servidor",
+	"open.panel_cooldown": "Fa massa poc que has utilitzat aquest panell. Si us plau, torna-ho a provar %s.",
+	"commands.claim.thread": "A causa de limitacions de Discord, el reclam no funciona amb fils",
+	"generic.join_support_server": "Unir-se al Servidor de Suport",
+	"commands.open.guild_channel_limit": "El servidor ha arribat al límit de Discord de 500 canals",
+	"commands.open.missing_form_answer": "Has de respondre la pregunta `%s`",
+	"close.no_permission": "No se t'ha autoritzat tancar aquest tiquet",
+	"": {
+		"generic.title.close_with_reason": "Tancar amb una Raó",
+		"generic.reason": "Raó"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Raó de tancament del tiquet, p.e. \"Resolt\""
+		},
+		"success": "<@%d> ha tancat el tiquet",
+		"rate": {
+			"not_allowed": {
+				"staff": "No pots qualificar aquest tiquet perquè pertanys a l'equip de suport de %s",
+				"empty": "No pots qualificar aquest tiquet perquè no hi has enviat cap missatge"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "L'ordre `%s` s'ha deshabilitat en aquest servidor: si us plau, utilitza un panell per obrir un tiquet",
+			"threads": {
+				"cant_see_parent_channel": "No s'ha pogut afegir <@%d> al tiquet: Assegura't que tinc permís per veure el canal pare (<#%d>) del fil",
+				"cant_message_in_threads": "Et falta el permís `Enviar Missatges en Fils`, necessari per obrir un tiquet. Si us plau, demana a l'administrador que activi el permís, i prova-ho un altre cop."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Panell no vàlid: Has de seleccionar-ne un de la llista desplegable",
+			"success": "<@%[2]d> ha mogut aquest tiquet al panell `%[1]s`",
+			"non_thread_to_thread": "No pots canviar a un panell que usi fils des d'un tiquet de tipus canal",
+			"claimer_no_access_title": "El Canvi de Panell ha estat Bloquejat",
+			"claimer_no_access": "La persona qui ha reclamat el tiquet (<@%d>) no té accés al panell seleccionat.",
+			"auto_unclaimed": "<@%[2]d> ha mogut el tiquet al panell `%[1]s`.\n\nEl tiquet ja no està reclamat, doncs <@%d> no té accés al nou panell."
+		},
+		"blacklist": {
+			"staff": "Els membres de l'equip no es poden afegir a la llista negra",
+			"add_role": {
+				"success": "<@&%d> ha estat afegit a la llista negra",
+				"limit": "Has arribat al límit de rols (%d) a la llista negra"
+			},
+			"remove_role": {
+				"success": "<@&%d> s'ha tret de la llista negra"
+			},
+			"add": {
+				"limit": "Has arribat al límit d'usuaris (%d) a la llista negra: considera utilitzar un rol"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Aquest tiquet no té missatge de benvinguda",
+			"content": "Utilitza el botó de sota per anar a l'inici del tiquet"
+		},
+		"addsupport": {
+			"confirm": "Si us plau, confirma que vols afegir %s a l'equip de suport per defecte",
+			"everyone": "No es pot afegir el rol `@everyone` a l'equip"
+		},
+		"addadmin": {
+			"confirm": "Si us plau, confirma que vols afegir %s com a administrador del bot"
+		},
+		"tags": {
+			"create": {
+				"limit": "Has arribat al límit d'etiquetes (%d)"
+			},
+			"get": {
+				"requires_premium": "No pots utilitzar ordres personalitzades (àlies d'etiquetes) sense subscripció Premium"
+			}
+		},
+		"language": {
+			"content": "Els idiomes disponibles i el seu progrés de traducció són els següents:\n%s",
+			"success": "S'ha canviat l'idioma del servidor a **%s** (%s)",
+			"select": "Selecciona un idioma (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` només es pot utilitzar en el mode fil. Visita la nostra [documentació](%s) per conèixer més sobre els fils",
+			"success": "Ara estàs disponible",
+			"remove_success": "Ara ja no estàs disponible"
+		},
+		"reopen": {
+			"not_found": "No s'ha trobat el tiquet",
+			"no_permission": "No tens permís per reobrir el tiquet",
+			"already_open": "Aquest tiquet ja està obert",
+			"not_thread": "Només es poden reobrir els fils",
+			"thread_deleted": "El tiquet s'ha eliminat de forma permanent",
+			"success": "Tiquet %d reobert: <#%d>",
+			"in_ticket": "<@%d> ha reobert el tiquet"
+		},
+		"premium": {
+			"key": "Codi",
+			"check_again": "Torna-ho a Provar",
+			"subscription_found": "Subscripció Trobada!",
+			"subscription_found_content": "Per tal de poder aplicar la teva subscripció a aquest servidor, el seu propietari (<@%d>) t'ha d'afegir com a **usuari/a** administrador (com a rol no serveix) amb l'ordre %s.\\n\\nPots verificar si ets usuari administrador executant %s.",
+			"activate_key": "Activar un Codi Premium",
+			"checking": "Comprovant Estat de la Subscripció Premium...",
+			"please_wait": "Si us plau, espera...",
+			"success_after_check": "S'ha activat Premium en aquest servidor!",
+			"link_patreon_account": "Vincular Compte Patreon",
+			"no_subscription": "No s'ha trobat cap subscripció Patreon vinculada al teu compte de Discord. Assegura't que [has vinculat els teus comptes de Patreon i Discord](%s), i després has esperat 10 minuts.",
+			"open_form": "Obrir Formulari",
+			"open_form_description": "Prem el botó de sota per tornar a obrir el formulari",
+			"use_key_anyway": "Utilitza el Codi Premium igualment",
+			"already_purchased_title": "Ja has comprat Premium?",
+			"already_purchased_description": "Si ja has comprat una subscripció Premium, selecciona el mètode de pagament al desplegable de sota per començar",
+			"giveaway_key": "Codi de Sorteig",
+			"selector": {
+				"description": "Selecciona amb quin mètode has obtingut el Premium",
+				"key": {
+					"description": "Selecciona aquesta opció si has obtingut el codi d'un sorteig"
+				},
+				"patreon": {
+					"description": "Selecciona aquesta opció si has fet la compra a Patreon"
+				},
+				"discord": {
+					"description": "Selecciona aquesta opció si has fet la compra a través de la botiga integrada de Discord"
+				}
+			},
+			"about": "Premium et dona accés a més panells, estadístiques, un bot personalitzat i més! Visita la nostra [web](%s) per més informació.",
+			"already_activated": "Bones notícies! Premium ja està activat en aquest servidor.",
+			"already_activated_whitelabel": "Bones notícies! Prèmium ja està activat en aquest servidor.\n\nPer ajuda sobre com fer servir Whitelabel, llegeix la nostra [guia de configuració de Whitelabel](%s).",
+			"discord": {
+				"no_subscription": "La subscripció Prèmium es pot fer directament a través de Discord. Clica el botó de sota per obrir el gestor de subscripcions.\n\nUn cop comprat, pot trigar fins a 5 minuts a detectar-se la subscripció."
+			},
+			"subscription_found_content_modern": "S'ha detectat la teva subscripció Patreon. Pulsa \"Obrir el Selector de Servidor\" a sota per obrir el tauler de control i assignar el servidor on aplicar la subscripció.",
+			"open_server_selector": "Obrir el Selector de Servidor"
+		},
+		"notes": {
+			"added_to_existing": "Has estat afegit a un fil de notes existent: <#%d>",
+			"thread_name": "notes",
+			"created": "S'ha creat un fil de notes pel tiquet: <#%d>",
+			"channel_mode_only": "Tingues en compte que els fils només són compatibles amb el mode de canals"
+		},
+		"rename": {
+			"ratelimited": "Per limitacions imposades per Discord, els tiquets només es poden reanomenar 2 vegades cada 10 minuts"
+		},
+		"vote": {
+			"redeem_credits": "Bescanviar Crèdits",
+			"no_credits": "Bescanvi fallit: no tens Crèdits de votació!",
+			"redeem": {
+				"success": {
+					"plural": "Els teus Crèdits de vot han estat bescanviats per **%d** dies de Prèmium!",
+					"singular": "Els teus Crèdits de vot han estat bescanviats per **%d** dia de Prèmium!"
+				}
+			},
+			"with_credits": {
+				"plural": "Tens **%d** Crèdits de vot. Clica el botó \"Bescanviar Crèdits\" per reclamar %d dies Prèmium en aquest servidor.",
+				"singular": "Tens **%d** Crèdit de vot. Clica el botó \"Bescanviar Crèdits\" per reclamar %d dia Prèmium en aquest servidor."
+			}
+		},
+		"viewstaff": {
+			"title": "Personal",
+			"admin": {
+				"users": "Administradors",
+				"roles": "Rols Administradors",
+				"no_users": "No hi ha usuaris administradors",
+				"no_roles": "No hi ha rols administradors"
+			},
+			"support": {
+				"users": "Usuaris de l'equip de suport",
+				"roles": "Rols de l'equip de suport",
+				"no_roles": "No hi ha rols a l'equip de suport",
+				"users_warning": "-# **Avís:** Els usuaris dels equips de suport seran obsolets. Si us plau, migra a rols."
+			}
+		},
+		"edit": {
+			"title": "Editar Configuració del Tiquet",
+			"description": "A sota, pots editar varis paràmetres del tiquet.",
+			"labels": {
+				"title": "Editar Etiquetes",
+				"description": "Editar les etiquetes assignades a aquest tiquet",
+				"update_modal": {
+					"title": "Actualitzar Etiquetes del Tiquet",
+					"select_menu_title": "Etiquetes",
+					"success": "Les etiquetes del tiquet s'han actualitzat correctament a: %s"
+				},
+				"none_configured": "No s'han configurat etiquetes per aquest servidor. Pots crear etiquetes en el [tauler de control](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Panell de Tiquets Canviat",
+			"jump_to_top": "Anar a l'Inici",
+			"reopened": "Tiquet Tornat a Obrir",
+			"ticket_closed": "Tiquet Tancat"
+		},
+		"click_here": "Clica Aquí",
+		"confirm": "Confirmar",
+		"website": "La Nostra Web"
+	},
+	"help": {
+		"switch_panel": "Canvia el tiquet a un altre panell de tiquets, canviant la categoria, l'equip de suport, etc.",
+		"jump_to_top": "Et proporciona un botó per anar a l'inici del tiquet",
+		"on_call": "Et marca com a disponible, per ser afegit i mencionat a tots els nous tiquets",
+		"reopen": "Torna a obrir un tiquet que ha estat tancat prèviament",
+		"notes": "Crea un fil per discutir en privat entre els integrants de l'equip de suport",
+		"edit": "Edita la configuració del tiquet actual"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Vols descobrir més? La nostra [documentació](%s) t'ensenyarà com configurar cada aspecte del bot!"
+		},
+		"threads": {
+			"no_notification_channel": "Has de proporcionar un canal de notificació de tiquet",
+			"notification_channel_type": "El canal de notificació de tiquet ha de ser de tipus text",
+			"success": "El mode Fil ha estat activat",
+			"disabled": "El mode Fil ha estat desactivat"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "El tiquet ja es troba tancat",
+			"no_permission": "No tens permís per veure aquest tipus de tiquet",
+			"already_joined": "Ja et trobes actualment al tiquet (<#%d>)",
+			"success": "Has estat afegit al tiquet: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "No es poden crear fils en un canal de difusió",
+		"panel_force_disabled": "Aquest panell ha estat desactivat. Si us plau, demanar a l'administrador que reactivi la subscripció Premium, i executi %s per reactivar aquest panell.",
+		"panel_disabled": "Els administradors del servidor han deshabilitat aquest tipus de tiquet",
+		"acl": {
+			"no_allow_rules": "L'accés per obrir aquest tipus de tiquet es troba deshabilitat per tots els rols",
+			"deny_listed": "No pots obrir aquest tipus de tiquet perquè tens el rol <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Necessites un dels següents rols per obrir aquest tipus de tiquet: %s",
+				"single": "Necessites el següent rol per obrir aquest tipus de tiquet: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Selecciona el tipus de petició GDPR que voldries fer:",
+		"section": {
+			"transcript": "### **Opcions d'Eliminar Transcripcions**\n-# _Elimina transcripcions dels servidors que posseeixis_",
+			"message": "### **Opcions de Missatges Anònims**\n-# _Fes anònims els missatges de les transcripcions dels servidors seleccionats_"
+		},
+		"warning": "### **Informació Important**\n* L'eliminació és **permanent** i no es pot desfer\n* Només pots eliminar transcripcions dels servidors que **tu** posseeixis\n* Només els **teus** missatges poden ser convertits a anònims a les transcripcions\n* La petició pot trigar fins a **30 dies** a completar-se\n* La teva petició serà processada segons una **cua**",
+		"resources": "### **Recursos**\n[Què és GDPR?](%s)\n[Dret de Supressió](%s)\n[Dret d'Accés](%s)",
+		"button": {
+			"all_transcripts": "Totes les transcripcions dels servidors",
+			"specific_transcripts": "Transcripcions específiques",
+			"all_messages": "Tots els teus missatges en servidors",
+			"specific_messages": "Els teus missatges de tiquets específics"
+		},
+		"language_option": "Idioma",
+		"modal": {
+			"all_transcripts": "Eliminar Totes les Transcripcions dels Servidors",
+			"specific_transcripts": "Eliminar Transcripcions Específiques",
+			"all_messages": "Fer Anònims els Teus Missatges als Servidors",
+			"specific_messages": "Fer Anònims els Teus Missatges a Servidors Específics",
+			"select_server": "Seleccionar un servidor",
+			"select_servers": "Seleccionar un o més servidors",
+			"server_id": {
+				"label": "Identificador ID del servidor",
+				"placeholder": "Indica l'identificador del servidor"
+			},
+			"server_ids": {
+				"label": "Identificadors ID del servidor",
+				"placeholder": "Indica els identificadors separats per comes (p. ex., 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Identificadors ID de tiquet",
+				"placeholder": "Indica els identificadors de tiquet separats per comes (p. ex., 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "Es Requereix Confirmació de GDPR",
+			"all_transcripts": "**Tipus de petició:** Eliminar totes les transcripcions dels servidors que posseeixis\n**Servidor:** %s",
+			"all_transcripts_multi": "**Tipus de petició:** Eliminar totes les transcripcions dels servidors que posseeixis\n**Servidors:**\n* %s",
+			"specific_transcripts": "**Tipus de petició:** Eliminar transcripcions específiques del servidor\n**Servidor:** %s\n**IDs de tiquet:** %s",
+			"all_messages": "**Tipus de petició:** Fer anònims tots els teus missatges del servidor seleccionat\n**Servidor:** %s",
+			"all_messages_multi": "**Tipus de petició:** Fer anònims tots els teus missatges dels servidors seleccionats\n**Servidors:**\n* %s",
+			"specific_messages": "**Tipus de petició:** Fer anònims els teus missatges de tiquets específics\n**Servidor:** %s\n**IDs de tiquet:** %s",
+			"warning": "\n\n⚠️ **Avís:** Aquesta acció és permanent i no es pot desfer.\n\nEntens i acceptes que aquesta acció és permanent?",
+			"button": "Confirmar - Ho entenc"
+		},
+		"queued": {
+			"title": "Petició RGPD en espera",
+			"all_transcripts": "**Tipus de petició:** Eliminar totes les transcripcions del servidor\n**Servidor:** %s",
+			"all_transcripts_multi": "**Tipus de petició:** Eliminar totes les transcripcions dels servidors\n**Servidors:**\n* %s",
+			"specific_transcripts": "**Tipus de petició:** Eliminar transcripcions específiques\n**Servidor:** %s\n**IDs de tiquet:** %s",
+			"all_messages": "**Tipus de petició:** Fer anònims tots els teus missatges del servidor\n**Servidor:** %s",
+			"all_messages_multi": "**Tipus de petició:** Fer anònims tots els teus missatges dels servidors\n**Servidors:**\n* %s",
+			"specific_messages": "**Tipus de petició:** Fer anònims els teus missatges de tiquets específics\n**Servidor:** %s\n**IDs de tiquet:** %s",
+			"footer": "\n\nLa teva petició està en espera per ser processada.\nSegons el nombre de transcripcions, el processament pot trigar una estona."
+		},
+		"completed": {
+			"title": "Petició RGPD completada",
+			"all_transcripts": "**Tipus de petició:** Eliminar totes les transcripcions del servidor\n**Servidor:** %s\n**Transcripcions Eliminades:** %d",
+			"all_transcripts_multi": "**Tipus de petició:** Eliminar totes les transcripcions dels servidors\n**Servidors:**\n* %s\n**Transcripcions Eliminades:** %d",
+			"specific_transcripts": "**Tipus de petició:** Eliminar transcripcions específiques\n**Servidor:** %s\n**Transcripcions Eliminades:** %d",
+			"all_messages": "**Tipus de petició:** Fer anònims tots els teus missatges del servidor\n**Servidor:** %s\n**Missatges fets Anònims:** %d",
+			"all_messages_multi": "**Tipus de petició:** Fer anònims tots els teus missatges en servidors\n**Servidors:**\n* %s\n**Missatges fets Anònims:** %d",
+			"specific_messages": "**Tipus de petició:** Fer anònims els teus missatges de tiquets concrets\n**Servidor:** %s\n**Missatges fets Anònims:** %d",
+			"error": "\n\n**⚠️ Error:** %s"
+		},
+		"followup": {
+			"error": "⚠️ S'ha trobat un error a la teva petició de RGPD: %s",
+			"no_data": "ℹ️ S'ha processat la teva petició RGPD. No s'han trobat dades afectades.",
+			"success": "✅ La teva petició RGPD ha estat processada correctament."
+		},
+		"error": {
+			"no_servers": "No s'han trobat servidors dels quals tinguis propietat i tingui transcripcions.",
+			"invalid_server_id": "ID de servidor no vàlid.",
+			"invalid_ticket_ids": "ID de tiquet no vàlid. Si us plau, indiqueu els ID's numèrics dels tiquets separats per comes (p.ex., 123, 456, 789).",
+			"not_owner": "Has de ser propietari del servidor per eliminar transcripcions.",
+			"server_not_found": "Servidor no trobat.",
+			"queue_failed": "No s'ha pogut posar la petició RGPD en cua. Si us plau, torna-ho a provar més tard.",
+			"worker_offline": "El servei de processament RGPD no està disponible. Si us plau, torna-ho a provar més tard o, si continua donant problemes, contacta amb suport."
+		}
+	},
+	"errors": {
+		"unknown_channel": "No s'ha trobat el canal requerit: segurament ha estat eliminat.\n\nSi us plau, demana a l'administració del servidor que visiti el [tauler de control web](%s) i verifiqui que tota la configuració de canals sigui correcta.",
+		"unknown_guild": "No s'ha pogut trobar el servidor.",
+		"unknown_member": "No s'ha trobat l'usuari. Pot ser que hagi abandonat el servidor o hagi estat banejat.",
+		"unknown_message": "El missatge amb el qual vols interactuar ha estat eliminat.\n\nSi us plau, torna-ho a provar amb un altre missatge.",
+		"unknown_user": "no s'ha pogut trobar l'usuari.",
+		"unknown_role": "El rol requerit per aquesta acció ja no existeix.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i torni a configurar els rols.",
+		"unknown_category": "No s'ha trobat la categoria requerida: segurament ha estat eliminada.\n\nSi us plau, demana a l'administració del servidor que visiti el [tauler de control web](%s) i assigni una categoria correcta al panell de tiquets.",
+		"unknown_interaction": "Aquesta interacció ha caducat.\n\nSi us plau, torna-ho a provar.",
+		"max_webhooks": "Aquest servidor ha assolit el màxim de webhooks.\n\nSi us plau, demana a l'administració que elimini alguns webhooks no utilitzats i torna-ho a provar.",
+		"max_channels": "No s'ha pogut obrir el teu tiquet: Aquest servidor ha assolit el màxim de canals de Discord (500).\n\nSi us plau, demana a l'administració que tanqui alguns tiquets o elimini canals no utilitzats per poder obrir tiquets.",
+		"interaction_acknowledged": "Aquesta interacció ja ha estat processada.\n\nSi has de tornar a fer la mateixa acció, si us plau, inicia una nova interacció.",
+		"missing_permissions": {
+			"title": "No tinc els següents permisos, necessaris per dur a terme aquesta acció",
+			"body": "Si us plau, assigna aquests permisos al bot o, alternativament, el permís d'`Administració` i torna-ho a provar.\nSi us plau, visita la nostra [documentació](%s) per tota l'explicació sobre perquè és necessari cada permís."
+		},
+		"missing_access": "No tinc els permisos necessaris per fer aquesta acció.\n\nSi us plau, assigna els permisos necessaris al bot o, alternativament, el permís d'`Administració` i torna-ho a provar.\nSi us plau, visita la nostra [documentació](%s) per tota l'explicació sobre perquè és necessari cada permís.",
+		"invalid_length": "Algun o alguns camps son massa curts o massa llargs.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i verifiqui totes les entrades, també que compleixin la longitud requerida.",
+		"required_field": "Un camp requerit no hi és o està buit.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i verifiqui que tots els camps requerits estiguin omplerts.",
+		"invalid_channel_type": "El tipus de canal no és vàlid per aquesta operació.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i assigni un canal vàlid al panell de tiquets.",
+		"invalid_category": "La categoria no és vàlida per aquesta operació.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i assigni una categoria vàlida al panell de tiquets.",
+		"invalid_id": "S'ha proporcionat un ID no vàlid a la configuració del bot.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i verifiqui que els ID de totes les categories, canals i rols siguin correctes.",
+		"invalid_characters": "L'entrada conté caràcters no vàlids.\n\nSi us plau, utiliza només lletres, número, guionets i guions baixos.",
+		"invalid_choice": "S'ha proporcionat una opció no vàlida.\n\nSi us plau, demana a l'administració del servidor que visiti el [panell web](%s) i verifiqui que la configuració sigui correcta.",
+		"invalid_form": "L'acció no es pot completar a causa d'una entrada no vàlida.",
+		"thread_locked": "El teu tiquet no es pot obrir perquè el fil de discussió està bloquejat.\n\nSi us plau, demana a l'administració del servidor que desbloquegi fil de discussió.",
+		"max_active_threads": "No es pot obrir el teu tiquet perquè s'ha assolit el màxim de fils actius en aquest canal.\n\nSi us plau, demana a l'administració que tanqui alguns tiquets o fils.",
+		"timed_out": "Temps d'operació exhaurit. Si us plau, torna-ho a provar.",
+		"rate_limited": "Tens una taxa d'ús limitada. Si us plau, torna-ho a provar %s.",
+		"rate_limited_global": "Discord està experimentant una sobrecàrrega (taxa d'us global). Si us plau, torna-ho a provar %s.",
+		"general": "Hi ha hagut un error mentre es duia a terme l'acció.",
+		"error_id": "ID d'error"
+	}
+}

@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets là một bot dễ sử dụng và có thể thiết lập theo ý của bạn.\\nNhóm hỗ trợ: %s\\nLệnh: Gõ `%s`\\nBắt đầu bằng lệnh `%s`\\n",
+	"commands.add.no_members": "Bạn cần nhắc đến các thành viên mà bạn muốn thêm vào phiếu hỗ trợ",
+	"commands.add.no_permission": "Bạn không có quyền thêm người khác vào phiếu hỗ trợ này",
+	"commands.add.no_everyone": "Bạn không thể thêm vai trò `@everyone` vào phiếu hỗ trợ",
+	"commands.addadmin.no_members": "Bạn cần nhắc đến một thành viên hoặc một vai trò để trao quyền quản trị viên",
+	"commands.addadmin.owner": "Chủ của máy chủ đã là quản trị viên theo mặc định",
+	"commands.addsupport.no_members": "Bạn cần nhắc đến một thành viên hoặc một vai trò để trao quyền đại diện hỗ trợ viên",
+	"commands.blacklist.no_members": "Bạn cần nhắc đề cập một thành viên để chuyển đổi trạng thái trong danh sách đen",
+	"commands.blacklist.self": "Bạn không thể thêm chính mình vào danh sách đen",
+	"commands.claim.success": "%s sẽ xử lý phiếu hỗ trợ của bạn",
+	"commands.invite": "[Ấn vào đây](<%s>)",
+	"commands.language.invalid": "Bạn cần ghi rõ mã của ngôn ngữ hoặc cờ hiệu. Các ngôn ngữ đang khả dụng:\\n%s",
+	"commands.open.ticket_limit": "Bạn chỉ có thể mở %d %s một lúc",
+	"commands.open.too_many_tickets": "Hiện có quá nhiều phiếu hỗ trợ đang được mở trong danh mục. Hãy nhờ quản trị viên đóng bớt chúng hoặc di chuyển chúng qua mục khác.\n\n**Discord giới hạn** mỗi danh mục chỉ có thể chứa 50 kênh.",
+	"commands.panel": "Hãy truy cập <%s> để cài đặt với giao diện trực quan",
+	"commands.premium": "Bạn có thể mua phiên bản Premium tại <%s>.\\nPhiên bản Premium mang lại nhiều quyền lợi như:\\n```diff\\n+ Tạo bảng phiếu hỗ trợ không giới hạn\\n+ Thay đổi tên, ảnh đại diện & trạng thái (whitelabel)\\n+ Thông tin chi tiết về hội, thành viên và hỗ trợ viên\\n+ Không có quảng cáo thương hiệu ở cuối tin nhắn\\n+ Giúp đỡ đội ngũ phát triển và giúp trả phí chạy máy chủ cho bot\\n```\\n\\nNgoài ra, bạn có thể đánh giá tại <%s> để nhận phiên bản cao cấp miễn phí trong vòng 24 giờ",
+	"commands.premium.invalid_key": "Mã kích hoạt sai. Hãy kiểm tra xem bạn đã sao chép đúng mã không.",
+	"commands.remove.no_permission": "Bạn không có quyền để loại bỏ người khác khỏi phiếu hỗ trợ này",
+	"commands.remove.staff": "Bạn không thể gỡ các quản lý khỏi phiếu hỗ trợ này",
+	"commands.removeadmin.no_members": "Bạn cần nhắc đến một thành viên hoặc một vai trò để gỡ bỏ quyền quản trị viên",
+	"commands.removeadmin.owner": "Chủ sở hữu máy chủ bắt buộc phải là quản trị viên",
+	"commands.removeadmin.self": "Bạn không thể gỡ quyền của bản thân",
+	"commands.removesupport.no_members": "Bạn cần nhắc đến một thành viên hoặc một vai trò để gỡ quyền đại diện hỗ trợ viên",
+	"commands.rename.missing_name": "Bạn cần ghi rõ tên mới cho phiếu hỗ trợ này",
+	"commands.rename.success": "Phiếu hỗ trợ này đã được đổi tên thành <#%d>",
+	"commands.tags.create.already_exists": "Thẻ tên với ID `%s` đã được sử dụng. Có thể xóa thẻ tên đó bằng lệnh `%s`",
+	"commands.tags.create.invalid_arguments": "Bạn phải chỉ rõ ID của thẻ và nội dung trong đó",
+	"commands.tags.create.too_long": "ID của thẻ không thể dài hơn 16 ký tự",
+	"commands.tags.delete.invalid_arguments": "Phải chỉ rõ ID của thẻ để xóa",
+	"commands.tags.delete.not_exist": "Không tìm thấy thẻ tên có ID `%s`",
+	"commands.tags.get.invalid_arguments": "Bạn phải cung cấp ID của thẻ. Để hiểu hơn về thẻ, hãy đọc <%s>.",
+	"commands.tags.get.invalid_tag": "Thẻ tên không hợp lệ. Xem chi tiết về thẻ tên tại <%s>.",
+	"commands.tags.list": "ID của các thẻ: \\n%s\\nĐể thấy được nội dung của một thẻ, dùng lệnh `%s`",
+	"commands.unclaim.not_claimed": "Phiếu hỗ trợ này chưa được nhận",
+	"commands.unclaim.not_claimer": "Chỉ quản trị viên và người nhận phiếu hỗ trợ mới có thể hủy nhận phiếu hỗ trợ",
+	"commands.unclaim.success": "Tất cả các đại diện hỗ trợ giờ có thể trả lời phiếu hỗ trợ",
+	"commands.vote": "Nhấn vào nút bên dưới để đánh giá bot và sử dụng bản premium miễn phí trong vòng 24 giờ.\n\nSau khi bạn đã đánh giá, sử dụng lại lệnh %s để quy đổi điểm đánh giá.",
+	"generic.invalid_argument": "Lựa chọn không hợp lệ: đọc lại hướng dẫn",
+	"generic.invalid_user": "Không thể tìm ra người dùng",
+	"generic.no_permission": "Bạn không có quyền để thực hiện thao tác này",
+	"generic.not_ticket": "Đây không phải là một phiếu hỗ trợ",
+	"generic.owner_only": "Lệnh này chỉ dành cho người chủ sở hữu bot",
+	"help.about": "Nêu thông tin về người máy",
+	"help.add": "Thêm một người dùng vào phiếu hỗ trợ",
+	"help.addadmin": "Cấp quyền một người hoặc vai trò quyền quản trị viên",
+	"help.addsupport": "Thêm vai trò dành cho đại diện hỗ trợ viên",
+	"help.admin": "Quản lý người máy",
+	"help.admin.blacklist": "Chặn một máy chủ khỏi việc dùng người máy",
+	"help.admin.debug.server": "Vá lỗi máy chủ",
+	"help.admin.generate_premium": "Tạo mã dành cho bản premium",
+	"help.admin.unblacklist": "Gỡ một máy chủ ra khỏi danh sách chặn",
+	"help.blacklist": "Tùy chọn cho phép các thành viên có thể tương tác với người máy hay không",
+	"help.cancel": "Hủy quy trình cài đặt",
+	"help.claim": "Chỉ định một thành viên quản lý vào một phiếu hỗ trợ",
+	"help.close": "Đóng phiếu hỗ trợ này",
+	"help.help": "Hiển thị danh sách lệnh",
+	"help.invite": "Cung cấp đường dẫn để mời người máy",
+	"help.language": "Thay đổi ngôn ngữ mà người máy dùng",
+	"help.managetags": "Thêm, xóa hoặc xem các thẻ tên",
+	"help.open": "Mở một phiếu hỗ trợ mới",
+	"help.panel": "Tạo một bảng để cho thành viên tạo phiếu hỗ trợ chỉ với một nút nhấn",
+	"help.premium": "Sử dụng lệnh này sau khi mua bản premium để kích hoạt nó",
+	"help.remove": "Gỡ một người khỏi một phiếu hỗ trợ",
+	"help.removeadmin": "Thu hồi quyền quản trị viên của một người hoặc vai trò",
+	"help.removesupport": "Thu hồi quyền đại diện hỗ trợ viên từ một người hoặc vai trò",
+	"help.rename": "Đổi tên phiếu hỗ trợ này",
+	"help.setup": "Giúp bạn dễ dàng cài đặt người máy",
+	"help.stats": "Hiện thị các chỉ số về thành viên, các quản lý hỗ trợ và máy chủ",
+	"help.statsserver": "Hiển thị thông tin số liệu về máy chủ",
+	"help.tag": "Gửi một đoạn trích tin nhắn có sẵn",
+	"help.tagdelete": "Xóa một thẻ tên",
+	"help.taggadd": "Thêm một thẻ mới",
+	"help.taglist": "Danh sách tất cả các thẻ",
+	"help.transfer": "Chuyển phiếu hỗ trợ đã được nhận tới một thành viên khác",
+	"help.unclaim": "Gỡ nhận trong phiếu hỗ trợ hiện tại",
+	"help.viewstaff": "Danh sách các thành viên quản lý và các vai trò",
+	"help.vote": "Gửi cho bạn một đường dẫn để đánh giá và nhận phiên bản premium miễn phí",
+	"help.gdpr": "Quản lý yêu cầu dữ liệu GDPR",
+	"open.success": "Đã mở một phiếu hỗ trợ mới: %s",
+	"open.outside_support_hours": {
+		"title": "This panel is currently closed",
+		"message": "Vui lòng thử lại vào khung thời gian hỗ trợ."
+	},
+	"setup.auto.category.failure": "Tôi đang thiếu quyền `Quản lý các kênh`",
+	"setup.auto.category.success": "Đã tạo một mục kênh cho các phiếu hỗ trợ",
+	"setup.auto.completed": "Đã thiết lập thành công! Nhấn vào [đây](%s) để thiết lập một bảng reaction, và thêm <@&%d> và <@&%d> là vai trò cho các thành viên quản lý",
+	"setup.auto.roles.failure": "Tôi đang thiếu quyền `Quản lý vai trò`",
+	"setup.auto.roles.success": "Đã tạo vai trò `Tickets Admin` & `Tickets Support`",
+	"setup.auto.transcript.failure": "Tôi đang thiếu quyền `Quản lý các kênh`",
+	"setup.auto.transcript.success": "Đã tạo kênh <#%d>",
+	"setup.ticket_limit.success": "Giới hạn phiếu hỗ trợ đã được thay đổi thành `%d`",
+	"setup.transcript.invalid": "Bạn phải nhắc đến một kênh hợp lệ bên trong máy chủ (như <#%d>)\\n**Ví dụ:** `%s`",
+	"setup.transcript.success": "Kênh dành các bản ghi chép đã được thay đổi thành <#%d>",
+	"commands.language.help_wanted": "Bạn dùng ngôn ngữ khác? Tham gia [máy chủ hỗ trợ](%s) nếu bạn muốn giúp phiên dịch thêm ngôn ngữ cho người máy",
+	"commands.rename.too_long": "Tên của kênh không thể dài hơn 100 ký tự",
+	"commands.autoclose.configure": "Hãy xem [bảng quản lý](%s) để thay đổi các cài đặt về tự động đóng phiếu",
+	"help.autoclose": "Các lệnh liên quan đến tính năng tự động đóng",
+	"help.autoclose.exclude": "Thêm ngoại lệ cho phiếu hỗ trợ không tự động đóng",
+	"help.autoclose.configure": "Chỉnh sửa các cài đặt liên quan đến tự động đóng",
+	"commands.autoclose.exclude.success": "Phiếu hỗ trợ này đã được ngoại lệ khỏi bị tự động đóng",
+	"commands.claim.no_permission": "Chỉ các thành viên quản lý mới có thể nhận các phiếu hỗ trợ",
+	"commands.open.from": "Phiếu hỗ trợ này được mở từ [tin nhắn này](%s).\n\n<@%d> đã nói trong <#%d>:\n```%s```",
+	"commands.open.from.moved": "Cuộc hội thoại đã được chuyển đến một phiếu hỗ trợ (<#%d>)",
+	"help.close_request": "Gửi một tin nhắn hỏi thành viên xác nhận có thể đóng phiếu hỗ trợ này",
+	"close.reason_too_long": "Lý do không được dài hơn 255 ký tự",
+	"commands.close_request.success": "Yêu cầu đóng đã được gửi đi thành công",
+	"commands.close_request.no_reason": "<@%d> đã yêu cầu đóng phiếu hỗ trợ này.\n\nHãy đồng ý hoặc từ chối yêu cầu bằng các nút bên dưới.",
+	"commands.close_request.with_reason": "<@%d> đã yêu cầu đóng phiếu hỗ trợ này. Lý do:\n```\n%s\n```\nHãy đồng ý hoặc từ chối yêu cầu bằng các nút bên dưới.",
+	"commands.close_request.no_permission": "Chỉ người mở phiếu hỗ trợ này mới có thể trả lời yêu cầu đóng phiếu hỗ trợ",
+	"commands.close_request.denied": "<@%d> đã từ chối yêu cầu đóng phiếu hỗ trợ",
+	"generic.error": "Lỗi",
+	"feedback.disabled": "Máy chủ này đã tắt chức năng đánh giá",
+	"feedback.success": "Đánh giá bạn đã được ghi lại",
+	"generic.success": "Thành công",
+	"button.guild_only": "Nút này phải được dùng bên trong một máy chủ",
+	"button.dms_only": "Nút này phải được dùng trong tin nhắn riêng trực tiếp",
+	"commands.tag.generic": "Thẻ tên",
+	"commands.tags.delete.success": "Thẻ tên `%s` đã được xóa đi",
+	"generic.ticket": "Phiếu hỗ trợ",
+	"generic.title.premium_only": "Lệnh chỉ dành cho phiên bản premium",
+	"generic.admin": "Quản trị viên",
+	"commands.tags.create.success": "Thẻ đã được tạo - bạn có thể dùng nó với lệnh `%s`",
+	"generic.title.about": "Thông tin",
+	"generic.title.vote": "Đánh giá",
+	"generic.title.tags": "Các thẻ tên",
+	"generic.title.autoclose": "Tự động đóng",
+	"generic.title.invite": "Mời",
+	"generic.title.close": "Đóng",
+	"generic.title.claim": "Nhận",
+	"generic.title.unclaim": "Chưa nhận",
+	"generic.title.blacklisted": "Đã bị chặn",
+	"generic.title.blacklist": "Danh sách bị chặn",
+	"generic.error.blacklisted": "Bạn bị chặn trong máy chủ này",
+	"generic.error.guild_blacklisted": "Máy chủ đã bị cấm sử dụng bot",
+	"generic.error.user_blacklisted": "Bạn đã bị cấm sử dụng bot",
+	"commands.blacklist.add.success": "<@%d> đã bị chặn",
+	"commands.blacklist.remove.success": "<@%d> đã được xóa khỏi danh sách đen",
+	"generic.title.add_admin": "Thêm quản trị viên",
+	"generic.title.add_support": "Thêm hỗ trợ viên",
+	"generic.title.remove_admin": "Gỡ quản trị viên",
+	"generic.title.remove_support": "Gỡ hỗ trợ viên",
+	"commands.addsupport.success": "Đại diện hỗ trợ viên đã được thêm thành công: %s",
+	"generic.title.language": "Ngôn ngữ",
+	"commands.removesupport.success": "Đại diện hỗ trợ viên đã được gỡ thành công: %s",
+	"commands.addadmin.success": "Đã thêm quản trị viên thành công: %s",
+	"commands.removeadmin.success": "Đã gỡ quản trị viên thành công: %s",
+	"generic.title.setup": "Thiết lập",
+	"generic.title.premium": "Phiên bản premium",
+	"generic.title.panel": "Bảng điều khiển",
+	"generic.title.rename": "Đổi tên",
+	"generic.title.remove": "Gỡ",
+	"generic.title.help": "Giúp đỡ",
+	"generic.title.close_confirmation": "Xác nhận đóng",
+	"close.confirmation": "Hãy xác nhận rằng bạn muốn đóng phiếu hỗ trợ này",
+	"generic.title.close_request": "Yêu cầu đóng",
+	"commands.close_request.accept": "Chấp nhận và đóng",
+	"commands.close_request.deny": "Từ chối và giữ trạng thái mở",
+	"commands.premium.success": "Phiên bản premium đã được kích hoạt trong **%d** ngày",
+	"generic.title.claimed": "Đã nhận phiếu hỗ trợ",
+	"generic.title.unclaimed": "Đã hủy nhận phiếu hỗ trợ",
+	"generic.title.add": "Thêm",
+	"commands.add.success": "<@%s> đã được thêm vào kênh <#%d>",
+	"commands.add.role_thread": "Vai trò không thể được thêm vào phiếu hỗ trợ chủ đề do giới hạn của Discord",
+	"commands.remove.success": "<@%s> đã bị xóa khỏi <#%d>",
+	"commands.remove.role_thread": "Vai trò không thể được thêm vào phiếu hỗ trợ chủ đề do giới hạn của Discord",
+	"open.ratelimited": "Các phiếu hỗ trợ đang được mở quá nhanh trong hội này",
+	"open.panel_cooldown": "You are on cooldown for this panel. Please try again %s.",
+	"commands.claim.thread": "Vì giới hạn của Discord, không thể nhận phiếu hỗ trợ bên trong kênh Chủ Đề",
+	"generic.join_support_server": "Tham gia máy chủ hỗ trợ",
+	"commands.open.guild_channel_limit": "Máy chủ Discord này đã đạt giới hạn 500 kênh",
+	"commands.open.missing_form_answer": "Bạn phải trả lời câu hỏi `%s`",
+	"close.no_permission": "Bạn không có quyền đóng phiếu hỗ trợ này",
+	"": {
+		"generic.title.close_with_reason": "Đóng với lý do",
+		"generic.reason": "Lý do"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Lý do đóng phiếu hỗ trợ, vd: \"Đã giải quyết xong\""
+		},
+		"success": "Phiếu hỗ trợ này đã được đóng bởi <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "Bạn không thể đánh giá phiếu hỗ trợ này này vì bạn là người hỗ trợ trong %s",
+				"empty": "Bạn không thể đánh giá phiếu hỗ trợ này vì bạn không gửi tin nhắn nào trong phiếu đó"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Lệnh '%s' đã bị tắt trong máy chủ này, hãy sử dụng bảng tạo phiếu hỗ trợ để mở",
+			"threads": {
+				"cant_see_parent_channel": "Không thể thêm <@%d> vào phiếu hỗ trợ: Hãy chắc chắn họ có quyền để xem kênh chứa chủ đề (<#%d>)",
+				"cant_message_in_threads": "Bạn đang thiếu quyền \"Gửi Tin Nhắn trong Chủ Đề\", cần có quyền này để mở phiếu hỗ trợ. Vui lòng hỏi quản trị viên để thêm quyền lợi cho bạn và thử lại sau."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Bảng không hợp lệ: Bạn cần chọn 1 từ mục dưới",
+			"success": "Phiếu hỗ trợ này đã được chuyển sang bảng `%s' bởi <@%d>",
+			"non_thread_to_thread": "Bạn không thể chuyển đổi bảng điều khiển sử dụng kênh chủ đề từ phiếu hỗ trợ không dùng kênh chủ đề",
+			"claimer_no_access_title": "Panel Switch Blocked",
+			"claimer_no_access": "The ticket claimer (<@%d>) does not have access to the selected panel.",
+			"auto_unclaimed": "The ticket has been switched to the `%s` panel by <@%d>.\n\nThe ticket has been automatically unclaimed, as <@%d> does not have access to the new panel."
+		},
+		"blacklist": {
+			"staff": "Quản lí không thể bị cho vào danh sách đen",
+			"add_role": {
+				"success": "<@&%d> đã bị cho vào danh sách đen",
+				"limit": "Bạn đã sử dụng hết giới hạn của danh sách đen vai trò (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> đã được xóa khỏi danh sách đen"
+			},
+			"add": {
+				"limit": "Bạn đạt giới hạn số người dùng có thể thêm vào danh sách đen (%d): thay vào đó hãy sử dụng vai trò"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Phiếu hỗ trợ này không có tin nhắn chào mừng",
+			"content": "Bấm nút phía dưới để nhảy lên tin nhắn đầu tiên của phiếu hỗ trợ"
+		},
+		"addsupport": {
+			"confirm": "Hãy xác nhận rằng bạn muốn thêm %s vào nhóm hỗ trợ mặc định",
+			"everyone": "Bạn không thể thêm `@everyone` với vai trò quản trị"
+		},
+		"addadmin": {
+			"confirm": "Hãy xác minh rằng bạn muốn thêm %s thành quản lí của bot"
+		},
+		"tags": {
+			"create": {
+				"limit": "Bạn đã đạt giới hạn số thẻ có thể tạo (%d)"
+			},
+			"get": {
+				"requires_premium": "Yêu cầu phiên bản premium để sử dụng lệnh tùy chỉnh (bao gồm cả thẻ lệnh)"
+			}
+		},
+		"language": {
+			"content": "Các ngôn ngữ khả dụng và tiến độ dịch thuật:\n%s",
+			"success": "Ngôn ngữ của máy chủ đã được đổi từ **%s** thành (%s)",
+			"select": "Chọn ngôn ngữ (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` chỉ có thể sử dụng khi dùng chế độ chủ đề. Tham khảo [docs](%s) để tìm hiểu thêm",
+			"success": "Bạn đã bắt đầu tiếp nhận hỗ trợ",
+			"remove_success": "Bạn đã ngừng tiếp nhận hỗ trợ"
+		},
+		"reopen": {
+			"not_found": "Không tìm thấy phiếu hỗ trợ",
+			"no_permission": "Bạn không có quyền để mở lại phiếu hỗ trợ",
+			"already_open": "Phiếu hỗ trợ này đã được mở rồi",
+			"not_thread": "Chỉ kênh chủ đề mới có thể được mở lại",
+			"thread_deleted": "Phiếu hỗ trợ đã được xóa vĩnh viễn",
+			"success": "Phiếu hỗ trợ %d đã được mở lại: <#%d>",
+			"in_ticket": "Phiếu hỗ trợ này đã được mở lại bởi <@%d>"
+		},
+		"premium": {
+			"key": "Mã kích hoạt",
+			"check_again": "Kiểm tra lại",
+			"subscription_found": "Đã tìm thấy gói đăng kí!",
+			"subscription_found_content": "Để có thể áp dụng gói đăng kí trên máy chủ này, chủ sở hữu máy chủ (<@%d>) cần thêm bạn vào **Quản lí** (vai trò sẽ bị bỏ qua) bằng lệnh %s.\\n\\nBạn có thể kiểm tra bằng lệnh %s.",
+			"activate_key": "Kích hoạt mã cho bản premium",
+			"checking": "Đang kiểm tra trạng thái nâng cấp...",
+			"please_wait": "Vui lòng chờ...",
+			"success_after_check": "Phiên bản premium đã được kích hoạt thành công trên máy chủ này!",
+			"link_patreon_account": "Liên kết tài khoản Patreon",
+			"no_subscription": "Không thể tìm thấy gói đăng kí Patreon được liên kết với tài khoản Discord. Vui lòng kiểm tra rằng bạn đã [liên kết tài khoản Patreon với tài khoản Discord](%s), và chờ thêm khoảng 10 phút.",
+			"open_form": "Mở biểu mẫu",
+			"open_form_description": "Bấm nút phía dưới để mở lại biểu mẫu",
+			"use_key_anyway": "Dùng Mã kích hoạt premium",
+			"already_purchased_title": "Bạn đã mua bản premium rồi?",
+			"already_purchased_description": "Nếu bạn đã mua premium trước đó, hãy lựa chọn phương thức thanh toán trong mục bên dưới để bắt đầu",
+			"giveaway_key": "Giveaway Mã kích hoạt",
+			"selector": {
+				"description": "Chọn phương thức mà bạn đã sử dụng để sở hữu phiên bản premium",
+				"key": {
+					"description": "Chọn tuỳ chọn này nếu bạn nhận được mã kích hoạt từ Giveaway"
+				},
+				"patreon": {
+					"description": "Chọn tuỳ chọn này nếu bạn đã thanh toán qua Patreon"
+				},
+				"discord": {
+					"description": "Chọn tùy chọn này nếu bạn đã thanh toán trực tiếp qua cửa hàng trên ứng dụng Discord"
+				}
+			},
+			"about": "Nâng cấp cho bạn truy cập thêm bảng, số liệu, bot tuỳ chỉnh và nhiều hơn! Truy cập [website](%s) của chúng tôi để tìm hiểu thêm.",
+			"already_activated": "Tin vui nè! Premium đã được kích hoạt trên máy chủ này rồi.",
+			"already_activated_whitelabel": "Tin vui nè! Máy chủ này đã được kích hoạt Premium.\n\nNếu bạn cần trợ giúp trong việc cài đặt whitelabel, hãy đọc [hướng dẫn cài đặt whitelabel](%s).",
+			"discord": {
+				"no_subscription": "Phiên bản Premium có thể được mua trực tiếp trên Discord. Bấm vào nút phía dưới tin nhắn để mở trang quản lý gói đăng ký.\n\nSau khi thanh toán, vui lòng chờ thêm 5 phút để gói đăng ký có thể được kích hoạt."
+			},
+			"subscription_found_content_modern": "Đã tìm thấy gói đăng ký Patreon của bạn. Vui lòng bấm vào nút \"Lựa chọn máy chủ\" phía dưới để mở trang quản lý và chọn máy chủ bạn muốn áp dụng gói đăng ký premium của bạn vào.",
+			"open_server_selector": "Lựa chọn máy chủ"
+		},
+		"notes": {
+			"added_to_existing": "Bạn đã được thêm vào chủ đề ghi chú có sẵn: <#%d>",
+			"thread_name": "ghi chú",
+			"created": "Một kênh chủ đề ghi chú đã được tạo cho phiếu hỗ trợ này: <#%d>",
+			"channel_mode_only": "Các chủ đề ghi chú chỉ hỗ trợ trong chế độ kênh"
+		},
+		"rename": {
+			"ratelimited": "Vì một số giới hạn của Discord, phiếu hỗ trợ chỉ có thể đổi tên 2 lần mỗi 10 phút"
+		},
+		"vote": {
+			"redeem_credits": "Quy đổi điểm",
+			"no_credits": "Quy đổi thất bại: Bạn không có điểm đánh giá nào cả!",
+			"redeem": {
+				"success": {
+					"plural": "Điểm đánh giá của bạn đã được quy đổi sang **%d** ngày có hiệu lực dành cho bản premium!",
+					"singular": "Điểm đánh giá của bạn đã được quy đổi sang **%d** ngày có hiệu lực dành cho bản premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "Bạn hiện đang có **%d** điểm đánh giá. Bấm vào nút \"Quy đổi điểm\" bên dưới để quy đổi điểm sang %d ngày có hiệu lực dành cho phiên bản premium trong máy chủ này.",
+				"singular": "Bạn hiện đang có **%d** điểm đánh giá. Bấm vào nút \"Quy đổi điểm\" bên dưới để quy đổi điểm sang %d ngày có hiệu lực dành cho phiên bản cao cấp trong máy chủ này."
+			}
+		},
+		"viewstaff": {
+			"title": "Quản lý",
+			"admin": {
+				"users": "Quản trị viên",
+				"roles": "Vai trò của quản trị viên",
+				"no_users": "Không có quản trị viên",
+				"no_roles": "Không có vai trò của quản trị viên"
+			},
+			"support": {
+				"users": "Thành viên đội ngũ hỗ trợ",
+				"roles": "Vai trò của đội ngũ hỗ trợ",
+				"no_roles": "Không có vai trò của đội ngũ hỗ trợ",
+				"users_warning": "-# **Cảnh cáo:** Tính năng chọn thành viên cho đội ngũ hỗ trợ đã không còn khả dùng. Vui lòng chuyển sang sử dụng vai trò cho đội ngũ hỗ trợ."
+			}
+		},
+		"edit": {
+			"title": "Edit Ticket Settings",
+			"description": "Below you can edit various settings for this ticket.",
+			"labels": {
+				"title": "Edit Labels",
+				"description": "Edit the labels assigned to this ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels have been successfully updated to: %s"
+				},
+				"none_configured": "No labels have been configured for this server. You can create labels in the [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Đã đổi bảng",
+			"jump_to_top": "Nhảy lên tin nhắn đầu tiên",
+			"reopened": "Phiếu hỗ trợ đã được mở lại",
+			"ticket_closed": "Đã đóng phiếu hỗ trợ"
+		},
+		"click_here": "Nhấn vào đây",
+		"confirm": "Xác nhận",
+		"website": "Website của chúng tôi"
+	},
+	"help": {
+		"switch_panel": "Chuyển phiếu hỗ trợ này sang bảng khác, đổi mục của kênh, nhóm hỗ trợ, v.v",
+		"jump_to_top": "Thêm nút để có thể nhảy lên tin nhắn đầu tiên của phiếu hỗ trợ",
+		"on_call": "Thêm bạn là đang sẵn sàng, được thêm và ping trong các phiếu hỗ trợ mới",
+		"reopen": "Mở lại phiếu hỗ trợ mà trước đó đã đóng",
+		"notes": "Tạo một kênh chủ đề để thảo luận riêng tư giữa các hỗ trợ viên",
+		"edit": "Edits settings for the current ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Bạn muốn khám phá thêm? [documentation](%s) có thể giúp bạn tuỳ chỉnh các chức năng của bot!"
+		},
+		"threads": {
+			"no_notification_channel": "Bạn cần cung cấp kênh thông báo cho phiếu hỗ trợ",
+			"notification_channel_type": "Kênh thông báo cho phiếu hỗ trợ phải là kênh Text",
+			"success": "Chế độ chủ đề đã được bật",
+			"disabled": "Chế độ chủ đề đã bị tắt"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Phiếu hỗ trợ này đã được đóng",
+			"no_permission": "Bạn không được cấp quyền để xem loại phiếu hỗ trợ này",
+			"already_joined": "Bạn đã tham gia vào phiếu hỗ trợ này rồi (<#%d>)",
+			"success": "Đã thêm bạn vào phiếu hỗ trợ: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Không thể kênh tạo chủ đề trong kênh thông báo",
+		"panel_force_disabled": "Bảng này đã bị vô hiệu hóa. Hãy thử hỏi quản lí máy chủ kích hoạt lại bản cao cấp, và chạy lại lệnh %s để kích hoạt lại bảng này.",
+		"panel_disabled": "Quản lí máy chủ đã tắt việc mở loại phiếu hỗ trợ này",
+		"acl": {
+			"no_allow_rules": "Quyền mở loại phiếu hỗ trợ này đã bị tắt cho tất cả các vai trò",
+			"deny_listed": "Bạn không thể mở loại phiếu hỗ trợ này vì bạn có vai trò <@&%d>",
+			"not_allow_listed": {
+				"multiple": "Bạn cần một trong những vai trò sau để mở dạng phiếu hỗ trợ này: %s",
+				"single": "Bạn cần những vai trò sau để mở dạng phiếu hỗ trợ này: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Chọn loại dữ liệu GDPR mà bạn muốn yêu cầu:",
+		"section": {
+			"transcript": "### **Các tùy chọn xóa bản ghi chép**\n-# _Xóa những bản ghi chép từ các máy chủ bạn sở hữu_",
+			"message": "### **Các tùy chọn ẩn danh tin nhắn**\n-# _Ẩn danh tin nhắn của bạn từ các bản ghi chép trong các máy chủ được chọn_"
+		},
+		"warning": "### **Thông tin cần lưu ý**\n* Việc xóa bỏ là **vĩnh viễn** và không thể hoàn tác\n* Bạn chỉ có thể xóa các bản ghi chép từ các máy chủ mà **bạn** sở hữu\n* Chỉ có tin nhắn của **bạn** mới có thể được ẩn danh trong các bản ghi chép\n* Yêu cầu của bạn có thể mất tới **30 ngày** để hoàn thiện\n* Yêu cầu của bạn sẽ được xử lí **theo lượt**",
+		"resources": "### **Các thông tin**\n[GDPR là gì?](%s)\n[Quyền được xóa bỏ](%s)\n[Quyền được truy cập](%s)",
+		"button": {
+			"all_transcripts": "Tất cả bản ghi chép từ các máy chủ",
+			"specific_transcripts": "Những bản ghi chép cụ thể",
+			"all_messages": "Tất cả tin nhắn bạn gửi trong các máy chủ",
+			"specific_messages": "Tin nhắn của bạn trong phiếu hỗ trợ cụ thể"
+		},
+		"language_option": "Ngôn ngữ",
+		"modal": {
+			"all_transcripts": "Xóa Tất cả bản ghi chép từ các máy chủ",
+			"specific_transcripts": "Xóa những bản ghi chép cụ thể",
+			"all_messages": "Ẩn danh tin nhắn của bạn trong các máy chủ",
+			"specific_messages": "Ảm danh tin nhắn của bạn trong phiếu hỗ trợ cụ thể",
+			"select_server": "Chọn một máy chủ",
+			"select_servers": "Chọn một hoặc nhiều máy chủ",
+			"server_id": {
+				"label": "ID máy chủ",
+				"placeholder": "Nhập ID máy chủ"
+			},
+			"server_ids": {
+				"label": "Các ID máy chủ",
+				"placeholder": "Nhập ID máy chủ có thể tách ra bằng dấu phẩy (Vd: 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Các ID phiếu hỗ trợ",
+				"placeholder": "Nhập ID phiếu hỗ trợ có thể tách ra bằng dấu phẩy (Vd: 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "Xác nhận yêu cầu GDPR",
+			"all_transcripts": "**Loại yêu cầu:** Xóa tất cả bản ghi chép từ máy chủ bạn sở hữu\n**Máy chủ:** %s",
+			"all_transcripts_multi": "**Loại yêu cầu:** Xóa tất cả bản ghi chép từ các máy chủ bạn sở hữu\n**Danh sách máy chủ:** \n* %s",
+			"specific_transcripts": "**Loại yêu cầu:** Xóa bản ghi chép cụ thể từ máy chủ\n**Máy chủ:** %s\n**ID phiếu hỗ trợ:** %s",
+			"all_messages": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong máy chủ được chọn\n**Máy chủ:** %s",
+			"all_messages_multi": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong các máy chủ được chọn\n**Danh sách máy chủ:** \n* %s",
+			"specific_messages": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong phiếu hỗ trợ cụ thể\n**Máy chủ:** %s\n**ID phiếu hỗ trợ:**: %s",
+			"warning": "\n\n⚠️ **Cảnh cáo:** Sau khi thực hiện hành động sẽ không thể hoàn tác lại.\n\nBạn có hiểu và đồng ý rằng hành động trên là vĩnh viễn không?",
+			"button": "Đồng ý - Tôi đã hiểu"
+		},
+		"queued": {
+			"title": "Yêu cầu GDPR đang được duyệt",
+			"all_transcripts": "**Loại yêu cầu:** Xóa tất cả bản ghi chép trong máy chủ\n**Máy chủ:** %s",
+			"all_transcripts_multi": "**Loại yêu cầu:** Xóa tất cả bản ghi chép trong các máy chủ \n**Danh sách máy chủ:** \n* %s",
+			"specific_transcripts": "**Loại yêu cầu:** Xóa các bản ghi chép cụ thể \n**Máy chủ:** %s\n**ID phiếu hỗ trợ:** %s",
+			"all_messages": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong máy chủ\n**Máy chủ:** %s",
+			"all_messages_multi": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong các máy chủ\n**Danh sách máy chủ:** \n* %s",
+			"specific_messages": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong phiếu hỗ trợ cụ thể\n**Máy chủ:** %s\n**ID phiếu hỗ trợ:**: %s",
+			"footer": "\n\nYêu cầu của bạn đã được đưa vào kiểm duyệt để xử lý.\nThời gian xử lý sẽ phụ thuộc vào số lượng bản ghi chép."
+		},
+		"completed": {
+			"title": "Yêu cầu GDPR đã được duyệt thành công",
+			"all_transcripts": "**Loại yêu cầu:** Xóa tất cả bản ghi chép trong máy chủ\n**Máy chủ:** %s\n**Bản ghi chép đã xóa:** %d",
+			"all_transcripts_multi": "**Loại yêu cầu:** Xóa tất cả bản ghi chép trong các máy chủ\n**Danh sách máy chủ:** \n* %s\n**Bản ghi chép đã xóa:** %d",
+			"specific_transcripts": "**Loại yêu cầu:** Xóa bản ghi chép cụ thể từ máy chủ\n**Máy chủ:** %s\n**Bản ghi chép đã xóa:** %d",
+			"all_messages": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong trong máy chủ\n**Máy chủ:** %s\n**Tin nhắn được ẩn danh:**: %d",
+			"all_messages_multi": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong các máy chủ\n**Danh sách máy chủ:** \n* %s\n**Tin nhắn được ẩn danh:**: %d",
+			"specific_messages": "**Loại yêu cầu:** Ẩn danh tất cả tin nhắn của bạn trong phiếu hỗ trợ cụ thể\n**Máy chủ:** %s\n**Tin nhắn được ẩn danh:**: %d",
+			"error": "\n\n**⚠️ Lỗi:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Đã gặp vấn đề với yêu cầu GDPR của bạn: %s",
+			"no_data": "ℹ️ Đã xử lí yêu cầu GDPR của bạn. Không có dữ liệu nào được tìm thấy.",
+			"success": "✅ Đã xử lí yêu cầu GDPR của bạn thành công."
+		},
+		"error": {
+			"no_servers": "Không tìm thấy máy chủ bạn sở hữu và có bản ghi chép.",
+			"invalid_server_id": "ID máy chủ không hợp lệ.",
+			"invalid_ticket_ids": "IDs của các phiếu hỗ trợ không hợp lệ. Vui lòng nhập ID dưới dạng số và tách ra bằng dấu phẩy (VD: 123, 456, 789).",
+			"not_owner": "Chỉ chủ sở hữu máy chủ mới có thể xóa các bản ghi chép.",
+			"server_not_found": "Không tìm thấy máy chủ.",
+			"queue_failed": "Kiểm duyệt yêu cầu GDPR thất bại. Vui lòng thử lại sau.",
+			"worker_offline": "Hệ thống xử lí yêu cầu GDPR hiện không khả dụng. Vui lòng thử lại sau hoặc liên hệ với đội ngũ hỗ trợ nếu vấn đề này còn tiếp diễn."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Không thể tìm được kênh theo yêu cầu: kênh có thể đã bị xóa.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và đảm bảo rằng các kênh trong cài đặt đã hợp lệ.",
+		"unknown_guild": "Không thể tìm được máy chủ.",
+		"unknown_member": "Không thể tìm được người dùng. Có thể họ đã rời máy chủ hoặc bị cấm.",
+		"unknown_message": "Tin nhắn mà bạn đang tương tác với hiện đã bị xóa.\n\nVui lòng thử tương tác với một tin nhắn khác.",
+		"unknown_user": "không tìm thấy người dùng.",
+		"unknown_role": "Vai trò yêu cầu cho tác vụ này không còn tồn tại.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và cấu hình lại vai trò trong cài đặt.",
+		"unknown_category": "Không thể tìm được danh mục theo yêu cầu: danh mục có thể đã bị xóa.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và đặt lại một danh mục hợp lệ cho bảng phiếu hỗ trợ.",
+		"unknown_interaction": "Tương tác đã hết hạn.\n\nVui lòng thực hiện lại tương tác.",
+		"max_webhooks": "Máy chủ đã đạt giới hạn số lượng webhook có thể tạo.\n\nVui lòng nhờ quản trị viên để xóa bớt webhooks không được sử dụng và thử lại.",
+		"max_channels": "Your ticket could not be opened because this server has reached Discord's channel limit (500).\n\nPlease ask a server administrator to close some tickets or delete some unused channels before opening a new ticket.",
+		"interaction_acknowledged": "Tương tác này đã được xử lí.\n\nNếu bạn muốn thực hiện lại tác vụ, hãy bắt đầu một tương tác mới.",
+		"missing_permissions": {
+			"title": "Tôi đang thiếu những quyền sau để thực hiện tác vụ",
+			"body": "Vui lòng cấp những quyền sau cho bot hoặc cấp quyền `Quản trị viên` và thử lại.\nVui lòng try cập [trang tài liệu](%s) để biết lí do tại sao những quyền sau cần thiết."
+		},
+		"missing_access": "I am missing the permissions required to perform this action.\n\nPlease assign the necessary permissions to the bot, or alternatively, the `Administrator` permission and try again.\nPlease visit our [docs](%s) for an explanation of why each permission is required.",
+		"invalid_length": "Có một hoặc nhiều dòng quá ngắn hoặc quá dài.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và đảm bảo rằng tất cả dữ liệu nhập vào và các dòng có độ dài giới hạn theo yêu cầu.",
+		"required_field": "Có một dòng yêu cầu đang bị thiếu hoặc để trống.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và đảm bảo rằng tất cả các dòng đều được điền đầy đủ.",
+		"invalid_channel_type": "Kênh cho tác vụ này không hợp lệ, kênh có thể đã bị xóa.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và đảm bảo rằng các kênh trong cài đặt đã hợp lệ.",
+		"invalid_category": "Danh mục không hợp lệ, danh mục có thể đã bị xóa.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và đặt lại một danh mục hợp lệ cho bảng phiếu hỗ trợ.",
+		"invalid_id": "ID không hợp lệ trong cấu hình của bot.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và xác minh lại các cài đặt.",
+		"invalid_characters": "Nội dung nhập vào có chứa ký không hợp lệ.\n\nChỉ được phép sử dụng chữ cái, số, dấu gạch ngang và dấu gạch dưới.",
+		"invalid_choice": "Có lựa chọn không hợp lệ.\n\nVui lòng nhờ quản trị viên máy chủ truy cập [bảng quản lý](%s) và xác minh lại các cài đặt.",
+		"invalid_form": "Tác vụ này không thể thực hiện do dữ liệu được nhập không hợp lệ.",
+		"thread_locked": "Your ticket could not be opened because the ticket thread is locked.\n\nPlease ask a server administrator to unlock the ticket thread.",
+		"max_active_threads": "Your ticket could not be opened because the maximum number of active threads has been reached in this channel.\n\nPlease ask a server administrator to close some tickets or threads.",
+		"timed_out": "Đã hết thời gian xử lí, vui lòng thử lại.",
+		"rate_limited": "Bạn đã bị giới hạn. Vui lòng thử lại sau %s.",
+		"rate_limited_global": "Discord đang bị quá tải (giới hạn toàn cầu). Vui lòng thử lại sau %s.",
+		"general": "Đã có lỗi xảy ra khi thực hiện tác vụ.",
+		"error_id": "Lỗi ID"
+	}
+}

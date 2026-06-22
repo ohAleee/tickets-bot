@@ -1,0 +1,513 @@
+{
+	"commands.about": "Tickets is een eenvoudig te gebruiken en zeer configureerbare ticket- en ondersteuningsbot.\\nSupport server: %s\\nCommands: Typ `%s`\\nGa aan de slag door het commando `%s` te doen.",
+	"commands.add.no_members": "U moet leden vermelden om aan het ticket toe te voegen",
+	"commands.add.no_permission": "U heeft niet de juiste machtigingen om mensen aan deze ticket toe te voegen",
+	"commands.add.no_everyone": "Je kunt niet de '@everyone' rol toevoegen aan een ticket",
+	"commands.addadmin.no_members": "U moet een gebruiker vermelden of een rol noemen om beheerdersrechten aan te verlenen",
+	"commands.addadmin.owner": "De eigenaar van de server is al een administrator",
+	"commands.addsupport.no_members": "U moet een gebruiker vermelden of een rol noemen om ondersteuningsrechten te verlenen",
+	"commands.blacklist.no_members": "U moet een gebruiker vermelden om deze op de zwarte lijst te zetten",
+	"commands.blacklist.self": "U kunt uzelf niet op de zwarte lijst zetten",
+	"commands.claim.success": "Uw ticket wordt behandeld door %s",
+	"commands.invite": "[Klik hier](<%s>)",
+	"commands.language.invalid": "U moet een taalcode of vlag opgeven. Beschikbare talen:\\n%s",
+	"commands.open.ticket_limit": "U kunt %d %s slechts één keer openen",
+	"commands.open.too_many_tickets": "Er zijn te veel tickets in de ticketcategorie. Vraag een beheerder om sommige te sluiten of om ze naar een andere categorie te verplaatsen\n\nDit is een **door Discord opgelegd limiet** van 50 kanalen per categorie.",
+	"commands.panel": "Bezoek <%s> om een ​​paneel te configureren",
+	"commands.premium": "U kunt een premium abonnement kopen op <%s>.\\nPremium biedt veel voordelen, zoals:\\n```diff\\n+ Maak onbeperkt ticketpanelen\\n+ Pas bot naam, avatar en status aan (whitelabel)\\n+ Gedetailleerde statistieken over de server, gebruikers en ondersteunend personeel\\n+ Geen branding in de voettekst van berichten\\n+ Ondersteun ontwikkeling en help me de serverkosten te betalen\\n```\\n\\nU kunt ook stemmen op <%s> om 24 uur lang gratis premium te krijgen",
+	"commands.premium.invalid_key": "Ongeldige sleutel. Zorg ervoor dat je het correct hebt gekopieerd.",
+	"commands.remove.no_permission": "Je hebt geen toestemming om mensen uit dit ticket te verwijderen",
+	"commands.remove.staff": "Je kunt geen personeel van een ticket verwijderen",
+	"commands.removeadmin.no_members": "U moet een gebruiker vermelden of een rol noemen om administratorrechten van in te trekken",
+	"commands.removeadmin.owner": "De server eigenaar moet een administrator zijn",
+	"commands.removeadmin.self": "Je kunt je eigen privileges niet intrekken",
+	"commands.removesupport.no_members": "U moet een gebruiker vermelden of een rol noemen om ondersteuningsrechten te verlenen",
+	"commands.rename.missing_name": "Je moet een nieuwe naam voor dit ticket opgeven",
+	"commands.rename.success": " Dit ticket is hernoemd naar <#%d>",
+	"commands.tags.create.already_exists": "Er bestaat al een tag met het ID `%s`. U kunt de tag verwijderen met `%s`",
+	"commands.tags.create.invalid_arguments": "U moet een tag-ID en inhoud opgeven",
+	"commands.tags.create.too_long": "Tag-ID's mogen niet langer zijn dan 16 tekens",
+	"commands.tags.delete.invalid_arguments": "U moet een tag-ID opgeven om te verwijderen",
+	"commands.tags.delete.not_exist": "Kan een tag met het ID `%s` niet vinden",
+	"commands.tags.get.invalid_arguments": "U moet het ID van de tag opgeven. Ga voor meer hulp met tag naar <%s>.",
+	"commands.tags.get.invalid_tag": "Ongeldige tag. Ga voor meer hulp met tags naar <%s>.",
+	"commands.tags.list": "ID's voor alle tags: \\n%s\\n Voer `%s` uit om de inhoud van een tag te bekijken",
+	"commands.unclaim.not_claimed": "Dit ticket is niet opgeëist",
+	"commands.unclaim.not_claimer": "Alleen administratoren en de gebruiker die het ticket heeft geclaimd, kunnen het ticket ongedaan maken",
+	"commands.unclaim.success": "Alle ondersteuningsvertegenwoordigers kunnen nu reageren op het ticket",
+	"commands.vote": "Klik op de onderstaande knop om op de bot te stemmen en ontvang 24 uur lang gratis premium.\n\nNadat je hebt gestemd, voer je het commando %s uit om je stemcredits te verzilveren.",
+	"generic.invalid_argument": "Ongeldig argument: verwijs naar gebruik",
+	"generic.invalid_user": "Kan de doelgebruiker niet vinden",
+	"generic.no_permission": "Hiervoor heeft u geen toestemming",
+	"generic.not_ticket": "Dit is geen ticketkanaal",
+	"generic.owner_only": "Deze opdracht is alleen voor de bot-eigenaar",
+	"help.about": " Vertelt je informatie over de bot",
+	"help.add": "Voegt een gebruiker toe aan een ticket",
+	"help.addadmin": "Geeft een gebruiker of rol administratorrechten",
+	"help.addsupport": "Voegt een rol toe als ondersteuningvertegenwoordiger",
+	"help.admin": "Botbeheer",
+	"help.admin.blacklist": "Zet een server op de zwarte lijst van de bot",
+	"help.admin.debug.server": "Foutopsporing van een server",
+	"help.admin.generate_premium": "Genereer premium sleutels",
+	"help.admin.unblacklist": "Haalt een server van de zwarte lijst af",
+	"help.blacklist": "Schakelt in of gebruikers met de bot mogen communiceren",
+	"help.cancel": "Annuleert het installatieproces",
+	"help.claim": "Wijst één medewerker toe aan een ticket",
+	"help.close": "Sluit het huidige ticket",
+	"help.help": "Toont u een lijst met commando's",
+	"help.invite": "Voorziet in een uitnodigingslink voor de bot",
+	"help.language": "Verandert de taal die de bot gebruikt",
+	"help.managetags": "Tags toevoegen, verwijderen of weergeven",
+	"help.open": "Opent een nieuwe ticket",
+	"help.panel": "Creëert een paneel waarmee gebruikers met 1 klik een ticket kunnen openen",
+	"help.premium": "Voer dit commando uit na de aankoop van premium om het te activeren",
+	"help.remove": "Verwijdert een gebruiker uit een ticket",
+	"help.removeadmin": "Hiermee trekt u de beheerdersrechten van een gebruiker of rol in",
+	"help.removesupport": "Trekt de privileges van de ondersteuningsvertegenwoordiger van een gebruiker of rol in",
+	"help.rename": " Hernoemt het huidige ticket",
+	"help.setup": "Hiermee kunt u de bot eenvoudig configureren",
+	"help.stats": "Toont u statistieken over gebruikers, ondersteunend personeel en de server",
+	"help.statsserver": "Toont u statistieken over de server",
+	"help.tag": "Verzendt een berichtfragment",
+	"help.tagdelete": "Verwijdert een tag",
+	"help.taggadd": "Voegt een nieuwe tag toe",
+	"help.taglist": "Geeft alle tags weer",
+	"help.transfer": "Brengt een geclaimd ticket over naar een andere gebruiker",
+	"help.unclaim": "Verwijdert de claim op het huidige ticket",
+	"help.viewstaff": "Geeft de medewerkers en rollen weer",
+	"help.vote": "Geeft een link waarop u gratis premium krijgt door te stemmen",
+	"help.gdpr": "Beheer jouw GDPR data verzoeken",
+	"open.success": "Een nieuw ticket is geopend: %s",
+	"open.outside_support_hours": {
+		"title": "Dit paneel is momenteel gesloten",
+		"message": "Probeer het opnieuw tijdens onze ondersteuningsuren."
+	},
+	"setup.auto.category.failure": "Ik mis de permissie 'Kanalen beheren'",
+	"setup.auto.category.success": "Ticketcategorie aangemaakt",
+	"setup.auto.completed": "Installatie voltooid! Klik [hier](%s) om een reactiescherm op te zetten, en voeg de <@&%d> en <@&%d> rollen toe aan je medewerkers",
+	"setup.auto.roles.failure": "Ik mis de permissie 'Rollen Beheren'",
+	"setup.auto.roles.success": "`Tickets Admin` & `Tickets Support` rollen gecreëerd",
+	"setup.auto.transcript.failure": "Ik mis de permissie 'Kanalen Beheren'",
+	"setup.auto.transcript.success": "Kanaal <#%d> gecreëerd",
+	"setup.ticket_limit.success": "Het ticket limiet is veranderd naar `%d`",
+	"setup.transcript.invalid": "Je moet een geldig kanaal vermelden op de server (bijv. <#%d>)\\n**Voorbeeld:** `%s`",
+	"setup.transcript.success": "Het transcripts kanaal is veranderd naar <#%d>",
+	"commands.language.help_wanted": "Spreek je een andere taal? Sluit je aan bij onze [support server](%s) als je geïnteresseerd bent in het vertalen van de bot in meer talen",
+	"commands.rename.too_long": "Kanaalnamen kunnen niet langer zijn dan 100 tekens",
+	"commands.autoclose.configure": "Bezoek het [dashboard](%s) om reactiepanelen te maken",
+	"help.autoclose": "Autoclose gerelateerde commando's",
+	"help.autoclose.exclude": "Sluit uit dat het huidige ticket wordt gesloten",
+	"help.autoclose.configure": "Autoclose gerelateerde instellingen bewerken",
+	"commands.autoclose.exclude.success": "Dit ticket word niet meer automatisch gesloten",
+	"commands.claim.no_permission": "Alleen medewerkers kunnen tickets opeisen",
+	"commands.open.from": "Dit ticket is geopend vanaf [dit bericht](%s).\n\n<@%d> zei in <#%d>:\n```%s```",
+	"commands.open.from.moved": "Gesprek is verplaatst naar een ticket (<#%d>)",
+	"help.close_request": "Stuurt een bericht waarin de gebruiker wordt gevraagd te bevestigen dat de ticket kan worden gesloten",
+	"close.reason_too_long": "De reden kan niet langer zijn dan 255 tekens",
+	"commands.close_request.success": "Verzoek tot sluiten is succesvol verzonden",
+	"commands.close_request.no_reason": "<@%d> heeft gevraagd om dit ticket te sluiten.\n\nAccepteer of weiger met de knoppen hieronder.",
+	"commands.close_request.with_reason": "<@%d> heeft gevraagd om dit ticket te sluiten. Reden:\n```\n%s\n```\nAccepteer of weiger met de knoppen hieronder.",
+	"commands.close_request.no_permission": "Alleen de gebruiker die het ticket heeft geopend kan reageren op de sluitingsaanvraag",
+	"commands.close_request.denied": "<@%d> heeft het sluitingsverzoek geweigerd",
+	"generic.error": "Foutmelding",
+	"feedback.disabled": "Feedback op deze server is uitgeschakeld",
+	"feedback.success": "Uw feedback is doorgegeven",
+	"generic.success": "Succes",
+	"button.guild_only": "Deze knop moet worden gebruikt in een server",
+	"button.dms_only": "Deze knop moet worden gebruikt in directe berichten",
+	"commands.tag.generic": "Label",
+	"commands.tags.delete.success": "Tag `%s` is verwijderd",
+	"generic.ticket": "Ticket",
+	"generic.title.premium_only": "Premium Only Commando",
+	"generic.admin": "Beheerder",
+	"commands.tags.create.success": "Tag aangemaakt - u kunt deze gebruiken door `%s` uit te voeren",
+	"generic.title.about": "Over ons",
+	"generic.title.vote": "Stem",
+	"generic.title.tags": "Labels",
+	"generic.title.autoclose": "Automatisch sluiten",
+	"generic.title.invite": "Uitnodigen",
+	"generic.title.close": "Sluiten",
+	"generic.title.claim": "Opeisen",
+	"generic.title.unclaim": "Trek claim in",
+	"generic.title.blacklisted": "Verbannen",
+	"generic.title.blacklist": "Zwarte Lijst",
+	"generic.error.blacklisted": "U bent geblacklist in deze server",
+	"generic.error.guild_blacklisted": "Deze server staat op de zwarte lijst voor het gebruik van deze bot",
+	"generic.error.user_blacklisted": "Je staat op de zwarte lijst en kan deze bot niet gebruiken",
+	"commands.blacklist.add.success": "<@%d> is op de blacklist gezet",
+	"commands.blacklist.remove.success": "<@%d> is uit de blacklist gehaald",
+	"generic.title.add_admin": "Beheerder toevoegen",
+	"generic.title.add_support": "Support toevoegen",
+	"generic.title.remove_admin": "Beheerder verwijderen",
+	"generic.title.remove_support": "Support verwijderen",
+	"commands.addsupport.success": "Ondersteuningsmedewerker is toegevoegd: %s",
+	"generic.title.language": "Taal",
+	"commands.removesupport.success": "Ondersteuningsmedewerker verwijderd: %s",
+	"commands.addadmin.success": "Admininstrator is succesvol toegevoegd: %s",
+	"commands.removeadmin.success": "Administrator verwijderd: %s",
+	"generic.title.setup": "Installatie",
+	"generic.title.premium": "Premium",
+	"generic.title.panel": "Paneel",
+	"generic.title.rename": "Hernoemen",
+	"generic.title.remove": "Verwijder",
+	"generic.title.help": "Help",
+	"generic.title.close_confirmation": "Sluitbevestiging",
+	"close.confirmation": "Bevestig dat u dit ticket wil sluiten",
+	"generic.title.close_request": "Sluitingsverzoek",
+	"commands.close_request.accept": "Accepteren & Sluiten",
+	"commands.close_request.deny": "Weigeren en open houden",
+	"commands.premium.success": "Premium is geactiveerd voor **%d** dagen",
+	"generic.title.claimed": "Ticket opgeëist",
+	"generic.title.unclaimed": "Onopgeëist ticket",
+	"generic.title.add": "Toevoegen",
+	"commands.add.success": "<@%s> is toegevoegd aan <#%d>",
+	"commands.add.role_thread": "Door de beperkingen van Discord kunnen rollen niet toegevoegd worden aan thread tickets",
+	"commands.remove.success": "<@%s> is verwijderd van <#%d>",
+	"commands.remove.role_thread": "Door de beperkingen van Discord kunnen rollen niet verwijderd worden van thread tickets",
+	"open.ratelimited": "Er worden te snel tickets geopend in deze server",
+	"open.panel_cooldown": "Je bent op cooldown voor dit paneel. Probeer het opnieuw %s.",
+	"commands.claim.thread": "Door beperkingen vanuit Discord wordt het claimen van threads niet ondersteunt",
+	"generic.join_support_server": "Word lid van de ondersteuningsserver",
+	"commands.open.guild_channel_limit": "Deze server heeft de limiet van 500 kanalen bereikt",
+	"commands.open.missing_form_answer": "Je moet de vraag `%s` beantwoorden",
+	"close.no_permission": "U heeft niet de juiste permissies om dit ticket te sluiten",
+	"": {
+		"generic.title.close_with_reason": "Sluit met een reden",
+		"generic.reason": "Reden"
+	},
+	"close": {
+		"reason": {
+			"placeholder": "Reden voor het sluiten van het ticket, bv. \"Opgelost\""
+		},
+		"success": "De ticket is gesloten door <@%d>",
+		"rate": {
+			"not_allowed": {
+				"staff": "U kunt dit ticket niet beoordelen omdat u een ondersteuningsmedewerker bent in %s",
+				"empty": "U kunt dit ticket niet beoordelen omdat u geen berichten heeft verstuurd"
+			}
+		}
+	},
+	"commands": {
+		"open": {
+			"disabled": "Het `%s` commando is uitgeschakeld in deze server: gebruik een ticketpaneel om een ticket te openen",
+			"threads": {
+				"cant_see_parent_channel": "Kon <@%d> niet toevoegen aan de ticket: Zorg ervoor dat ze toestemming hebben om het hoofdkanaal van het gesprek te bekijken (<#%d>)",
+				"cant_message_in_threads": "U mist de 'Send Messages in Threads' permissie, die nodig is om een ticket te openen. Vraag aan een server administrator om u deze permissie te verlenen en probeer het vervolgens opnieuw."
+			}
+		},
+		"switch_panel": {
+			"invalid_panel": "Ongeldig paneel: U moet één selecteren uit de keuzelijst",
+			"success": "Dit ticket is overgeschakeld naar het `%s` paneel door <@%d>",
+			"non_thread_to_thread": "Je kunt vanuit een ticket dat geen threads gebruikt niet overschakelen naar een paneel dat threads gebruikt",
+			"claimer_no_access_title": "Paneel wissel is geblokkeerd",
+			"claimer_no_access": "De ticket claimer (<@%d>) heeft geen toegang tot het geselecteerde paneel.",
+			"auto_unclaimed": "Dit ticket is verplaatst naar de '%s' paneel door <@%d>.\n\nDit ticket is automatisch niet geselecteerd, omdat <@%d> geen toegang heeft tot het nieuwe paneel."
+		},
+		"blacklist": {
+			"staff": "Medewerkers kunnen niet worden geblacklist",
+			"add_role": {
+				"success": "<@&%d> is op de blacklist gezet",
+				"limit": "Je hebt het limiet voor de rol blacklist bereikt (%d)"
+			},
+			"remove_role": {
+				"success": "<@&%d> is van de zwarte lijst gehaald"
+			},
+			"add": {
+				"limit": "U heeft het gebruiker blacklist limiet bereikt (%d): overweeg om een rol te gebruiken"
+			}
+		},
+		"jump_to_top": {
+			"no_welcome_message": "Dit ticket heeft geen welkom bericht",
+			"content": "Klik op de knop hieronder om naar het begin van het ticket te gaan"
+		},
+		"addsupport": {
+			"confirm": "Bevestig dat u %s wilt toevoegen aan het standaard support team",
+			"everyone": "Je kunt de rol `@everyone` niet toevoegen als staff"
+		},
+		"addadmin": {
+			"confirm": "Bevestig dat u %s als bot beheerder wilt toevoegen"
+		},
+		"tags": {
+			"create": {
+				"limit": "Je hebt het tag-limiet bereikt (%d)"
+			},
+			"get": {
+				"requires_premium": "Premium is vereist om aangepaste commando's te gebruiken"
+			}
+		},
+		"language": {
+			"content": "De beschikbare talen en hun voortgang in vertaling zijn als volgt:\n%s",
+			"success": "De servertaal is veranderd naar **%s** (%s)",
+			"select": "Selecteer een taal (%c-%c)"
+		},
+		"on_call": {
+			"channel_mode": "`%s` kan alleen gebruikt worden in de thread modus. Bezoek onze [docs](%s) om meer te weten te komen over threads",
+			"success": "U word nu op de hoogte gebracht van nieuwe oproepen",
+			"remove_success": "Je word niet langer op de hoogte gebracht van nieuwe oproepen"
+		},
+		"reopen": {
+			"not_found": "Ticket niet gevonden",
+			"no_permission": "Je hebt geen toestemming om deze ticket opnieuw te openen",
+			"already_open": "Deze ticket is al geopend",
+			"not_thread": "Alleen threads kunnen opnieuw geopend worden",
+			"thread_deleted": "De ticket is permanent verwijderd",
+			"success": "Ticket %d opnieuw geopend: <#%d>",
+			"in_ticket": "Deze ticket is opnieuw geopend door <@%d>"
+		},
+		"premium": {
+			"key": "Sleutel",
+			"check_again": "Controleer opnieuw",
+			"subscription_found": "Abonnement gevonden!",
+			"subscription_found_content": "Om je abonnement toe te passen op deze server moet de servereigenaar (<@%d>) je toevoegen als een admin **gebruiker** (rollen worden genegeerd) via het %s commando.\\n\\nU kunt controleren of u als admin gebruiker bent toegevoegd door %s uit te voeren.",
+			"activate_key": "Activeer een Premium-sleutel",
+			"checking": "Controleren van Premium-status...",
+			"please_wait": "Een ogenblik geduld...",
+			"success_after_check": "Premium is nu actief in deze server!",
+			"link_patreon_account": "Koppel Patreon account",
+			"no_subscription": "Kon geen actief Patreon-abonnement vinden dat gekoppeld is aan je Discord-account. Zorg ervoor dat je [je Patreon en Discord accounts hebt verbonden](%s), en nog eens 10 minuten hebt gewacht.",
+			"open_form": "Open formulier",
+			"open_form_description": "Druk op de knop hieronder om het formulier te heropenen",
+			"use_key_anyway": "Toch Premium sleutel gebruiken",
+			"already_purchased_title": "Al premium gekocht?",
+			"already_purchased_description": "Als je premium al hebt aangeschaft, selecteer dan de betaalmethode in het dropdown menu om te beginnen",
+			"giveaway_key": "Sleutel weggeven",
+			"selector": {
+				"description": "Selecteer de methode die je hebt gebruikt om premium te krijgen",
+				"key": {
+					"description": "Selecteer deze optie als je een giveaway sleutel hebt gekregen"
+				},
+				"patreon": {
+					"description": "Selecteer deze optie als je je aankoop hebt gedaan op Patreon"
+				},
+				"discord": {
+					"description": "Selecteer deze optie als u uw aankoop heeft gemaakt in de Discord winkel"
+				}
+			},
+			"about": "Premium geeft je toegang tot meer panelen, statistieken, een aangepaste bot en meer! Bezoek onze [website](%s) voor meer informatie.",
+			"already_activated": "Goed nieuws! Premium is al actief in deze server.",
+			"already_activated_whitelabel": "Goed nieuws! Premium is al actief in deze server.\n\nVoor hulp bij het gebruik van whitelabel, zie [onze whitelabel installatiehandleiding](%s).",
+			"discord": {
+				"no_subscription": "Premium kan rechtstreeks vanuit Discord worden gekocht. Klik op de knop in dit bericht om de abonnementen beheer pagina te openen.\n\nHet kan tot 5 minuten nadat u een aankoop heeft gedaan duren voordat het abonnement gedetecteerd wordt."
+			},
+			"subscription_found_content_modern": "Uw Patreon abonnement is gevonden. Klik op de \"Open Server Selector\" knop om het dashboard te openen waar u kunt selecteren in welke servers u het premium abonnement wilt gebruiken.",
+			"open_server_selector": "Open het server selectie menu"
+		},
+		"notes": {
+			"added_to_existing": "Je bent toegevoegd aan de bestaande notitiethread: <#%d>",
+			"thread_name": "notities",
+			"created": "Voor deze ticket is een notitie gemaakt: <#%d>",
+			"channel_mode_only": "Notitie threads worden alleen in kanaalmodus ondersteund"
+		},
+		"rename": {
+			"ratelimited": "Wegens beperkingen door Discord kan tickets slecht twee keer per 10 minuten worden hernoemd"
+		},
+		"vote": {
+			"redeem_credits": "Credits inwisselen",
+			"no_credits": "Inwisseling mislukt: u heeft niet genoeg credits!",
+			"redeem": {
+				"success": {
+					"plural": "Uw stem credits zijn ingewisseld voor **%d** dagen premium!",
+					"singular": "Uw stem credits zijn ingewisseld voor **%d** dag premium!"
+				}
+			},
+			"with_credits": {
+				"plural": "U heeft **%d** stem credits. Klik op de \"Credits Inwisselen\" knop hieronder om ze in te wisselen voor **%d** dagen premium in deze server.",
+				"singular": "U heeft **%d** stem credit. Klik op de \"Credits Inwisselen\" knop hieronder om deze in te wisselen voor **%d** dag premium in deze server."
+			}
+		},
+		"viewstaff": {
+			"title": "Staf",
+			"admin": {
+				"users": "Administratoren",
+				"roles": "Administrator rollen",
+				"no_users": "Geen administratoren",
+				"no_roles": "Geen administrator rollen"
+			},
+			"support": {
+				"users": "Ondersteuningsgebruikers",
+				"roles": "Ondersteuningsrollen",
+				"no_roles": "Geen ondersteuningsrollen",
+				"users_warning": "-# **Waarschuwing.** Gebruikers in ondersteuningsteams zijn niet langer nodig. Migreer naar rollen."
+			}
+		},
+		"edit": {
+			"title": "Ticketinstellingen bewerken",
+			"description": "Hieronder kun je verschillende instellingen voor deze ticket bewerken.",
+			"labels": {
+				"title": "Bewerk Labels",
+				"description": "Bewerk de labels van deze ticket",
+				"update_modal": {
+					"title": "Update Ticket Labels",
+					"select_menu_title": "Labels",
+					"success": "Ticket labels zijn bijgewerkt naar: %s"
+				},
+				"none_configured": "Geen labels zijn geselecteerd voor deze server. Je kan labels maken in de [dashboard](%s)."
+			}
+		}
+	},
+	"generic": {
+		"title": {
+			"panel_switched": "Ticketpaneel gewijzigd",
+			"jump_to_top": "Spring naar boven",
+			"reopened": "Ticket opnieuw geopend",
+			"ticket_closed": "Ticket gesloten"
+		},
+		"click_here": "Klik hier",
+		"confirm": "Bevestig",
+		"website": "Onze website"
+	},
+	"help": {
+		"switch_panel": "Schakel een ticket over naar een ander ticketpaneel, wijzigt de kanaalcategorie, ondersteuningsteams, enzovoort",
+		"jump_to_top": "Biedt je met een knop om naar de bovenkant van het ticket te gaan",
+		"on_call": "Markeert je als \"on call\", zodat je wordt toegevoegd en gepingd in alle nieuwe tickets",
+		"reopen": "Heropent een ticket die eerder was gesloten",
+		"notes": "Maakt een conversatie aan voor privé gesprek tussen ondersteunende vertegenwoordigers",
+		"edit": "Bewerk instellingen van huidige ticket"
+	},
+	"setup": {
+		"auto": {
+			"docs": "Wil je meer ontdekken? Onze [documentation](%s) zal je leren hoe je elk aspect van de bot moet configureren!"
+		},
+		"threads": {
+			"no_notification_channel": "Je moet een ticket notificatie kanaal opgeven",
+			"notification_channel_type": "Het ticket notificatie kanaal moet een tekstkanaal zijn",
+			"success": "Thread-modus is ingeschakeld",
+			"disabled": "Thread-modus is uitgeschakeld"
+		}
+	},
+	"button": {
+		"join_thread": {
+			"closed_ticket": "Deze ticket is al gesloten",
+			"no_permission": "Je hebt geen toestemming om dit type ticket te bekijken",
+			"already_joined": "Je bent al lid geworden van ticket (<#%d>)",
+			"success": "Je bent toegevoegd aan ticket: <#%d>"
+		}
+	},
+	"open": {
+		"thread_in_announcement_channel": "Threads kunnen niet worden aangemaakt in aankondigingskanalen",
+		"panel_force_disabled": "Dit paneel is uitgeschakeld. Vraag een serverbeheerder om premium opnieuw te activeren en voer %s uit om dit paneel weer in te schakelen.",
+		"panel_disabled": "De beheerder van de server heeft het openen van dit type ticket uitgeschakeld",
+		"acl": {
+			"no_allow_rules": "Toegang tot het openen van dit type ticket is uitgeschakeld voor alle rollen",
+			"deny_listed": "Je kunt dit type ticket niet openen omdat je de rol <@&%d > hebt",
+			"not_allow_listed": {
+				"multiple": "U heeft een van de volgende rollen nodig om deze type ticket te openen: %s",
+				"single": "Je moet de volgende rol hebben om een ticket te openen: %s"
+			}
+		}
+	},
+	"gdpr": {
+		"intro": "Selecteer het type GDPR verzoek dat je wilt maken:",
+		"section": {
+			"transcript": "### **Transcript Verwijderingsopties** \n-# _Verwijder transcripts van servers die jij bezit_",
+			"message": "### **Bericht Anonimisatie Opties**\n-# _Anonimiseer jouw berichten van transcripten in de geselecteerde servers_"
+		},
+		"warning": "### **Belangrijke Informatie**\n* Verwijderen is **permanent** and kan niet ongedaan worden\n* Je kan alleen transcripts verwijderen van servers die **jij** bezit\n* Alleen **jouw** berichten kunnen in transcripten geanonimiseerd worden\n* De aanvraag kan tot **30 dagen** duren om te voltooien\n* Jouw aanvraag zal worden verwerkt in een **wachtrij**",
+		"resources": "### **Bronnen**\n[Wat is GDPR?](%s)\n[Recht om te wissen](%s)\n[Recht van toegang](%s)",
+		"button": {
+			"all_transcripts": "Alle transcripties van servers",
+			"specific_transcripts": "Specifieke transcripties",
+			"all_messages": "Al jouw berichten in servers",
+			"specific_messages": "Jouw berichten in specifieke tickets"
+		},
+		"language_option": "Taal",
+		"modal": {
+			"all_transcripts": "Verwijder Alle Transcripties van Servers",
+			"specific_transcripts": "Verwijder Specifieke Transcripties",
+			"all_messages": "Anonimiseer Je Berichten in Servers",
+			"specific_messages": "Anonimiseer Je Berichten in Specifieke Tickets",
+			"select_server": "Selecteer een server",
+			"select_servers": "Selecteer één of meer servers",
+			"server_id": {
+				"label": "Server ID",
+				"placeholder": "Voer de server ID in"
+			},
+			"server_ids": {
+				"label": "Server ID's",
+				"placeholder": "Voer server ID's in, gescheiden door komma's (bijv. 1071167333265047653, 1412752753348055111)"
+			},
+			"ticket_ids": {
+				"label": "Ticket ID's",
+				"placeholder": "Voer ticket ID's in, gescheiden door komma's (bijv. 123, 456, 789)"
+			}
+		},
+		"confirm": {
+			"title": "GDPR Bevestiging Vereist",
+			"all_transcripts": "**Type aanvraag:** Verwijder alle transcripts van een server waarvan u de eigenaar bent\n**Server:** %s",
+			"all_transcripts_multi": "**Aanvraag Type:** Verwijder alle transcripts van servers die u bezit\n**Servers:**\n* %s",
+			"specific_transcripts": "**Request Type:** Verwijder specifieke transcripts van server\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Aanvraag Type:** anonimiseert al uw berichten in de geselecteerde server\n**Server:** %s",
+			"all_messages_multi": "**Type Aanvraag:** Anonimiseer alle berichten in geselecteerde servers\n**Server:**\n* %s",
+			"specific_messages": "**Type Aanvraag:** Anonimiseer je berichten in specifieke tickets\n**Server:** %s\n**Ticket ID's:** %s",
+			"warning": "\n\n⚠️ **Waarschuwing:** Deze actie is permanent en kan niet ongedaan gemaakt worden.\n\nBegrijpt u dit en accepteert u dat deze actie permanent is?",
+			"button": "Bevestig - ik begrijp het"
+		},
+		"queued": {
+			"title": "GDPR aanvraag in de wachtrij",
+			"all_transcripts": "**Type aanvraag:** Verwijder alle transcripts van een server waarvan u de eigenaar bent\n**Server:** %s",
+			"all_transcripts_multi": "**Type aanvraag:** Verwijder alle transcripts van een server waarvan u de eigenaar bent\n**Server:** %s",
+			"specific_transcripts": "**Request Type:** Verwijder specifieke transcripts van server\n**Server:** %s\n**Ticket IDs:** %s",
+			"all_messages": "**Aanvraag Type:** anonimiseert al uw berichten in de geselecteerde server\n**Server:** %s",
+			"all_messages_multi": "**Aanvraag Type:** anonimiseert al uw berichten in de geselecteerde server\n**Server:** %s",
+			"specific_messages": "**Verzoek Type:** Anonimiseer je berichten in specifieke tickets\n**Server:** %s\n**Ticket IDs:** %s",
+			"footer": "\n\nJe aanvraag staat in de wachtrij voor verwerking.\nverwerking kan enige tijd in beslag nemen, afhankelijk van het aantal transcripties."
+		},
+		"completed": {
+			"title": "GDPR aanvraag voltooid",
+			"all_transcripts": "**Request Type:** Verwijder specifieke transcripts van server\n**Server:** %s\n**Ticket IDs:** %d",
+			"all_transcripts_multi": "**Type Aanvraag: ** Verwijder alle transcripties van de servers\n**Servers: **\n* %s\n**Transcripties Verwijderd.** %d",
+			"specific_transcripts": "**Type Aanvraag:** Verwijder specifieke transcripties\n**Server:** %s\n**Transcripties Verwijderd.** %d",
+			"all_messages": "**Type Aanvraag:** Anonimiseer al je berichten in de server\n**Server:** %s\n**Berichten Geanonimiseerd.** %d",
+			"all_messages_multi": "**Type Aanvraag:** Anonimiseer al je berichten in servers\n**Servers:**\n* %s\n**Berichten Geanonimiseerd:** %d",
+			"specific_messages": "**Type Aanvraag:** Anonimiseer je berichten in specifieke tickets\n**Server:** %s\n**Berichten Geanonimiseerd:** %d",
+			"error": "\n\n**⚠️ Fout:** %s"
+		},
+		"followup": {
+			"error": "⚠️ Je GDRP aanvraag ondervond een fout: %s",
+			"no_data": "Je GDPR aanvraag is verwerkt. Er zijn geen gegevens gevonden.",
+			"success": "Je GDPR aanvraag is succesvol verwerkt."
+		},
+		"error": {
+			"no_servers": "Geen servers gevonden waar je de eigenaar bent en transcripten hebt.",
+			"invalid_server_id": "Ongeldige server-ID opgegeven.",
+			"invalid_ticket_ids": "Ongeldige ticket-IDs verstrekt. Voer numerieke ticket-ID's in, gescheiden door komma's, (bijv. 123, 456, 789).",
+			"not_owner": "Je moet de servereigenaar zijn om transcripties te verwijderen.",
+			"server_not_found": "Server niet gevonden.",
+			"queue_failed": "Wachtrij GDPR aanvraag mislukt. Probeer het later opnieuw.",
+			"worker_offline": "De GDPR verwerkingsservice is momenteel niet beschikbaar. Probeer het later opnieuw of contacteer support als het probleem zich blijft voordoen."
+		}
+	},
+	"errors": {
+		"unknown_channel": "Kon geen vereist kanaal vinden: waarschijnlijk is het verwijderd.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en om te verifiëren dat alle kanaal-instellingen correct zijn geconfigureerd.",
+		"unknown_guild": "Kon de server niet vinden.",
+		"unknown_member": "The gebruiker kon niet gevonden worden. Hij heeft mogelijk de server verlaten of is verbannen.",
+		"unknown_message": "Het bericht dat u probeert te gebruiken is verwijderd.\n\nProbeer de actie opnieuw met een ander bericht.",
+		"unknown_user": "gebruiker kon niet gevonden worden.",
+		"unknown_role": "De rol vereist voor deze actie bestaat niet meer.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en de rol-instellingen te herconfigureren.",
+		"unknown_category": "Kon de vereiste categorie niet vinden: waarschijnlijk is het verwijderd.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en een geldige kanaal categorie toe te wijzen aan dit ticket paneel.",
+		"unknown_interaction": "Deze interactie is verlopen.\n\nProbeer de actie opnieuw.",
+		"max_webhooks": "Deze server heeft het maximum aantal webhooks bereikt.\n\nVraag een server administrator om een paar ongebruikte webhooks te verwijderen en probeer het opnieuw.",
+		"max_channels": "Jouw ticket kan niet geopend worden omdat deze server Discord's kanalen limiet heeft bereikt. (500)\n\nGelieven een server administrator te vragen om sommige tickets dicht te doen of om ongebruikte kanalen te verwijden voor een nieuw ticket te openen.",
+		"interaction_acknowledged": "Deze interactie is al verwerkt.\n\nAls je deze actie opnieuw wilt uitvoeren, start dan een nieuwe interactie.",
+		"missing_permissions": {
+			"title": "Ik mis de volgende machtigingen die nodig zijn voor het uitvoeren van deze actie",
+			"body": "Gelieve deze machtigingen toe te wijzen aan de bot, of anders de 'Beheerder' machtiging en probeer het opnieuw.\nBezoek onze [docs](%s) voor een verklaring waarom elke machtiging vereist is."
+		},
+		"missing_access": "Ik ontbreek de machtigingen die nodig zijn om deze actie te doen.\n\nAlsjeblieft geef de nodige machtigingen voor de bot, of als alternatief geef de 'Administrator' machtigingen en probeer opnieuw.\nAlsjeblieft bekijk onze [docs](%s) voor een uitleg waarom deze machtigingen nodig zijn.",
+		"invalid_length": "Eén of meer velden zijn te kort of te lang.\n\nVraag een server administrator om de [dashboard](%s) te bezoeken en controleer alle inputs en zorg ervoor dat alle velden voldoen aan de vereiste lengte-beperkingen.",
+		"required_field": "Een verplicht veld ontbreekt of is leeg.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en te controleren dat alle vereiste velden ingevuld zijn.",
+		"invalid_channel_type": "Dit kanaal type is ongeldig voor deze bewerking.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en een geldig kanaal aan het ticketpaneel toe te wijzen.",
+		"invalid_category": "De kanaalcategorie is ongeldig, waarschijnlijk is het verwijderd.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en een geldige categorie aan het ticketpaneel toe te wijzen.",
+		"invalid_id": "Er is een ongeldige ID opgegeven in de bot configuratie.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en alle categorieën, kanalen en rol ID's te controleren.",
+		"invalid_characters": "De invoer bevat ongeldige tekens.\n\nGebruik alleen letters, cijfers, koppeltekens en liggende streepjes.",
+		"invalid_choice": "Een ongeldige optie is opgegeven.\n\nVraag een server administrator om het [dashboard](%s) te bezoeken en alle instellingen te controleren.",
+		"invalid_form": "De actie kon niet worden voltooid wegens een ongeldige invoer.",
+		"thread_locked": "Jouw ticket kon niet geopend worden omdat de thread vergrendeld is.\n\nGelieven vraag een server administrator om deze ticket thread te ontgrendelen.",
+		"max_active_threads": "Jouw ticket kon niet geopend worden omdat het maximale aantal of actieve threads is bereikt in dit kanaal.\n\nGelieven vraag een server administrator om een aantal tickets of threads te sluiten.",
+		"timed_out": "De wachttijd is verstreken, probeer het opnieuw.",
+		"rate_limited": "Je wordt beperkt in snelheid. Probeer het later opnieuw %s.",
+		"rate_limited_global": "Discord ondergaat hoge belasting (globale snelheidslimiet). Probeer het later opnieuw %s.",
+		"general": "Een fout is opgetreden tijdens het uitvoeren van deze actie.",
+		"error_id": "Fout ID"
+	}
+}
