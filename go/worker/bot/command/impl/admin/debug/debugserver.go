@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TicketsBot-cloud/common/model"
 	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/gdl/objects/application"
@@ -164,12 +165,8 @@ func (AdminDebugServerCommand) Execute(ctx registry.CommandContext, raw string) 
 		return
 	}
 
-	// Get active entitlements to find subscription owner
-	entitlements, err := dbclient.Client.Entitlements.ListGuildSubscriptions(ctx, guild.Id, guild.OwnerId, 0)
-	if err != nil {
-		ctx.HandleError(err)
-		return
-	}
+	// Premium is force-unlocked and the entitlements table has been removed — nothing to show.
+	entitlements := []model.GuildEntitlementEntry{}
 
 	panels, err := dbclient.Client.Panel.GetByGuild(ctx, guild.Id)
 	if err != nil {
