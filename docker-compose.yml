@@ -386,25 +386,25 @@ services:
       retries: 5
       start_period: 5s
 
-  minio-setup:
-    image: minio/mc:latest
-    container_name: minio-setup
-    depends_on:
-      rustfs:
-        condition: service_healthy
-    entrypoint: >
-      /bin/sh -c "
-      until mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET} >/dev/null 2>&1; do echo 'Waiting for RustFS...'; sleep 2; done;
-      mc mb --ignore-existing myminio/${S3_ARCHIVE_BUCKET};
-      mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
-      mc mb --ignore-existing myminio/${S3_DATA_IMPORT_BUCKET};
-      mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
-      mc mb --ignore-existing myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
-      mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
-      echo 'buckets ready';
-      "
-    networks:
-      - app-network
+#  minio-setup:
+#    image: minio/mc:latest
+#    container_name: minio-setup
+#    depends_on:
+#      rustfs:
+#        condition: service_healthy
+#    entrypoint: >
+#      /bin/sh -c "
+#      until mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET} >/dev/null 2>&1; do echo 'Waiting for RustFS...'; sleep 2; done;
+#      mc mb --ignore-existing myminio/${S3_ARCHIVE_BUCKET};
+#      mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
+#      mc mb --ignore-existing myminio/${S3_DATA_IMPORT_BUCKET};
+#      mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
+#      mc mb --ignore-existing myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+#      mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+#      echo 'buckets ready';
+#      "
+#    networks:
+#      - app-network
 
 networks:
   app-network:
