@@ -44,6 +44,25 @@ CREATE INDEX IF NOT EXISTS voice_states_guild_id ON voice_states("guild_id");
 CREATE INDEX IF NOT EXISTS voice_states_user_id ON voice_states("user_id");
 `
 
+// Archive (logarchiver) schema — logarchiver does not create its own schema or seed a
+// bucket; it only ListBuckets from the DB. Mirrors logarchiver/migrations/0001-init-schema.sql.
+const archiveSchema = `
+CREATE TABLE IF NOT EXISTS buckets (
+    "id"           uuid PRIMARY KEY      DEFAULT gen_random_uuid(),
+    "endpoint_url" VARCHAR(255) NOT NULL,
+    "name"         VARCHAR(255) NOT NULL,
+    "active"       BOOLEAN      NOT NULL DEFAULT FALSE
+);
+CREATE TABLE IF NOT EXISTS objects (
+    "guild_id"  int8 NOT NULL,
+    "ticket_id" int4 NOT NULL,
+    "bucket_id" uuid NOT NULL,
+    PRIMARY KEY ("guild_id", "ticket_id"),
+    FOREIGN KEY ("bucket_id") REFERENCES "buckets" ("id")
+);
+CREATE INDEX IF NOT EXISTS objects_guid_id_idx ON objects ("guild_id");
+`
+
 func maybeBootstrapSchema(logger *zap.Logger) {
 	if !envTrue("INIT_SCHEMA") && !envTrue("INIT_SCHEMA_ONLY") {
 		return
@@ -87,6 +106,37 @@ func maybeBootstrapSchema(logger *zap.Logger) {
 	logger.Info("Creating cache (botcache) schema")
 	if _, err := cachePool.Exec(ctx, cacheSchema); err != nil {
 		logger.Fatal("Schema bootstrap: failed to create cache schema", zap.Error(err))
+	}
+
+	// --- archive (logarchiver) ---
+	if archiveURI := os.Getenv("ARCHIVE_DATABASE_URI"); archiveURI != "" {
+		archivePool, err := pgxpool.Connect(ctx, archiveURI)
+		if err != nil {
+			logger.Fatal("Schema bootstrap: failed to connect to archive database", zap.Error(err))
+		}
+		defer archivePool.Close()
+
+		logger.Info("Creating archive schema")
+		if _, err := archivePool.Exec(ctx, archiveSchema); err != nil {
+			logger.Fatal("Schema bootstrap: failed to create archive schema", zap.Error(err))
+		}
+
+		// Seed (and keep active) the default bucket logarchiver writes transcripts to.
+		bucketID := os.Getenv("ARCHIVER_DEFAULT_BUCKET_ID")
+		endpoint := os.Getenv("S3_ENDPOINT")
+		name := os.Getenv("S3_ARCHIVE_BUCKET")
+		if bucketID != "" && endpoint != "" && name != "" {
+			logger.Info("Seeding active default bucket", zap.String("bucket_id", bucketID), zap.String("name", name))
+			if _, err := archivePool.Exec(ctx,
+				`INSERT INTO buckets (id, endpoint_url, name, active) VALUES ($1, $2, $3, true)
+				 ON CONFLICT (id) DO UPDATE SET endpoint_url = $2, name = $3, active = true`,
+				bucketID, endpoint, name,
+			); err != nil {
+				logger.Fatal("Schema bootstrap: failed to seed default bucket", zap.Error(err))
+			}
+		} else {
+			logger.Warn("Skipping default-bucket seed (ARCHIVER_DEFAULT_BUCKET_ID / S3_ENDPOINT / S3_ARCHIVE_BUCKET not all set)")
+		}
 	}
 
 	logger.Info("Schema bootstrap complete")

@@ -113,6 +113,11 @@ services:
       WORKER_REDIS_THREADS: 4
       # --- fresh-DB schema bootstrap (empty = off; idempotent when on) ---
       INIT_SCHEMA: ${INIT_SCHEMA:-}
+      # archive schema + default-bucket seed are created by the bootstrap too
+      ARCHIVE_DATABASE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/archive
+      ARCHIVER_DEFAULT_BUCKET_ID: ${DEFAULT_BUCKET_ID:-b77cc1a0-91ec-4d64-bb6d-21717737ea3c}
+      S3_ENDPOINT: ${S3_ENDPOINT}
+      S3_ARCHIVE_BUCKET: ${S3_ARCHIVE_BUCKET}
       # --- autoclose sweep ---
       SWEEP_TIME: ${SWEEP_TIME:-10}
       # --- dashboard API ---
@@ -254,7 +259,7 @@ services:
       S3_ACCESS: ${S3_ACCESS}
       S3_SECRET: ${S3_SECRET}
       S3_SECURE: ${S3_SECURE}
-      DEFAULT_BUCKET_ID: b77cc1a0-91ec-4d64-bb6d-21717737ea3c
+      DEFAULT_BUCKET_ID: ${DEFAULT_BUCKET_ID:-b77cc1a0-91ec-4d64-bb6d-21717737ea3c}
       SENTRY_DSN: ${SENTRY_DSN:-}
       PRODUCTION_MODE: "true"
       ADMIN_AUTH_TOKEN: ${ARCHIVER_ADMIN_AUTH_TOKEN}
@@ -347,26 +352,14 @@ services:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-      until curl -s http://rustfs:9000/ > /dev/null; do echo 'Waiting for RustFS...'; sleep 1; done;
-      mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET};
-      if mc ls myminio/${S3_ARCHIVE_BUCKET} >/dev/null 2>&1; then
-        echo 'The ${S3_ARCHIVE_BUCKET} bucket already exists';
-      else
-        mc mb myminio/${S3_ARCHIVE_BUCKET};
-        mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
-      fi;
-      if mc ls myminio/${S3_DATA_IMPORT_BUCKET} >/dev/null 2>&1; then
-        echo 'The ${S3_DATA_IMPORT_BUCKET} bucket already exists';
-      else
-        mc mb myminio/${S3_DATA_IMPORT_BUCKET};
-        mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
-      fi;
-      if mc ls myminio/${S3_TRANSCRIPT_IMPORT_BUCKET} >/dev/null 2>&1; then
-        echo 'The ${S3_TRANSCRIPT_IMPORT_BUCKET} bucket already exists';
-      else
-        mc mb myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
-        mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
-      fi;
+      until mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET} >/dev/null 2>&1; do echo 'Waiting for RustFS...'; sleep 2; done;
+      mc mb --ignore-existing myminio/${S3_ARCHIVE_BUCKET};
+      mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
+      mc mb --ignore-existing myminio/${S3_DATA_IMPORT_BUCKET};
+      mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
+      mc mb --ignore-existing myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+      mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+      echo 'buckets ready';
       "
     networks:
       - app-network
