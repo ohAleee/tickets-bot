@@ -50,8 +50,6 @@ import (
 	"github.com/TicketsBot-cloud/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/worker/bot/integrations"
 	"github.com/TicketsBot-cloud/worker/bot/listeners/messagequeue"
-	"github.com/TicketsBot-cloud/worker/bot/metrics/prometheus"
-	"github.com/TicketsBot-cloud/worker/bot/metrics/statsd"
 	workerredis "github.com/TicketsBot-cloud/worker/bot/redis"
 	rpclisteners "github.com/TicketsBot-cloud/worker/bot/rpc/listeners"
 	workerutils "github.com/TicketsBot-cloud/worker/bot/utils"
@@ -131,20 +129,9 @@ func main() {
 		[]byte(workerconfig.Conf.Archiver.AesKey),
 	)
 
-	logger.Info("Starting Prometheus server")
-	prometheus.StartServer(workerconfig.Conf.Prometheus.Address)
-
-	logger.Info("Starting StatsD client")
-	statsd.Client, err = statsd.NewClient(workerconfig.Conf.Statsd.Address, workerconfig.Conf.Statsd.Prefix)
-	if err != nil {
-		logger.Error("Failed to start StatsD client", zap.Error(err))
-	} else {
-		request.RegisterPreRequestHook(statsd.RestHook)
-		go statsd.Client.StartDaemon()
-	}
-
-	request.RegisterPreRequestHook(prometheus.PreRequestHook)
-	request.RegisterPostRequestHook(prometheus.PostRequestHook)
+	// Metrics gathering (StatsD + Prometheus) intentionally removed. statsd.Client is left
+	// uninitialised — its IncrementKey is nil-safe, so the call sites across the worker
+	// no-op — and the Prometheus server/REST hooks are no longer started or registered.
 
 	logger.Info("Initialising integrations")
 	integrations.InitIntegrations()
