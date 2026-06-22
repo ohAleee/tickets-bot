@@ -7,7 +7,9 @@ x-logging: &default-logging
 services:
   # ------------------------------------------------------------------ data ----
   postgres:
-    image: postgres:15
+    # Pin a major version — do NOT use :latest for a database (a major bump can't be 
+    # auto-upgraded and breaks the data dir). Override with POSTGRES_VERSION if needed.
+    image: postgres:${POSTGRES_VERSION:-17}
     user: "${UID:-}:${GID:-}"
     container_name: postgres
     restart: unless-stopped
@@ -19,7 +21,9 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      # Mount the PARENT dir (not /data): required by Postgres 18+, and compatible with
+      # 15-17 (data lands in a subdirectory underneath).
+      - ./pgdata:/var/lib/postgresql
       # Single instance hosts all three databases (ticketsbot/botcache/archive).
       - ./infra/postgres/initdb:/docker-entrypoint-initdb.d:ro
     networks:
@@ -31,7 +35,7 @@ services:
       retries: 10
 
   redis:
-    image: redis:7
+    image: redis:8.8.0
     user: "${UID:-}:${GID:-}"
     container_name: redis
     restart: unless-stopped
