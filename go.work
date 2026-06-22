@@ -5,15 +5,16 @@ go 1.25.0
 // pulled these from github). This lets the single ticketbot binary build against one
 // shared copy of each module — notably one `common` (worker pinned a newer commit than
 // dashboard; the workspace forces both onto ./go/common).
+// autoclosedaemon and logarchiver are intentionally absent: the autoclose sweep was
+// reimplemented on cloud libs inside ticketbot (autoclose.go), and logarchiver stays a
+// separate container (it pulls the incompatible legacy TicketsBot/* module trees).
 use (
 	./go/analytics-client
 	./go/archiverclient
-	./go/autoclosedaemon
 	./go/common
 	./go/database
 	./go/dashboard
 	./go/gdl
-	./go/logarchiver
 	./go/ticketbot
 	./go/worker
 )
