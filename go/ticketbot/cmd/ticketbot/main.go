@@ -112,7 +112,7 @@ func main() {
 	workercache.Client = &pgCache
 
 	// Fresh-install schema bootstrap (no-op unless INIT_SCHEMA[_ONLY] is set).
-	maybeBootstrapSchema(logger.With(zap.String("service", "schema-init")), &pgCache)
+	maybeBootstrapSchema(logger.With(zap.String("service", "schema-init")))
 
 	logger.Info("Connecting to clickhouse")
 	dbclient.ConnectAnalytics(logger.With(zap.String("service", "clickhouse")))

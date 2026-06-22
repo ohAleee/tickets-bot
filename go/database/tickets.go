@@ -80,6 +80,10 @@ func newTicketTable(db *pgxpool.Pool) *TicketTable {
 
 func (t TicketTable) Schema() string {
 	return `
+DO $$ BEGIN
+	CREATE TYPE ticket_status AS ENUM ('OPEN', 'PENDING', 'CLOSED');
+EXCEPTION WHEN duplicate_object THEN null;
+END $$;
 CREATE TABLE IF NOT EXISTS tickets(
 	"id" int4 NOT NULL,
 	"guild_id" int8 NOT NULL,
