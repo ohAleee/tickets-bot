@@ -4,11 +4,6 @@ x-logging: &default-logging
     max-size: "10m"
     max-file: "3"
 
-# S3 (rustfs) for transcript storage + the bucket-creation helper.
-include:
-  - path:
-      - ./addons/packages/rustfs/docker-compose.yaml
-
 services:
   # ------------------------------------------------------------------ data ----
   postgres:
@@ -308,6 +303,65 @@ services:
     logging: *default-logging
     ports:
       - "5000:5000"
+    networks:
+      - app-network
+
+  # --------------------------------------------------- S3 storage (rustfs) ----
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: rustfs
+    # RustFS runs as UID 10001. Ensure host volume permissions match.
+    environment:
+      # RustFS uses different env var names than MinIO
+      RUSTFS_ACCESS_KEY: ${S3_ACCESS}
+      RUSTFS_SECRET_KEY: ${S3_SECRET}
+      RUSTFS_VOLUMES: /data
+      RUSTFS_CONSOLE_ENABLE: "true"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+      RUSTFS_ADDRESS: ":9000"
+    ports:
+      - "9000:9000" # S3 API
+      - "9001:9001" # Console
+    volumes:
+      - ./s3data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9000"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  minio-setup:
+    image: minio/mc:latest
+    container_name: minio-setup
+    depends_on:
+      rustfs:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      until curl -s http://rustfs:9000/ > /dev/null; do echo 'Waiting for RustFS...'; sleep 1; done;
+      mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET};
+      if mc ls myminio/${S3_ARCHIVE_BUCKET} >/dev/null 2>&1; then
+        echo 'The ${S3_ARCHIVE_BUCKET} bucket already exists';
+      else
+        mc mb myminio/${S3_ARCHIVE_BUCKET};
+        mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
+      fi;
+      if mc ls myminio/${S3_DATA_IMPORT_BUCKET} >/dev/null 2>&1; then
+        echo 'The ${S3_DATA_IMPORT_BUCKET} bucket already exists';
+      else
+        mc mb myminio/${S3_DATA_IMPORT_BUCKET};
+        mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
+      fi;
+      if mc ls myminio/${S3_TRANSCRIPT_IMPORT_BUCKET} >/dev/null 2>&1; then
+        echo 'The ${S3_TRANSCRIPT_IMPORT_BUCKET} bucket already exists';
+      else
+        mc mb myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+        mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+      fi;
+      "
     networks:
       - app-network
 
