@@ -1,20 +1,17 @@
 [workspace]
 resolver = "2"
+# Trimmed to the gateway layer this deployment actually runs (sharder public+whitelabel,
+# http-gateway, cache-sync-service) plus their shared library crates. The unused service
+# crates from upstream tickets.rs (patreon-proxy, vote_listener, bot-list-updater,
+# server-counter, stats-channel-updater, global-resolver, image-proxy, secure-proxy) were
+# removed — none are deployed here and none are depended on by the kept crates.
 members = [
-    "patreon-proxy",
     "sharder",
+    "http-gateway",
+    "cache-sync-service",
     "cache",
     "model",
     "common",
     "database",
-    "vote_listener",
-    "http-gateway",
-    "bot-list-updater",
-    "server-counter",
-    "stats-channel-updater",
-    "global-resolver",
-    "image-proxy",
-    "secure-proxy",
     "event-stream",
-    "cache-sync-service"
 ]
