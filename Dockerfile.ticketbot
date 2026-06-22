@@ -1,0 +1,32 @@
+# Unified ticketbot binary (worker interactions + gateway + dashboard API + autoclose +
+# view refresher). Build context is the repo root so the whole Go workspace is available.
+FROM golang:1.25 AS builder
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates git zlib1g-dev pkg-config && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /src
+
+# Workspace + all local Go modules (resolved via go.work).
+COPY go.work ./
+COPY go/ ./go/
+
+# czlib (gateway compression) needs cgo + zlib.
+ENV CGO_ENABLED=1 GOTOOLCHAIN=auto
+RUN go build -trimpath -o /out/ticketbot ./go/ticketbot/cmd/ticketbot
+
+# --- Runtime ---
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates zlib1g && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=builder /out/ticketbot /app/ticketbot
+# i18n reads ./locale/<code>.json relative to the working directory at runtime.
+COPY --from=builder /src/go/worker/i18n/locale /app/locale
+
+RUN useradd -m container
+USER container
+
+ENTRYPOINT ["/app/ticketbot"]

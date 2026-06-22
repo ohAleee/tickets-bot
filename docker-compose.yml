@@ -1,0 +1,327 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+# S3 (rustfs) for transcript storage + the bucket-creation helper.
+include:
+  - path:
+      - ./addons/packages/rustfs/docker-compose.yaml
+
+services:
+  # ------------------------------------------------------------------ data ----
+  postgres:
+    image: postgres:15
+    user: "${UID:-}:${GID:-}"
+    container_name: postgres
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-null}
+      POSTGRES_DB: ticketsbot
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      # Single instance hosts all three databases (ticketsbot/botcache/archive).
+      - ./infra/postgres/initdb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ticketsbot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    user: "${UID:-}:${GID:-}"
+    container_name: redis
+    restart: unless-stopped
+    logging: *default-logging
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD:-null}"]
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD:-null} ping | grep PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # --------------------------------------------------------------- support ----
+  statsd:
+    image: ${STATSD_IMAGE:-ghcr.io/statsd/statsd:v0.10.2}
+    user: "${UID:-}:${GID:-}"
+    container_name: statsd
+    restart: unless-stopped
+    logging: *default-logging
+    networks:
+      - app-network
+
+  http-proxy:
+    image: ${HTTP_PROXY_IMAGE:-ghcr.io/rxdn/http-proxy:metrics}
+    user: "${UID:-}:${GID:-}"
+    container_name: http-proxy
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      DISCORD_TOKEN: ${DISCORD_BOT_TOKEN}
+    networks:
+      - app-network
+
+  # ------------------------------------------------- unified Go ticket bot ----
+  # worker (interactions + gateway) + dashboard API + autoclose + view refresher,
+  # all in one process. See go/ticketbot/cmd/ticketbot.
+  ticketbot:
+    build:
+      context: .
+      dockerfile: Dockerfile.ticketbot
+    user: "${UID:-}:${GID:-}"
+    container_name: ticketbot
+    restart: unless-stopped
+    logging: *default-logging
+    ports:
+      - "8082:8081"   # dashboard REST API
+    environment:
+      # --- worker: identity / branding ---
+      DASHBOARD_URL: ${DASHBOARD_URL:-http://localhost:5000}
+      FRONTPAGE_URL: ${LANDING_PAGE_URL:-https://tickets.bot}
+      VOTE_URL: ${VOTE_URL:-https://vote.tickets.bot}
+      POWEREDBY: ${POWERED_BY:-github.com/ticketsbot-cloud}
+      ICON_URL: ${ICON_URL:-https://tickets.bot/assets/img/logo.png}
+      SUPPORT_SERVER_INVITE: ${DISCORD_SUPPORT_SERVER_INVITE:-https://discord.gg/ticketsbot}
+      WORKER_PUBLIC_TOKEN: ${DISCORD_BOT_TOKEN}
+      WORKER_PUBLIC_ID: ${DISCORD_BOT_CLIENT_ID}
+      WORKER_BOT_ADMINS: ${ADMIN_USER_IDS}
+      WORKER_BOT_HELPERS: ${HELPER_USER_IDS:-}
+      # --- worker: interaction HTTP server (called by http-gateway) ---
+      HTTP_ADDR: 0.0.0.0:4001
+      DISCORD_PROXY_URL: http-proxy:80
+      PROMETHEUS_SERVER_ADDR: 0.0.0.0:9090
+      WORKER_STATSD_ADDR: statsd:8125
+      WORKER_STATSD_PREFIX: ticketsbot
+      WORKER_SENTRY_DSN: ${SENTRY_DSN:-}
+      # --- worker: archiver + databases (single postgres) ---
+      WORKER_ARCHIVER_URL: http://logarchiver:4000
+      WORKER_ARCHIVER_AES_KEY: ${ARCHIVER_AES_KEY}
+      DATABASE_HOST: postgres:5432
+      DATABASE_NAME: ticketsbot
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-null}
+      DATABASE_THREADS: 4
+      CACHE_HOST: postgres:5432
+      CACHE_NAME: botcache
+      CACHE_USER: postgres
+      CACHE_PASSWORD: ${DATABASE_PASSWORD:-null}
+      CACHE_THREADS: 4
+      WORKER_REDIS_ADDR: redis:6379
+      WORKER_REDIS_PASSWD: ${REDIS_PASSWORD:-null}
+      WORKER_REDIS_THREADS: 4
+      # --- autoclose sweep ---
+      SWEEP_TIME: ${SWEEP_TIME:-10}
+      # --- dashboard API ---
+      SERVER_ADDR: 0.0.0.0:8081
+      BASE_URL: ${DASHBOARD_URL:-http://localhost:5000}
+      MAIN_SITE: ${LANDING_PAGE_URL:-https://tickets.bot}
+      DATABASE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/ticketsbot
+      CACHE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-null}
+      REDIS_THREADS: 2
+      RATELIMIT_WINDOW: 10
+      RATELIMIT_MAX: 10
+      REAL_IP_HEADERS: ${REAL_IP_HEADERS:-X-Forwarded-For}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.1,172.21.0.1}
+      JWT_SECRET: ${JWT_SECRET:-}
+      OAUTH_ID: ${DISCORD_BOT_CLIENT_ID}
+      OAUTH_SECRET: ${DISCORD_BOT_OAUTH_SECRET}
+      OAUTH_REDIRECT_URI: ${DASHBOARD_URL:-http://localhost:5000}/callback
+      BOT_ID: ${DISCORD_BOT_CLIENT_ID}
+      BOT_TOKEN: ${DISCORD_BOT_TOKEN}
+      ADMINS: ${ADMIN_USER_IDS}
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      LOG_ARCHIVER_URL: http://logarchiver:4000
+      LOG_AES_KEY: ${ARCHIVER_AES_KEY}
+      RENDER_SERVICE_URL: http://discord-chat-replica:8088
+      INTERACTIONS_BASE_URL: ${INTERACTIONS_BASE_URL:-http://http-gateway:4000}
+      S3_IMPORT_ENDPOINT: ${S3_ENDPOINT}
+      S3_IMPORT_SECURE: ${S3_SECURE:-false}
+      S3_IMPORT_ACCESS_KEY: ${S3_ACCESS}
+      S3_IMPORT_SECRET_KEY: ${S3_SECRET}
+      S3_IMPORT_TRANSCRIPT_BUCKET: ${S3_TRANSCRIPT_IMPORT_BUCKET}
+      S3_IMPORT_DATA_BUCKET: ${S3_DATA_IMPORT_BUCKET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # --------------------------------------------- Rust gateway layer (built) ---
+  sharder-main:
+    build:
+      context: ./rust
+      dockerfile: sharder/Dockerfile
+    user: "${UID:-}:${GID:-}"
+    container_name: sharder-main
+    hostname: sharder-0
+    restart: unless-stopped
+    logging: *default-logging
+    ports:
+      - "8092:8091"
+    environment:
+      RUST_LOG: info
+      sharder_id: 0
+      sharder_total: 1
+      sharder_cluster_size: 1
+      large_sharding_buckets: 1
+      redis_addr: redis:6379
+      redis_password: ${REDIS_PASSWORD:-null}
+      redis_threads: 2
+      metrics_addr: 0.0.0.0:8091
+      sentry_dsn: ${SENTRY_DSN:-}
+      sharder_token: ${DISCORD_BOT_TOKEN}
+      bot_id: ${DISCORD_BOT_CLIENT_ID}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  http-gateway:
+    build:
+      context: ./rust
+      dockerfile: http-gateway/Dockerfile
+    user: "${UID:-}:${GID:-}"
+    container_name: http-gateway
+    restart: unless-stopped
+    logging: *default-logging
+    ports:
+      - "8088:4000"
+    environment:
+      RUST_LOG: info
+      server_addr: 0.0.0.0:4000
+      public_bot_id: ${DISCORD_BOT_CLIENT_ID}
+      public_token: ${DISCORD_BOT_TOKEN}
+      public_public_key: ${DISCORD_BOT_PUBLIC_KEY}
+      database_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/ticketsbot
+      database_threads: 4
+      cache_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
+      cache_threads: 4
+      worker_svc_uri: ticketbot:4001
+      shard_count: 1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ticketbot:
+        condition: service_started
+    networks:
+      - app-network
+
+  cachesync:
+    build:
+      context: ./rust
+      dockerfile: cache-sync-service/Dockerfile
+    user: "${UID:-}:${GID:-}"
+    container_name: cachesync
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      RUST_LOG: info
+      workers: 1
+      redis_addr: redis:6379
+      redis_password: ${REDIS_PASSWORD:-null}
+      redis_stream: "stream:gateway-events"
+      consumer_group: "cache-sync"
+      postgres_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
+      metric_server_addr: 0.0.0.0:8091
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      sharder-main:
+        condition: service_started
+    networks:
+      - app-network
+
+  # ----------------------------------------------- transcripts (unchanged) ----
+  logarchiver:
+    image: ${LOGARCHIVER_IMAGE:-ghcr.io/ticketsbot-cloud/logarchiver:7a7df5cacbdccbf47678a11c7709b9065b984ac8}
+    user: "${UID:-}:${GID:-}"
+    container_name: logarchiver
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      ARCHIVER_ADDR: 0.0.0.0:4000
+      S3_ENDPOINT: ${S3_ENDPOINT}
+      S3_ACCESS: ${S3_ACCESS}
+      S3_SECRET: ${S3_SECRET}
+      S3_SECURE: ${S3_SECURE}
+      DEFAULT_BUCKET_ID: b77cc1a0-91ec-4d64-bb6d-21717737ea3c
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      PRODUCTION_MODE: "true"
+      ADMIN_AUTH_TOKEN: ${ARCHIVER_ADMIN_AUTH_TOKEN}
+      DATABASE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres:5432/archive
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "4000"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  discord-chat-replica:
+    image: ${DISCORD_CHAT_REPLICA_IMAGE:-ghcr.io/ticketsbot-cloud/discord-chat-replica:d6350bf3c26b680efad7b823dd19e4d8fa37e6c2}
+    user: "${UID:-}:${GID:-}"
+    container_name: discord-chat-replica
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      PORT: 8088
+    networks:
+      - app-network
+
+  # --------------------------------------------------- dashboard frontend ----
+  dashboard:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        CLIENT_ID: ${DISCORD_BOT_CLIENT_ID}
+        REDIRECT_URI: ${DASHBOARD_URL:-http://localhost:5000}/callback
+        API_URL: ${API_URL:-http://localhost:8082}
+        WS_URL: ${API_URL:-http://localhost:8082}
+        FRONTPAGE_URL: ${LANDING_PAGE_URL:-https://tickets.bot}
+        DOCS_URL: ${DOCS_URL:-https://docs.tickets.bot}
+        REDIRECT_WEBSITE: ${REDIRECT_WEBSITE:-https://tickets.bot}
+        INVITE_URL: ${INVITE_URL:-https://discord.com}
+        TITLE: ${DASHBOARD_TITLE:-}
+        DESCRIPTION: ${DASHBOARD_DESCRIPTION:-}
+        FAVICON: ${DASHBOARD_FAVICON_URL:-}
+        FAVICON_TYPE: ${DASHBOARD_FAVICON_TYPE:-}
+        WHITELABEL_DISABLED: ${DASHBOARD_WHITELABEL_DISABLED:-false}
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5000
+    user: "${UID:-}:${GID:-}"
+    container_name: dashboard
+    restart: unless-stopped
+    logging: *default-logging
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
