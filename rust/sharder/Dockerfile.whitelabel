@@ -1,0 +1,27 @@
+FROM rust:1-bullseye
+
+RUN apt-get install -y apt-transport-https
+RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 openssl libssl-dev ca-certificates cmake
+
+RUN mkdir -p /tmp/compile
+WORKDIR /tmp/compile
+
+COPY . .
+
+# Whitelabel sharder: maintains a gateway connection per customer bot (tokens loaded from
+# the DB), forwarding their events into the same Redis stream as the public sharder.
+RUN cargo build --release --bin whitelabel --features whitelabel
+
+# Prod container
+FROM debian:bullseye
+
+RUN apt-get update && apt-get -y upgrade && apt-get -y install openssl libssl-dev ca-certificates
+
+COPY --from=0 /tmp/compile/target/release/whitelabel /srv/sharder/whitelabel
+RUN chmod +x /srv/sharder/whitelabel
+
+RUN useradd -m container
+USER container
+WORKDIR /srv/sharder
+
+CMD ["/srv/sharder/whitelabel"]

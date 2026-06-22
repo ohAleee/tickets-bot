@@ -190,6 +190,36 @@ services:
     networks:
       - app-network
 
+  # Maintains gateway connections for whitelabel (custom) bots — tokens loaded from the DB
+  # and picked up live as they're added in the dashboard. Forwards into the same stream as
+  # the public sharder, so whitelabel tickets capture messages / transcripts.
+  sharder-whitelabel:
+    build:
+      context: ./rust
+      dockerfile: sharder/Dockerfile.whitelabel
+    user: "${UID:-}:${GID:-}"
+    container_name: sharder-whitelabel
+    hostname: sharder-wl-0
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      RUST_LOG: info
+      sharder_id: 0
+      sharder_total: 1
+      redis_addr: redis:6379
+      redis_threads: 2
+      metrics_addr: 0.0.0.0:8091
+      sentry_dsn: ${SENTRY_DSN:-}
+      database_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/ticketsbot
+      database_threads: 4
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+
   http-gateway:
     build:
       context: ./rust
