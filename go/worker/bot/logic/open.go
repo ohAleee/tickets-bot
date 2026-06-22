@@ -33,6 +33,7 @@ import (
 	"github.com/TicketsBot-cloud/worker/bot/redis"
 	"github.com/TicketsBot-cloud/worker/bot/utils"
 	"github.com/TicketsBot-cloud/worker/i18n"
+	"github.com/go-redsync/redsync/v4"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -48,6 +49,14 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 
 	mu, err := redis.TakeTicketOpenLock(lockCtx, cmd.GuildId())
 	if err != nil {
+		// A concurrent open for this guild already holds the lock (e.g. a duplicate submit or
+		// a re-delivered interaction). That's not an error worth reporting to Sentry — just ask
+		// the user to wait rather than showing a generic failure.
+		if errors.Is(err, redsync.ErrFailed) || errors.Is(err, context.DeadlineExceeded) {
+			cmd.ReplyRaw(customisation.Red, "Please wait", "A ticket is already being created — please wait a moment and try again.")
+			return database.Ticket{}, err
+		}
+
 		cmd.HandleError(err)
 		return database.Ticket{}, err
 	}

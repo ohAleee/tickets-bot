@@ -12,7 +12,12 @@ type Mutex interface {
 	UnlockContext(ctx context.Context) (bool, error)
 }
 
-const TicketOpenLockExpiry = time.Second * 3
+// Long enough to cover a full (cold) ticket open — channel create + permission overwrites +
+// welcome message via the REST proxy can take several seconds. At 3s the lock could expire
+// mid-open, letting a re-delivered interaction start a second concurrent open and causing
+// "failed to acquire lock" collisions. The open releases the lock via defer as soon as it
+// finishes, so this is only the crash-safety expiry.
+const TicketOpenLockExpiry = time.Second * 30
 
 var ErrLockExpired = redsync.ErrLockAlreadyExpired
 
