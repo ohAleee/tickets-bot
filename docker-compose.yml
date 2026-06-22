@@ -41,13 +41,16 @@ services:
     container_name: redis
     restart: unless-stopped
     logging: *default-logging
-    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD:-null}"]
+    # Passwordless by default. To require a password: add --requirepass ${REDIS_PASSWORD}
+    # here, set the clients' password env below, and put redis_password back on the Rust
+    # services (sharder/cachesync).
+    command: ["redis-server"]
     volumes:
       - ./redis_data:/data
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD:-null} ping | grep PONG"]
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -107,7 +110,7 @@ services:
       CACHE_PASSWORD: ${DATABASE_PASSWORD:-null}
       CACHE_THREADS: 4
       WORKER_REDIS_ADDR: redis:6379
-      WORKER_REDIS_PASSWD: ${REDIS_PASSWORD:-null}
+      WORKER_REDIS_PASSWD: ${REDIS_PASSWORD}
       WORKER_REDIS_THREADS: 4
       # --- autoclose sweep ---
       SWEEP_TIME: ${SWEEP_TIME:-10}
@@ -119,7 +122,7 @@ services:
       CACHE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-null}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       REDIS_THREADS: 2
       RATELIMIT_WINDOW: 10
       RATELIMIT_MAX: 10
@@ -170,7 +173,6 @@ services:
       sharder_cluster_size: 1
       large_sharding_buckets: 1
       redis_addr: redis:6379
-      redis_password: ${REDIS_PASSWORD:-null}
       redis_threads: 2
       metrics_addr: 0.0.0.0:8091
       sentry_dsn: ${SENTRY_DSN:-}
@@ -224,7 +226,6 @@ services:
       RUST_LOG: info
       workers: 1
       redis_addr: redis:6379
-      redis_password: ${REDIS_PASSWORD:-null}
       redis_stream: "stream:gateway-events"
       consumer_group: "cache-sync"
       postgres_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
