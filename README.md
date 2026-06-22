@@ -61,8 +61,13 @@ docker compose build      # builds ticketbot + the Rust services + frontend
 docker compose up -d
 ```
 
-Register slash commands once the stack is up (see `go/worker/cmd/registercommands`).
-For an existing deployment, migrate data and drop premium tables per `migrate/README.md`.
+See **[docs/SETUP.md](docs/SETUP.md)** for the full walkthrough: database setup (fresh or
+migrated) and registering slash commands.
+
+- **Fresh database**: `docker compose run --rm -e INIT_SCHEMA_ONLY=true ticketbot` creates
+  the schema (premium tables excluded). Or set `INIT_SCHEMA=true` in `.env`.
+- **Existing deployment**: migrate data + drop premium tables per `migrate/README.md`.
+- **Slash commands**: `docker compose run --rm --entrypoint /app/registercommands ticketbot --token "$DISCORD_BOT_TOKEN"`.
 
 ## Notes / deviations
 
@@ -72,5 +77,6 @@ For an existing deployment, migrate data and drop premium tables per `migrate/RE
 - **No whitelabel sharder**: upstream's compose didn't run one either — whitelabel bots
   receive interactions through `http-gateway`. Add one from `rust/sharder` (the
   `whitelabel` bin) only if whitelabel bots need gateway events.
-- `CreateTables` is never called at runtime upstream; this refactor assumes you migrate an
-  existing schema (see `migrate/`), it does not bootstrap a fresh schema.
+- Fresh installs are supported via `INIT_SCHEMA` (upstream never calls `CreateTables` at
+  runtime); existing deployments can instead migrate their data (see `migrate/`). Both paths
+  are covered in `docs/SETUP.md`.

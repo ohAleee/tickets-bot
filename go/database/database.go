@@ -257,11 +257,9 @@ func (d *Database) CreateTables(ctx context.Context, pool *pgxpool.Pool) {
 		d.DashboardUsers,
 		d.Embeds,
 		d.EmbedFields, // depends on embeds
-		d.Entitlements,
+		// Premium tables intentionally omitted (premium is force-unlocked): Entitlements,
+		// DiscordEntitlements, DiscordStoreSkus, SubscriptionSkus.
 		d.Experiment,
-		d.DiscordEntitlements, // depends on entitlements
-		d.DiscordStoreSkus,    // depends on skus
-		d.SubscriptionSkus,    // depends on skus
 		d.FeedbackEnabled,
 		d.Forms,
 		d.FormInput,           // depends on forms
@@ -272,10 +270,9 @@ func (d *Database) CreateTables(ctx context.Context, pool *pgxpool.Pool) {
 		d.GlobalBlacklist,
 		d.GuildLeaveTime,
 		d.GuildMetadata,
-		d.LegacyPremiumEntitlements,
-		d.LegacyPremiumEntitlementGuilds,
+		// Premium tables omitted: LegacyPremiumEntitlements, LegacyPremiumEntitlementGuilds.
 		d.MultiPanels,
-		d.MultiServerSkus,
+		// Premium table omitted: MultiServerSkus.
 		d.NamingScheme,
 		d.OnCall,
 		d.Panel,
@@ -287,10 +284,9 @@ func (d *Database) CreateTables(ctx context.Context, pool *pgxpool.Pool) {
 		d.PanelSupportHoursSettings, // must be created after panels table
 		d.PanelUserMention,
 		d.PanelHereMention,
-		d.PatreonEntitlements,
+		// Premium table omitted: PatreonEntitlements.
 		d.Permissions,
-		d.PremiumGuilds,
-		d.PremiumKeys,
+		// Premium tables omitted: PremiumGuilds, PremiumKeys.
 		d.RoleBlacklist,
 		d.RolePermissions,
 		d.ServerBlacklist,
@@ -320,11 +316,9 @@ func (d *Database) CreateTables(ctx context.Context, pool *pgxpool.Pool) {
 		d.FirstResponseTime,
 		d.TicketMembers,
 		d.TicketClaims,
-		d.UsedKeys,
+		// Premium tables omitted: UsedKeys, VoteCredits, Votes.
 		d.UsersCanClose,
 		d.UserGuilds,
-		d.VoteCredits,
-		d.Votes,
 		d.Webhooks,
 		d.WelcomeMessages,
 		d.Whitelabel,

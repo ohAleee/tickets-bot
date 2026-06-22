@@ -14,6 +14,8 @@ COPY go/ ./go/
 # czlib (gateway compression) needs cgo + zlib.
 ENV CGO_ENABLED=1 GOTOOLCHAIN=auto
 RUN go build -trimpath -o /out/ticketbot ./go/ticketbot/cmd/ticketbot
+# Helper for registering slash commands with Discord (run as a one-shot).
+RUN go build -trimpath -o /out/registercommands ./go/worker/cmd/registercommands
 
 # --- Runtime ---
 FROM debian:bookworm-slim
@@ -23,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 COPY --from=builder /out/ticketbot /app/ticketbot
+COPY --from=builder /out/registercommands /app/registercommands
 # i18n reads ./locale/<code>.json relative to the working directory at runtime.
 COPY --from=builder /src/go/worker/i18n/locale /app/locale
 
