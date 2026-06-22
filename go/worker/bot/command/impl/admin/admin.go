@@ -21,8 +21,7 @@ func (AdminCommand) Properties() registry.Properties {
 		PermissionLevel: permission.Everyone,
 		Children: []registry.Command{
 			AdminBlacklistCommand{},
-			AdminGenPremiumCommand{},
-			AdminListUserEntitlementsCommand{},
+			// admin premium-key / entitlement commands removed: premium is always on
 			AdminRecacheCommand{},
 			AdminWhitelabelAssignGuildCommand{},
 			AdminWhitelabelDataCommand{},

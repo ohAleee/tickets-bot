@@ -3,69 +3,16 @@ package api
 import (
 	"net/http"
 
-	"github.com/TicketsBot-cloud/common/premium"
-	dbclient "github.com/TicketsBot-cloud/dashboard/database"
-	"github.com/TicketsBot-cloud/dashboard/utils"
-	"github.com/TicketsBot-cloud/dashboard/utils/types"
 	"github.com/gin-gonic/gin"
-	"github.com/jackc/pgx/v4"
 )
 
+// GetEntitlements previously listed the user's purchased subscriptions so they could be
+// assigned to servers. Premium is now unconditional for every guild, the premium tables
+// have been removed from the database, and there is nothing to manage — so this returns
+// an empty, table-free response. The unchanged dashboard renders it as "no subscriptions".
 func GetEntitlements(ctx *gin.Context) {
-	userId := ctx.Keys["userid"].(uint64)
-
-	entitlements, err := dbclient.Client.Entitlements.ListUserSubscriptions(ctx, userId, premium.GracePeriod)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, utils.ErrorStr("Failed to query database. Please try again."))
-		return
-	}
-
-	legacyEntitlement, err := dbclient.Client.LegacyPremiumEntitlements.GetUserTier(ctx, userId, premium.GracePeriod)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, utils.ErrorStr("Failed to query database. Please try again."))
-		return
-	}
-
-	res := gin.H{
-		"entitlements":       entitlements,
-		"legacy_entitlement": legacyEntitlement,
-	}
-
-	if legacyEntitlement == nil || legacyEntitlement.IsLegacy {
-		ctx.JSON(http.StatusOK, res)
-		return
-	}
-
-	// If it's a multi-server subscription, fetch more data
-	var permitted *int
-	guildIds := make([]uint64, 0)
-	if err := dbclient.Client.WithTx(ctx, func(tx pgx.Tx) error {
-		tmp, ok, err := dbclient.Client.MultiServerSkus.GetPermittedServerCount(ctx, tx, legacyEntitlement.SkuId)
-		if err != nil {
-			return err
-		}
-
-		if ok {
-			permitted = &tmp
-		}
-
-		activeEntitlements, err := dbclient.Client.LegacyPremiumEntitlementGuilds.ListForUser(ctx, tx, userId)
-		if err != nil {
-			return err
-		}
-
-		for _, entitlement := range activeEntitlements {
-			guildIds = append(guildIds, entitlement.GuildId)
-		}
-
-		return nil
-	}); err != nil {
-		ctx.JSON(http.StatusInternalServerError, utils.ErrorStr("Failed to query database. Please try again."))
-		return
-	}
-
-	res["permitted_server_count"] = permitted
-	res["selected_guilds"] = types.UInt64StringSlice(guildIds)
-
-	ctx.JSON(http.StatusOK, res)
+	ctx.JSON(http.StatusOK, gin.H{
+		"entitlements":       []any{},
+		"legacy_entitlement": nil,
+	})
 }
