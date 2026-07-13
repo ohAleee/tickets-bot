@@ -15,7 +15,10 @@ import (
 // checked req.Header (not reliably set when this hook runs), so guard on the URL path and
 // the token argument instead.
 func ProxyHook(token string, req *http.Request) {
-	if strings.Contains(req.URL.Path, "/oauth2/") || strings.HasPrefix(token, "Basic") {
+	// This hook is also registered globally in the unified binary, so keep the
+	// application-scoped bypass in sync with the worker hook: those endpoints
+	// (and OAuth2) must reach Discord directly rather than the Twilight proxy.
+	if strings.Contains(req.URL.Path, "/oauth2/") || strings.Contains(req.URL.Path, "/applications/") || strings.HasPrefix(token, "Basic") {
 		return
 	}
 

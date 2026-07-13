@@ -91,6 +91,27 @@ services:
       WORKER_PUBLIC_ID: ${DISCORD_BOT_CLIENT_ID}
       WORKER_BOT_ADMINS: ${ADMIN_USER_IDS}
       WORKER_BOT_HELPERS: ${HELPER_USER_IDS:-}
+      # --- worker: custom (application) emojis ---
+      # Application emojis are only usable by the app that owns them, so a
+      # self-hosted bot must upload its own emojis (Dev Portal > Emojis) and set
+      # their IDs here. Unset values fall back to defaults baked into the binary.
+      EMOJI_ID: ${EMOJI_ID:-}
+      EMOJI_OPEN: ${EMOJI_OPEN:-}
+      EMOJI_OPENTIME: ${EMOJI_OPENTIME:-}
+      EMOJI_CLOSE: ${EMOJI_CLOSE:-}
+      EMOJI_CLOSETIME: ${EMOJI_CLOSETIME:-}
+      EMOJI_REASON: ${EMOJI_REASON:-}
+      EMOJI_SUBJECT: ${EMOJI_SUBJECT:-}
+      EMOJI_TRANSCRIPT: ${EMOJI_TRANSCRIPT:-}
+      EMOJI_CLAIM: ${EMOJI_CLAIM:-}
+      EMOJI_PANEL: ${EMOJI_PANEL:-}
+      EMOJI_RATING: ${EMOJI_RATING:-}
+      EMOJI_STAFF: ${EMOJI_STAFF:-}
+      EMOJI_THREAD: ${EMOJI_THREAD:-}
+      EMOJI_BULLETLINE: ${EMOJI_BULLETLINE:-}
+      EMOJI_PATREON: ${EMOJI_PATREON:-}
+      EMOJI_DISCORD: ${EMOJI_DISCORD:-}
+      EMOJI_LOGO: ${EMOJI_LOGO:-}
       # --- worker: interaction HTTP server (called by http-gateway) ---
       HTTP_ADDR: 0.0.0.0:4001
       DISCORD_PROXY_URL: http-proxy:80
