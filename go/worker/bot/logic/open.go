@@ -597,17 +597,27 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 		return nil
 	})
 
-	// Create webhook
+	// Create the webhook off the critical path: it is a chain of two to three Discord round trips
+	// and is only needed later, when staff reply from the dashboard's live chat. Waiting for it
+	// here used to be the slowest branch of the group. Note premium is force-unlocked in this
+	// fork, so unlike upstream this ran for every single ticket.
 	// TODO: Create webhook on use, rather than on ticket creation.
 	if cmd.PremiumTier() > premium.None {
-		group.Go(func() error {
-			// For threads, create webhook on the parent channel since threads can't have their own webhooks
-			webhookChannelId := ch.Id
-			if ticket.IsThread {
-				webhookChannelId = cmd.ChannelId() // Parent channel
+		// For threads, create webhook on the parent channel since threads can't have their own webhooks
+		webhookChannelId := ch.Id
+		if ticket.IsThread {
+			webhookChannelId = cmd.ChannelId() // Parent channel
+		}
+
+		go func() {
+			// Detached from the interaction context, which is cancelled as soon as we reply.
+			ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
+			defer cancel()
+
+			if err := createWebhook(ctx, cmd, ticketId, cmd.GuildId(), webhookChannelId); err != nil {
+				sentry.Error(err)
 			}
-			return createWebhook(rootSpan.Context(), cmd, ticketId, cmd.GuildId(), webhookChannelId)
-		})
+		}()
 	}
 
 	if err := group.Wait(); err != nil {
@@ -640,13 +650,15 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 		}
 	}
 
-	// Pin the welcome message as the last step after everything else is complete
+	// Pin the welcome message. Nothing waits on the pin, and it is another Discord round trip on
+	// the path between the user pressing the button and the ticket being announced to them, so it
+	// happens in the background.
 	if welcomeMessageId != 0 && ticket.ChannelId != nil {
-		span = sentry.StartSpan(rootSpan.Context(), "Pin welcome message")
 		channelId := *ticket.ChannelId
 
-		_ = cmd.Worker().AddPinnedChannelMessage(channelId, welcomeMessageId)
-		span.Finish()
+		go func() {
+			_ = cmd.Worker().AddPinnedChannelMessage(channelId, welcomeMessageId)
+		}()
 	}
 
 	span = sentry.StartSpan(rootSpan.Context(), "Increment statsd counters")

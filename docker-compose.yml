@@ -134,7 +134,10 @@ services:
       CACHE_THREADS: 4
       WORKER_REDIS_ADDR: redis:6379
       WORKER_REDIS_PASSWD: ${REDIS_PASSWORD}
-      WORKER_REDIS_THREADS: 4
+      # Must exceed the number of permanently blocking consumers (ticket close, autoclose,
+      # close-request, close-reason listeners + the RPC stream consumer), or ordinary commands
+      # queue behind them: see the comment in go/worker/bot/redis/client.go.
+      WORKER_REDIS_THREADS: ${WORKER_REDIS_THREADS:-32}
       # --- fresh-DB schema bootstrap (empty = off; idempotent when on) ---
       INIT_SCHEMA: ${INIT_SCHEMA:-}
       # archive schema + default-bucket seed are created by the bootstrap too
@@ -185,38 +188,16 @@ services:
       - app-network
 
   # --------------------------------------------- Rust gateway layer (built) ---
-  sharder-main:
-    build:
-      context: ./rust
-      dockerfile: sharder/Dockerfile
-    user: "${UID:-}:${GID:-}"
-    container_name: tickets-sharder-main
-    hostname: sharder-0
-    restart: unless-stopped
-    logging: *default-logging
-    ports:
-      - "8092:8091"
-    environment:
-      RUST_LOG: info
-      sharder_id: 0
-      sharder_total: 1
-      sharder_cluster_size: 1
-      large_sharding_buckets: 1
-      redis_addr: redis:6379
-      redis_threads: 2
-      metrics_addr: 0.0.0.0:8091
-      sentry_dsn: ${SENTRY_DSN:-}
-      sharder_token: ${DISCORD_BOT_TOKEN}
-      bot_id: ${DISCORD_BOT_CLIENT_ID}
-    depends_on:
-      redis:
-        condition: service_healthy
-    networks:
-      - app-network
+  # This deployment is whitelabel-only: the public bot is never invited to a server, so it needs
+  # no gateway connection and `sharder-main` (rust/sharder, `public` bin) is not run. It is still
+  # required as an *application* — dashboard OAuth, BOT_TOKEN, and http-gateway's public_* config.
+  # To run the public bot instead, restore the service AND enable its privileged intents (Message
+  # Content + Server Members) in the Developer Portal, or Discord closes the gateway with
+  # 4014 "Disallowed intent(s)".
 
   # Maintains gateway connections for whitelabel (custom) bots — tokens loaded from the DB
-  # and picked up live as they're added in the dashboard. Forwards into the same stream as
-  # the public sharder, so whitelabel tickets capture messages / transcripts.
+  # and picked up live as they're added in the dashboard. Feeds stream:gateway-events, which is
+  # what the worker and the cache consume, so whitelabel tickets capture messages / transcripts.
   sharder-whitelabel:
     build:
       context: ./rust
@@ -290,13 +271,13 @@ services:
       consumer_group: "cache-sync"
       postgres_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
       metric_server_addr: 0.0.0.0:8091
+    # Consumes stream:gateway-events, which the whitelabel sharder feeds — it does not depend on
+    # the (removed) public sharder.
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
-      sharder-main:
-        condition: service_started
     networks:
       - app-network
 
