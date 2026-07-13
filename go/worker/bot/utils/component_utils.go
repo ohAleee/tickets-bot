@@ -59,12 +59,15 @@ func addPremiumFooter(existingComponents []component.Component) []component.Comp
 		existingComponents = append(existingComponents, component.BuildSeparator(component.Separator{}))
 	}
 
+	// Only ever reached for the public bot (see the IsWhitelabel guard in the caller), so the
+	// env-configured set is the right one here.
+	logo := customisation.DefaultEmojis().Logo
+
 	existingComponents = append(existingComponents,
 		component.BuildTextDisplay(component.TextDisplay{
-			Content: fmt.Sprintf("-# %s Powered by [%s](https://%s)", customisation.EmojiLogo, config.Conf.Bot.PoweredBy, config.Conf.Bot.PoweredBy),
+			Content: fmt.Sprintf("-#%s Powered by [%s](https://%s)", customisation.PrefixWithEmoji("", logo), config.Conf.Bot.PoweredBy, config.Conf.Bot.PoweredBy),
 		}),
 	)
 
-	// TODO: Add custom emoji support
 	return existingComponents
 }

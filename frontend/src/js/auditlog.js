@@ -58,6 +58,9 @@ export const ACTION_TYPE_LABELS = {
   212: "Whitelabel Create Interactions",
   213: "Whitelabel Status Set",
   214: "Whitelabel Status Delete",
+  215: "Whitelabel Resync",
+  216: "Whitelabel Assign Guild",
+  217: "Whitelabel Emojis Set",
 
   300: "Bot Staff Add",
   301: "Bot Staff Remove",

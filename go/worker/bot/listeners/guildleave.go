@@ -30,6 +30,16 @@ func OnGuildLeave(worker *worker.Context, e events.GuildDelete) {
 			if err := dbclient.Client.WhitelabelGuilds.Delete(ctx, worker.BotId, e.Guild.Id); err != nil {
 				sentry.Error(err)
 			}
+
+			// Drop the assignment if it pointed at this bot, then hand the guild to another of
+			// the owner's bots still in it, if any.
+			if err := dbclient.Client.WhitelabelGuildAssignments.DeleteIfBot(ctx, e.Guild.Id, worker.BotId); err != nil {
+				sentry.Error(err)
+			}
+
+			if _, _, err := dbclient.Client.WhitelabelGuildAssignments.PromoteIfVacant(ctx, e.Guild.Id); err != nil {
+				sentry.Error(err)
+			}
 		}
 
 		// Exclude from autoclose

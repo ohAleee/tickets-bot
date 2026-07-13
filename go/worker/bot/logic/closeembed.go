@@ -36,10 +36,7 @@ func TranscriptLinkElement(condition bool) CloseEmbedElement {
 	}
 
 	return func(worker *worker.Context, ticket database.Ticket) []component.Component {
-		var transcriptEmoji *emoji.Emoji
-		if !worker.IsWhitelabel {
-			transcriptEmoji = customisation.EmojiTranscript.BuildEmoji()
-		}
+		transcriptEmoji := customisation.GetEmojis(context.Background(), worker.BotId, worker.IsWhitelabel).Transcript.BuildEmoji()
 
 		transcriptLink := fmt.Sprintf("%s/manage/%d/transcripts/view/%d", config.Conf.Bot.DashboardUrl, ticket.GuildId, ticket.Id)
 
@@ -58,10 +55,7 @@ func ThreadLinkElement(condition bool) CloseEmbedElement {
 	}
 
 	return func(worker *worker.Context, ticket database.Ticket) []component.Component {
-		var threadEmoji *emoji.Emoji
-		if !worker.IsWhitelabel {
-			threadEmoji = customisation.EmojiThread.BuildEmoji()
-		}
+		threadEmoji := customisation.GetEmojis(context.Background(), worker.BotId, worker.IsWhitelabel).Thread.BuildEmoji()
 
 		return utils.Slice(
 			component.BuildButton(component.Button{
@@ -162,15 +156,17 @@ func BuildCloseEmbed(
 		colour = customisation.Green.Default()
 	}
 
+	emojis := customisation.GetEmojis(ctx, worker.BotId, worker.IsWhitelabel)
+
 	// TODO: Translate titles
 	closeEmbed := embed.NewEmbed().
 		SetTitle("Ticket Closed").
 		SetColor(colour).
-		AddField(formatTitle("Ticket ID", customisation.EmojiId, worker.IsWhitelabel), strconv.Itoa(ticket.Id), true).
-		AddField(formatTitle("Opened By", customisation.EmojiOpen, worker.IsWhitelabel), fmt.Sprintf("<@%d>", ticket.UserId), true).
-		AddField(formatTitle("Closed By", customisation.EmojiClose, worker.IsWhitelabel), fmt.Sprintf("<@%d>", closedBy), true).
-		AddField(formatTitle("Open Time", customisation.EmojiOpenTime, worker.IsWhitelabel), message.BuildTimestamp(ticket.OpenTime, message.TimestampStyleShortDateTime), true).
-		AddField(formatTitle("Claimed By", customisation.EmojiClaim, worker.IsWhitelabel), claimedBy, true)
+		AddField(customisation.PrefixWithEmoji("Ticket ID", emojis.Id), strconv.Itoa(ticket.Id), true).
+		AddField(customisation.PrefixWithEmoji("Opened By", emojis.Open), fmt.Sprintf("<@%d>", ticket.UserId), true).
+		AddField(customisation.PrefixWithEmoji("Closed By", emojis.Close), fmt.Sprintf("<@%d>", closedBy), true).
+		AddField(customisation.PrefixWithEmoji("Open Time", emojis.OpenTime), message.BuildTimestamp(ticket.OpenTime, message.TimestampStyleShortDateTime), true).
+		AddField(customisation.PrefixWithEmoji("Claimed By", emojis.Claim), claimedBy, true)
 
 	if ticket.CloseTime != nil {
 		closeEmbed.SetTimestamp(*ticket.CloseTime)
@@ -179,10 +175,10 @@ func BuildCloseEmbed(
 	if rating == nil {
 		closeEmbed = closeEmbed.AddBlankField(true)
 	} else {
-		closeEmbed = closeEmbed.AddField(formatTitle("Rating", customisation.EmojiRating, worker.IsWhitelabel), fmt.Sprintf("%d ⭐", *rating), true)
+		closeEmbed = closeEmbed.AddField(customisation.PrefixWithEmoji("Rating", emojis.Rating), fmt.Sprintf("%d ⭐", *rating), true)
 	}
 
-	closeEmbed = closeEmbed.AddField(formatTitle("Reason", customisation.EmojiReason, worker.IsWhitelabel), formattedReason, false)
+	closeEmbed = closeEmbed.AddField(customisation.PrefixWithEmoji("Reason", emojis.Reason), formattedReason, false)
 
 	var rows []component.Component
 	for _, row := range components {
@@ -280,14 +276,6 @@ func EditDMMessageIfExists(
 	})
 
 	return err
-}
-
-func formatTitle(s string, emoji customisation.CustomEmoji, isWhitelabel bool) string {
-	if !isWhitelabel {
-		return fmt.Sprintf("%s %s", emoji, s)
-	} else {
-		return s
-	}
 }
 
 func EditGuildArchiveMessageIfExists(

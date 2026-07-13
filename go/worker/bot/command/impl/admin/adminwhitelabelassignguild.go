@@ -68,6 +68,12 @@ func (AdminWhitelabelAssignGuildCommand) Execute(ctx registry.CommandContext, bo
 		return
 	}
 
+	// The command means "this bot serves this guild", so it overrides any existing assignment.
+	if err := dbclient.Client.WhitelabelGuildAssignments.Set(ctx, guildId, botId, nil); err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
 	ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
 		utils.BuildContainerRaw(
 			ctx,

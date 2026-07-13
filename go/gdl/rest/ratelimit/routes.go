@@ -215,6 +215,9 @@ const (
 	RouteGetCurrentApplication
 	RouteEditCurrentApplication
 
+	// /applications/:id/emojis
+	RouteListApplicationEmojis
+
 	///applications/:id/entitlements
 	RouteListEntitlements
 	RouteConsumeEntitlement

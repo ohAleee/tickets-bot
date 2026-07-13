@@ -11,7 +11,6 @@ import (
 
 	"github.com/TicketsBot-cloud/common/tokenchange"
 	"github.com/TicketsBot-cloud/common/whitelabel"
-	"github.com/TicketsBot-cloud/common/whitelabeldelete"
 	"github.com/TicketsBot-cloud/dashboard/app"
 	"github.com/TicketsBot-cloud/dashboard/app/http/audit"
 	"github.com/TicketsBot-cloud/dashboard/config"
@@ -60,16 +59,18 @@ func WhitelabelPost() func(*gin.Context) {
 			return
 		}
 
-		// Check if this is a different token
-		existing, err := dbclient.Client.Whitelabel.GetByUserId(c, userId)
+		// A user may own several bots, so registering a token adds a bot rather than replacing
+		// one. Guard against claiming a bot that belongs to somebody else: the upsert now keys on
+		// bot_id, which would otherwise silently move it to the caller.
+		existing, err := dbclient.Client.Whitelabel.GetByBotId(c, bot.Id)
 		if err != nil {
 			_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to process request"))
 			return
 		}
 
-		// Take existing whitelabel bot offline, if it is a different bot
-		if existing.BotId != 0 && existing.BotId != bot.Id {
-			whitelabeldelete.Publish(redis.Client.Client, existing.BotId)
+		if existing.BotId != 0 && existing.UserId != userId {
+			c.JSON(http.StatusConflict, utils.ErrorStr("This bot is already registered by another user"))
+			return
 		}
 
 		// Set token in DB so that http-gateway can use it when Discord validates the interactions endpoint
@@ -101,7 +102,7 @@ func WhitelabelPost() func(*gin.Context) {
 
 		if _, err := rest.EditCurrentApplication(context.Background(), data.Token, nil, editData); err != nil {
 			// TODO: Use a transaction
-			if _, err := dbclient.Client.Whitelabel.Delete(c, bot.Id); err != nil {
+			if _, err := dbclient.Client.Whitelabel.Delete(c, userId, bot.Id); err != nil {
 				_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to process request"))
 				return
 			}

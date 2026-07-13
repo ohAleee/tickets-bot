@@ -11,7 +11,7 @@ same functionality, far fewer moving parts.
 | Message bus | Kafka + Redis | **Redis only** (Kafka removed) |
 | Postgres | 3 instances (main / cache / archive) | **1 instance, 3 databases** |
 | Premium | tiered gating + subscription tables | **force-unlocked for every guild**; premium tables dropped |
-| Whitelabel | kept | **kept** (interactions via http-gateway) |
+| Whitelabel | one bot per user, no emojis | **N bots per user**, per-server bot choice, per-bot emojis |
 | Rust services | prebuilt kafka images | **built from forked source** (Redis streams) |
 
 Result: ~17 containers → ~13, one Go binary, one language toolchain change (Kafka gone),
@@ -69,14 +69,37 @@ migrated) and registering slash commands.
 - **Existing deployment**: migrate data + drop premium tables per `migrate/README.md`.
 - **Slash commands**: `docker compose run --rm --entrypoint /app/registercommands ticketbot --token "$DISCORD_BOT_TOKEN"`.
 
+## Whitelabel
+
+A user registers a bot token on the dashboard's Whitelabel page. Unlike upstream, a user can own
+**several** bots and choose which one serves each server (Servers table on that page); the first
+bot to join a server takes it by default, so a single-bot setup needs no configuration. See
+**[docs/SETUP.md](docs/SETUP.md#whitelabel-bots)** for the walkthrough.
+
+Two things that bite on a self-hosted install:
+
+- **`INTERACTIONS_BASE_URL` must be a public HTTPS URL that reaches `http-gateway`.** The
+  dashboard registers `{INTERACTIONS_BASE_URL}/handle/{bot_id}` as the app's interactions
+  endpoint, and Discord validates it immediately: the default internal `http://http-gateway:4000`
+  is rejected outright.
+- **Emojis are per application.** `EMOJI_*` configures the **public** bot only. Discord only lets
+  an app use the emojis it owns, so each whitelabel bot uploads its own (Developer Portal >
+  Emojis) and stores their ids on the Whitelabel page — there is an import button that reads them
+  straight off the application.
+
+The public bot is only needed as an *application* (dashboard OAuth, `BOT_TOKEN`, http-gateway
+config); it does not have to be in any server. Set `WHITELABEL_ONLY=true` to make a guild without
+a whitelabel bot fail loudly instead of falling back to a public bot that isn't there.
+
 ## Notes / deviations
 
 - **logarchiver** stays a separate container: it depends on the incompatible legacy
   `TicketsBot/*` module trees, so it can't share the cloud-libs binary. ticketbot talks
   to it over HTTP via archiverclient.
-- **No whitelabel sharder**: upstream's compose didn't run one either — whitelabel bots
-  receive interactions through `http-gateway`. Add one from `rust/sharder` (the
-  `whitelabel` bin) only if whitelabel bots need gateway events.
+- **`sharder-whitelabel`** runs the `whitelabel` bin from `rust/sharder` (upstream's compose ran
+  no such service). It loads bot tokens from the DB, picks up new ones live over
+  `tickets:tokenchange`, and forwards into the same `stream:gateway-events` as the public sharder,
+  so whitelabel tickets capture messages and transcripts.
 - Fresh installs are supported via `INIT_SCHEMA` (upstream never calls `CreateTables` at
   runtime); existing deployments can instead migrate their data (see `migrate/`). Both paths
   are covered in `docs/SETUP.md`.

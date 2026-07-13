@@ -10,7 +10,6 @@ import (
 	"github.com/TicketsBot-cloud/dashboard/app"
 	"github.com/TicketsBot-cloud/dashboard/app/http/audit"
 	"github.com/TicketsBot-cloud/dashboard/botcontext"
-	"github.com/TicketsBot-cloud/dashboard/database"
 	"github.com/TicketsBot-cloud/dashboard/redis"
 	"github.com/TicketsBot-cloud/dashboard/utils"
 	dbmodel "github.com/TicketsBot-cloud/database"
@@ -26,19 +25,7 @@ func GetWhitelabelCreateInteractions() func(*gin.Context) {
 
 	return func(c *gin.Context) {
 		userId := c.Keys["userid"].(uint64)
-
-		// Get bot
-		bot, err := database.Client.Whitelabel.GetByUserId(c, userId)
-		if err != nil {
-			_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to create whitelabel bot"))
-			return
-		}
-
-		// Ensure bot exists
-		if bot.BotId == 0 {
-			c.JSON(404, utils.ErrorStr("No bot found"))
-			return
-		}
+		bot := botFromContext(c)
 
 		if err := createInteractions(cm, bot.BotId, bot.Token); err != nil {
 			if errors.Is(err, ErrInteractionCreateCooldown) {

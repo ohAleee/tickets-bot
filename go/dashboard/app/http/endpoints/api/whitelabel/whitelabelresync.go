@@ -12,7 +12,6 @@ import (
 	dbclient "github.com/TicketsBot-cloud/dashboard/database"
 	"github.com/TicketsBot-cloud/dashboard/log"
 	"github.com/TicketsBot-cloud/dashboard/redis"
-	"github.com/TicketsBot-cloud/dashboard/utils"
 	"github.com/TicketsBot-cloud/database"
 	"github.com/TicketsBot-cloud/worker/bot/command/manager"
 	"github.com/gin-gonic/gin"
@@ -29,17 +28,7 @@ func WhitelabelResync() func(*gin.Context) {
 
 	return func(c *gin.Context) {
 		userId := c.Keys["userid"].(uint64)
-
-		bot, err := dbclient.Client.Whitelabel.GetByUserId(c, userId)
-		if err != nil {
-			_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to load whitelabel bot"))
-			return
-		}
-
-		if bot.BotId == 0 {
-			c.JSON(http.StatusNotFound, utils.ErrorStr("No bot found"))
-			return
-		}
+		bot := botFromContext(c)
 
 		if err := whitelabel.ReapplyIntents(c, bot.Token); err != nil {
 			_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to update the Discord application"))

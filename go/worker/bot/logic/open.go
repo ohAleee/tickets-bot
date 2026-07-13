@@ -1456,14 +1456,16 @@ func buildJoinThreadMessage(
 		title = "Ticket Reopened"
 	}
 
+	emojis := customisation.GetEmojis(ctx, worker.BotId, worker.IsWhitelabel)
+
 	e := utils.BuildEmbedRaw(customisation.GetColourOrDefault(ctx, guildId, colour), title, fmt.Sprintf("%s with ID: %d has been opened. Press the button below to join it.", name, ticketId), nil, premiumTier)
-	e.AddField(customisation.PrefixWithEmoji("Opened By", customisation.EmojiOpen, !worker.IsWhitelabel), customisation.PrefixWithEmoji(fmt.Sprintf("<@%d>", openerId), customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
-	e.AddField(customisation.PrefixWithEmoji("Panel", customisation.EmojiPanel, !worker.IsWhitelabel), customisation.PrefixWithEmoji(panelName, customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
-	e.AddField(customisation.PrefixWithEmoji("Staff In Ticket", customisation.EmojiStaff, !worker.IsWhitelabel), customisation.PrefixWithEmoji(strconv.Itoa(len(staffMembers)), customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
+	e.AddField(customisation.PrefixWithEmoji("Opened By", emojis.Open), customisation.PrefixWithEmoji(fmt.Sprintf("<@%d>", openerId), emojis.BulletLine), true)
+	e.AddField(customisation.PrefixWithEmoji("Panel", emojis.Panel), customisation.PrefixWithEmoji(panelName, emojis.BulletLine), true)
+	e.AddField(customisation.PrefixWithEmoji("Staff In Ticket", emojis.Staff), customisation.PrefixWithEmoji(strconv.Itoa(len(staffMembers)), emojis.BulletLine), true)
 
 	if len(staffMembers) > 0 {
 		var mentions []string // dynamic length
-		charCount := len(customisation.EmojiBulletLine.String()) + 1
+		charCount := len(customisation.PrefixWithEmoji("", emojis.BulletLine)) + 1
 		for _, staffMember := range staffMembers {
 			mention := fmt.Sprintf("<@%d>", staffMember)
 
@@ -1475,7 +1477,7 @@ func buildJoinThreadMessage(
 			charCount += len(mention) + 1 // +1 for space
 		}
 
-		e.AddField(customisation.PrefixWithEmoji("Staff Members", customisation.EmojiStaff, !worker.IsWhitelabel), customisation.PrefixWithEmoji(strings.Join(mentions, " "), customisation.EmojiBulletLine, !worker.IsWhitelabel), false)
+		e.AddField(customisation.PrefixWithEmoji("Staff Members", emojis.Staff), customisation.PrefixWithEmoji(strings.Join(mentions, " "), emojis.BulletLine), false)
 	}
 
 	return command.MessageResponse{

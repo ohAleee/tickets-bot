@@ -121,7 +121,7 @@ func BuildPatreonNotLinkedMessage(ctx registry.CommandContext) command.MessageRe
 		component.BuildButton(component.Button{
 			Label: ctx.GetMessage(i18n.MessagePremiumLinkPatreonAccount),
 			Style: component.ButtonStyleLink,
-			Emoji: ctx.SelectValidEmoji(customisation.EmojiPatreon, "🔗"),
+			Emoji: ctx.SelectValidEmoji(customisation.GetEmojis(ctx, ctx.Worker().BotId, ctx.Worker().IsWhitelabel).Patreon, "🔗"),
 			Url:   utils.Ptr("https://support.patreon.com/hc/en-us/articles/212052266-Get-my-Discord-role"),
 		}),
 		component.BuildButton(component.Button{

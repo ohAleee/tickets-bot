@@ -34,6 +34,18 @@ func OnGuildCreate(worker *worker.Context, e events.GuildCreate) {
 		return
 	}
 
+	// The whitelabel sharder records membership itself, but a real join is also the moment the
+	// guild picks up its serving bot: first bot in wins, and an existing choice is preserved.
+	if worker.IsWhitelabel {
+		if err := dbclient.Client.WhitelabelGuilds.Add(ctx, worker.BotId, e.Guild.Id); err != nil {
+			sentry.Error(err)
+		}
+
+		if err := dbclient.Client.WhitelabelGuildAssignments.SetIfAbsent(ctx, e.Guild.Id, worker.BotId); err != nil {
+			sentry.Error(err)
+		}
+	}
+
 	if time.Now().Sub(e.JoinedAt) < time.Minute {
 		statsd.Client.IncrementKey(statsd.KeyJoins)
 

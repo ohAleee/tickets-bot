@@ -64,35 +64,38 @@ func (h *WhitelabelRecreateCommandsHandler) Execute(ctx *context.ButtonContext) 
 		return
 	}
 
-	bot, err := dbclient.Client.Whitelabel.GetByUserId(ctx, userId)
+	// The custom id only carries the owner, so re-create commands for every bot they own.
+	bots, err := dbclient.Client.Whitelabel.ListByUserId(ctx, userId)
 	if err != nil {
 		ctx.HandleError(err)
 		return
 	}
 
-	if bot.BotId == 0 {
+	if len(bots) == 0 {
 		ctx.ReplyRaw(customisation.Red, "Error", "This user does not have a whitelabel bot.")
-		return
-	}
-
-	// Cooldown to avoid Discord global-command rate limits (shared with the dashboard).
-	key := fmt.Sprintf("tickets:interaction-create-cooldown:%d", bot.BotId)
-	wasSet, err := redis.Client.SetNX(ctx, key, 1, time.Minute).Result()
-	if err != nil {
-		ctx.HandleError(err)
-		return
-	}
-
-	if !wasSet {
-		ctx.ReplyRaw(customisation.Red, "Slow down", "Slash commands were re-created recently. Please wait a minute and try again.")
 		return
 	}
 
 	commands, _ := getCommandManager().BuildCreatePayload(true, nil)
 
-	if _, err := rest.ModifyGlobalCommands(ctx, bot.Token, nil, bot.BotId, commands); err != nil {
-		ctx.HandleError(err)
-		return
+	for _, bot := range bots {
+		// Cooldown to avoid Discord global-command rate limits (shared with the dashboard).
+		key := fmt.Sprintf("tickets:interaction-create-cooldown:%d", bot.BotId)
+		wasSet, err := redis.Client.SetNX(ctx, key, 1, time.Minute).Result()
+		if err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		if !wasSet {
+			ctx.ReplyRaw(customisation.Red, "Slow down", "Slash commands were re-created recently. Please wait a minute and try again.")
+			return
+		}
+
+		if _, err := rest.ModifyGlobalCommands(ctx, bot.Token, nil, bot.BotId, commands); err != nil {
+			ctx.HandleError(err)
+			return
+		}
 	}
 
 	ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
@@ -102,7 +105,7 @@ func (h *WhitelabelRecreateCommandsHandler) Execute(ctx *context.ButtonContext) 
 			"Whitelabel - Re-create Slash Commands",
 			[]component.Component{
 				component.BuildTextDisplay(component.TextDisplay{
-					Content: fmt.Sprintf("Slash commands for <@%d> have been re-created. They may take a few minutes to appear.", bot.BotId),
+					Content: fmt.Sprintf("Slash commands for %s have been re-created. They may take a few minutes to appear.", mentionBots(bots)),
 				}),
 			},
 		),

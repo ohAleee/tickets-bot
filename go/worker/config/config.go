@@ -42,6 +42,10 @@ type (
 			Admins              []uint64 `env:"WORKER_BOT_ADMINS"`
 			Helpers             []uint64 `env:"WORKER_BOT_HELPERS"`
 			MonitoredBots       []uint64 `env:"MONITORED_BOTS"`
+			// When the public bot is not invited anywhere, falling back to it for a guild with
+			// no whitelabel bot yields an opaque "Missing Access" from Discord. Set this to fail
+			// loudly instead.
+			WhitelabelOnly bool `env:"WHITELABEL_ONLY" envDefault:"false"`
 		}
 
 		PremiumProxy struct {

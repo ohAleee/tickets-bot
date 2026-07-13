@@ -49,6 +49,9 @@ type Config struct {
 		PublicIntegrationRequestWebhookToken string `env:"PUBLIC_INTEGRATION_REQUEST_WEBHOOK_TOKEN" toml:"public-integration-request-webhook-token"`
 		PoweredBy                            string `env:"POWEREDBY" envDefault:"tickets.bot"`
 		IconUrl                              string `env:"ICON_URL" envDefault:"https://tickets.bot/assets/img/logo.png"`
+		// When the public bot is not invited anywhere, falling back to it for a guild with no
+		// whitelabel bot yields an opaque "Missing Access" from Discord. Set this to fail loudly.
+		WhitelabelOnly bool `env:"WHITELABEL_ONLY" envDefault:"false"`
 	}
 	Redis struct {
 		Host     string `env:"HOST,required"`

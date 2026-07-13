@@ -103,7 +103,9 @@ type Database struct {
 	TicketLabels               *TicketLabelsTable
 	TicketLabelAssignments     *TicketLabelAssignmentsTable
 	Whitelabel                     *WhitelabelBotTable
+	WhitelabelEmojis               *WhitelabelEmojis
 	WhitelabelErrors               *WhitelabelErrors
+	WhitelabelGuildAssignments     *WhitelabelGuildAssignments
 	WhitelabelGuilds               *WhitelabelGuilds
 	WhitelabelStatuses             *WhitelabelStatuses
 	WhitelabelUsers                *WhitelabelUsers
@@ -203,7 +205,9 @@ func NewDatabase(pool *pgxpool.Pool) *Database {
 		TicketLabels:               newTicketLabelsTable(pool),
 		TicketLabelAssignments:     newTicketLabelAssignmentsTable(pool),
 		Whitelabel:                     newWhitelabelBotTable(pool),
+		WhitelabelEmojis:               newWhitelabelEmojis(pool),
 		WhitelabelErrors:               newWhitelabelErrors(pool),
+		WhitelabelGuildAssignments:     newWhitelabelGuildAssignments(pool),
 		WhitelabelGuilds:               newWhitelabelGuilds(pool),
 		WhitelabelStatuses:             newWhitelabelStatuses(pool),
 		WhitelabelUsers:                newWhitelabelUsers(pool),
@@ -323,7 +327,9 @@ func (d *Database) CreateTables(ctx context.Context, pool *pgxpool.Pool) {
 		d.WelcomeMessages,
 		d.Whitelabel,
 		d.WhitelabelErrors,
-		d.WhitelabelGuilds,
+		d.WhitelabelGuilds,           // Must be created after Whitelabel table
+		d.WhitelabelGuildAssignments, // Must be created after Whitelabel table
+		d.WhitelabelEmojis,           // Must be created after Whitelabel table
 		d.WhitelabelStatuses,
 		d.WhitelabelUsers,
 		d.AuditLog,

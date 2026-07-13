@@ -77,6 +77,11 @@ func SyncGuilds(ctx context.Context, db *database.Database, token string, botId 
 			if err := db.WhitelabelGuilds.Add(ctx, botId, id); err != nil {
 				return err
 			}
+
+			// First bot in a guild serves it; an assignment the owner already made is kept.
+			if err := db.WhitelabelGuildAssignments.SetIfAbsent(ctx, id, botId); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -84,6 +89,17 @@ func SyncGuilds(ctx context.Context, db *database.Database, token string, botId 
 	for _, id := range stored {
 		if _, ok := discord[id]; !ok {
 			if err := db.WhitelabelGuilds.Delete(ctx, botId, id); err != nil {
+				return err
+			}
+
+			// Hand the guild to another of the owner's bots if one is still in it. Leaving it
+			// unassigned would drop the guild back to the public bot, which is typically not a
+			// member — locking the owner out of that guild's dashboard.
+			if err := db.WhitelabelGuildAssignments.DeleteIfBot(ctx, id, botId); err != nil {
+				return err
+			}
+
+			if _, _, err := db.WhitelabelGuildAssignments.PromoteIfVacant(ctx, id); err != nil {
 				return err
 			}
 		}

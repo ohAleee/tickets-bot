@@ -53,28 +53,10 @@ func (AdminWhitelabelDataCommand) Execute(ctx registry.CommandContext, userId ui
 		return
 	}
 
-	data, err := dbclient.Client.Whitelabel.GetByUserId(ctx, userId)
+	bots, err := dbclient.Client.Whitelabel.ListByUserId(ctx, userId)
 	if err != nil {
 		ctx.HandleError(err)
 		return
-	}
-
-	var botIdFormatted = "Bot not found"
-	var publicKeyFormatted = "Not set"
-	if data.BotId != 0 {
-		botIdFormatted = fmt.Sprintf("%d (<@%d>)", data.BotId, data.BotId)
-
-		application, err := rest.GetCurrentApplication(ctx, data.Token, nil)
-		if err != nil {
-			ctx.HandleError(err)
-			return
-		}
-
-		if application.VerifyKey == data.PublicKey {
-			publicKeyFormatted = "Matches"
-		} else {
-			publicKeyFormatted = "Does not match(!)"
-		}
 	}
 
 	errors, err := dbclient.Client.WhitelabelErrors.GetRecent(ctx, userId, 3)
@@ -89,49 +71,74 @@ func (AdminWhitelabelDataCommand) Execute(ctx registry.CommandContext, userId ui
 	} else {
 		strs := make([]string, len(errors))
 		for i, botError := range errors {
-			strs[i] = fmt.Sprintf("[<t:%d:f>] `%s`", botError.Time.Unix(), botError.Message)
+			botFormatted := "unknown bot"
+			if botError.BotId != nil {
+				botFormatted = fmt.Sprintf("%d", *botError.BotId)
+			}
+
+			strs[i] = fmt.Sprintf("[<t:%d:f>] (%s) `%s`", botError.Time.Unix(), botFormatted, botError.Message)
 		}
 
 		errorsFormatted = strings.Join(strs, "\n")
 	}
 
-	guilds, err := dbclient.Client.WhitelabelGuilds.GetGuilds(ctx, data.BotId)
-	if err != nil {
-		ctx.HandleError(err)
-		return
+	tds := fmt.Sprintf("**Subscription Tier:** %s\n", tier.String())
+
+	if len(bots) == 0 {
+		tds += "**Bot ID:** Bot not found\n"
 	}
 
-	var guildsFormatted string
-	if len(guilds) == 0 {
-		guildsFormatted = "No Guilds"
-	} else {
-		for _, guild := range guilds {
-			guildsFormatted += fmt.Sprintf("%d\n", guild)
+	// A user may own several bots: report each one separately.
+	for _, data := range bots {
+		publicKeyFormatted := "Not set"
+
+		application, err := rest.GetCurrentApplication(ctx, data.Token, nil)
+		if err != nil {
+			ctx.HandleError(err)
+			return
 		}
 
-		guildsFormatted = strings.TrimSuffix(guildsFormatted, "\n")
+		if application.VerifyKey == data.PublicKey {
+			publicKeyFormatted = "Matches"
+		} else {
+			publicKeyFormatted = "Does not match(!)"
+		}
+
+		guilds, err := dbclient.Client.WhitelabelGuilds.GetGuilds(ctx, data.BotId)
+		if err != nil {
+			ctx.HandleError(err)
+			return
+		}
+
+		var guildsFormatted string
+		if len(guilds) == 0 {
+			guildsFormatted = "No Guilds"
+		} else {
+			for _, guild := range guilds {
+				guildsFormatted += fmt.Sprintf("%d\n", guild)
+			}
+
+			guildsFormatted = strings.TrimSuffix(guildsFormatted, "\n")
+		}
+
+		fields := []model.Field{
+			{Name: "Bot ID", Value: fmt.Sprintf("%d (<@%d>)", data.BotId, data.BotId)},
+			{Name: "Public Key", Value: publicKeyFormatted},
+			{Name: "Guilds", Value: guildsFormatted},
+			{
+				Name:  "Invite Link",
+				Value: fmt.Sprintf("[Click Here](https://discord.com/oauth2/authorize?client_id=%d&scope=bot+applications.commands&permissions=395942816984)", data.BotId),
+			},
+		}
+
+		for i := range fields {
+			tds += fmt.Sprintf("**%s:** %s\n", fields[i].Name, fields[i].Value)
+		}
+
+		tds += "\n"
 	}
 
-	tds := ""
-
-	fields := []model.Field{
-		{Name: "Subscription Tier", Value: tier.String()},
-		{Name: "Bot ID", Value: botIdFormatted},
-	}
-
-	if data.BotId != 0 {
-		fields = append(fields, model.Field{Name: "Public Key", Value: publicKeyFormatted})
-		fields = append(fields, model.Field{Name: "Guilds", Value: guildsFormatted})
-		fields = append(fields, model.Field{Name: "Last 3 Errors", Value: errorsFormatted})
-		fields = append(fields, model.Field{
-			Name:  "Invite Link",
-			Value: fmt.Sprintf("[Click Here](https://discord.com/oauth2/authorize?client_id=%d&scope=bot+applications.commands&permissions=395942816984)", data.BotId),
-		})
-	}
-
-	for i := range fields {
-		tds += fmt.Sprintf("**%s:** %s\n", fields[i].Name, fields[i].Value)
-	}
+	tds += fmt.Sprintf("**Last 3 Errors:** %s\n", errorsFormatted)
 
 	innerComponents := []component.Component{
 		component.BuildTextDisplay(component.TextDisplay{Content: "## Whitelabel"}),
@@ -145,7 +152,8 @@ func (AdminWhitelabelDataCommand) Execute(ctx registry.CommandContext, userId ui
 		utils.BuildContainerWithComponents(ctx, customisation.Green, "Admin - Whitelabel Data", innerComponents),
 	}
 
-	if data.BotId != 0 {
+	// The buttons act on every bot the user owns, so their custom ids stay keyed by user.
+	if len(bots) > 0 {
 		components = append(components, component.BuildActionRow(
 			component.BuildButton(component.Button{
 				Label:    "Resync Bot",

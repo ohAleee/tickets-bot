@@ -9,26 +9,14 @@ import (
 	"github.com/TicketsBot-cloud/dashboard/app"
 	"github.com/TicketsBot-cloud/dashboard/database"
 	"github.com/TicketsBot-cloud/dashboard/rpc/cache"
-	"github.com/TicketsBot-cloud/dashboard/utils"
 	cache2 "github.com/TicketsBot-cloud/gdl/cache"
 	"github.com/gin-gonic/gin"
 )
 
 func WhitelabelGetGuilds(c *gin.Context) {
-	userId := c.Keys["userid"].(uint64)
-
-	bot, err := database.Client.Whitelabel.GetByUserId(c, userId)
-	if err != nil {
-		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to load whitelabel bots"))
-		return
-	}
+	bot := botFromContext(c)
 
 	// id -> name
-	if bot.BotId == 0 {
-		c.JSON(400, utils.ErrorStr("Whitelabel bot not found"))
-		return
-	}
-
 	ids, err := database.Client.WhitelabelGuilds.GetGuilds(c, bot.BotId)
 	if err != nil {
 		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to load whitelabel bots"))
