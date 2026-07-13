@@ -8,7 +8,9 @@ export const DESCRIPTION =
   env.DESCRIPTION || "Management panel for the Discord Tickets V2 bot";
 export const FAVICON = env.FAVICON || "/favicon.ico";
 export const FAVICON_TYPE = env.FAVICON_TYPE || "image/ico";
-export const WHITELABEL_DISABLED = env.WHITELABEL_DISABLED || false;
+// Build args arrive as strings, so "false" must not be treated as truthy.
+export const WHITELABEL_DISABLED =
+  env.WHITELABEL_DISABLED === true || env.WHITELABEL_DISABLED === "true";
 export const REDIRECT_WEBSITE = env.REDIRECT_WEBSITE || "https://tickets.bot";
 
 export const OAUTH = {
