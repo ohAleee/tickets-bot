@@ -32,6 +32,10 @@ func ContextForGuild(guildId uint64) (*BotContext, error) {
 			RestCache:   restcache.NewRedisRestCache(redis.Client.Client, res.Token, rateLimiter),
 		}, nil
 	} else {
+		if config.Conf.Bot.WhitelabelOnly {
+			return nil, fmt.Errorf("guild %d has no whitelabel bot assigned and WHITELABEL_ONLY is set", guildId)
+		}
+
 		return PublicContext(), nil
 	}
 }

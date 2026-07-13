@@ -172,12 +172,14 @@ func (r *Replyable) GetMessage(messageId i18n.MessageId, format ...interface{}) 
 	return i18n.GetMessageFromGuild(r.ctx.GuildId(), messageId, format...)
 }
 
+// SelectValidEmoji renders the bot's own emoji when it has one, and the unicode fallback when it
+// does not — which is the case for a whitelabel bot whose owner uploaded no application emojis.
 func (r *Replyable) SelectValidEmoji(customEmoji customisation.CustomEmoji, fallback string) *emoji.Emoji {
-	if r.ctx.Worker().IsWhitelabel {
-		return utils.BuildEmoji(fallback) // TODO: Check whitelabel_guilds table for emojis server
-	} else {
-		return customEmoji.BuildEmoji()
+	if !customEmoji.Configured() {
+		return utils.BuildEmoji(fallback)
 	}
+
+	return customEmoji.BuildEmoji()
 }
 
 func (r *Replyable) buildErrorResponse(err error, eventId string, includeInviteLink bool) command.MessageResponse {

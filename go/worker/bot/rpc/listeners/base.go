@@ -3,6 +3,7 @@ package listeners
 import (
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/TicketsBot-cloud/gdl/cache"
@@ -53,6 +54,10 @@ func (b *BaseListener) ContextForGuild(ctx context.Context, guildId uint64) (*wo
 			RateLimiter:  nil,
 		}, nil
 	} else {
+		if config.Conf.Bot.WhitelabelOnly {
+			return nil, fmt.Errorf("guild %d has no whitelabel bot assigned and WHITELABEL_ONLY is set", guildId)
+		}
+
 		return &worker.Context{
 			Token:        config.Conf.Discord.Token,
 			BotId:        config.Conf.Discord.PublicBotId,

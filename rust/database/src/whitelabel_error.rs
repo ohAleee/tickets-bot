@@ -27,6 +27,7 @@ impl Table for WhitelabelErrorTable {
 CREATE TABLE IF NOT EXISTS whitelabel_errors(
 	"error_id" serial,
 	"user_id" int8 NOT NULL,
+	"bot_id" int8,
 	"error" varchar(255) NOT NULL,
 	"error_time" timestamptz NOT NULL,
 	PRIMARY KEY("error_id")
@@ -65,11 +66,17 @@ impl WhitelabelErrorTable {
         Ok(errors)
     }
 
-    pub async fn append(&self, user_id: Snowflake, error: String) -> Result<(), Error> {
-        let query = r#"INSERT INTO whitelabel_errors("user_id", "error", "error_time") VALUES($1, $2, NOW());"#;
+    pub async fn append(
+        &self,
+        user_id: Snowflake,
+        bot_id: Snowflake,
+        error: String,
+    ) -> Result<(), Error> {
+        let query = r#"INSERT INTO whitelabel_errors("user_id", "bot_id", "error", "error_time") VALUES($1, $2, $3, NOW());"#;
 
         sqlx::query(query)
             .bind(user_id.0 as i64)
+            .bind(bot_id.0 as i64)
             .bind(error)
             .execute(&*self.db)
             .await?;

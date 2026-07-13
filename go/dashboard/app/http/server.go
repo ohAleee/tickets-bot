@@ -235,16 +235,31 @@ func StartServer(logger *zap.Logger, sm *livechat.SocketManager) *nethttp.Server
 		{
 			whitelabelGroup := userGroup.Group("/whitelabel", middleware.VerifyWhitelabel(true))
 
-			whitelabelGroup.GET("/", api_whitelabel.WhitelabelGet)
+			// A user may own several bots.
+			whitelabelGroup.GET("/bots", api_whitelabel.ListBots)
+			whitelabelGroup.POST("/bots", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelPost())
+			whitelabelGroup.GET("/servers", api_whitelabel.ListServers)
 			whitelabelGroup.GET("/errors", api_whitelabel.WhitelabelGetErrors)
-			whitelabelGroup.GET("/guilds", api_whitelabel.WhitelabelGetGuilds)
-			whitelabelGroup.POST("/create-interactions", api_whitelabel.GetWhitelabelCreateInteractions())
-			whitelabelGroup.POST("/resync", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelResync())
-			whitelabelGroup.DELETE("/", api_whitelabel.WhitelabelDelete)
 
-			whitelabelGroup.POST("/", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelPost())
-			whitelabelGroup.POST("/status", rl(middleware.RateLimitTypeUser, 1, time.Second*5), api_whitelabel.WhitelabelStatusPost)
-			whitelabelGroup.DELETE("/status", rl(middleware.RateLimitTypeUser, 1, time.Second*5), api_whitelabel.WhitelabelStatusDelete)
+			// Everything below acts on one bot, and only if the caller owns it.
+			botGroup := whitelabelGroup.Group("/bots/:botid", middleware.VerifyWhitelabelBotOwner)
+			botGroup.GET("", api_whitelabel.WhitelabelGet)
+			botGroup.DELETE("", api_whitelabel.WhitelabelDelete)
+			botGroup.GET("/guilds", api_whitelabel.WhitelabelGetGuilds)
+			botGroup.GET("/emojis", api_whitelabel.WhitelabelGetEmojis)
+			botGroup.PUT("/emojis", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelSetEmojis)
+			botGroup.POST("/emojis/import", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelImportEmojis)
+			botGroup.POST("/create-interactions", api_whitelabel.GetWhitelabelCreateInteractions())
+			botGroup.POST("/resync", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelResync())
+			botGroup.POST("/status", rl(middleware.RateLimitTypeUser, 1, time.Second*5), api_whitelabel.WhitelabelStatusPost)
+			botGroup.DELETE("/status", rl(middleware.RateLimitTypeUser, 1, time.Second*5), api_whitelabel.WhitelabelStatusDelete)
+
+			// Picking the bot for a guild needs guild admin too — the param must be named "id",
+			// since that is what AuthenticateGuild reads.
+			whitelabelGroup.PUT("/servers/:id",
+				middleware.AuthenticateGuild(permission.Admin),
+				rl(middleware.RateLimitTypeUser, 20, time.Minute),
+				api_whitelabel.SetGuildBot)
 		}
 	}
 

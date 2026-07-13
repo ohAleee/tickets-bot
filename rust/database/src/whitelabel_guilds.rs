@@ -52,15 +52,22 @@ impl WhitelabelGuilds {
         Ok(guilds)
     }
 
+    /// The owner's explicit assignment wins; membership is only a fallback. Keep this in sync
+    /// with GetBotByGuild in go/database/whitelabelguilds.go.
     pub async fn get_bot_by_guild(&self, guild_id: Snowflake) -> Result<Option<Snowflake>, Error> {
-        let query = r#"SELECT "bot_id" from whitelabel_guilds WHERE "guild_id"=$1 LIMIT 1;"#;
+        let query = r#"
+SELECT COALESCE(
+	(SELECT "bot_id" FROM whitelabel_guild_assignments WHERE "guild_id" = $1),
+	(SELECT "bot_id" FROM whitelabel_guilds WHERE "guild_id" = $1 ORDER BY "bot_id" LIMIT 1)
+);"#;
 
-        match sqlx::query_as::<_, (i64,)>(query)
+        match sqlx::query_as::<_, (Option<i64>,)>(query)
             .bind(guild_id.0 as i64)
             .fetch_one(&*self.db)
             .await
         {
-            Ok(id) => Ok(Some(Snowflake(id.0 as u64))),
+            Ok((Some(id),)) => Ok(Some(Snowflake(id as u64))),
+            Ok((None,)) => Ok(None),
             Err(sqlx::Error::RowNotFound) => Ok(None),
             Err(e) => Err(e),
         }

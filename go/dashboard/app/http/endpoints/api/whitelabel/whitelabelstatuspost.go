@@ -23,19 +23,7 @@ type statusUpdateBody struct {
 
 func WhitelabelStatusPost(c *gin.Context) {
 	userId := c.Keys["userid"].(uint64)
-
-	// Get bot
-	bot, err := database.Client.Whitelabel.GetByUserId(c, userId)
-	if err != nil {
-		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to process request"))
-		return
-	}
-
-	// Ensure bot exists
-	if bot.BotId == 0 {
-		c.JSON(404, utils.ErrorStr("No bot found"))
-		return
-	}
+	bot := botFromContext(c)
 
 	// Parse status
 	var data statusUpdateBody

@@ -3,10 +3,12 @@ package utils
 import (
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	w "github.com/TicketsBot-cloud/worker"
 	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/config"
 )
 
 func ContextTimeout(timeout time.Duration) (context.Context, context.CancelFunc) {
@@ -22,6 +24,10 @@ func WorkerForGuild(ctx context.Context, mainWorker *w.Context, guildId uint64) 
 	}
 
 	if !isWhitelabel {
+		if config.Conf.Bot.WhitelabelOnly {
+			return nil, fmt.Errorf("guild %d has no whitelabel bot assigned and WHITELABEL_ONLY is set", guildId)
+		}
+
 		return mainWorker, nil
 	}
 

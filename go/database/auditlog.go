@@ -83,6 +83,8 @@ const (
 	AuditActionWhitelabelStatusSet          AuditActionType = 213
 	AuditActionWhitelabelStatusDelete       AuditActionType = 214
 	AuditActionWhitelabelResync             AuditActionType = 215
+	AuditActionWhitelabelAssignGuild        AuditActionType = 216
+	AuditActionWhitelabelEmojisSet          AuditActionType = 217
 
 	AuditActionBotStaffAdd    AuditActionType = 300
 	AuditActionBotStaffRemove AuditActionType = 301

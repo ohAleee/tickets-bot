@@ -10,6 +10,9 @@ pub use whitelabel::*;
 mod whitelabel_error;
 pub use whitelabel_error::*;
 
+mod whitelabel_guild_assignment;
+pub use whitelabel_guild_assignment::WhitelabelGuildAssignments;
+
 mod whitelabel_guilds;
 pub use whitelabel_guilds::WhitelabelGuilds;
 

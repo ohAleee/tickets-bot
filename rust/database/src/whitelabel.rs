@@ -26,13 +26,13 @@ impl Table for Whitelabel {
         sqlx::query(
             r#"
 CREATE TABLE IF NOT EXISTS whitelabel(
-	"user_id" int8 UNIQUE NOT NULL,
-	"bot_id" int8 UNIQUE NOT NULL,
+	"user_id" int8 NOT NULL,
+	"bot_id" int8 NOT NULL,
     "public_key" CHAR(64) NOT NULL,
 	"token" VARCHAR(84) NOT NULL UNIQUE,
-	PRIMARY KEY("user_id")
+	PRIMARY KEY("bot_id")
 );
-CREATE INDEX IF NOT EXISTS whitelabel_bot_id ON whitelabel("bot_id");
+CREATE INDEX IF NOT EXISTS whitelabel_user_id ON whitelabel("user_id");
         "#,
         )
         .execute(&*self.db)
@@ -115,11 +115,11 @@ INSERT INTO whitelabel
     ("user_id", "bot_id", "public_key", "token")
 VALUES
     ($1, $2, $3, $4)
-ON CONFLICT("user_id") DO
+ON CONFLICT("bot_id") DO
     UPDATE
-        SET "bot_id" = $2,
+        SET "user_id" = $1,
             "public_key" = $3,
-            "token" = $4";
+            "token" = $4;
 "#;
 
         sqlx::query(query)

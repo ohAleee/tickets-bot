@@ -49,34 +49,37 @@ func (h *WhitelabelResyncHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	bot, err := dbclient.Client.Whitelabel.GetByUserId(ctx, userId)
+	// The custom id only carries the owner, so resync every bot they own.
+	bots, err := dbclient.Client.Whitelabel.ListByUserId(ctx, userId)
 	if err != nil {
 		ctx.HandleError(err)
 		return
 	}
 
-	if bot.BotId == 0 {
+	if len(bots) == 0 {
 		ctx.ReplyRaw(customisation.Red, "Error", "This user does not have a whitelabel bot.")
 		return
 	}
 
-	if err := commonwl.ReapplyIntents(ctx, bot.Token); err != nil {
-		ctx.HandleError(err)
-		return
-	}
+	for _, bot := range bots {
+		if err := commonwl.ReapplyIntents(ctx, bot.Token); err != nil {
+			ctx.HandleError(err)
+			return
+		}
 
-	if err := tokenchange.PublishTokenChange(redis.Client, tokenchange.TokenChangeData{
-		Token: bot.Token,
-		NewId: bot.BotId,
-		OldId: 0,
-	}); err != nil {
-		ctx.HandleError(err)
-		return
-	}
+		if err := tokenchange.PublishTokenChange(redis.Client, tokenchange.TokenChangeData{
+			Token: bot.Token,
+			NewId: bot.BotId,
+			OldId: 0,
+		}); err != nil {
+			ctx.HandleError(err)
+			return
+		}
 
-	if err := commonwl.SyncGuilds(ctx, dbclient.Client, bot.Token, bot.BotId); err != nil {
-		ctx.HandleError(err)
-		return
+		if err := commonwl.SyncGuilds(ctx, dbclient.Client, bot.Token, bot.BotId); err != nil {
+			ctx.HandleError(err)
+			return
+		}
 	}
 
 	ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
@@ -86,7 +89,7 @@ func (h *WhitelabelResyncHandler) Execute(ctx *context.ButtonContext) {
 			"Whitelabel - Resync",
 			[]component.Component{
 				component.BuildTextDisplay(component.TextDisplay{
-					Content: fmt.Sprintf("Bot <@%d> has been resynced.", bot.BotId),
+					Content: fmt.Sprintf("%s has been resynced.", mentionBots(bots)),
 				}),
 			},
 		),

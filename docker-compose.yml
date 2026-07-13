@@ -91,6 +91,9 @@ services:
       WORKER_PUBLIC_ID: ${DISCORD_BOT_CLIENT_ID}
       WORKER_BOT_ADMINS: ${ADMIN_USER_IDS}
       WORKER_BOT_HELPERS: ${HELPER_USER_IDS:-}
+      # Read by both the worker and the dashboard API: when true, a guild with no whitelabel bot
+      # assigned errors out instead of falling back to the (uninvited) public bot.
+      WHITELABEL_ONLY: ${WHITELABEL_ONLY:-false}
       # --- worker: custom (application) emojis ---
       # Application emojis are only usable by the app that owns them, so a
       # self-hosted bot must upload its own emojis (Dev Portal > Emojis) and set

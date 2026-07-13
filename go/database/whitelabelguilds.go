@@ -2,6 +2,8 @@ package database
 
 import (
 	"context"
+	"errors"
+
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
 )
@@ -48,21 +50,88 @@ func (w *WhitelabelGuilds) GetGuilds(ctx context.Context, botId uint64) (guilds 
 	return
 }
 
+// GetBotByGuild resolves which bot acts in a guild. The explicit assignment made by the bot
+// owner wins; the membership table is only a fallback, so a guild whose assignment row is
+// missing keeps being served by a whitelabel bot instead of silently dropping to the public
+// bot (which is usually not even in the guild).
 func (w *WhitelabelGuilds) GetBotByGuild(ctx context.Context, guildId uint64) (botId uint64, found bool, e error) {
-	query := `SELECT "bot_id" from whitelabel_guilds WHERE "guild_id"=$1 LIMIT 1;`
+	query := `
+SELECT COALESCE(
+	(SELECT "bot_id" FROM whitelabel_guild_assignments WHERE "guild_id" = $1),
+	(SELECT "bot_id" FROM whitelabel_guilds WHERE "guild_id" = $1 ORDER BY "bot_id" LIMIT 1)
+);`
 
-	if err := w.QueryRow(ctx, query, guildId).Scan(&botId); err != nil {
-		if err == pgx.ErrNoRows {
-			found = false
-		} else {
-			e = err
+	var resolved *uint64
+	if err := w.QueryRow(ctx, query, guildId).Scan(&resolved); err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return 0, false, nil
 		}
-		return
+
+		return 0, false, err
 	}
 
-	found = true
+	if resolved == nil {
+		return 0, false, nil
+	}
 
-	return
+	return *resolved, true, nil
+}
+
+// ListBotsByGuild returns every whitelabel bot currently present in the guild — the candidates
+// the owner may assign it to.
+func (w *WhitelabelGuilds) ListBotsByGuild(ctx context.Context, guildId uint64) ([]uint64, error) {
+	query := `SELECT "bot_id" FROM whitelabel_guilds WHERE "guild_id"=$1 ORDER BY "bot_id";`
+
+	rows, err := w.Query(ctx, query, guildId)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var bots []uint64
+	for rows.Next() {
+		var id uint64
+		if err := rows.Scan(&id); err != nil {
+			return nil, err
+		}
+
+		bots = append(bots, id)
+	}
+
+	return bots, rows.Err()
+}
+
+type WhitelabelMembership struct {
+	GuildId uint64
+	BotId   uint64
+}
+
+// GetMembershipsForUser returns every (guild, bot) pair across all of the user's bots.
+func (w *WhitelabelGuilds) GetMembershipsForUser(ctx context.Context, userId uint64) ([]WhitelabelMembership, error) {
+	query := `
+SELECT wg."guild_id", wg."bot_id"
+FROM whitelabel_guilds wg
+INNER JOIN whitelabel w ON w."bot_id" = wg."bot_id"
+WHERE w."user_id" = $1
+ORDER BY wg."guild_id", wg."bot_id";`
+
+	rows, err := w.Query(ctx, query, userId)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var memberships []WhitelabelMembership
+	for rows.Next() {
+		var m WhitelabelMembership
+		if err := rows.Scan(&m.GuildId, &m.BotId); err != nil {
+			return nil, err
+		}
+
+		memberships = append(memberships, m)
+	}
+
+	return memberships, rows.Err()
 }
 
 func (w *WhitelabelGuilds) Add(ctx context.Context, botId, guildId uint64) (err error) {

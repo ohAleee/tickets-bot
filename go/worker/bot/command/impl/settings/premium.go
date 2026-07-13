@@ -7,7 +7,6 @@ import (
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
-	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
 	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 	"github.com/TicketsBot-cloud/worker/bot/command"
@@ -90,12 +89,13 @@ func (PremiumCommand) Execute(ctx registry.CommandContext) {
 		))
 
 	} else {
-		var patreonEmoji, discordEmoji, keyEmoji *emoji.Emoji
-		if !ctx.Worker().IsWhitelabel {
-			patreonEmoji = customisation.EmojiPatreon.BuildEmoji()
-			discordEmoji = customisation.EmojiDiscord.BuildEmoji()
-			keyEmoji = utils.BuildEmoji("🔑")
-		}
+		emojis := customisation.GetEmojis(ctx, ctx.Worker().BotId, ctx.Worker().IsWhitelabel)
+
+		// BuildEmoji yields nil for a slot the bot has not configured, so an unconfigured
+		// whitelabel bot simply renders the buttons without emojis.
+		patreonEmoji := emojis.Patreon.BuildEmoji()
+		discordEmoji := emojis.Discord.BuildEmoji()
+		keyEmoji := utils.BuildEmoji("🔑")
 
 		fields := utils.Slice(embed.EmbedField{
 			Name:   ctx.GetMessage(i18n.MessagePremiumAlreadyPurchasedTitle),

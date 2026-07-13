@@ -155,7 +155,7 @@ impl<T: EventForwarder> WhitelabelShardManager<T> {
                         if let Err(e) = self
                             .database
                             .whitelabel_errors
-                            .append(Snowflake(bot.user_id as u64), data.error)
+                            .append(Snowflake(bot.user_id as u64), bot_id, data.error)
                             .await
                         {
                             self.log_err_for_bot(

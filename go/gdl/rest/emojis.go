@@ -24,6 +24,28 @@ func ListGuildEmojis(ctx context.Context, token string, rateLimiter *ratelimit.R
 	return emojis, err
 }
 
+type applicationEmojis struct {
+	Items []emoji.Emoji `json:"items"`
+}
+
+// ListApplicationEmojis returns the emojis uploaded to an application. Application emojis can
+// only be used by the application that owns them, so this is how a whitelabel bot discovers the
+// emojis it is allowed to render.
+func ListApplicationEmojis(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId uint64) ([]emoji.Emoji, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/applications/%d/emojis", applicationId),
+		Route:       ratelimit.NewApplicationRoute(ratelimit.RouteListApplicationEmojis, applicationId),
+		RateLimiter: rateLimiter,
+	}
+
+	// Unlike the guild endpoint, this one wraps the array in an object.
+	var res applicationEmojis
+	err, _ := endpoint.Request(ctx, token, nil, &res)
+	return res.Items, err
+}
+
 func GetGuildEmoji(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId, emojiId uint64) (emoji.Emoji, error) {
 	endpoint := request.Endpoint{
 		RequestType: request.GET,

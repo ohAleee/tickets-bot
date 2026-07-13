@@ -113,3 +113,61 @@ guild commands).
 Point your Discord application's **Interactions Endpoint URL** at the `http-gateway`
 (exposed on host port `8088`, container `:4000`), e.g. `https://your-domain/` reverse-proxied
 to `http-gateway:4000`. It forwards interactions to `ticketbot:4001`.
+
+The gateway serves `POST /handle/{bot_id}`, so with a reverse proxy that strips a `/gateway/`
+prefix:
+
+```nginx
+location /gateway/ {
+    proxy_pass http://127.0.0.1:8088/;
+    include proxy_params;
+}
+```
+
+set `INTERACTIONS_BASE_URL=https://your-domain/gateway` in `.env`. The public bot's endpoint is
+then `https://your-domain/gateway/handle/<public bot id>`, and whitelabel bots get theirs set
+automatically (see below).
+
+---
+
+## 5. Whitelabel bots
+
+A whitelabel bot is a second Discord application that runs the same ticket logic under your own
+name. **`INTERACTIONS_BASE_URL` must be a public HTTPS URL** (see above) before you start: the
+dashboard writes `{INTERACTIONS_BASE_URL}/handle/{bot_id}` into the application and Discord
+validates it on the spot, rejecting plain HTTP and internal hostnames with
+`URL_TYPE_INVALID_SCHEME`.
+
+1. Create the application in the Discord Developer Portal and copy its **bot token**.
+2. Dashboard → **Whitelabel** → *Add a Bot* → paste the token. This stores the token and public
+   key, enables the message-content and guild-members intents, sets the interactions endpoint and
+   registers the slash commands. Repeat for as many bots as you want.
+3. Click **Invite** on the bot's row and add it to your server. The whitelabel sharder records the
+   membership itself, and the first bot to join a server becomes the one serving it.
+4. If several of your bots are in the same server, pick the one that answers tickets there in the
+   **Servers** table. The others stay in the server but go idle. Panels posted by the previous bot
+   must be re-sent (open the panel in the dashboard and save it).
+5. **Emojis**: Discord only lets an application use the emojis it owns, so a whitelabel bot cannot
+   render the public bot's `EMOJI_*` set. Upload your emojis to *this* application (Developer
+   Portal > your app > Emojis) using the names listed in the dashboard's **Emojis** card, then
+   press *Import from application*. Slots left empty simply render without an emoji.
+6. Remove the public bot from the server: it is no longer needed there. It stays required as an
+   *application* (dashboard OAuth, `BOT_TOKEN`, http-gateway config) but need not be in any guild.
+   Set `WHITELABEL_ONLY=true` to turn "no whitelabel bot assigned" into a clear error rather than
+   a silent fallback to a public bot that isn't in the server.
+
+### Gotchas
+
+- **Kicking the public bot deletes the guild from `botcache`** (its `GUILD_DELETE` reaches
+  cache-sync), and the dashboard then answers "Guild not found" even though the whitelabel bot is
+  still there. Force the whitelabel sharder to re-IDENTIFY so Discord replays `GUILD_CREATE`:
+  ```bash
+  docker compose stop sharder-whitelabel
+  docker exec tickets-redis redis-cli DEL \
+    tickets:resume:whitelabel:<bot_id>:sid \
+    tickets:resume:whitelabel:<bot_id>:seq \
+    tickets:resume:whitelabel:<bot_id>:url
+  docker compose start sharder-whitelabel
+  ```
+  A plain restart is not enough: the sharder RESUMEs from those keys and Discord replays nothing.
+- Adding a bot needs **no sharder restart** — it connects on the `tickets:tokenchange` publish.
