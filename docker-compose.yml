@@ -11,7 +11,7 @@ services:
     # auto-upgraded and breaks the data dir). Override with POSTGRES_VERSION if needed.
     image: postgres:${POSTGRES_VERSION:-17}
     user: "${UID:-}:${GID:-}"
-    container_name: postgres
+    container_name: tickets-postgres
     restart: unless-stopped
     logging: *default-logging
     environment:
@@ -37,7 +37,7 @@ services:
   redis:
     image: redis:8.8.0
     user: "${UID:-}:${GID:-}"
-    container_name: redis
+    container_name: tickets-redis
     restart: unless-stopped
     logging: *default-logging
     # Passwordless by default. To require a password: add --requirepass ${REDIS_PASSWORD}
@@ -58,7 +58,7 @@ services:
   http-proxy:
     image: ${HTTP_PROXY_IMAGE:-ghcr.io/rxdn/http-proxy:metrics}
     user: "${UID:-}:${GID:-}"
-    container_name: http-proxy
+    container_name: tickets-http-proxy
     restart: unless-stopped
     logging: *default-logging
     environment:
@@ -74,7 +74,7 @@ services:
       context: .
       dockerfile: Dockerfile.ticketbot
     user: "${UID:-}:${GID:-}"
-    container_name: ticketbot
+    container_name: tickets-ticketbot
     restart: unless-stopped
     logging: *default-logging
     ports:
@@ -166,7 +166,7 @@ services:
       context: ./rust
       dockerfile: sharder/Dockerfile
     user: "${UID:-}:${GID:-}"
-    container_name: sharder-main
+    container_name: tickets-sharder-main
     hostname: sharder-0
     restart: unless-stopped
     logging: *default-logging
@@ -198,7 +198,7 @@ services:
       context: ./rust
       dockerfile: sharder/Dockerfile.whitelabel
     user: "${UID:-}:${GID:-}"
-    container_name: sharder-whitelabel
+    container_name: tickets-sharder-whitelabel
     hostname: sharder-wl-0
     restart: unless-stopped
     logging: *default-logging
@@ -225,7 +225,7 @@ services:
       context: ./rust
       dockerfile: http-gateway/Dockerfile
     user: "${UID:-}:${GID:-}"
-    container_name: http-gateway
+    container_name: tickets-http-gateway
     restart: unless-stopped
     logging: *default-logging
     ports:
@@ -255,7 +255,7 @@ services:
       context: ./rust
       dockerfile: cache-sync-service/Dockerfile
     user: "${UID:-}:${GID:-}"
-    container_name: cachesync
+    container_name: tickets-cachesync
     restart: unless-stopped
     logging: *default-logging
     environment:
@@ -280,7 +280,7 @@ services:
   logarchiver:
     image: ${LOGARCHIVER_IMAGE:-ghcr.io/ticketsbot-cloud/logarchiver:7a7df5cacbdccbf47678a11c7709b9065b984ac8}
     user: "${UID:-}:${GID:-}"
-    container_name: logarchiver
+    container_name: tickets-logarchiver
     restart: unless-stopped
     logging: *default-logging
     environment:
@@ -308,7 +308,7 @@ services:
   discord-chat-replica:
     image: ${DISCORD_CHAT_REPLICA_IMAGE:-ghcr.io/ticketsbot-cloud/discord-chat-replica:d6350bf3c26b680efad7b823dd19e4d8fa37e6c2}
     user: "${UID:-}:${GID:-}"
-    container_name: discord-chat-replica
+    container_name: tickets-discord-chat-replica
     restart: unless-stopped
     logging: *default-logging
     environment:
@@ -339,7 +339,7 @@ services:
       - HOST=0.0.0.0
       - PORT=5000
     user: "${UID:-}:${GID:-}"
-    container_name: dashboard
+    container_name: tickets-dashboard
     restart: unless-stopped
     logging: *default-logging
     ports:
@@ -352,7 +352,7 @@ services:
   # ./s3data ownership on every startup (and on fresh installs), so no manual chown is needed.
   rustfs-init:
     image: busybox
-    container_name: rustfs-init
+    container_name: tickets-rustfs-init
     command: ["sh", "-c", "mkdir -p /data && chown -R 10001:10001 /data"]
     volumes:
       - ./s3data:/data
@@ -360,7 +360,7 @@ services:
 
   rustfs:
     image: rustfs/rustfs:latest
-    container_name: rustfs
+    container_name: tickets-rustfs
     depends_on:
       rustfs-init:
         condition: service_completed_successfully
@@ -386,25 +386,25 @@ services:
       retries: 5
       start_period: 5s
 
-#  minio-setup:
-#    image: minio/mc:latest
-#    container_name: minio-setup
-#    depends_on:
-#      rustfs:
-#        condition: service_healthy
-#    entrypoint: >
-#      /bin/sh -c "
-#      until mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET} >/dev/null 2>&1; do echo 'Waiting for RustFS...'; sleep 2; done;
-#      mc mb --ignore-existing myminio/${S3_ARCHIVE_BUCKET};
-#      mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
-#      mc mb --ignore-existing myminio/${S3_DATA_IMPORT_BUCKET};
-#      mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
-#      mc mb --ignore-existing myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
-#      mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
-#      echo 'buckets ready';
-#      "
-#    networks:
-#      - app-network
+  minio-setup:
+    image: minio/mc:latest
+    container_name: tickets-minio-setup
+    depends_on:
+      rustfs:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set myminio http://rustfs:9000 ${S3_ACCESS} ${S3_SECRET} >/dev/null 2>&1; do echo 'Waiting for RustFS...'; sleep 2; done;
+      mc mb --ignore-existing myminio/${S3_ARCHIVE_BUCKET};
+      mc anonymous set public myminio/${S3_ARCHIVE_BUCKET};
+      mc mb --ignore-existing myminio/${S3_DATA_IMPORT_BUCKET};
+      mc anonymous set public myminio/${S3_DATA_IMPORT_BUCKET};
+      mc mb --ignore-existing myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+      mc anonymous set public myminio/${S3_TRANSCRIPT_IMPORT_BUCKET};
+      echo 'buckets ready';
+      "
+    networks:
+      - app-network
 
 networks:
   app-network:
