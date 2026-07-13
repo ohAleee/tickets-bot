@@ -134,7 +134,10 @@ services:
       CACHE_THREADS: 4
       WORKER_REDIS_ADDR: redis:6379
       WORKER_REDIS_PASSWD: ${REDIS_PASSWORD}
-      WORKER_REDIS_THREADS: 4
+      # Must exceed the number of permanently blocking consumers (ticket close, autoclose,
+      # close-request, close-reason listeners + the RPC stream consumer), or ordinary commands
+      # queue behind them: see the comment in go/worker/bot/redis/client.go.
+      WORKER_REDIS_THREADS: ${WORKER_REDIS_THREADS:-32}
       # --- fresh-DB schema bootstrap (empty = off; idempotent when on) ---
       INIT_SCHEMA: ${INIT_SCHEMA:-}
       # archive schema + default-bucket seed are created by the bootstrap too

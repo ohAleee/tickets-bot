@@ -134,6 +134,9 @@ func interactionHandler(redis *redis.Client, cache *cache.PgCache) func(*gin.Con
 			responseCh := make(chan command.Response, 1)
 
 			timeToDefer := calculateTimeToDefer(interactionData.Id)
+			// The handler setup below can take a while; hold the deadline as an absolute instant so
+			// that time it consumes counts against the ack budget instead of being added to it.
+			deferAt := time.Now().Add(timeToDefer)
 
 			disableAutoDefer, defaultEphemeral, err := executeCommand(ctx, worker, commandManager.GetCommands(), interactionData, responseCh)
 			if err != nil {
@@ -155,7 +158,7 @@ func interactionHandler(redis *redis.Client, cache *cache.PgCache) func(*gin.Con
 					}
 					ctx.JSON(200, data.Build())
 					ctx.Writer.Flush()
-				case <-time.After(timeToDefer):
+				case <-time.After(time.Until(deferAt)):
 					// Command is taking too long - fallback to auto-defer
 					var flags uint
 					if defaultEphemeral {
@@ -190,12 +193,13 @@ func interactionHandler(redis *redis.Client, cache *cache.PgCache) func(*gin.Con
 			}
 
 			timeToDefer := calculateTimeToDefer(interactionData.Id)
+			deferAt := time.Now().Add(timeToDefer)
 
 			responseCh := make(chan button.Response, 1) // Buffer > 0 is important, or it could hang!
 			btn_manager.HandleInteraction(ctx, buttonManager, worker, interactionData, responseCh)
 
 			select {
-			case <-time.After(timeToDefer):
+			case <-time.After(time.Until(deferAt)):
 				res := interaction.NewResponseDeferredMessageUpdate()
 				ctx.JSON(200, res)
 				ctx.Writer.Flush()
@@ -410,9 +414,21 @@ func calculateTimeToReceive(interactionId uint64) time.Duration {
 	return time.Now().Sub(generated)
 }
 
+// calculateTimeToDefer returns how long we may still wait for the handler before we have to ack
+// the interaction. Discord's deadline is 3s from the moment the interaction was *created*, so the
+// budget is measured from the snowflake, not from now: by the time we see it, ~500ms have already
+// gone to Discord -> Cloudflare -> the reverse proxy -> http-gateway. The previous
+// max(..., CallbackTimeout) floor waited a further CallbackTimeout from *now* regardless of how
+// late the interaction already was, which pushed the ack past 3s and made Discord show
+// "This interaction failed" even though the action itself had succeeded.
 func calculateTimeToDefer(interactionId uint64) time.Duration {
 	generated := utils.SnowflakeToTime(interactionId)
 
-	// Call max incase the snowflake timestamp is off
-	return max(generated.Add(config.Conf.Discord.CallbackTimeout).Sub(time.Now()), config.Conf.Discord.CallbackTimeout)
+	remaining := time.Until(generated.Add(config.Conf.Discord.CallbackTimeout))
+	if remaining < 0 {
+		// Already past the budget (skewed snowflake, or a slow inbound path): ack immediately.
+		return 0
+	}
+
+	return remaining
 }
