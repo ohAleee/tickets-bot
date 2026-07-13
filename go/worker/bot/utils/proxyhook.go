@@ -14,12 +14,14 @@ import (
 // also sees the dashboard's OAuth2 token exchange. OAuth2 endpoints must go directly to
 // Discord (the Twilight proxy only routes bot API paths and 500s on /oauth2/token).
 func ProxyHook(token string, req *http.Request) {
-	if strings.Contains(req.URL.Path, "/oauth2/") {
+	// OAuth2 and application-scoped endpoints must reach Discord directly; the
+	// Twilight proxy only routes bot API paths. Match on path segments rather
+	// than a hardcoded API version (BaseUrl has since moved from v9 to v10, which
+	// silently broke the old "/api/v9/applications/" prefix check).
+	if strings.Contains(req.URL.Path, "/oauth2/") || strings.Contains(req.URL.Path, "/applications/") {
 		return
 	}
 
-	if !strings.HasPrefix(req.URL.Path, "/api/v9/applications/") {
-		req.URL.Scheme = "http"
-		req.URL.Host = config.Conf.Discord.ProxyUrl
-	}
+	req.URL.Scheme = "http"
+	req.URL.Host = config.Conf.Discord.ProxyUrl
 }
