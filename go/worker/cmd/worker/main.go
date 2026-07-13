@@ -111,12 +111,15 @@ func main() {
 	dbclient.ConnectAnalytics(logger.With(zap.String("service", "clickhouse")))
 	logger.Info("Connected to clickhouse")
 
-	// Configure HTTP proxy
-	if config.Conf.Discord.ProxyUrl != "" {
-		logger.Info("Configuring REST proxy", zap.String("url", config.Conf.Discord.ProxyUrl))
-		request.Client.Timeout = config.Conf.Discord.RequestTimeout
-		request.RegisterPreRequestHook(utils.ProxyHook)
+	// Configure HTTP proxy. The proxy is required: the REST hook rewrites every
+	// bot API request's host to it, so an empty value would silently produce
+	// "dial tcp: missing address" on each call. Fail loudly at startup instead.
+	if config.Conf.Discord.ProxyUrl == "" {
+		logger.Fatal("DISCORD_PROXY_URL is empty; the Discord REST proxy is required")
 	}
+	logger.Info("Configuring REST proxy", zap.String("url", config.Conf.Discord.ProxyUrl))
+	request.Client.Timeout = config.Conf.Discord.RequestTimeout
+	request.RegisterPreRequestHook(utils.ProxyHook)
 
 	logger.Info("Configuring microservice clients (no I/O)")
 	if config.Conf.DebugMode == "" {

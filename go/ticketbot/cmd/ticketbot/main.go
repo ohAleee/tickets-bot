@@ -118,11 +118,14 @@ func main() {
 	logger.Info("Connecting to clickhouse")
 	dbclient.ConnectAnalytics(logger.With(zap.String("service", "clickhouse")))
 
-	// Configure HTTP proxy for the Discord REST client
-	if workerconfig.Conf.Discord.ProxyUrl != "" {
-		request.Client.Timeout = workerconfig.Conf.Discord.RequestTimeout
-		request.RegisterPreRequestHook(workerutils.ProxyHook)
+	// Configure HTTP proxy for the Discord REST client. The proxy is required:
+	// the REST hook rewrites every bot API request's host to it, so an empty
+	// value would silently produce "dial tcp: missing address" on each call.
+	if workerconfig.Conf.Discord.ProxyUrl == "" {
+		logger.Fatal("DISCORD_PROXY_URL is empty; the Discord REST proxy is required")
 	}
+	request.Client.Timeout = workerconfig.Conf.Discord.RequestTimeout
+	request.RegisterPreRequestHook(workerutils.ProxyHook)
 
 	// Force-unlock premium: every guild is treated as Whitelabel tier.
 	mockWorker := premium.NewMockLookupClient(premium.Whitelabel, model.EntitlementSourcePatreon)
