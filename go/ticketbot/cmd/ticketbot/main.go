@@ -48,6 +48,7 @@ import (
 	"github.com/TicketsBot-cloud/worker/bot/blacklist"
 	workercache "github.com/TicketsBot-cloud/worker/bot/cache"
 	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/integrationowners"
 	"github.com/TicketsBot-cloud/worker/bot/integrations"
 	"github.com/TicketsBot-cloud/worker/bot/listeners/messagequeue"
 	workerredis "github.com/TicketsBot-cloud/worker/bot/redis"
@@ -145,6 +146,7 @@ func main() {
 	go messagequeue.ListenCloseReasonUpdate()
 
 	go blacklist.StartCacheRefreshLoop(logger.With(zap.String("service", "blacklist_refresh")))
+	go integrationowners.StartCacheRefreshLoop(logger.With(zap.String("service", "integration_owner_refresh")))
 
 	// =========================================================================
 	// Dashboard subsystem

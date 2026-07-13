@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -23,6 +24,15 @@ import (
 	"github.com/jackc/pgx/v4"
 	"go.uber.org/zap"
 )
+
+func multiPanelSyncError(multiPanelId int, action, detail string) string {
+	return fmt.Sprintf(
+		"This panel is used in a multi-panel (ID %d). Failed to %s multi-panel message: %s",
+		multiPanelId,
+		action,
+		detail,
+	)
+}
 
 func UpdatePanel(c *gin.Context) {
 	guildId := c.Keys["guildid"].(uint64)
@@ -168,7 +178,11 @@ func UpdatePanel(c *gin.Context) {
 		err = messageData.edit(botContext, existing.MessageId)
 		if err != nil {
 			var unwrapped request.RestError
-			if errors.As(err, &unwrapped) && (unwrapped.StatusCode == 404 || unwrapped.StatusCode == 10008) {
+			// Message is gone (404/10008), or was authored by a different bot — e.g. the
+			// guild switched between the main bot and a whitelabel bot — and so cannot be
+			// edited (50005). Delete the old message if we can (ignoring failure) and resend.
+			if errors.As(err, &unwrapped) && (unwrapped.StatusCode == 404 || unwrapped.StatusCode == 10008 || unwrapped.ApiError.Code == 50005) {
+				_ = rest.DeleteMessage(c, botContext.Token, botContext.RateLimiter, existing.ChannelId, existing.MessageId)
 				newMessageId, err = messageData.send(botContext)
 				if err != nil {
 					var unwrapped2 request.RestError
@@ -229,7 +243,7 @@ func UpdatePanel(c *gin.Context) {
 	}
 
 	// If ticket limit is 0, treat it as use global setting
-	if data.TicketLimit == utils.Ptr(uint8(0)) {
+	if data.TicketLimit != nil && *data.TicketLimit == 0 {
 		data.TicketLimit = nil
 	}
 
@@ -268,7 +282,6 @@ func UpdatePanel(c *gin.Context) {
 		HideCloseWithReasonButton: data.HideCloseWithReasonButton,
 		HideClaimButton:           data.HideClaimButton,
 	}
-
 
 	// insert mention data
 	validRoles := utils.ToSet(utils.Map(roles, utils.RoleToId))
@@ -364,17 +377,23 @@ func UpdatePanel(c *gin.Context) {
 		err = messageData.edit(botContext, multiPanel.MessageId, panels)
 		if err != nil {
 			var unwrapped request.RestError
-			if errors.As(err, &unwrapped) && (unwrapped.StatusCode == 404 || unwrapped.StatusCode == 10008) {
+			// Gone (404/10008), or authored by a different bot and so uneditable (50005):
+			// delete the old message if we can (ignoring failure) and resend.
+			if errors.As(err, &unwrapped) && (unwrapped.StatusCode == 404 || unwrapped.StatusCode == 10008 || unwrapped.ApiError.Code == 50005) {
+				_ = rest.DeleteMessage(c, botContext.Token, botContext.RateLimiter, multiPanel.ChannelId, multiPanel.MessageId)
 				messageId, err = messageData.send(botContext, panels)
 				if err != nil {
 					var unwrapped2 request.RestError
 					if errors.As(err, &unwrapped2) {
 						if unwrapped2.StatusCode == http.StatusForbidden {
-							c.JSON(400, utils.ErrorStr("I do not have permission to send messages in the specified channel"))
+							c.JSON(400, utils.ErrorStr(
+								"This panel is used in a multi-panel (ID %d). I do not have permission to send messages in the multi-panel's channel",
+								multiPanel.Id,
+							))
 						} else {
 							log.Logger.Error("Body", zap.Any("body", messageData))
-							log.Logger.Error("Error sending panel message", zap.Any("errs", unwrapped2.ApiError.Errors))
-							c.JSON(400, utils.ErrorStr("Error sending panel message: "+unwrapped2.ApiError.Message))
+							log.Logger.Error("Error sending multi-panel message", zap.Int("multi_panel_id", multiPanel.Id), zap.Any("errs", unwrapped2.ApiError.Errors))
+							c.JSON(400, utils.ErrorStr("%s", multiPanelSyncError(multiPanel.Id, "send", unwrapped2.ApiError.Message)))
 						}
 					} else {
 						_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to update panel"))
@@ -383,13 +402,16 @@ func UpdatePanel(c *gin.Context) {
 					return
 				}
 			} else if errors.As(err, &unwrapped) && unwrapped.StatusCode == http.StatusForbidden {
-				c.JSON(400, utils.ErrorStr("I do not have permission to edit messages in the specified channel"))
+				c.JSON(400, utils.ErrorStr(
+					"This panel is used in a multi-panel (ID %d). I do not have permission to edit messages in the multi-panel's channel",
+					multiPanel.Id,
+				))
 				return
 			} else {
 				log.Logger.Error("Body", zap.Any("body", messageData))
 				if errors.As(err, &unwrapped) {
-					log.Logger.Error("Error editing panel message", zap.Any("errs", unwrapped.ApiError.Errors))
-					c.JSON(400, utils.ErrorStr("Error editing panel message: "+unwrapped.ApiError.Message))
+					log.Logger.Error("Error editing multi-panel message", zap.Int("multi_panel_id", multiPanel.Id), zap.Any("errs", unwrapped.ApiError.Errors))
+					c.JSON(400, utils.ErrorStr("%s", multiPanelSyncError(multiPanel.Id, "edit", unwrapped.ApiError.Message)))
 				} else {
 					_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to update panel"))
 				}

@@ -56,6 +56,7 @@ const (
 	AuditActionTicketSendTag           AuditActionType = 91
 	AuditActionTicketClose             AuditActionType = 92
 	AuditActionTicketCloseReasonUpdate AuditActionType = 93
+	AuditActionTicketCloseRequest      AuditActionType = 94
 
 	AuditActionGuildIntegrationActivate   AuditActionType = 100
 	AuditActionGuildIntegrationUpdate     AuditActionType = 101
@@ -81,6 +82,7 @@ const (
 	AuditActionWhitelabelCreateInteractions AuditActionType = 212
 	AuditActionWhitelabelStatusSet          AuditActionType = 213
 	AuditActionWhitelabelStatusDelete       AuditActionType = 214
+	AuditActionWhitelabelResync             AuditActionType = 215
 
 	AuditActionBotStaffAdd    AuditActionType = 300
 	AuditActionBotStaffRemove AuditActionType = 301

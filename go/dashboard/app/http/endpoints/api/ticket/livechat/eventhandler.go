@@ -38,7 +38,7 @@ func (c *Client) HandleEvent(event Event) error {
 }
 
 func (c *Client) handleAuthEvent(data AuthData) error {
-	if c.Authenticated {
+	if c.authenticated.Load() {
 		return api.NewErrorWithMessage(http.StatusBadRequest, errors.New("Already authenticated"), "Already authenticated")
 	}
 
@@ -104,7 +104,7 @@ func (c *Client) handleAuthEvent(data AuthData) error {
 		return api.NewErrorWithMessage(http.StatusPaymentRequired, err, "Live-chat requires premium to use")
 	}
 
-	c.Authenticated = true
+	c.authenticated.Store(true)
 
 	c.Write(Event{
 		Type: EventTypeAuthenticated,

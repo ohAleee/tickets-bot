@@ -40,6 +40,9 @@ func StartServer(logger *zap.Logger, sm *livechat.SocketManager) *nethttp.Server
 	router.Use(middleware.Logging(logger))
 	router.Use(middleware.ErrorHandler)
 
+	// Health check - registered before rate-limit middleware so probes aren't rate-limited
+	router.GET("/health", root.HealthHandler)
+
 	router.RemoteIPHeaders = config.Conf.Server.RealIpHeaders
 	if err := router.SetTrustedProxies(config.Conf.Server.TrustedProxies); err != nil {
 		panic(err)
@@ -186,6 +189,8 @@ func StartServer(logger *zap.Logger, sm *livechat.SocketManager) *nethttp.Server
 		guildAuthApiSupport.POST("/tickets/:ticketId/tag", rl(middleware.RateLimitTypeGuild, 5, time.Second*5), api_ticket.SendTag)
 		guildAuthApiSupport.DELETE("/tickets/:ticketId", api_ticket.CloseTicket)
 		guildAuthApiSupport.PATCH("/tickets/:ticketId/close-reason", api_ticket.UpdateCloseReason)
+		guildAuthApiSupport.POST("/tickets/:ticketId/close-request", api_ticket.CloseRequest)
+		guildAuthApiSupport.POST("/tickets/bulk-close-request", rl(middleware.RateLimitTypeGuild, 5, time.Minute), api_ticket.BulkCloseRequest)
 
 		// Websockets do not support headers: so we must implement authentication over the WS connection
 		router.GET("/api/:id/tickets/:ticketId/live-chat", livechat.GetLiveChatHandler(sm))
@@ -234,6 +239,7 @@ func StartServer(logger *zap.Logger, sm *livechat.SocketManager) *nethttp.Server
 			whitelabelGroup.GET("/errors", api_whitelabel.WhitelabelGetErrors)
 			whitelabelGroup.GET("/guilds", api_whitelabel.WhitelabelGetGuilds)
 			whitelabelGroup.POST("/create-interactions", api_whitelabel.GetWhitelabelCreateInteractions())
+			whitelabelGroup.POST("/resync", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelResync())
 			whitelabelGroup.DELETE("/", api_whitelabel.WhitelabelDelete)
 
 			whitelabelGroup.POST("/", rl(middleware.RateLimitTypeUser, 5, time.Minute), api_whitelabel.WhitelabelPost())
