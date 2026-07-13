@@ -16,9 +16,29 @@ import (
 	"github.com/TicketsBot-cloud/gdl/objects/guild"
 	"github.com/TicketsBot-cloud/gdl/rest"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
+	"github.com/TicketsBot-cloud/worker/i18n"
 	"github.com/jackc/pgtype"
 	errgroup "golang.org/x/sync/errgroup"
 )
+
+// ResolveGuildLocale resolves the locale to use for a guild's outgoing messages,
+// preferring the explicitly-set language, then the guild's Discord preferred locale,
+// falling back to English.
+func ResolveGuildLocale(ctx context.Context, guildId uint64) *i18n.Locale {
+	if langCode, err := dbclient.Client.ActiveLanguage.Get(ctx, guildId); err == nil && langCode != "" {
+		if locale, ok := i18n.MappedByIsoShortCode[langCode]; ok {
+			return locale
+		}
+	}
+
+	if g, err := cache.Instance.GetGuild(ctx, guildId); err == nil && g.PreferredLocale != "" {
+		if locale, ok := i18n.DiscordLocales[g.PreferredLocale]; ok {
+			return locale
+		}
+	}
+
+	return i18n.LocaleEnglish
+}
 
 type GuildDto struct {
 	Id              uint64                     `json:"id,string"`

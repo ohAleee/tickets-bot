@@ -21,6 +21,7 @@ import (
 	"github.com/TicketsBot-cloud/worker/bot/blacklist"
 	"github.com/TicketsBot-cloud/worker/bot/cache"
 	"github.com/TicketsBot-cloud/worker/bot/dbclient"
+	"github.com/TicketsBot-cloud/worker/bot/integrationowners"
 	"github.com/TicketsBot-cloud/worker/bot/integrations"
 	"github.com/TicketsBot-cloud/worker/bot/listeners/messagequeue"
 	"github.com/TicketsBot-cloud/worker/bot/metrics/prometheus"
@@ -159,6 +160,7 @@ func main() {
 	go messagequeue.ListenCloseReasonUpdate()
 
 	go blacklist.StartCacheRefreshLoop(logger.With(zap.String("service", "blacklist_refresh")))
+	go integrationowners.StartCacheRefreshLoop(logger.With(zap.String("service", "integration_owner_refresh")))
 
 	if config.Conf.WorkerMode == config.WorkerModeInteractions {
 		logger.Info("Starting HTTP server", zap.String("mode", string(config.Conf.WorkerMode)))
