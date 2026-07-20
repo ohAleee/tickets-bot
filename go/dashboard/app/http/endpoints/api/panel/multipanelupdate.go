@@ -237,6 +237,7 @@ func MultiPanelUpdate(c *gin.Context) {
 			CustomEmbed: dbEmbed,
 			Fields:      dbEmbedFields,
 		},
+		Components: data.Components,
 	}
 
 	if err = dbclient.Client.MultiPanels.Update(c, multiPanel.Id, updated); err != nil {

@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -45,16 +46,29 @@ type multiPanelCreateData struct {
 	SelectMenuPlaceholder *string              `json:"select_menu_placeholder,omitempty" validate:"omitempty,max=150"`
 	Panels                []panelConfiguration `json:"panels" validate:"dive"`
 	Embed                 *types.CustomEmbed   `json:"embed" validate:"omitempty,dive"`
+	// Components is an optional Discord "Components V2" layout designed in the dashboard
+	// editor. When present, it replaces the embed as the panel message body.
+	Components json.RawMessage `json:"components,omitempty"`
 }
 
 func (d *multiPanelCreateData) IntoMessageData(isPremium bool) multiPanelMessageData {
-	return multiPanelMessageData{
+	// The layout is validated before we reach here, so a parse error is treated as "no V2
+	// layout" and we fall back to the embed.
+	components, _ := parseComponentsV2(d.Components)
+
+	data := multiPanelMessageData{
 		IsPremium:             isPremium,
 		ChannelId:             d.ChannelId,
 		SelectMenu:            d.SelectMenu,
 		SelectMenuPlaceholder: d.SelectMenuPlaceholder,
-		Embed:                 d.Embed.IntoDiscordEmbed(),
+		Components:            components,
 	}
+
+	if len(components) == 0 && d.Embed != nil {
+		data.Embed = d.Embed.IntoDiscordEmbed()
+	}
+
+	return data
 }
 
 func MultiPanelCreate(c *gin.Context) {
@@ -165,6 +179,7 @@ func MultiPanelCreate(c *gin.Context) {
 			CustomEmbed: dbEmbed,
 			Fields:      dbEmbedFields,
 		},
+		Components: data.Components,
 	}
 
 	multiPanel.Id, err = dbclient.Client.MultiPanels.Create(c, multiPanel)
@@ -216,7 +231,16 @@ func MultiPanelCreate(c *gin.Context) {
 }
 
 func (d *multiPanelCreateData) doValidations(guildId uint64) (panels []database.Panel, err error) {
-	if err := validateEmbed(d.Embed); err != nil {
+	components, parseErr := parseComponentsV2(d.Components)
+	if parseErr != nil {
+		return nil, validation.NewInvalidInputError("The message layout is not valid JSON")
+	}
+
+	if len(components) > 0 {
+		if err := validateComponentsV2(components); err != nil {
+			return nil, err
+		}
+	} else if err := validateEmbed(d.Embed); err != nil {
 		return nil, err
 	}
 

@@ -11,11 +11,13 @@ type Thumbnail struct {
 }
 
 type UnfurledMediaItem struct {
-	Url         string `json:"url"`
-	ProxyUrl    string `json:"proxy_url"`
-	Height      int    `json:"height"`
-	Width       int    `json:"width"`
-	ContentType string `json:"content_type"`
+	Url string `json:"url"`
+	// The remaining fields are populated by Discord on responses and must be omitted when
+	// sending, otherwise Discord rejects the empty proxy_url / zero dimensions.
+	ProxyUrl    string `json:"proxy_url,omitempty"`
+	Height      int    `json:"height,omitempty"`
+	Width       int    `json:"width,omitempty"`
+	ContentType string `json:"content_type,omitempty"`
 }
 
 func (i Thumbnail) Type() ComponentType {

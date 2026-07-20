@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 
 	dbclient "github.com/TicketsBot-cloud/dashboard/database"
 	"github.com/TicketsBot-cloud/dashboard/utils"
@@ -27,6 +28,7 @@ func MultiPanelList(ctx *gin.Context) {
 		SelectMenu            bool                  `json:"select_menu"`
 		SelectMenuPlaceholder *string               `json:"select_menu_placeholder"`
 		Embed                 *types.CustomEmbed    `json:"embed"`
+		Components            json.RawMessage       `json:"components,omitempty"`
 		Panels                []panelConfiguration  `json:"panels"`
 	}
 
@@ -57,6 +59,7 @@ func MultiPanelList(ctx *gin.Context) {
 			SelectMenu:            multiPanel.SelectMenu,
 			SelectMenuPlaceholder: multiPanel.SelectMenuPlaceholder,
 			Embed:                 transformedEmbed,
+			Components:            multiPanel.Components,
 		}
 
 		// TODO: Use a join
