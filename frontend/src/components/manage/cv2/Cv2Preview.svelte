@@ -18,14 +18,14 @@
         {#if block._accessory === 'image' && block._image}
             <img class="thumb" src={block._image} alt="thumbnail"/>
         {:else if block._accessory === 'button'}
-            <span class="btn" class:link={block._button.kind === 'link'}>{buttonLabel(block._button)}</span>
+            <span class="btn {btnClass(block._button)}">{buttonLabel(block._button)}</span>
         {/if}
     </div>
 
 {:else if block.type === 'buttons'}
     <div class="btnrow">
         {#each block.buttons as b}
-            <span class="btn" class:link={b.kind === 'link'}>{buttonLabel(b)}</span>
+            <span class="btn {btnClass(b)}">{buttonLabel(b)}</span>
         {/each}
     </div>
 
@@ -49,6 +49,11 @@
         const emoji = b.emoji ? b.emoji + " " : "";
         if (b.kind === "ticket") return emoji + (b.label || panelLabel(b.panelId));
         return emoji + (b.label || b.url || "Button");
+    }
+    // Link buttons are always grey; ticket buttons follow their chosen colour.
+    function btnClass(b) {
+        if (b.kind === "link") return "grey";
+        return { primary: "blurple", secondary: "grey", success: "green", danger: "red" }[b.style] || "blurple";
     }
 
     function md(text) {
@@ -88,7 +93,10 @@
 
     .btnrow { display: flex; flex-wrap: wrap; gap: 6px; }
     .btn { background: #5865f2; color: #fff; border-radius: 4px; padding: 6px 12px; font-size: 0.85rem; white-space: nowrap; }
-    .btn.link { background: #4e5058; }
+    .btn.blurple { background: #5865f2; }
+    .btn.grey { background: #4e5058; }
+    .btn.green { background: #248046; }
+    .btn.red { background: #da373c; }
 
     .container {
         background: #2b2d31; border-left: 4px solid transparent; border-radius: 4px;

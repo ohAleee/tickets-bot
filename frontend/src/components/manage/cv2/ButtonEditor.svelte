@@ -16,6 +16,15 @@
                 {#each subPanels as p}<option value={p.id}>{p.label}</option>{/each}
             </select>
         </div>
+        <div class="row">
+            <label class="mini">Colour</label>
+            <select bind:value={button.style} on:change={changed}>
+                <option value="primary">Blurple (Primary)</option>
+                <option value="secondary">Grey (Secondary)</option>
+                <option value="success">Green (Success)</option>
+                <option value="danger">Red (Danger)</option>
+            </select>
+        </div>
         <Input col1 label="Label (optional — defaults to the panel's)" placeholder="Open a ticket" bind:value={button.label} on:input={changed}/>
         <Input col1 label="Emoji (optional)" placeholder="📩 or <:name:id>" bind:value={button.emoji} on:input={changed}/>
     {:else}

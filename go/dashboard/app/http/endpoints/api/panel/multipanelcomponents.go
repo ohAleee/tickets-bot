@@ -69,8 +69,25 @@ type cv2Button struct {
 	Kind    string  `json:"kind"` // "link" | "ticket"
 	Label   string  `json:"label,omitempty"`
 	Emoji   *string `json:"emoji,omitempty"`
-	Url     string  `json:"url,omitempty"`      // link
-	PanelId *int    `json:"panelId,omitempty"`  // ticket
+	Url     string  `json:"url,omitempty"`     // link
+	PanelId *int    `json:"panelId,omitempty"` // ticket
+	Style   string  `json:"style,omitempty"`   // ticket: primary|secondary|success|danger
+}
+
+// cv2ButtonStyle maps a semantic colour name to a Discord button style, falling back to the
+// sub-panel's own style when unset.
+func cv2ButtonStyle(name string, fallback component.ButtonStyle) component.ButtonStyle {
+	switch name {
+	case "primary":
+		return component.ButtonStylePrimary
+	case "secondary":
+		return component.ButtonStyleSecondary
+	case "success":
+		return component.ButtonStyleSuccess
+	case "danger":
+		return component.ButtonStyleDanger
+	}
+	return fallback
 }
 
 // parseCV2Blocks decodes the stored/submitted layout. An empty/null payload means the classic
@@ -181,7 +198,7 @@ func buildCV2Button(b cv2Button, panelMap map[int]database.PanelWithCustomizatio
 			).IntoGdl()
 		}
 
-		style := component.ButtonStyle(pwc.ButtonStyle)
+		style := cv2ButtonStyle(b.Style, component.ButtonStyle(pwc.ButtonStyle))
 		if style == 0 || style == component.ButtonStyleLink {
 			style = component.ButtonStylePrimary
 		}

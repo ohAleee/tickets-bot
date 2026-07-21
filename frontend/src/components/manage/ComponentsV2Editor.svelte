@@ -14,6 +14,19 @@
   The model written to `data.components` matches the backend's semantic schema exactly.
 -->
 <div class="cv2">
+    <details class="cv2-io">
+        <summary><i class="fas fa-code"></i> Import / Export JSON</summary>
+        <div class="cv2-io-body">
+            <textarea class="cv2-io-text" bind:value={ioText} spellcheck="false"
+                placeholder={'Paste a Components V2 JSON layout here and click Import, or click "Export current" to dump the current layout.'}></textarea>
+            <div class="cv2-io-actions">
+                <Button icon="fas fa-file-export" type="button" on:click={doExport}>Export current</Button>
+                <Button icon="fas fa-file-import" type="button" on:click={doImport}>Import</Button>
+                {#if ioMsg}<span class="cv2-io-msg" class:err={ioErr}>{ioMsg}</span>{/if}
+            </div>
+        </div>
+    </details>
+
     <div class="cv2-cols">
         <!-- ============ Editor ============ -->
         <div class="cv2-col">
@@ -162,7 +175,7 @@
         }
     }
     function makeButton() {
-        return { _id: newId(), kind: "link", label: "", emoji: "", url: "", panelId: subPanels[0]?.id ?? null };
+        return { _id: newId(), kind: "link", label: "", emoji: "", url: "", panelId: subPanels[0]?.id ?? null, style: "primary" };
     }
     function add(type) {
         const block = type === "container"
@@ -189,8 +202,13 @@
     function buttonToWire(b) {
         if (b.kind === "ticket") {
             const out = { kind: "ticket", panelId: b.panelId ?? null };
+            // panelLabel is a portability hint: the backend ignores it, but on import it lets a
+            // ticket button re-bind to the matching sub-panel by name.
+            const p = subPanels.find((x) => x.id === b.panelId);
+            if (p) out.panelLabel = p.label;
             if (b.label) out.label = b.label;
             if (b.emoji) out.emoji = b.emoji;
+            if (b.style) out.style = b.style;
             return out;
         }
         const out = { kind: "link", label: b.label || "", url: b.url || "" };
@@ -221,6 +239,17 @@
     }
 
     // ---- deserialization (wire model -> editor model) ----
+    function resolvePanelId(b) {
+        const validIds = new Set(subPanels.map((p) => p.id));
+        let id = b?.panelId ?? null;
+        if ((id == null || !validIds.has(id)) && b?.panelLabel) {
+            const m = subPanels.find((p) => (p.label || "").toLowerCase() === String(b.panelLabel).toLowerCase());
+            if (m) id = m.id;
+        }
+        if (id == null || !validIds.has(id)) id = subPanels[0]?.id ?? null;
+        return id;
+    }
+
     function buttonFromWire(b) {
         return {
             _id: newId(),
@@ -228,7 +257,8 @@
             label: b?.label || "",
             emoji: b?.emoji || "",
             url: b?.url || "",
-            panelId: b?.panelId ?? (subPanels[0]?.id ?? null),
+            panelId: resolvePanelId(b),
+            style: b?.style || "primary",
         };
     }
     function leafFromWire(b) {
@@ -265,6 +295,47 @@
         if (enabled) data.components = blocks.map(toWire);
     }
 
+    // ---- import / export ----
+    let ioText = "";
+    let ioMsg = "";
+    let ioErr = false;
+
+    function doExport() {
+        ioText = JSON.stringify(blocks.map(toWire), null, 2);
+        ioErr = false;
+        ioMsg = "Current layout exported below — copy it to save or share.";
+    }
+
+    function doImport() {
+        ioErr = false;
+        ioMsg = "";
+        let parsed;
+        try {
+            parsed = JSON.parse(ioText);
+        } catch (e) {
+            ioErr = true;
+            ioMsg = "Invalid JSON: " + e.message;
+            return;
+        }
+        if (!Array.isArray(parsed)) {
+            if (parsed && typeof parsed === "object") parsed = [parsed];
+            else {
+                ioErr = true;
+                ioMsg = "The JSON must be an array of components.";
+                return;
+            }
+        }
+        const next = parsed.map(fromWire).filter(Boolean);
+        if (next.length === 0) {
+            ioErr = true;
+            ioMsg = "No valid components were found in that JSON.";
+            return;
+        }
+        blocks = next;
+        commit();
+        ioMsg = `Imported ${next.length} top-level component(s).`;
+    }
+
     // Does the layout place any ticket button? (drives the mock preview + hint)
     function scanTicket(list) {
         for (const b of list || []) {
@@ -290,6 +361,19 @@
 
 <style>
     .cv2 { width: 100%; }
+
+    .cv2-io { margin-bottom: 12px; border: 1px solid var(--background-secondary, #3a3d44); border-radius: 6px; }
+    .cv2-io > summary { cursor: pointer; padding: 8px 12px; font-size: 0.85rem; font-weight: 600; user-select: none; }
+    .cv2-io-body { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+    .cv2-io-text {
+        width: 100%; min-height: 120px; resize: vertical; font-family: monospace; font-size: 0.8rem;
+        background: #1e1f22; color: #dbdee1; border: 1px solid var(--background-secondary, #3a3d44);
+        border-radius: 6px; padding: 8px;
+    }
+    .cv2-io-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .cv2-io-msg { font-size: 0.82rem; color: #57f287; }
+    .cv2-io-msg.err { color: #f04747; }
+
     .cv2-cols { display: flex; gap: 20px; width: 100%; }
     .cv2-col { display: flex; flex-direction: column; gap: 10px; width: 50%; min-width: 0; }
     .cv2-muted { color: var(--text-muted, #99aab5); font-size: 0.85rem; font-style: italic; margin: 4px 0; }
