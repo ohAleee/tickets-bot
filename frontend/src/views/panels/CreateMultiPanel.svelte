@@ -74,6 +74,12 @@
     async function createMultiPanel() {
         const data = structuredClone(multiPanelCreateData);
 
+        // The Components V2 layout is a self-contained structure; keep it out of the recursive
+        // blank-stripping helpers (which would delete empty strings / arrays inside it) and
+        // re-attach it afterwards.
+        const components = data.components;
+        delete data.components;
+
         // Transform panels array to include customizations
         data.panels = data.panels.map(panelId => ({
             panel_id: panelId,
@@ -85,6 +91,10 @@
 
         setBlankStringsToNull(data);
         removeBlankEmbedFields(data);
+
+        if (Array.isArray(components) && components.length > 0) {
+            data.components = components;
+        }
 
         const res = await axios.post(`${API_URL}/api/${guildId}/multipanels`, data);
         if (res.status !== 200) {

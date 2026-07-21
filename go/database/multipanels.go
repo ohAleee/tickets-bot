@@ -2,7 +2,10 @@ package database
 
 import (
 	"context"
+	ejson "encoding/json"
 	"errors"
+	"strings"
+
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
 )
@@ -15,6 +18,10 @@ type MultiPanel struct {
 	SelectMenu            bool                   `json:"select_menu"`
 	SelectMenuPlaceholder *string                `json:"select_menu_placeholder"`
 	Embed                 *CustomEmbedWithFields `json:"embed"`
+	// Components holds an optional Discord "Components V2" layout (a JSON array of
+	// component objects). When present, the multi-panel message is rendered as a
+	// Components V2 message instead of the classic embed + action row.
+	Components ejson.RawMessage `json:"components,omitempty"`
 }
 
 type MultiPanelTable struct {
@@ -37,6 +44,7 @@ CREATE TABLE IF NOT EXISTS multi_panels(
 	"select_menu" bool DEFAULT 'f',
 	"select_menu_placeholder" VARCHAR(150) DEFAULT NULL,
 	"embed" JSONB DEFAULT NULL,
+	"components" JSONB DEFAULT NULL,
 	PRIMARY KEY("id")
 );
 CREATE INDEX IF NOT EXISTS multi_panels_guild_id ON multi_panels("guild_id");
@@ -46,7 +54,7 @@ CREATE INDEX IF NOT EXISTS multi_panels_message_id ON multi_panels("message_id")
 func (p *MultiPanelTable) Get(ctx context.Context, id int) (MultiPanel, bool, error) {
 	query := `
 SELECT
-	"id", "message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed"
+	"id", "message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed", "components"
 FROM
 	multi_panels
 WHERE
@@ -55,8 +63,9 @@ WHERE
 
 	var panel MultiPanel
 	var embedRaw *string
+	var componentsRaw *string
 	err := p.QueryRow(ctx, query, id).Scan(
-		&panel.Id, &panel.MessageId, &panel.ChannelId, &panel.GuildId, &panel.SelectMenu, &panel.SelectMenuPlaceholder, &embedRaw,
+		&panel.Id, &panel.MessageId, &panel.ChannelId, &panel.GuildId, &panel.SelectMenu, &panel.SelectMenuPlaceholder, &embedRaw, &componentsRaw,
 	)
 
 	if err != nil {
@@ -71,6 +80,10 @@ WHERE
 		if err := json.Unmarshal([]byte(*embedRaw), &panel.Embed); err != nil {
 			return MultiPanel{}, false, err
 		}
+	}
+
+	if componentsRaw != nil {
+		panel.Components = ejson.RawMessage(*componentsRaw)
 	}
 
 	return panel, true, nil
@@ -79,7 +92,7 @@ WHERE
 func (p *MultiPanelTable) GetByMessageId(ctx context.Context, messageId uint64) (MultiPanel, bool, error) {
 	query := `
 SELECT
-	"id", "message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed"
+	"id", "message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed", "components"
 FROM
 	multi_panels
 WHERE
@@ -88,8 +101,9 @@ WHERE
 
 	var panel MultiPanel
 	var embedRaw *string
+	var componentsRaw *string
 	err := p.QueryRow(ctx, query, messageId).Scan(
-		&panel.Id, &panel.MessageId, &panel.ChannelId, &panel.GuildId, &panel.SelectMenu, &panel.SelectMenuPlaceholder, &embedRaw,
+		&panel.Id, &panel.MessageId, &panel.ChannelId, &panel.GuildId, &panel.SelectMenu, &panel.SelectMenuPlaceholder, &embedRaw, &componentsRaw,
 	)
 
 	if err != nil {
@@ -106,12 +120,16 @@ WHERE
 		}
 	}
 
+	if componentsRaw != nil {
+		panel.Components = ejson.RawMessage(*componentsRaw)
+	}
+
 	return panel, true, nil
 }
 
 func (p *MultiPanelTable) GetByGuild(ctx context.Context, guildId uint64) ([]MultiPanel, error) {
 	query := `
-SELECT "id", "message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed"
+SELECT "id", "message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed", "components"
 FROM multi_panels
 WHERE "guild_id" = $1;
 `
@@ -126,8 +144,9 @@ WHERE "guild_id" = $1;
 	for rows.Next() {
 		var panel MultiPanel
 		var embedRaw *string
+		var componentsRaw *string
 		err := rows.Scan(
-			&panel.Id, &panel.MessageId, &panel.ChannelId, &panel.GuildId, &panel.SelectMenu, &panel.SelectMenuPlaceholder, &embedRaw,
+			&panel.Id, &panel.MessageId, &panel.ChannelId, &panel.GuildId, &panel.SelectMenu, &panel.SelectMenuPlaceholder, &embedRaw, &componentsRaw,
 		)
 
 		if err != nil {
@@ -140,6 +159,10 @@ WHERE "guild_id" = $1;
 			}
 		}
 
+		if componentsRaw != nil {
+			panel.Components = ejson.RawMessage(*componentsRaw)
+		}
+
 		panels = append(panels, panel)
 	}
 
@@ -149,9 +172,9 @@ WHERE "guild_id" = $1;
 func (p *MultiPanelTable) Create(ctx context.Context, panel MultiPanel) (int, error) {
 	query := `
 INSERT INTO
-	multi_panels("message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed")
+	multi_panels("message_id", "channel_id", "guild_id", "select_menu", "select_menu_placeholder", "embed", "components")
 VALUES
-	($1, $2, $3, $4, $5, $6)
+	($1, $2, $3, $4, $5, $6, $7)
 RETURNING
 	"id"
 ;
@@ -167,9 +190,14 @@ RETURNING
 		embedRaw = ptr(string(embedRawBytes))
 	}
 
+	var componentsRaw *string
+	if raw := strings.TrimSpace(string(panel.Components)); raw != "" && raw != "null" {
+		componentsRaw = ptr(raw)
+	}
+
 	var multiPanelId int
 	if err := p.QueryRow(ctx, query,
-		panel.MessageId, panel.ChannelId, panel.GuildId, panel.SelectMenu, panel.SelectMenuPlaceholder, embedRaw,
+		panel.MessageId, panel.ChannelId, panel.GuildId, panel.SelectMenu, panel.SelectMenuPlaceholder, embedRaw, componentsRaw,
 	).Scan(&multiPanelId); err != nil {
 		return 0, err
 	}
@@ -184,7 +212,8 @@ UPDATE multi_panels
 		"channel_id" = $3,
 		"select_menu" = $4,
 		"select_menu_placeholder" = $5,
-		"embed" = $6
+		"embed" = $6,
+		"components" = $7
 	WHERE
 		"id" = $1
 ;`
@@ -199,8 +228,13 @@ UPDATE multi_panels
 		embedRaw = ptr(string(embedRawBytes))
 	}
 
+	var componentsRaw *string
+	if raw := strings.TrimSpace(string(multiPanel.Components)); raw != "" && raw != "null" {
+		componentsRaw = ptr(raw)
+	}
+
 	_, err = p.Exec(ctx, query,
-		multiPanelId, multiPanel.MessageId, multiPanel.ChannelId, multiPanel.SelectMenu, multiPanel.SelectMenuPlaceholder, embedRaw,
+		multiPanelId, multiPanel.MessageId, multiPanel.ChannelId, multiPanel.SelectMenu, multiPanel.SelectMenuPlaceholder, embedRaw, componentsRaw,
 	)
 
 	return

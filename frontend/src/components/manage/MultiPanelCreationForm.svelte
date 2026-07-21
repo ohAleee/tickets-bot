@@ -103,7 +103,22 @@
     <Collapsible defaultOpen>
         <span slot="header">Panel Message</span>
         <div slot="content" class="col-1">
-            <EmbedForm footerPremiumOnly={true} bind:data={data.embed}/>
+            <div class="cv2-toggle-row">
+                <Checkbox label="Use Advanced Message (Components V2)" bind:value={useComponentsV2} on:change={onModeChange}/>
+                <span class="cv2-toggle-hint">Design a rich message with text, sections, images and dividers instead of an embed.</span>
+            </div>
+
+            {#if useComponentsV2}
+                <ComponentsV2Editor
+                    bind:data={data}
+                    enabled={useComponentsV2}
+                    selectMenu={data.select_menu}
+                    placeholder={data.select_menu_placeholder}
+                    {subPanels}
+                />
+            {:else}
+                <EmbedForm footerPremiumOnly={true} bind:data={data.embed}/>
+            {/if}
         </div>
     </Collapsible>
 </form>
@@ -115,6 +130,7 @@
     import Checkbox from "../form/Checkbox.svelte";
     import Collapsible from "../Collapsible.svelte";
     import EmbedForm from "../EmbedForm.svelte";
+    import ComponentsV2Editor from "./ComponentsV2Editor.svelte";
     import Input from "../form/Input.svelte";
     import EmojiInput from "../form/EmojiInput.svelte";
     import WrappedSelect from "../WrappedSelect.svelte";
@@ -146,6 +162,31 @@
             },
         }
     }
+
+    // Components V2 ("Advanced Message") mode. Enabled when the panel already has a stored
+    // components layout, or when the user turns the toggle on.
+    let useComponentsV2 = Array.isArray(data?.components) && data.components.length > 0;
+
+    onMount(() => {
+        // Re-derive once data is fully populated (edit flow loads it asynchronously).
+        useComponentsV2 = Array.isArray(data?.components) && data.components.length > 0;
+    });
+
+    // Turning the toggle off clears any stored layout so the classic embed is used.
+    function onModeChange() {
+        if (!useComponentsV2 && data) {
+            data.components = null;
+        }
+    }
+
+    // Sub-panels (id + effective label) passed to the editor for ticket-button selection and
+    // the preview's mock category picker.
+    $: subPanels = (data && data.panels ? data.panels : []).map((panelId) => {
+        const panel = getPanelById(panelId);
+        const customLabel = panelCustomizations[panelId]?.custom_label;
+        const label = (customLabel && customLabel.trim()) || panel?.button_label || panel?.title || `Panel ${panelId}`;
+        return { id: panelId, label };
+    });
 
     function getPanelById(panelId) {
         return panels.find(p => p.panel_id === panelId);
@@ -363,6 +404,19 @@
 
     .validation-error i {
         font-size: 1rem;
+    }
+
+    .cv2-toggle-row {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 12px;
+    }
+
+    .cv2-toggle-hint {
+        color: var(--text-muted, #99aab5);
+        font-size: 0.85rem;
+        font-style: italic;
     }
 
     .emoji-row {

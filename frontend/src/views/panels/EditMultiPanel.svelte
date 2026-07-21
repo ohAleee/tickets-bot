@@ -75,6 +75,13 @@
     async function editMultiPanel() {
         const data = structuredClone(multiPanelData);
 
+        // The Components V2 layout is a self-contained structure; keep it out of the recursive
+        // blank-stripping helpers (which would delete empty strings / arrays inside it) and
+        // re-attach it afterwards. A null value is sent explicitly so the backend clears any
+        // previously stored layout when the user switches back to an embed.
+        const components = data.components;
+        delete data.components;
+
         // Transform panels array to include customizations
         data.panels = data.panels.map(panelId => ({
             panel_id: panelId,
@@ -86,6 +93,8 @@
 
         setBlankStringsToNull(data);
         removeBlankEmbedFields(data);
+
+        data.components = (Array.isArray(components) && components.length > 0) ? components : null;
 
         const res = await axios.patch(`${API_URL}/api/${guildId}/multipanels/${multiPanelId}`, data);
         if (res.status !== 200) {
