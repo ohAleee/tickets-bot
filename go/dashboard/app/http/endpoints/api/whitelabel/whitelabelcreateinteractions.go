@@ -9,11 +9,11 @@ import (
 
 	"github.com/TicketsBot-cloud/dashboard/app"
 	"github.com/TicketsBot-cloud/dashboard/app/http/audit"
-	"github.com/TicketsBot-cloud/dashboard/botcontext"
 	"github.com/TicketsBot-cloud/dashboard/redis"
 	"github.com/TicketsBot-cloud/dashboard/utils"
 	dbmodel "github.com/TicketsBot-cloud/database"
 	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/worker/bot/command/manager"
 	"github.com/gin-gonic/gin"
 )
@@ -69,14 +69,15 @@ func createInteractions(cm *manager.CommandManager, botId uint64, token string) 
 		return fmt.Errorf("%w, please wait another %d seconds", ErrInteractionCreateCooldown, int64(expiration.Seconds()))
 	}
 
-	botContext, err := botcontext.ContextForGuild(0)
-	if err != nil {
-		return err
-	}
+	// Global slash commands are registered on the whitelabel application itself, so we only need
+	// a rate limiter keyed to this bot. Resolving a BotContext via ContextForGuild(0) used to be
+	// how we got one, but under WHITELABEL_ONLY that lookup fails ("guild 0 has no whitelabel bot
+	// assigned"), which broke bot creation, resync and re-registration. Build the limiter directly.
+	rateLimiter := ratelimit.NewRateLimiter(ratelimit.NewRedisStore(redis.Client.Client, fmt.Sprintf("ratelimiter:%d", botId)), 1)
 
 	commands, _ := cm.BuildCreatePayload(true, nil)
 
 	// TODO: Use proper context
-	_, err = rest.ModifyGlobalCommands(context.Background(), token, botContext.RateLimiter, botId, commands)
+	_, err = rest.ModifyGlobalCommands(context.Background(), token, rateLimiter, botId, commands)
 	return err
 }
