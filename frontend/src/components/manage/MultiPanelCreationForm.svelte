@@ -114,7 +114,7 @@
                     enabled={useComponentsV2}
                     selectMenu={data.select_menu}
                     placeholder={data.select_menu_placeholder}
-                    panelLabels={previewPanelLabels}
+                    {subPanels}
                 />
             {:else}
                 <EmbedForm footerPremiumOnly={true} bind:data={data.embed}/>
@@ -179,12 +179,13 @@
         }
     }
 
-    // Labels used to mock the category buttons in the editor preview.
-    $: previewPanelLabels = (data && data.panels ? data.panels : []).map((panelId) => {
+    // Sub-panels (id + effective label) passed to the editor for ticket-button selection and
+    // the preview's mock category picker.
+    $: subPanels = (data && data.panels ? data.panels : []).map((panelId) => {
         const panel = getPanelById(panelId);
         const customLabel = panelCustomizations[panelId]?.custom_label;
-        if (customLabel && customLabel.trim() !== "") return customLabel.trim();
-        return panel?.button_label || (panel?.title || `Panel ${panelId}`);
+        const label = (customLabel && customLabel.trim()) || panel?.button_label || panel?.title || `Panel ${panelId}`;
+        return { id: panelId, label };
     });
 
     function getPanelById(panelId) {

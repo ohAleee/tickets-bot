@@ -54,17 +54,17 @@ type multiPanelCreateData struct {
 func (d *multiPanelCreateData) IntoMessageData(isPremium bool) multiPanelMessageData {
 	// The layout is validated before we reach here, so a parse error is treated as "no V2
 	// layout" and we fall back to the embed.
-	components, _ := parseComponentsV2(d.Components)
+	blocks, _ := parseCV2Blocks(d.Components)
 
 	data := multiPanelMessageData{
 		IsPremium:             isPremium,
 		ChannelId:             d.ChannelId,
 		SelectMenu:            d.SelectMenu,
 		SelectMenuPlaceholder: d.SelectMenuPlaceholder,
-		Components:            components,
+		Blocks:                blocks,
 	}
 
-	if len(components) == 0 && d.Embed != nil {
+	if len(blocks) == 0 && d.Embed != nil {
 		data.Embed = d.Embed.IntoDiscordEmbed()
 	}
 
@@ -231,17 +231,16 @@ func MultiPanelCreate(c *gin.Context) {
 }
 
 func (d *multiPanelCreateData) doValidations(guildId uint64) (panels []database.Panel, err error) {
-	components, parseErr := parseComponentsV2(d.Components)
+	blocks, parseErr := parseCV2Blocks(d.Components)
 	if parseErr != nil {
 		return nil, validation.NewInvalidInputError("The message layout is not valid JSON")
 	}
 
-	if len(components) > 0 {
-		if err := validateComponentsV2(components); err != nil {
+	isV2 := len(blocks) > 0
+	if !isV2 {
+		if err := validateEmbed(d.Embed); err != nil {
 			return nil, err
 		}
-	} else if err := validateEmbed(d.Embed); err != nil {
-		return nil, err
 	}
 
 	group, _ := errgroup.WithContext(context.Background())
@@ -252,7 +251,22 @@ func (d *multiPanelCreateData) doValidations(guildId uint64) (panels []database.
 		return
 	})
 
-	err = group.Wait()
+	if err = group.Wait(); err != nil {
+		return
+	}
+
+	// Ticket buttons reference sub-panels by id, so the layout can only be validated once the
+	// panel set is known.
+	if isV2 {
+		validIds := make(map[int]bool, len(panels))
+		for _, p := range panels {
+			validIds[p.PanelId] = true
+		}
+		if err = validateCV2(blocks, validIds); err != nil {
+			return
+		}
+	}
+
 	return
 }
 

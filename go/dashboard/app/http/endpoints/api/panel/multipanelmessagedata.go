@@ -2,10 +2,8 @@ package api
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"math"
-	"strings"
 
 	"github.com/TicketsBot-cloud/dashboard/botcontext"
 	"github.com/TicketsBot-cloud/dashboard/config"
@@ -28,10 +26,10 @@ type multiPanelMessageData struct {
 
 	Embed *embed.Embed
 
-	// Components, when non-empty, is a Discord "Components V2" layout designed in the
-	// dashboard editor. It is rendered in place of the embed; the category picker (select
-	// menu / buttons) is appended to it automatically.
-	Components []component.Component
+	// Blocks, when non-empty, is a "Components V2" layout designed in the dashboard editor. It
+	// is rendered in place of the embed; the category picker (select menu / buttons) is added
+	// automatically unless the layout already places ticket buttons.
+	Blocks []cv2Block
 }
 
 func multiPanelDiscordSubPanelError(action, detail string) string {
@@ -42,26 +40,9 @@ func multiPanelDiscordSubPanelError(action, detail string) string {
 	)
 }
 
-// parseComponentsV2 decodes the stored/submitted Components V2 layout. An empty or null
-// payload means the panel uses the classic embed rendering.
-func parseComponentsV2(raw json.RawMessage) ([]component.Component, error) {
-	trimmed := strings.TrimSpace(string(raw))
-	if trimmed == "" || trimmed == "null" {
-		return nil, nil
-	}
-
-	var components []component.Component
-	if err := json.Unmarshal(raw, &components); err != nil {
-		return nil, err
-	}
-
-	return components, nil
-}
-
 func multiPanelIntoMessageData(panel database.MultiPanel, isPremium bool) multiPanelMessageData {
-	// Best-effort: a malformed stored layout falls back to the classic embed rendering
-	// rather than breaking resends.
-	components, _ := parseComponentsV2(panel.Components)
+	// Best-effort: a malformed stored layout falls back to the classic embed rendering.
+	blocks, _ := parseCV2Blocks(panel.Components)
 
 	return multiPanelMessageData{
 		IsPremium: isPremium,
@@ -71,7 +52,7 @@ func multiPanelIntoMessageData(panel database.MultiPanel, isPremium bool) multiP
 		SelectMenu:            panel.SelectMenu,
 		SelectMenuPlaceholder: panel.SelectMenuPlaceholder,
 		Embed:                 types.NewCustomEmbed(panel.Embed.CustomEmbed, panel.Embed.Fields).IntoDiscordEmbed(),
-		Components:            components,
+		Blocks:                blocks,
 	}
 }
 
@@ -106,7 +87,7 @@ func getEffectiveEmojiId(panel database.Panel, customEmojiName *string, customEm
 }
 
 func (d *multiPanelMessageData) usesComponentsV2() bool {
-	return len(d.Components) > 0
+	return len(d.Blocks) > 0
 }
 
 // buildCategoryComponents builds the interactive category picker: a single select menu
@@ -182,24 +163,33 @@ func (d *multiPanelMessageData) buildCategoryComponents(panels []database.PanelW
 	return rows
 }
 
-// assembleComponentsV2 combines the custom layout with the category picker. The picker is
-// placed inside the trailing container when the layout ends with one (so it sits inside the
-// coloured card), otherwise it is appended at the top level.
-func (d *multiPanelMessageData) assembleComponentsV2(panels []database.PanelWithCustomization) []component.Component {
-	category := d.buildCategoryComponents(panels)
-
-	components := make([]component.Component, len(d.Components))
-	copy(components, d.Components)
-
+// appendCategory places the category picker inside the trailing container when the layout ends
+// with one (so it sits inside the coloured card), otherwise at the top level.
+func appendCategory(components []component.Component, category []component.Component) []component.Component {
 	if n := len(components); n > 0 {
 		if container, ok := components[n-1].ComponentData.(component.Container); ok {
 			container.Components = append(container.Components, category...)
 			components[n-1] = component.BuildContainer(container)
-		} else {
-			components = append(components, category...)
+			return components
 		}
-	} else {
-		components = append(components, category...)
+	}
+	return append(components, category...)
+}
+
+// assembleComponentsV2 renders the stored layout and, unless the layout already places ticket
+// buttons (button mode only), appends the category picker.
+func (d *multiPanelMessageData) assembleComponentsV2(panels []database.PanelWithCustomization) []component.Component {
+	panelMap := make(map[int]database.PanelWithCustomization, len(panels))
+	for _, p := range panels {
+		panelMap[p.Panel.PanelId] = p
+	}
+
+	components := buildCV2Blocks(d.Blocks, panelMap)
+
+	// A select menu can't be embedded in a section, so it is always appended. Buttons are only
+	// auto-appended when the user hasn't placed ticket buttons themselves.
+	if d.SelectMenu || !blocksContainTicketButton(d.Blocks) {
+		components = appendCategory(components, d.buildCategoryComponents(panels))
 	}
 
 	if !d.IsPremium {
