@@ -64,6 +64,8 @@
             .replace(/^## (.*)$/gm, "<h2>$1</h2>")
             .replace(/^# (.*)$/gm, "<h1>$1</h1>")
             .replace(/^-# (.*)$/gm, '<span class="sub">$1</span>')
+            .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, url) =>
+                `<a class="lnk" href="${url.replace(/"/g, "%22")}" target="_blank" rel="noopener noreferrer">${label}</a>`)
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
             .replace(/\*(.*?)\*/g, "<em>$1</em>")
             .replace(/__(.*?)__/g, "<u>$1</u>")
@@ -80,6 +82,8 @@
     .txt :global(h3) { font-size: 1rem; margin: 2px 0; }
     .txt :global(code) { background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px; font-family: monospace; }
     .txt :global(.sub) { font-size: 0.78rem; color: #949ba4; }
+    .txt :global(.lnk) { color: #00a8fc; text-decoration: none; }
+    .txt :global(.lnk:hover) { text-decoration: underline; }
 
     .sep { height: 1px; background: rgba(255,255,255,0.1); margin: 2px 0; }
     .sep.hidden { background: transparent; }
