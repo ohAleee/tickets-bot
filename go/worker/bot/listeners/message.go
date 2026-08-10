@@ -13,6 +13,7 @@ import (
 	"github.com/TicketsBot-cloud/database"
 	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 	"github.com/TicketsBot-cloud/worker"
 	"github.com/TicketsBot-cloud/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/worker/bot/metrics/prometheus"
@@ -45,7 +46,11 @@ func OnMessage(worker *worker.Context, e events.MessageCreate) {
 		ticket, ok, err := dbclient.Client.Tickets.GetByChannel(span.Context(), e.ChannelId)
 		if err == nil && ok && ticket.Id != 0 {
 			sentry.WithSpan0(span.Context(), "Delete pin notification", func(span *sentry.Span) {
-				if err := worker.DeleteMessage(e.ChannelId, e.Id); err != nil {
+				// The notification may already be gone (user deleted it, or a duplicate
+				// event) — 10008 Unknown Message is not worth reporting.
+				var restError request.RestError
+				if err := worker.DeleteMessage(e.ChannelId, e.Id); err != nil &&
+					!(errors.As(err, &restError) && restError.ApiError.Code == 10008) {
 					sentry.ErrorWithContext(err, utils.MessageCreateErrorContext(e))
 				}
 			})
