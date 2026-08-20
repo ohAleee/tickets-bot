@@ -171,6 +171,13 @@
 	"generic.join_support_server": "Join Support Server",
 	"commands.open.guild_channel_limit": "This server has reached Discord's limit of 500 channels",
 	"commands.open.missing_form_answer": "You must answer the question `%s`",
+	"help.lock": "Prevents the ticket opener and added members from sending further messages",
+	"help.unlock": "Allows the ticket opener and added members to send messages again",
+	"commands.lock.success": "This ticket has been locked by <@%d>. Only staff can send messages.",
+	"commands.unlock.success": "This ticket has been unlocked by <@%d>.",
+	"commands.lock.thread": "Due to Discord limitations, locking does not support thread tickets",
+	"generic.title.locked": "Ticket Locked",
+	"generic.title.unlocked": "Ticket Unlocked",
 	"close.no_permission": "You are not permitted to close this ticket",
 	"": {
 		"generic.title.close_with_reason": "Close With Reason",

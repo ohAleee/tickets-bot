@@ -57,6 +57,7 @@ func (cm *CommandManager) RegisterCommands() {
 	cm.registry["close"] = tickets.CloseCommand{}
 	cm.registry["edit"] = tickets.EditCommand{}
 	cm.registry["closerequest"] = tickets.CloseRequestCommand{}
+	cm.registry["lock"] = tickets.LockCommand{}
 	cm.registry["notes"] = tickets.NotesCommand{}
 	cm.registry["on-call"] = tickets.OnCallCommand{}
 	cm.registry["open"] = tickets.OpenCommand{}
@@ -67,6 +68,7 @@ func (cm *CommandManager) RegisterCommands() {
 	cm.registry["switchpanel"] = tickets.SwitchPanelCommand{}
 	cm.registry["transfer"] = tickets.TransferCommand{}
 	cm.registry["unclaim"] = tickets.UnclaimCommand{}
+	cm.registry["unlock"] = tickets.UnlockCommand{}
 }
 
 func (cm *CommandManager) RunSetupFuncs() {

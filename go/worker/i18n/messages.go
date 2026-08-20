@@ -52,6 +52,8 @@ var (
 	TitlePanelSwitched     MessageId = "generic.title.panel_switched"
 	TitleJumpToTop         MessageId = "generic.title.jump_to_top"
 	TitleReopened          MessageId = "generic.title.reopened"
+	TitleLocked            MessageId = "generic.title.locked"
+	TitleUnlocked          MessageId = "generic.title.unlocked"
 
 	MessageAbout   MessageId = "commands.about"
 	MessagePremium MessageId = "commands.premium"
@@ -134,6 +136,10 @@ var (
 	MessageClaimed           MessageId = "commands.claim.success"
 	MessageClaimNoPermission MessageId = "commands.claim.no_permission"
 	MessageClaimThread       MessageId = "commands.claim.thread"
+
+	MessageLocked     MessageId = "commands.lock.success"
+	MessageUnlocked   MessageId = "commands.unlock.success"
+	MessageLockThread MessageId = "commands.lock.thread"
 
 	MessagePanel MessageId = "commands.panel"
 
@@ -359,6 +365,8 @@ var (
 	HelpReopen             MessageId = "help.reopen"
 	HelpTransfer           MessageId = "help.transfer"
 	HelpUnclaim            MessageId = "help.unclaim"
+	HelpLock               MessageId = "help.lock"
+	HelpUnlock             MessageId = "help.unlock"
 	HelpHelp               MessageId = "help.help"
 	HelpRemoveAdmin        MessageId = "help.removeadmin"
 	HelpLanguage           MessageId = "help.language"
