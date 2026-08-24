@@ -356,7 +356,7 @@ func handleApplicationCommandResponseAfterDefer(interactionData interaction.Appl
 					}
 				}
 			case command.CommandResponseTypeModal:
-				// Modals cannot be sent after a defer — they must be the immediate interaction response
+				// Modals cannot be sent after a defer - they must be the immediate interaction response
 				sentry.ErrorWithContext(fmt.Errorf("attempted to send modal after defer"), NewApplicationCommandInteractionErrorContext(interactionData))
 			}
 		}

@@ -7,7 +7,7 @@
 --   * worker  /premium command + admin gen-premium / list-entitlements commands (unregistered)
 --   * dashboard GET /premium/@me/entitlements + PUT /active-guilds (now table-free no-ops)
 --
--- Whitelabel is NOT premium and is intentionally retained — the whitelabel_* tables stay.
+-- Whitelabel is NOT premium and is intentionally retained - the whitelabel_* tables stay.
 --
 -- Run against the ticketsbot database:
 --   psql "$TICKETSBOT_URI" -f migrate/drop-premium.sql

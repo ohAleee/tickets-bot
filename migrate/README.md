@@ -30,7 +30,7 @@ force-unlocked in code, so they are unused):
 psql -h localhost -p 5433 -U postgres -d ticketsbot -f migrate/drop-premium.sql
 ```
 
-Whitelabel is retained — its tables are **not** dropped.
+Whitelabel is retained - its tables are **not** dropped.
 
 ## Multiple whitelabel bots per user
 
@@ -39,7 +39,7 @@ Whitelabel is retained — its tables are **not** dropped.
 guild, chosen by the owner) and `whitelabel_emojis` (per-bot application emojis), and adds
 `bot_id` to `whitelabel_errors`.
 
-Existing deployments must run it — `INIT_SCHEMA` only issues `CREATE TABLE IF NOT EXISTS` and
+Existing deployments must run it - `INIT_SCHEMA` only issues `CREATE TABLE IF NOT EXISTS` and
 cannot alter the existing `whitelabel` table. Fresh installs get the new schema automatically.
 
 ```bash

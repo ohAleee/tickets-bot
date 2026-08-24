@@ -16,7 +16,7 @@ package main
 // feature gates pass and no "Powered by" branding is added.
 //
 // Logarchiver and the Rust gateway services (sharder/http-gateway/cache-sync) remain
-// separate containers — logarchiver because it drags the incompatible legacy
+// separate containers - logarchiver because it drags the incompatible legacy
 // TicketsBot/{common,database} module trees; the Rust services because they own the
 // Discord gateway connection. This binary talks to logarchiver over HTTP via
 // archiverclient and consumes the sharder's events over the Redis stream.
@@ -137,8 +137,8 @@ func main() {
 	)
 
 	// Metrics gathering (StatsD + Prometheus) intentionally removed. statsd.Client is left
-	// uninitialised — its IncrementKey is nil-safe, so the call sites across the worker
-	// no-op — and the Prometheus server/REST hooks are no longer started or registered.
+	// uninitialised - its IncrementKey is nil-safe, so the call sites across the worker
+	// no-op - and the Prometheus server/REST hooks are no longer started or registered.
 
 	logger.Info("Initialising integrations")
 	integrations.InitIntegrations()

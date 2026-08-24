@@ -7,7 +7,7 @@ x-logging: &default-logging
 services:
   # ------------------------------------------------------------------ data ----
   postgres:
-    # Pin a major version — do NOT use :latest for a database (a major bump can't be 
+    # Pin a major version - do NOT use :latest for a database (a major bump can't be 
     # auto-upgraded and breaks the data dir). Override with POSTGRES_VERSION if needed.
     image: postgres:${POSTGRES_VERSION:-17}
     user: "${UID:-}:${GID:-}"
@@ -190,12 +190,12 @@ services:
   # --------------------------------------------- Rust gateway layer (built) ---
   # This deployment is whitelabel-only: the public bot is never invited to a server, so it needs
   # no gateway connection and `sharder-main` (rust/sharder, `public` bin) is not run. It is still
-  # required as an *application* — dashboard OAuth, BOT_TOKEN, and http-gateway's public_* config.
+  # required as an *application* - dashboard OAuth, BOT_TOKEN, and http-gateway's public_* config.
   # To run the public bot instead, restore the service AND enable its privileged intents (Message
   # Content + Server Members) in the Developer Portal, or Discord closes the gateway with
   # 4014 "Disallowed intent(s)".
 
-  # Maintains gateway connections for whitelabel (custom) bots — tokens loaded from the DB
+  # Maintains gateway connections for whitelabel (custom) bots - tokens loaded from the DB
   # and picked up live as they're added in the dashboard. Feeds stream:gateway-events, which is
   # what the worker and the cache consume, so whitelabel tickets capture messages / transcripts.
   sharder-whitelabel:
@@ -271,7 +271,7 @@ services:
       consumer_group: "cache-sync"
       postgres_uri: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
       metric_server_addr: 0.0.0.0:8091
-    # Consumes stream:gateway-events, which the whitelabel sharder feeds — it does not depend on
+    # Consumes stream:gateway-events, which the whitelabel sharder feeds - it does not depend on
     # the (removed) public sharder.
     depends_on:
       postgres:

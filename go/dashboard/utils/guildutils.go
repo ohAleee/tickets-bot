@@ -155,8 +155,8 @@ func getGuildIntersection(ctx context.Context, userId uint64, userGuilds []guild
 
 	// Also include guilds served by one of the user's own whitelabel bots. The public bot cache
 	// (queried above) only knows guilds that cache-sync has seen a GUILD_CREATE for; a
-	// whitelabel-only guild — or one whose GUILD_CREATE the whitelabel sharder hasn't forwarded
-	// (e.g. after a RESUME) — is absent there even though the bot is in it. whitelabel_guilds is
+	// whitelabel-only guild - or one whose GUILD_CREATE the whitelabel sharder hasn't forwarded
+	// (e.g. after a RESUME) - is absent there even though the bot is in it. whitelabel_guilds is
 	// the authoritative record of that membership, so union it in.
 	memberships, err := dbclient.Client.WhitelabelGuilds.GetMembershipsForUser(ctx, userId)
 	if err != nil {

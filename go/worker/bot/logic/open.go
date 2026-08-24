@@ -50,10 +50,10 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 	mu, err := redis.TakeTicketOpenLock(lockCtx, cmd.GuildId())
 	if err != nil {
 		// A concurrent open for this guild already holds the lock (e.g. a duplicate submit or
-		// a re-delivered interaction). That's not an error worth reporting to Sentry — just ask
+		// a re-delivered interaction). That's not an error worth reporting to Sentry - just ask
 		// the user to wait rather than showing a generic failure.
 		if errors.Is(err, redsync.ErrFailed) || errors.Is(err, context.DeadlineExceeded) {
-			cmd.ReplyRaw(customisation.Red, "Please wait", "A ticket is already being created — please wait a moment and try again.")
+			cmd.ReplyRaw(customisation.Red, "Please wait", "A ticket is already being created - please wait a moment and try again.")
 			return database.Ticket{}, err
 		}
 
@@ -1002,7 +1002,7 @@ func CreateOverwrites(ctx context.Context, cmd registry.InteractionContext, user
 		})
 	}
 
-	// Default team (ticket admins + ticket support) — always StandardPermissions
+	// Default team (ticket admins + ticket support) - always StandardPermissions
 	if panel == nil || panel.WithDefaultTeam {
 		supportUsers, err := dbclient.Client.Permissions.GetSupport(ctx, cmd.GuildId())
 		if err != nil {
@@ -1040,7 +1040,7 @@ func CreateOverwrites(ctx context.Context, cmd registry.InteractionContext, user
 		}
 	}
 
-	// Panel-specific custom teams — per-team permissions
+	// Panel-specific custom teams - per-team permissions
 	if panel != nil {
 		panelTeamIds, err := dbclient.Client.PanelTeams.GetTeamIds(ctx, panel.PanelId)
 		if err != nil {

@@ -106,7 +106,7 @@ func (w *WhitelabelGuildAssignments) DeleteIfBot(ctx context.Context, guildId, b
 
 // PromoteIfVacant hands an unassigned guild to any whitelabel bot still present in it. Without
 // this, a guild whose assigned bot left would fall back to the public bot, which is typically
-// not a member — locking the owner out of that guild's dashboard.
+// not a member - locking the owner out of that guild's dashboard.
 func (w *WhitelabelGuildAssignments) PromoteIfVacant(ctx context.Context, guildId uint64) (botId uint64, promoted bool, e error) {
 	query := `
 INSERT INTO whitelabel_guild_assignments("guild_id", "bot_id")

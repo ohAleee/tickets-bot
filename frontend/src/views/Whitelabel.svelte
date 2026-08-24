@@ -367,7 +367,7 @@
                 <div slot="body" class="full-width">
                     {#if servers.length === 0}
                         <p>
-                            None of your bots are in a server yet — use Invite
+                            None of your bots are in a server yet - use Invite
                             above.
                         </p>
                     {:else}
@@ -547,7 +547,7 @@
                                 <td class="table-col"
                                     >{error.bot_id
                                         ? botName(error.bot_id)
-                                        : "—"}</td
+                                        : "-"}</td
                                 >
                                 <td class="table-col">{error.message}</td>
                                 <td class="table-col"

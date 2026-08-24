@@ -4,7 +4,7 @@ go 1.25.0
 
 // The TicketsBot modules are resolved from local source. The require versions mirror the
 // commits worker/dashboard pinned (so the module graph parses), and the replace
-// directives force local source — matching what the workspace (../../go.work) does, but
+// directives force local source - matching what the workspace (../../go.work) does, but
 // also making `go build` of this module deterministic on its own.
 require (
 	github.com/TicketsBot-cloud/archiverclient v0.0.0-20251015181023-f0b66a074704

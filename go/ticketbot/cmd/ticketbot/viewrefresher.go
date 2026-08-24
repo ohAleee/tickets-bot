@@ -1,6 +1,6 @@
 package main
 
-// View refresher — ported from the standalone database/cmd/viewrefresher container.
+// View refresher - ported from the standalone database/cmd/viewrefresher container.
 // Refreshes the materialized views every 6 hours (and once on startup) using the same
 // cloud database pool the rest of the binary uses.
 

@@ -20,7 +20,7 @@ and a single database server.
 ## Layout
 
 ```
-go/                      Go workspace (go.work) — all TicketsBot modules, local source
+go/                      Go workspace (go.work) - all TicketsBot modules, local source
   ticketbot/             unified entrypoint (cmd/ticketbot)
   worker/ dashboard/ database/ common/ gdl/ archiverclient/ analytics-client/
 rust/                    trimmed tickets.rs workspace (sharder, http-gateway, cache-sync + libs)
@@ -38,7 +38,7 @@ Dockerfile.ticketbot     unified Go binary
 - worker gateway RPC consumer (`stream:gateway-events`, from the sharder)
 - worker messagequeue listeners (ticket close / autoclose / close-request / reason)
 - dashboard REST API + livechat websockets (`:8081`)
-- autoclose sweep (ported to cloud libs — `autoclose.go`)
+- autoclose sweep (ported to cloud libs - `autoclose.go`)
 - database view refresher
 
 Premium is force-unlocked by pinning both premium lookup clients to a Whitelabel mock.
@@ -84,7 +84,7 @@ Two things that bite on a self-hosted install:
   is rejected outright.
 - **Emojis are per application.** `EMOJI_*` configures the **public** bot only. Discord only lets
   an app use the emojis it owns, so each whitelabel bot uploads its own (Developer Portal >
-  Emojis) and stores their ids on the Whitelabel page — there is an import button that reads them
+  Emojis) and stores their ids on the Whitelabel page - there is an import button that reads them
   straight off the application.
 
 The public bot is only needed as an *application* (dashboard OAuth, `BOT_TOKEN`, http-gateway

@@ -254,7 +254,7 @@ func StartServer(logger *zap.Logger, sm *livechat.SocketManager) *nethttp.Server
 			botGroup.POST("/status", rl(middleware.RateLimitTypeUser, 1, time.Second*5), api_whitelabel.WhitelabelStatusPost)
 			botGroup.DELETE("/status", rl(middleware.RateLimitTypeUser, 1, time.Second*5), api_whitelabel.WhitelabelStatusDelete)
 
-			// Picking the bot for a guild needs guild admin too — the param must be named "id",
+			// Picking the bot for a guild needs guild admin too - the param must be named "id",
 			// since that is what AuthenticateGuild reads.
 			whitelabelGroup.PUT("/servers/:id",
 				middleware.AuthenticateGuild(permission.Admin),

@@ -1,4 +1,4 @@
-# Dashboard frontend (Svelte SPA) — built from local source (the upstream Dockerfile
+# Dashboard frontend (Svelte SPA) - built from local source (the upstream Dockerfile
 # cloned from GitHub; here we build the vendored ./frontend unchanged). Build-time ARGs
 # are baked into the bundle by `npm run build`.
 FROM node:lts-alpine AS build

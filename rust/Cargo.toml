@@ -4,7 +4,7 @@ resolver = "2"
 # http-gateway, cache-sync-service) plus their shared library crates. The unused service
 # crates from upstream tickets.rs (patreon-proxy, vote_listener, bot-list-updater,
 # server-counter, stats-channel-updater, global-resolver, image-proxy, secure-proxy) were
-# removed — none are deployed here and none are depended on by the kept crates.
+# removed - none are deployed here and none are depended on by the kept crates.
 members = [
     "sharder",
     "http-gateway",

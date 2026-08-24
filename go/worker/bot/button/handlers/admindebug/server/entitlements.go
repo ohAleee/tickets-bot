@@ -29,7 +29,7 @@ func (h *AdminDebugServerEntitlementsHandler) Properties() registry.Properties {
 }
 
 func (h *AdminDebugServerEntitlementsHandler) Execute(ctx *context.ButtonContext) {
-	// Premium is force-unlocked and the entitlements table has been removed — nothing to show.
+	// Premium is force-unlocked and the entitlements table has been removed - nothing to show.
 	// (The debug embed no longer renders this button, but the handler stays registered.)
 	ctx.ReplyRaw(customisation.Orange, "No Entitlements", "Premium is enabled for all servers; there are no entitlements to display.")
 }

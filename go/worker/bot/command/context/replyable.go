@@ -173,7 +173,7 @@ func (r *Replyable) GetMessage(messageId i18n.MessageId, format ...interface{}) 
 }
 
 // SelectValidEmoji renders the bot's own emoji when it has one, and the unicode fallback when it
-// does not — which is the case for a whitelabel bot whose owner uploaded no application emojis.
+// does not - which is the case for a whitelabel bot whose owner uploaded no application emojis.
 func (r *Replyable) SelectValidEmoji(customEmoji customisation.CustomEmoji, fallback string) *emoji.Emoji {
 	if !customEmoji.Configured() {
 		return utils.BuildEmoji(fallback)

@@ -25,7 +25,7 @@ type serverResponse struct {
 }
 
 // ListServers returns every guild at least one of the user's bots is in, along with the bot that
-// currently serves it — the data behind the server/bot table on the whitelabel page.
+// currently serves it - the data behind the server/bot table on the whitelabel page.
 func ListServers(c *gin.Context) {
 	userId := c.Keys["userid"].(uint64)
 

@@ -12,7 +12,7 @@ type Mutex interface {
 	UnlockContext(ctx context.Context) (bool, error)
 }
 
-// Long enough to cover a full (cold) ticket open — channel create + permission overwrites +
+// Long enough to cover a full (cold) ticket open - channel create + permission overwrites +
 // welcome message via the REST proxy can take several seconds. At 3s the lock could expire
 // mid-open, letting a re-delivered interaction start a second concurrent open and causing
 // "failed to acquire lock" collisions. The open releases the lock via defer as soon as it

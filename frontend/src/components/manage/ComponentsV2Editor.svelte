@@ -1,7 +1,7 @@
 <!--
   Components V2 editor for the multi-panel ("select category to open a ticket") message.
 
-  Designs a Discord "Components V2" message as an ordered list of blocks — text, separators,
+  Designs a Discord "Components V2" message as an ordered list of blocks - text, separators,
   media galleries, sections (text + an optional image / button accessory), button rows, and
   accent-coloured containers that group leaf blocks. Buttons come in two kinds: a "link" button
   (opens a URL) and a "ticket" button (opens one of the multi-panel's sub-panels).
@@ -31,7 +31,7 @@
         <!-- ============ Editor ============ -->
         <div class="cv2-col">
             {#if blocks.length === 0}
-                <p class="cv2-muted">No components yet — add one below to start building your message.</p>
+                <p class="cv2-muted">No components yet - add one below to start building your message.</p>
             {/if}
 
             {#each blocks as block, i (block._id)}
@@ -112,7 +112,7 @@
                 {:else if hasTicketButton}
                     You've placed ticket buttons, so no extra button row is added.
                 {:else}
-                    The category buttons are appended automatically — add a ticket button anywhere to place them yourself.
+                    The category buttons are appended automatically - add a ticket button anywhere to place them yourself.
                 {/if}
             </p>
         </div>
@@ -303,7 +303,7 @@
     function doExport() {
         ioText = JSON.stringify(blocks.map(toWire), null, 2);
         ioErr = false;
-        ioMsg = "Current layout exported below — copy it to save or share.";
+        ioMsg = "Current layout exported below - copy it to save or share.";
     }
 
     function doImport() {

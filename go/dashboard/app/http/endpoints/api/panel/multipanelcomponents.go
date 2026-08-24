@@ -13,8 +13,8 @@ import (
 )
 
 // The multi-panel "Components V2" layout is stored as a small semantic model (not raw Discord
-// component JSON) so that "ticket buttons" — buttons that open one of the multi-panel's
-// sub-panels — can be resolved to the sub-panel's custom id at send time, and placed anywhere
+// component JSON) so that "ticket buttons" - buttons that open one of the multi-panel's
+// sub-panels - can be resolved to the sub-panel's custom id at send time, and placed anywhere
 // in the layout. This mirrors the probot /embeds editor's model.
 //
 // Supported blocks: text, separator, gallery, section, buttons, container.

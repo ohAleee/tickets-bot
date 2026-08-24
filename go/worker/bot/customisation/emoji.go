@@ -191,8 +191,8 @@ func GetEmojis(ctx context.Context, botId uint64, isWhitelabel bool) EmojiSet {
 
 	stored, err := dbclient.Client.WhitelabelEmojis.GetAll(ctx, botId)
 	if err != nil {
-		// Degrade to "no emojis" — how whitelabel bots behaved before they could configure their
-		// own — rather than risk rendering a broken <:name:0> in a user-facing message.
+		// Degrade to "no emojis" - how whitelabel bots behaved before they could configure their
+		// own - rather than risk rendering a broken <:name:0> in a user-facing message.
 		return EmojiSet{}
 	}
 

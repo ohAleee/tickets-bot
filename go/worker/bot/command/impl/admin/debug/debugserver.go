@@ -165,7 +165,7 @@ func (AdminDebugServerCommand) Execute(ctx registry.CommandContext, raw string) 
 		return
 	}
 
-	// Premium is force-unlocked and the entitlements table has been removed — nothing to show.
+	// Premium is force-unlocked and the entitlements table has been removed - nothing to show.
 	entitlements := []model.GuildEntitlementEntry{}
 
 	panels, err := dbclient.Client.Panel.GetByGuild(ctx, guild.Id)

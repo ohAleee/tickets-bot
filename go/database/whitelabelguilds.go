@@ -77,7 +77,7 @@ SELECT COALESCE(
 	return *resolved, true, nil
 }
 
-// ListBotsByGuild returns every whitelabel bot currently present in the guild — the candidates
+// ListBotsByGuild returns every whitelabel bot currently present in the guild - the candidates
 // the owner may assign it to.
 func (w *WhitelabelGuilds) ListBotsByGuild(ctx context.Context, guildId uint64) ([]uint64, error) {
 	query := `SELECT "bot_id" FROM whitelabel_guilds WHERE "guild_id"=$1 ORDER BY "bot_id";`

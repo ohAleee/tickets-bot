@@ -25,7 +25,7 @@
                 <option value="danger">Red (Danger)</option>
             </select>
         </div>
-        <Input col1 label="Label (optional — defaults to the panel's)" placeholder="Open a ticket" bind:value={button.label} on:input={changed}/>
+        <Input col1 label="Label (optional - defaults to the panel's)" placeholder="Open a ticket" bind:value={button.label} on:input={changed}/>
         <Input col1 label="Emoji (optional)" placeholder="📩 or <:name:id>" bind:value={button.emoji} on:input={changed}/>
     {:else}
         <Input col1 label="Label" placeholder="Click me" bind:value={button.label} on:input={changed}/>

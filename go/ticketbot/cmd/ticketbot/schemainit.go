@@ -5,7 +5,7 @@ package main
 // Upstream never calls CreateTables at runtime, so a brand-new database would have no
 // schema. Setting INIT_SCHEMA=true (or INIT_SCHEMA_ONLY=true) creates the schema on
 // startup:
-//   - main (ticketsbot) tables via database.CreateTables — premium tables are NOT created
+//   - main (ticketsbot) tables via database.CreateTables - premium tables are NOT created
 //   - materialized views
 //   - cache (botcache) tables (the gdl CreateSchema batches CREATE INDEX CONCURRENTLY,
 //     which aborts pgx's implicit batch transaction, so we run the DDL directly here;
@@ -44,7 +44,7 @@ CREATE INDEX IF NOT EXISTS voice_states_guild_id ON voice_states("guild_id");
 CREATE INDEX IF NOT EXISTS voice_states_user_id ON voice_states("user_id");
 `
 
-// Archive (logarchiver) schema — logarchiver does not create its own schema or seed a
+// Archive (logarchiver) schema - logarchiver does not create its own schema or seed a
 // bucket; it only ListBuckets from the DB. Mirrors logarchiver/migrations/0001-init-schema.sql.
 const archiveSchema = `
 CREATE TABLE IF NOT EXISTS buckets (
@@ -68,7 +68,7 @@ func maybeBootstrapSchema(logger *zap.Logger) {
 		return
 	}
 
-	logger.Info("INIT_SCHEMA set — bootstrapping database schema")
+	logger.Info("INIT_SCHEMA set - bootstrapping database schema")
 	ctx := context.Background()
 
 	// --- main (ticketsbot) ---

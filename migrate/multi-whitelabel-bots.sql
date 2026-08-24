@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS whitelabel_guild_assignments(
 );
 CREATE INDEX IF NOT EXISTS whitelabel_guild_assignments_bot_id ON whitelabel_guild_assignments("bot_id");
 
--- 3. Backfill from observed membership. Deterministic winner (lowest bot id) — with one bot per
+-- 3. Backfill from observed membership. Deterministic winner (lowest bot id) - with one bot per
 --    guild, which is every pre-migration deployment, this preserves the existing binding exactly.
 INSERT INTO whitelabel_guild_assignments("guild_id", "bot_id")
 SELECT "guild_id", MIN("bot_id") FROM whitelabel_guilds GROUP BY "guild_id"

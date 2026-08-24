@@ -94,7 +94,7 @@ func SyncGuilds(ctx context.Context, db *database.Database, token string, botId 
 
 			// Hand the guild to another of the owner's bots if one is still in it. Leaving it
 			// unassigned would drop the guild back to the public bot, which is typically not a
-			// member — locking the owner out of that guild's dashboard.
+			// member - locking the owner out of that guild's dashboard.
 			if err := db.WhitelabelGuildAssignments.DeleteIfBot(ctx, id, botId); err != nil {
 				return err
 			}

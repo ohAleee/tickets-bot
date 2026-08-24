@@ -21,12 +21,12 @@ docker compose build
 
 ## 1. Database
 
-One Postgres instance hosts three databases — `ticketsbot` (main), `botcache` (Discord
+One Postgres instance hosts three databases - `ticketsbot` (main), `botcache` (Discord
 cache), `archive` (transcripts). The init script
 `infra/postgres/initdb/01-create-databases.sh` creates `botcache` and `archive` on first
 boot; `ticketsbot` is created by `POSTGRES_DB`.
 
-### Option A — Fresh database (new install)
+### Option A - Fresh database (new install)
 
 Start Postgres + Redis, then bootstrap the schema once:
 
@@ -38,7 +38,7 @@ docker compose run --rm -e INIT_SCHEMA_ONLY=true ticketbot
 ```
 
 What this does (see `go/ticketbot/cmd/ticketbot/schemainit.go`):
-- creates the `ticketsbot` tables via `database.CreateTables` — **premium tables are not
+- creates the `ticketsbot` tables via `database.CreateTables` - **premium tables are not
   created** (premium is force-unlocked)
 - creates the `botcache` tables via the gdl cache schema
 - creates/refreshes the materialized views
@@ -47,10 +47,10 @@ All DDL is idempotent. Alternatively set `INIT_SCHEMA=true` in `.env` to bootstr
 normal startup (safe to leave on; it only creates what's missing). `archive` tables are
 created automatically by the `logarchiver` service.
 
-### Option B — Migrate an existing deployment
+### Option B - Migrate an existing deployment
 
 If you already run upstream TicketsBot with three Postgres instances, restore them into the
-single instance and drop the premium tables. See **`migrate/README.md`** — in short:
+single instance and drop the premium tables. See **`migrate/README.md`** - in short:
 
 ```bash
 # restore each dump into the matching database on the new single instance (port 5433)
@@ -170,4 +170,4 @@ validates it on the spot, rejecting plain HTTP and internal hostnames with
   docker compose start sharder-whitelabel
   ```
   A plain restart is not enough: the sharder RESUMEs from those keys and Discord replays nothing.
-- Adding a bot needs **no sharder restart** — it connects on the `tickets:tokenchange` publish.
+- Adding a bot needs **no sharder restart** - it connects on the `tickets:tokenchange` publish.

@@ -19,7 +19,7 @@ var ErrNil = redis.Nil
 // 0, and the RPC consumer sits in XREADGROUP with BLOCK 1s. A blocked command owns its connection
 // for as long as it blocks, so a pool merely as large as the number of consumers leaves nothing
 // for ordinary commands: every ticket-open lock, rate-limit token and cooldown check then queues
-// until a blocking consumer happens to cycle — measured at ~1s each, while Redis itself answers in
+// until a blocking consumer happens to cycle - measured at ~1s each, while Redis itself answers in
 // microseconds. Keep enough connections that the blocking consumers can never starve the pool.
 const minPoolSize = 16
 

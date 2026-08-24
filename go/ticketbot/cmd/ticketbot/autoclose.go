@@ -1,13 +1,13 @@
 package main
 
-// Autoclose sweep — ported from the standalone autoclosedaemon (which was built on the
+// Autoclose sweep - ported from the standalone autoclosedaemon (which was built on the
 // legacy TicketsBot/* module stack) onto the cloud libraries used by the rest of this
 // binary. The worker already CONSUMES autoclose / close-request events; this is the
 // PRODUCER side: a periodic sweep that finds inactive tickets and tickets whose close
 // timer has elapsed, then publishes them to the same Redis queues the worker listens on.
 //
 // Because premium is force-unlocked for every guild, the original premium gating (which
-// only autoclosed premium guilds and reset settings for the rest) is dropped — every
+// only autoclosed premium guilds and reset settings for the rest) is dropped - every
 // guild with autoclose configured is swept.
 
 import (
