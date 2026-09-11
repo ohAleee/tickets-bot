@@ -63,6 +63,9 @@ func GetTranscriptRenderHandler(ctx *gin.Context) {
 		return
 	}
 
+	// Swap mirrored attachment paths for signed, browser-loadable URLs
+	SignAttachmentUrls(ctx, guildId, ticketId, transcript.Messages)
+
 	// Render
 	payload := chatreplica.FromTranscript(transcript, ticketId)
 	// html, err := chatreplica.Render(payload)

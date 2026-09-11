@@ -223,3 +223,95 @@ func (r *ProxyRetriever) PurgeStatus(ctx context.Context, guildId uint64) (Purge
 		return PurgeStatus{}, errors.New(response.Message)
 	}
 }
+
+// Attachments are up to ARCHIVER_MEDIA_MAX_BYTES of binary, so they get their own client: the
+// shared one has a 3 second timeout sized for JSON transcripts.
+var attachmentTransport = &http.Client{Timeout: 60 * time.Second}
+
+func (r *ProxyRetriever) attachmentUrl(guildId uint64, ticketId int, attachmentId uint64, filename string) (string, error) {
+	uri, err := url.Parse(r.endpoint)
+	if err != nil {
+		return "", err
+	}
+
+	uri.Path = "/attachments"
+
+	query := uri.Query()
+	query.Set("guild", fmt.Sprintf("%d", guildId))
+	query.Set("id", fmt.Sprintf("%d", ticketId))
+	query.Set("attachment", fmt.Sprintf("%d", attachmentId))
+	query.Set("filename", filename)
+	uri.RawQuery = query.Encode()
+
+	return uri.String(), nil
+}
+
+func (r *ProxyRetriever) GetAttachment(ctx context.Context, guildId uint64, ticketId int, attachmentId uint64, filename string) ([]byte, error) {
+	uri, err := r.attachmentUrl(guildId, ticketId, attachmentId, filename)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, uri, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := attachmentTransport.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	defer res.Body.Close()
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	switch res.StatusCode {
+	case http.StatusOK:
+		return body, nil
+	case http.StatusNotFound:
+		return nil, ErrNotFound
+	default:
+		var decoded proxyErrorResponse
+		if err := json.Unmarshal(body, &decoded); err != nil {
+			return nil, err
+		}
+
+		return nil, fmt.Errorf("error from proxy: %s", decoded.Message)
+	}
+}
+
+func (r *ProxyRetriever) StoreAttachment(ctx context.Context, guildId uint64, ticketId int, attachmentId uint64, filename string, data []byte) error {
+	uri, err := r.attachmentUrl(guildId, ticketId, attachmentId, filename)
+	if err != nil {
+		return err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, uri, bytes.NewReader(data))
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("Content-Type", "application/octet-stream")
+
+	res, err := attachmentTransport.Do(req)
+	if err != nil {
+		return err
+	}
+
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		var decoded proxyErrorResponse
+		if err := json.NewDecoder(res.Body).Decode(&decoded); err != nil {
+			return err
+		}
+
+		return errors.New(decoded.Message)
+	}
+
+	return nil
+}

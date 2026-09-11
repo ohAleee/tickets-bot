@@ -43,6 +43,12 @@ func StartServer(logger *zap.Logger, sm *livechat.SocketManager) *nethttp.Server
 	// Health check - registered before rate-limit middleware so probes aren't rate-limited
 	router.GET("/health", root.HealthHandler)
 
+	// Signed, short-lived links to archived ticket attachments. No auth middleware: the browser
+	// loads these with <img> / <a download> and cannot send the Authorization header, so the HMAC
+	// in the query string is the authentication. Registered before the rate limiters too, since a
+	// single transcript can pull dozens of images at once.
+	router.GET("/media/:id/:ticketId/:attachmentId/*filename", api_transcripts.GetAttachmentHandler)
+
 	router.RemoteIPHeaders = config.Conf.Server.RealIpHeaders
 	if err := router.SetTrustedProxies(config.Conf.Server.TrustedProxies); err != nil {
 		panic(err)

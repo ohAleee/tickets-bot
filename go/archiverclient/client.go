@@ -73,6 +73,8 @@ func (c *ArchiverClient) Get(ctx context.Context, guildId uint64, ticketId int) 
 }
 
 func (c *ArchiverClient) Store(ctx context.Context, guildId uint64, ticketId int, messages []message.Message) error {
+	c.mirrorAttachments(ctx, guildId, ticketId, messages)
+
 	transcript := v2.NewTranscript(messages, v2.NoopRetriever[user.User], v2.NoopRetriever[channel.Channel], v2.NoopRetriever[guild.Role])
 
 	data, err := json.Marshal(transcript)

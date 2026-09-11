@@ -63,5 +63,7 @@ func GetTranscriptHandler(ctx *gin.Context) {
 		return
 	}
 
+	SignAttachmentUrls(ctx, guildId, ticketId, messages.Messages)
+
 	ctx.JSON(200, messages)
 }

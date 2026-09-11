@@ -116,10 +116,16 @@ func (s *Server) purgeGuildHandler(ctx *gin.Context) {
 				zap.Uint64("guild", guildId),
 			)
 
-			// Parse ticket ID, in form guildId/ticketId or guildId/free-ticketId
+			// Parse ticket ID, in form guildId/ticketId or guildId/free-ticketId. Attachments
+			// hang off the ticket's prefix (guildId/ticketId/attachments/...), so keep the
+			// first segment only.
 			cut := obj.Key[len(fmt.Sprintf("%d/", guildId)):]
 			if strings.HasPrefix(cut, "free-") {
 				cut = cut[len("free-"):]
+			}
+
+			if idx := strings.IndexByte(cut, '/'); idx != -1 {
+				cut = cut[:idx]
 			}
 
 			ticketId, err := strconv.Atoi(cut)

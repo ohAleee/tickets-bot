@@ -19,6 +19,10 @@ type Config struct {
 		Host       string `env:"SERVER_ADDR,required"`
 		MetricHost string `env:"METRIC_SERVER_ADDR"`
 		BaseUrl    string `env:"BASE_URL,required"`
+		// Public base URL of this API, used to build media links. Needed when the API is
+		// reverse proxied under a path prefix (the request the handler sees has it stripped).
+		// Empty falls back to the scheme + host of the incoming request.
+		MediaBaseUrl string `env:"MEDIA_BASE_URL"`
 		MainSite   string `env:"MAIN_SITE,required"`
 		Ratelimit  struct {
 			Window int `env:"WINDOW,required"`

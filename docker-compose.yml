@@ -122,6 +122,9 @@ services:
       # --- worker: archiver + databases (single postgres) ---
       WORKER_ARCHIVER_URL: http://logarchiver:4000
       WORKER_ARCHIVER_AES_KEY: ${ARCHIVER_AES_KEY}
+      # Ticket attachments are mirrored into the archive bucket on close, because Discord CDN
+      # links expire. Per-file cap in bytes; 0 disables mirroring (transcripts keep CDN links).
+      ARCHIVER_MEDIA_MAX_BYTES: ${ARCHIVER_MEDIA_MAX_BYTES:-26214400}
       DATABASE_HOST: postgres:5432
       DATABASE_NAME: ticketsbot
       DATABASE_USER: postgres
@@ -150,6 +153,9 @@ services:
       # --- dashboard API ---
       SERVER_ADDR: 0.0.0.0:8081
       BASE_URL: ${DASHBOARD_URL:-http://localhost:5000}
+      # Public base URL of this API (what the browser calls), used to build the signed media
+      # links. Must include the reverse proxy's path prefix, which the API never sees.
+      MEDIA_BASE_URL: ${API_URL:-http://localhost:8082}
       MAIN_SITE: ${LANDING_PAGE_URL:-https://tickets.bot}
       DATABASE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/ticketsbot
       CACHE_URI: postgres://postgres:${DATABASE_PASSWORD:-null}@postgres/botcache
@@ -281,9 +287,12 @@ services:
     networks:
       - app-network
 
-  # ----------------------------------------------- transcripts (unchanged) ----
+  # ------------------------------------------------------------ transcripts ----
+  # Built from go/logarchiver, not the upstream image: this fork adds the /attachments
+  # routes that back the mirrored ticket media.
   logarchiver:
-    image: ${LOGARCHIVER_IMAGE:-ghcr.io/ticketsbot-cloud/logarchiver:7a7df5cacbdccbf47678a11c7709b9065b984ac8}
+    build:
+      context: ./go/logarchiver
     user: "${UID:-}:${GID:-}"
     container_name: tickets-logarchiver
     restart: unless-stopped

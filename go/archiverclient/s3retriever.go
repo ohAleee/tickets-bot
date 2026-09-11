@@ -1,10 +1,13 @@
 package archiverclient
 
 import (
+	"bytes"
 	"context"
 	"errors"
+	"io"
 
 	"github.com/TicketsBot-cloud/logarchiver/pkg/s3client"
+	"github.com/minio/minio-go/v7"
 )
 
 type S3Retriever struct {
@@ -32,4 +35,39 @@ func (r *S3Retriever) StoreTicket(ctx context.Context, guildId uint64, ticketId 
 
 func (r *S3Retriever) DeleteTicket(ctx context.Context, guildId uint64, ticketId int) error {
 	return r.client.DeleteTicket(ctx, guildId, ticketId)
+}
+
+// Attachment objects are addressed directly through minio: the pinned logarchiver module has no
+// helper for them, only this fork's build of the service does.
+func (r *S3Retriever) GetAttachment(ctx context.Context, guildId uint64, ticketId int, attachmentId uint64, filename string) ([]byte, error) {
+	key := AttachmentKey(guildId, ticketId, attachmentId, filename)
+
+	object, err := r.client.Minio().GetObject(ctx, r.client.BucketName(), key, minio.GetObjectOptions{})
+	if err != nil {
+		return nil, err
+	}
+
+	defer object.Close()
+
+	data, err := io.ReadAll(object)
+	if err != nil {
+		var resp minio.ErrorResponse
+		if errors.As(err, &resp) && resp.Code == "NoSuchKey" {
+			return nil, ErrNotFound
+		}
+
+		return nil, err
+	}
+
+	return data, nil
+}
+
+func (r *S3Retriever) StoreAttachment(ctx context.Context, guildId uint64, ticketId int, attachmentId uint64, filename string, data []byte) error {
+	key := AttachmentKey(guildId, ticketId, attachmentId, filename)
+
+	_, err := r.client.Minio().PutObject(ctx, r.client.BucketName(), key, bytes.NewReader(data), int64(len(data)), minio.PutObjectOptions{
+		ContentType: "application/octet-stream",
+	})
+
+	return err
 }

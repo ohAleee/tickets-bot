@@ -76,6 +76,10 @@ func (c *S3Client) StoreTicket(ctx context.Context, guildId uint64, ticketId int
 func (c *S3Client) DeleteTicket(ctx context.Context, guildId uint64, ticketId int) error {
 	key := fmt.Sprintf("%d/%d", guildId, ticketId)
 
+	if err := c.DeleteAttachments(ctx, guildId, ticketId); err != nil {
+		return err
+	}
+
 	return c.client.RemoveObject(ctx, c.bucketName, key, minio.RemoveObjectOptions{})
 }
 

@@ -33,9 +33,11 @@
             
                                     {#if message.attachments && message.attachments.length > 0}
                                         {#each message.attachments as attachment}
-                                            {#if attachment.content_type && attachment.content_type.startsWith('image/')}
+                                            {#if isImage(attachment)}
                                                 <div class="message-attachment">
-                                                    <img src={attachment.url} alt="Attachment" class="attachment-image">
+                                                    <a href={attachment.url} target="_blank">
+                                                        <img src={attachment.url} alt={attachment.filename || 'Attachment'} class="attachment-image">
+                                                    </a>
                                                 </div>
                                             {:else}
                                                 <div class="message-attachment">
@@ -269,6 +271,16 @@
         }
 
         return buttonStyle;
+    }
+
+    // Attachments carry no content_type, so fall back to the file extension
+    function isImage(attachment) {
+        if (attachment.content_type) {
+            return attachment.content_type.startsWith('image/');
+        }
+
+        const imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'gifv', 'webp'];
+        return imageExtensions.includes((attachment.filename || '').split('.').pop().toLowerCase());
     }
 
     async function loadData() {

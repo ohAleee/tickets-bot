@@ -95,7 +95,14 @@ a whitelabel bot fail loudly instead of falling back to a public bot that isn't 
 
 - **logarchiver** stays a separate container: it depends on the incompatible legacy
   `TicketsBot/*` module trees, so it can't share the cloud-libs binary. ticketbot talks
-  to it over HTTP via archiverclient.
+  to it over HTTP via archiverclient. It is built from `go/logarchiver` (not the upstream
+  image) because this fork adds the `/attachments` routes.
+- **Ticket media is mirrored on close.** Discord CDN links are signed and expire, so a closed
+  ticket used to lose its images. `archiverclient.Store` now downloads every attachment up to
+  `ARCHIVER_MEDIA_MAX_BYTES` (default 25 MiB, `0` disables), stores it AES-encrypted next to the
+  transcript, and rewrites the URL to `/media/{guild}/{ticket}/{attachment}/{file}`. The
+  dashboard hands those out as HMAC-signed links valid for one hour, so a plain `<img>` can load
+  them without the Authorization header. Older transcripts keep their dead CDN links.
 - **`sharder-whitelabel`** runs the `whitelabel` bin from `rust/sharder` (upstream's compose ran
   no such service). It loads bot tokens from the DB, picks up new ones live over
   `tickets:tokenchange`, and forwards into the same `stream:gateway-events` as the public sharder,

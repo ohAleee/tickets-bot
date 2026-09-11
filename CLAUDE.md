@@ -52,6 +52,16 @@ pseudo-version.
   set is resolved per bot (`customisation.GetEmojis(ctx, botId, isWhitelabel)`, backed by
   `whitelabel_emojis` + an in-process cache) and the gate is data-driven (`CustomEmoji.Configured()`).
   Do not reintroduce `IsWhitelabel` checks around emojis.
+- **Mirrored ticket media.** Upstream stores only the Discord CDN URL of an attachment, which is
+  signed and expires within hours, so images 404 once the ticket is closed. `ArchiverClient.Store`
+  (`go/archiverclient/attachments.go`) downloads each attachment under `ARCHIVER_MEDIA_MAX_BYTES`,
+  encrypts it with the archiver AES key, uploads it through logarchiver's **local-only**
+  `/attachments` routes, and rewrites `url` / `proxy_url` to `/media/...`. The dashboard signs
+  those paths (HMAC over `JWT_SECRET`, 1h TTL) in the transcript endpoints and serves them from
+  `router.GET("/media/...")`, outside the `/api` group because an `<img>` cannot send the
+  Authorization header. Consequences: `docker-compose.yml` builds logarchiver from source instead
+  of pulling `ghcr.io/ticketsbot-cloud/logarchiver`, and the guild-purge key parser tolerates the
+  nested `{guild}/{ticket}/attachments/...` keys.
 - **`WHITELABEL_ONLY`** - makes a guild with no whitelabel bot fail loudly instead of falling back
   to the public bot (which, in a whitelabel-only deployment, is in no guilds).
 - **`sharder-whitelabel` in compose** - upstream's compose ran none.
