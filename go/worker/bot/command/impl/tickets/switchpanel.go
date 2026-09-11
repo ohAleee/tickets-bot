@@ -104,7 +104,6 @@ func (SwitchPanelCommand) Execute(ctx *cmdcontext.SlashCommandContext, panelId i
 		return
 	}
 
-	// Get ticket claimer
 	claimer, err := dbclient.Client.TicketClaims.Get(ctx, ticket.GuildId, ticket.Id)
 	if err != nil {
 		ctx.HandleError(err)
@@ -145,7 +144,6 @@ func (SwitchPanelCommand) Execute(ctx *cmdcontext.SlashCommandContext, panelId i
 		}
 	}
 
-	// Generate new channel name
 	newChannelName, err := logic.GenerateChannelName(ctx.Context, ctx.Worker(), &newPanel, ticket.GuildId, ticket.Id, ticket.UserId, utils.NilIfZero(claimer))
 	if err != nil {
 		ctx.HandleError(err)

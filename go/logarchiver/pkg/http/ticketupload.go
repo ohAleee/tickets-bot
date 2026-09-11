@@ -34,7 +34,6 @@ func (s *Server) ticketUploadHandler(ctx *gin.Context) {
 		return
 	}
 
-	// Get active bucket
 	client, bucket, err := s.getActiveClient(ctx)
 	if err != nil {
 		s.Logger.Error("Failed to get active client", zap.Error(err))

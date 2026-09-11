@@ -42,7 +42,6 @@ func (o *wrappedQueryOptions) UnmarshalJSON(data []byte) error {
 		field := t.Field(i)
 		fieldValue := v.Field(i)
 
-		// Get the JSON tag name
 		jsonTag := field.Tag.Get("json")
 		if jsonTag == "" {
 			jsonTag = strings.ToLower(field.Name)

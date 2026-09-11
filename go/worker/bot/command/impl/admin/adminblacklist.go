@@ -49,7 +49,6 @@ func (AdminBlacklistCommand) Execute(ctx registry.CommandContext, guildIdRaw str
 		return
 	}
 
-	// Parse real owner ID
 	var realOwnerId *uint64
 	if realOwnerIdRaw != nil && *realOwnerIdRaw != "" {
 		parsed, err := strconv.ParseUint(*realOwnerIdRaw, 10, 64)
@@ -89,7 +88,6 @@ func (AdminBlacklistCommand) Execute(ctx registry.CommandContext, guildIdRaw str
 		botInGuild = true
 	}
 
-	// Add to blacklist
 	if err := dbclient.Client.ServerBlacklist.Add(ctx, guildId, reason, ownerId, realOwnerId); err != nil {
 		ctx.HandleError(err)
 		return
@@ -120,7 +118,6 @@ func (AdminBlacklistCommand) Execute(ctx registry.CommandContext, guildIdRaw str
 		),
 	}))
 
-	// Leave guild
 	if botInGuild {
 		if err := worker.LeaveGuild(guildId); err != nil {
 			ctx.HandleError(err)

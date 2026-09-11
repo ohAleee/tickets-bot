@@ -482,7 +482,6 @@ WHERE "activated_by" = $1;`
 	return
 }
 
-// cache data
 func getCacheData(cache *cache.PgCache, userId uint64) map[string]interface{} {
 	data := make(map[string]interface{})
 

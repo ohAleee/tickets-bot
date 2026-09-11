@@ -19,7 +19,6 @@ pub struct Config {
     pub shard_count: u16,
 }
 
-// shim
 mod shim {
     use ed25519_dalek::PublicKey;
     use serde::de::Error;

@@ -30,7 +30,6 @@ func (h *ClaimHandler) Properties() registry.Properties {
 }
 
 func (h *ClaimHandler) Execute(ctx *context.ButtonContext) {
-	// Get permission level
 	permissionLevel, err := ctx.UserPermissionLevel(ctx)
 	if err != nil {
 		ctx.HandleError(err)
@@ -60,7 +59,6 @@ func (h *ClaimHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	// Update the welcome message claim button
 	if err := logic.UpdateWelcomeMessageClaimButton(ctx.Context, ctx.Worker(), ctx, ticket, true); err != nil {
 		ctx.HandleWarning(err)
 	}

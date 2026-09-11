@@ -29,7 +29,6 @@ func (h *PremiumKeyButtonHandler) Properties() registry.Properties {
 }
 
 func (h *PremiumKeyButtonHandler) Execute(ctx *context.ButtonContext) {
-	// Get permission level
 	permissionLevel, err := ctx.UserPermissionLevel(ctx)
 	if err != nil {
 		ctx.HandleError(err)

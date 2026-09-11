@@ -97,7 +97,6 @@ func (e *Endpoint) Request(ctx context.Context, token string, body any, response
 		}
 	}
 
-	// Create req
 	var req *http.Request
 	var err error
 	if body == nil || e.ContentType == Nil {
@@ -167,7 +166,6 @@ func (e *Endpoint) Request(ctx context.Context, token string, body any, response
 	var res *http.Response
 	var content []byte
 
-	// Execute hooks
 	executePreRequestHooks(token, req)
 	defer func() {
 		executePostRequestHooks(res, content)

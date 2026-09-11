@@ -254,7 +254,6 @@ func (c *MemoryCache) GetGuildMembers(ctx context.Context, guildId uint64, withU
 
 	var members []member.Member
 	for userId, cachedMember := range c.members[guildId] {
-		// Get user
 		var u user.User
 		if withUserData {
 			cachedUser, err := c.GetUser(ctx, userId)
@@ -475,7 +474,6 @@ func (c *MemoryCache) GetRoles(ctx context.Context, guildId uint64, ids []uint64
 }
 
 func (c *MemoryCache) GetGuildRoles(ctx context.Context, guildId uint64) ([]guild.Role, error) {
-	// get guild
 	c.guildLock.RLock()
 	g, found := c.guilds[guildId]
 	c.guildLock.RUnlock()
@@ -604,7 +602,6 @@ func (c *MemoryCache) GetEmoji(ctx context.Context, emojiId uint64) (emoji.Emoji
 }
 
 func (c *MemoryCache) GetGuildEmojis(ctx context.Context, guildId uint64) ([]emoji.Emoji, error) {
-	// get guild
 	c.guildLock.RLock()
 	guild, found := c.guilds[guildId]
 	c.guildLock.RUnlock()
@@ -699,7 +696,6 @@ func (c *MemoryCache) GetVoiceState(ctx context.Context, userId, guildId uint64)
 
 	cached, found := c.voiceStates[guildId][userId]
 	if found {
-		// get member
 		m, err := c.GetMember(ctx, guildId, userId)
 		if err == ErrNotFound {
 			m = member.Member{
@@ -727,7 +723,6 @@ func (c *MemoryCache) GetGuildVoiceStates(ctx context.Context, guildId uint64) (
 
 	var states []guild.VoiceState
 	for userId, cached := range c.voiceStates[guildId] {
-		// get member
 		m, err := c.GetMember(ctx, guildId, userId)
 		if err == ErrNotFound {
 			m = member.Member{

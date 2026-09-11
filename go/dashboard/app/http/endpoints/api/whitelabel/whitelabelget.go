@@ -24,7 +24,6 @@ type whitelabelResponse struct {
 func WhitelabelGet(c *gin.Context) {
 	bot := botFromContext(c)
 
-	// Get status
 	status, statusType, _, err := database.Client.WhitelabelStatuses.Get(c, bot.BotId)
 	if err != nil {
 		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to load whitelabel bots"))

@@ -84,7 +84,6 @@ func (StartTicketCommand) Execute(ctx registry.CommandContext) {
 
 		panel = &p
 
-		// Validate panel access
 		canProceed, warningTitle, warning, colour, err := logic.ValidatePanelAccess(interaction, p)
 		if err != nil {
 			ctx.HandleError(err)

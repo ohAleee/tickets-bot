@@ -78,7 +78,6 @@ func (TransferCommand) Execute(ctx registry.CommandContext, userId uint64) {
 		return
 	}
 
-	// Update the welcome message claim button
 	if err := logic.UpdateWelcomeMessageClaimButton(ctx, ctx.Worker(), ctx, ticket, true); err != nil {
 		ctx.HandleWarning(err)
 	}

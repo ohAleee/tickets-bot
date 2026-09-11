@@ -105,7 +105,6 @@ func (StatsServerCommand) Execute(ctx registry.CommandContext) {
 		return
 	})
 
-	// ticket duration
 	var ticketDuration analytics.TripleWindow
 	group.Go(func() (err error) {
 		span := sentry.StartSpan(span.Context(), "GetTicketDurationStats")

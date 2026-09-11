@@ -42,7 +42,6 @@ func GetIntegrationDetailedHandler(ctx *gin.Context) {
 		return
 	}
 
-	// Get placeholders
 	placeholders, err := dbclient.Client.CustomIntegrationPlaceholders.GetByIntegration(ctx, integrationId)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Failed to load integrations. Please try again."))
@@ -54,7 +53,6 @@ func GetIntegrationDetailedHandler(ctx *gin.Context) {
 		placeholders = make([]database.CustomIntegrationPlaceholder, 0)
 	}
 
-	// Get headers
 	headers, err := dbclient.Client.CustomIntegrationHeaders.GetByIntegration(ctx, integrationId)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Failed to load integrations. Please try again."))
@@ -66,7 +64,6 @@ func GetIntegrationDetailedHandler(ctx *gin.Context) {
 		headers = make([]database.CustomIntegrationHeader, 0)
 	}
 
-	// Get secrets
 	secrets, err := dbclient.Client.CustomIntegrationSecrets.GetByIntegration(ctx, integrationId)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Failed to load integrations. Please try again."))

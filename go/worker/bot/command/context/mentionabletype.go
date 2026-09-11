@@ -25,7 +25,6 @@ func (m MentionableType) OverwriteType() channel.PermissionOverwriteType {
 }
 
 // DetermineMentionableType TODO: Move this function to be a method on the CommandContext interface
-// DetermineMentionableType (type, ok)
 func DetermineMentionableType(ctx registry.CommandContext, id uint64) (MentionableType, bool) {
 	interactionCtx, ok := ctx.(*SlashCommandContext)
 	if ok {

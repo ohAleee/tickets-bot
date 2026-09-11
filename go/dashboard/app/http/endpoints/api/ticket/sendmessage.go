@@ -36,7 +36,6 @@ func SendMessage(ctx *gin.Context) {
 		return
 	}
 
-	// Get ticket ID
 	ticketId, err := strconv.Atoi(ctx.Param("ticketId"))
 	if err != nil {
 		ctx.JSON(400, utils.ErrorStr("Invalid ticket ID provided: %s", ctx.Param("ticketId")))
@@ -66,7 +65,6 @@ func SendMessage(ctx *gin.Context) {
 		return
 	}
 
-	// Get ticket
 	ticket, err := database.Client.Tickets.Get(ctx, ticketId, guildId)
 
 	// Verify the ticket exists

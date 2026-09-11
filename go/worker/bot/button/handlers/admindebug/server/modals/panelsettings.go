@@ -77,7 +77,6 @@ func (h *AdminDebugServerPanelSettingsModalHandler) Execute(ctx *context.ModalCo
 
 	selectedValues := selectData.Values
 
-	// Get all panels for this guild
 	panels, err := dbclient.Client.Panel.GetByGuild(ctx, guildId)
 	if err != nil {
 		ctx.HandleError(err)
@@ -112,7 +111,6 @@ func (h *AdminDebugServerPanelSettingsModalHandler) Execute(ctx *context.ModalCo
 			continue
 		}
 
-		// Build settings for this panel
 		panelSettings := buildPanelSettings(ctx, selectedPanel)
 		results = append(results, panelSettings)
 	}
@@ -136,14 +134,12 @@ func buildPanelSettings(ctx *context.ModalContext, selectedPanel *database.Panel
 	// Basic settings
 	settings = append(settings, fmt.Sprintf("**Message ID:** `%d`", selectedPanel.MessageId))
 
-	// Ticket mode
 	ticketMode := "Channel Mode"
 	if selectedPanel.UseThreads {
 		ticketMode = "Thread Mode"
 	}
 	settings = append(settings, fmt.Sprintf("**Ticket Mode:** `%s`", ticketMode))
 
-	// Panel channel
 	if selectedPanel.ChannelId != 0 {
 		channel, err := ctx.Worker().GetChannel(selectedPanel.ChannelId)
 		if err == nil {
@@ -163,7 +159,6 @@ func buildPanelSettings(ctx *context.ModalContext, selectedPanel *database.Panel
 		}
 	}
 
-	// Transcript channel
 	if selectedPanel.TranscriptChannelId != nil {
 		channel, err := ctx.Worker().GetChannel(*selectedPanel.TranscriptChannelId)
 		if err == nil {
@@ -176,14 +171,12 @@ func buildPanelSettings(ctx *context.ModalContext, selectedPanel *database.Panel
 	// Other settings
 	settings = append(settings, fmt.Sprintf("**With Default Team:** `%t`", selectedPanel.WithDefaultTeam))
 
-	// Naming scheme
 	scheme := "Default"
 	if selectedPanel.NamingScheme != nil {
 		scheme = *selectedPanel.NamingScheme
 	}
 	settings = append(settings, fmt.Sprintf("**Naming Scheme:** `%s`", scheme))
 
-	// Form
 	form := "Disabled"
 	if selectedPanel.FormId != nil {
 		formData, ok, err := dbclient.Client.Forms.Get(ctx, *selectedPanel.FormId)
@@ -195,7 +188,6 @@ func buildPanelSettings(ctx *context.ModalContext, selectedPanel *database.Panel
 	}
 	settings = append(settings, fmt.Sprintf("**Form:** `%s`", form))
 
-	// Exit survey
 	survey := "Disabled"
 	if selectedPanel.ExitSurveyFormId != nil {
 		surveyData, ok, err := dbclient.Client.Forms.Get(ctx, *selectedPanel.ExitSurveyFormId)
@@ -207,7 +199,6 @@ func buildPanelSettings(ctx *context.ModalContext, selectedPanel *database.Panel
 	}
 	settings = append(settings, fmt.Sprintf("**Exit Survey:** `%s`", survey))
 
-	// Panel status
 	status := "Enabled"
 	if selectedPanel.Disabled {
 		status = "Disabled"
@@ -216,7 +207,6 @@ func buildPanelSettings(ctx *context.ModalContext, selectedPanel *database.Panel
 	}
 	settings = append(settings, fmt.Sprintf("**Status:** `%s`", status))
 
-	// Delete mentions
 	deleteMentions := "Disabled"
 	if selectedPanel.DeleteMentions {
 		deleteMentions = "Enabled"

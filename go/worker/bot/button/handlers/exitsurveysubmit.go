@@ -70,7 +70,6 @@ func (h *ExitSurveySubmitHandler) Execute(cmd *cmdcontext.ModalContext) {
 		return
 	}
 
-	// Get ticket
 	ticket, err := dbclient.Client.Tickets.Get(ctx, ticketId, guildId)
 	if err != nil {
 		cmd.HandleError(err)

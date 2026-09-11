@@ -180,7 +180,6 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 		isThread = panel.UseThreads
 	}
 
-	// Check if the parent channel is an announcement channel
 	span = sentry.StartSpan(rootSpan.Context(), "Check if parent channel is announcement channel")
 	if isThread {
 		panelChannel, err := cmd.Channel()
@@ -523,7 +522,6 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 		}
 
 		if panel != nil {
-			// roles
 			span := sentry.StartSpan(rootSpan.Context(), "Get panel role mentions from database")
 			roles, err := dbclient.Client.PanelRoleMentions.GetRoles(ctx, panel.PanelId)
 			span.Finish()
@@ -539,7 +537,6 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 				}
 			}
 
-			// user
 			span = sentry.StartSpan(rootSpan.Context(), "Get panel user mention setting from database")
 			shouldMentionUser, err := dbclient.Client.PanelUserMention.ShouldMentionUser(ctx, panel.PanelId)
 			span.Finish()
@@ -551,7 +548,6 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 				}
 			}
 
-			// here
 			span = sentry.StartSpan(rootSpan.Context(), "Get panel here mention setting from database")
 			shouldMentionHere, err := dbclient.Client.PanelHereMention.ShouldMentionHere(ctx, panel.PanelId)
 			span.Finish()

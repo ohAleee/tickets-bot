@@ -95,7 +95,6 @@ type StrippedMessage struct {
 }
 
 func fetchMessages(botContext *botcontext.BotContext, ticket database.Ticket) ([]StrippedMessage, error) {
-	// Get messages
 	messages, err := rest.GetChannelMessages(context.Background(), botContext.Token, botContext.RateLimiter, *ticket.ChannelId, rest.GetChannelMessagesData{Limit: 100})
 	if err != nil {
 		return nil, err

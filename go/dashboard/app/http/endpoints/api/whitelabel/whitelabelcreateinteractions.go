@@ -50,7 +50,6 @@ func GetWhitelabelCreateInteractions() func(*gin.Context) {
 var ErrInteractionCreateCooldown = errors.New("Interaction creation on cooldown")
 
 func createInteractions(cm *manager.CommandManager, botId uint64, token string) error {
-	// Cooldown
 	key := fmt.Sprintf("tickets:interaction-create-cooldown:%d", botId)
 
 	// try to set first, prevent race condition

@@ -130,8 +130,6 @@ func blocksContainTicketButton(blocks []cv2Block) bool {
 	return false
 }
 
-// ---- rendering ----
-
 func parseCV2Emoji(raw *string) *emoji.Emoji {
 	if raw == nil {
 		return nil
@@ -342,8 +340,6 @@ func buildCV2Blocks(blocks []cv2Block, panelMap map[int]database.PanelWithCustom
 	}
 	return out
 }
-
-// ---- validation ----
 
 func validateCV2(blocks []cv2Block, validPanelIds map[int]bool) error {
 	if len(blocks) > maxV2Blocks {

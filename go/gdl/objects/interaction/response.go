@@ -9,9 +9,6 @@ type Response struct {
 	Type ResponseType `json:"type"`
 }
 
-// ========================================================
-// Pong Response
-// ========================================================
 type ResponsePong struct {
 	Response
 }
@@ -24,9 +21,6 @@ func NewResponsePong() ResponsePong {
 	}
 }
 
-// ========================================================
-// Channel Message Response
-// ========================================================
 type ResponseChannelMessage struct {
 	Response
 	Data ApplicationCommandCallbackData `json:"data"`
@@ -41,9 +35,6 @@ func NewResponseChannelMessage(data ApplicationCommandCallbackData) ResponseChan
 	}
 }
 
-// ========================================================
-// Ack With Source Response
-// ========================================================
 type ResponseAckWithSource struct {
 	Response
 	Data struct {
@@ -64,9 +55,6 @@ func NewResponseAckWithSource(flags uint) ResponseAckWithSource {
 	}
 }
 
-// ========================================================
-// Deferred Message Update Response
-// ========================================================
 type ResponseDeferredMessageUpdate struct {
 	Response
 }
@@ -79,9 +67,6 @@ func NewResponseDeferredMessageUpdate() ResponseDeferredMessageUpdate {
 	}
 }
 
-// ========================================================
-// Update message Response
-// ========================================================
 type ResponseUpdateMessage struct {
 	Response
 	Data ResponseUpdateMessageData `json:"data"`
@@ -103,9 +88,6 @@ func NewResponseUpdateMessage(data ResponseUpdateMessageData) ResponseUpdateMess
 	}
 }
 
-// ========================================================
-// Auto Complete Result Response
-// ========================================================
 type ApplicationCommandAutoCompleteResultResponse struct {
 	Response
 	Data struct {
@@ -126,9 +108,6 @@ func NewApplicationCommandAutoCompleteResultResponse(choices []ApplicationComman
 	}
 }
 
-// ========================================================
-// Modal Response
-// ========================================================
 type ModalResponse struct {
 	Response
 	Data ModalResponseData `json:"data"`
@@ -153,9 +132,6 @@ func NewModalResponse(customId, title string, components []component.Component) 
 	}
 }
 
-// ========================================================
-// Premium Required Response
-// ========================================================
 type PremiumRequiredResponse struct {
 	Response
 	Data struct{} `json:"data"`

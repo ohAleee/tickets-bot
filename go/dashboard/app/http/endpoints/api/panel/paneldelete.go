@@ -59,7 +59,6 @@ func DeletePanel(c *gin.Context) {
 		return
 	}
 
-	// Delete welcome message embed
 	if panel.WelcomeMessageEmbed != nil {
 		if err := database.Client.Embeds.Delete(c, *panel.WelcomeMessageEmbed); err != nil {
 			_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to delete panel"))
@@ -81,7 +80,6 @@ func DeletePanel(c *gin.Context) {
 		}
 	}
 
-	// Get premium tier
 	premiumTier, err := rpc.PremiumClient.GetTierByGuildId(c, guildId, true, botContext.Token, botContext.RateLimiter)
 	if err != nil {
 		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to delete panel"))

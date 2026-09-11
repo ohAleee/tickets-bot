@@ -28,14 +28,12 @@ func OnMemberLeave(worker *worker.Context, e events.GuildMemberRemove) {
 		sentry.Error(err)
 	}
 
-	// auto close
 	settings, err := dbclient.Client.AutoClose.Get(ctx, e.GuildId)
 	if err != nil {
 		sentry.Error(err)
 	} else {
 		// check setting is enabled
 		if settings.Enabled && settings.OnUserLeave != nil && *settings.OnUserLeave {
-			// get open tickets by user
 			tickets, err := dbclient.Client.Tickets.GetOpenByUser(ctx, e.GuildId, e.User.Id)
 			if err != nil {
 				sentry.Error(err)

@@ -91,9 +91,7 @@ func main() {
 		}
 	}
 
-	// =========================================================================
 	// Worker subsystem
-	// =========================================================================
 	logger.Info("Connecting to Redis (worker)")
 	if err := workerredis.Connect(); err != nil {
 		logger.Fatal("Failed to connect to Redis", zap.Error(err))
@@ -151,9 +149,7 @@ func main() {
 	go blacklist.StartCacheRefreshLoop(logger.With(zap.String("service", "blacklist_refresh")))
 	go integrationowners.StartCacheRefreshLoop(logger.With(zap.String("service", "integration_owner_refresh")))
 
-	// =========================================================================
 	// Dashboard subsystem
-	// =========================================================================
 	logger.Info("Loading dashboard config")
 	dcfg, err := dashconfig.LoadConfig()
 	if err != nil {
@@ -192,15 +188,11 @@ func main() {
 	logger.Info("Starting dashboard HTTP server")
 	dashSrv := dashhttp.StartServer(logger, socketManager)
 
-	// =========================================================================
 	// Background sweeps (ported from autoclosedaemon + viewrefresher containers)
-	// =========================================================================
 	go runAutoCloseSweep(logger.With(zap.String("service", "autoclose-sweep")))
 	go runViewRefresher(logger.With(zap.String("service", "view-refresher")))
 
-	// =========================================================================
 	// Worker event ingress: interactions HTTP + gateway RPC consumer
-	// =========================================================================
 	logger.Info("Starting interaction HTTP server")
 	go event.HttpListen(workerredis.Client, &pgCache)
 
@@ -233,7 +225,6 @@ func main() {
 		rpcClient.StartConsumer()
 	}()
 
-	// --- Shutdown ---
 	shutdownCh := make(chan os.Signal, 1)
 	signal.Notify(shutdownCh, syscall.SIGINT, syscall.SIGTERM)
 	<-shutdownCh

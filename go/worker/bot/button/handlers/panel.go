@@ -44,7 +44,6 @@ func (h *PanelHandler) Execute(ctx *context.ButtonContext) {
 			return
 		}
 
-		// Validate panel access
 		canProceed, outOfHoursTitle, outOfHoursWarning, outOfHoursColour, err := logic.ValidatePanelAccess(ctx, panel)
 		if err != nil {
 			ctx.HandleError(err)
@@ -175,7 +174,6 @@ func buildFormComponents(inputs []database.FormInput, inputOptions map[int][]dat
 				MaxValues: maxLength,
 				Required:  utils.Ptr(input.Required),
 			})
-		// Radio Group
 		case int(component.ComponentRadioGroup):
 			opts := make([]component.RadioGroupOption, len(options))
 			for j, option := range options {
@@ -190,7 +188,6 @@ func buildFormComponents(inputs []database.FormInput, inputOptions map[int][]dat
 				Options:  opts,
 				Required: utils.Ptr(input.Required),
 			})
-		// Checkbox Group
 		case int(component.ComponentCheckboxGroup):
 			opts := make([]component.CheckboxGroupOption, len(options))
 			for j, option := range options {

@@ -118,7 +118,6 @@ func CreatePanel(c *gin.Context) {
 		}
 	}
 
-	// Apply defaults
 	ApplyPanelDefaults(&data)
 
 	ctx, cancel := app.DefaultContext()

@@ -88,7 +88,6 @@ func (h *AdminDebugServerPermissionsModalSubmitHandler) Execute(ctx *context.Mod
 		return
 	}
 
-	// Get guild and settings
 	settings, err := dbclient.Client.Settings.Get(ctx, guildId)
 	if err != nil {
 		ctx.HandleError(err)
@@ -127,7 +126,6 @@ func (h *AdminDebugServerPermissionsModalSubmitHandler) Execute(ctx *context.Mod
 }
 
 func processPermissionChecks(selectedValues []string, worker *w.Context, guildId uint64, botMember member.Member, settings database.Settings, panels []database.Panel) ([]string, bool) {
-	// Server-wide permissions
 	serverWidePermissions := append(
 		[]permission.Permission{
 			// Thread mode specific
@@ -183,7 +181,6 @@ func processPermissionChecks(selectedValues []string, worker *w.Context, guildId
 				continue
 			}
 
-			// Check permissions for this panel
 			panelResults, hasMissing := checkPanelPermissions(worker, guildId, botMember, *panel, settings)
 			results = append(results, fmt.Sprintf("**Panel: %s**\n%s", panel.Title, panelResults))
 			if hasMissing {

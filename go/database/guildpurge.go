@@ -113,7 +113,6 @@ func (d *Database) PurgeGuildData(ctx context.Context, guildId uint64, logger *z
 		}
 	}
 
-	// Commit the transaction
 	if err := tx.Commit(ctx); err != nil {
 		return fmt.Errorf("failed to commit transaction: %w", err)
 	}

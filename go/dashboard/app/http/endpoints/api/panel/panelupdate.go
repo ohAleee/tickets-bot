@@ -56,7 +56,6 @@ func UpdatePanel(c *gin.Context) {
 		return
 	}
 
-	// get existing
 	existing, err := dbclient.Client.Panel.GetById(c, panelId)
 	if err != nil {
 		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Failed to parse request data"))
@@ -74,7 +73,6 @@ func UpdatePanel(c *gin.Context) {
 		return
 	}
 
-	// Apply defaults
 	ApplyPanelDefaults(&data)
 
 	premiumTier, err := rpc.PremiumClient.GetTierByGuildId(c, guildId, true, botContext.Token, botContext.RateLimiter)

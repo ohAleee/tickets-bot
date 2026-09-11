@@ -102,7 +102,6 @@ func BuildViewStaffMessage(ctx context.Context, cmd registry.CommandContext, pag
 		page = totalPages - 1
 	}
 
-	// Admin roles
 	label, value := buildPaginatedField(
 		cmd, adminRoles, page,
 		i18n.MessageViewStaffAdminRoles,
@@ -112,7 +111,6 @@ func BuildViewStaffMessage(ctx context.Context, cmd registry.CommandContext, pag
 	)
 	innerComponents = append(innerComponents, component.BuildTextDisplay(component.TextDisplay{Content: fmt.Sprintf("**%s**\n%s", label, value)}))
 
-	// Admin users
 	innerComponents = append(innerComponents, component.BuildSeparator(component.Separator{Divider: utils.Ptr(true), Spacing: utils.Ptr(1)}))
 	label, value = buildPaginatedField(
 		cmd, adminUsers, page,
@@ -123,7 +121,6 @@ func BuildViewStaffMessage(ctx context.Context, cmd registry.CommandContext, pag
 	)
 	innerComponents = append(innerComponents, component.BuildTextDisplay(component.TextDisplay{Content: fmt.Sprintf("**%s**\n%s", label, value)}))
 
-	// Support roles
 	innerComponents = append(innerComponents, component.BuildSeparator(component.Separator{Divider: utils.Ptr(true), Spacing: utils.Ptr(1)}))
 	label, value = buildPaginatedField(
 		cmd, supportRoles, page,
@@ -134,7 +131,6 @@ func BuildViewStaffMessage(ctx context.Context, cmd registry.CommandContext, pag
 	)
 	innerComponents = append(innerComponents, component.BuildTextDisplay(component.TextDisplay{Content: fmt.Sprintf("**%s**\n%s", label, value)}))
 
-	// Support users
 	if len(supportUsers) > 0 {
 		innerComponents = append(innerComponents, component.BuildSeparator(component.Separator{Divider: utils.Ptr(true), Spacing: utils.Ptr(1)}))
 		label, value = buildPaginatedField(

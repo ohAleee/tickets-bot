@@ -119,14 +119,12 @@ func ListTranscripts(ctx *gin.Context) {
 		return
 	}
 
-	// Get close reasons
 	closeReasons, err := dbclient.Client.CloseReason.GetMulti(ctx, guildId, ticketIds)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Failed to fetch records. Please try again."))
 		return
 	}
 
-	// Get label assignments
 	labelAssignments, err := dbclient.Client.TicketLabelAssignments.GetByTickets(ctx, guildId, ticketIds)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Failed to fetch records. Please try again."))
@@ -193,7 +191,6 @@ func ListTranscripts(ctx *gin.Context) {
 		totalPages = 1 // At least 1 page even if empty
 	}
 
-	// Get current page from query options
 	currentPage := queryOptions.Page
 	if currentPage == 0 {
 		currentPage = 1

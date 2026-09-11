@@ -82,7 +82,6 @@ func OnGuildCreate(worker *worker.Context, e events.GuildCreate) {
 }
 
 func sendIntroMessage(ctx context.Context, worker *worker.Context, guild guild.Guild, userId uint64) {
-	// Create DM channel
 	channel, err := worker.CreateDM(userId)
 	if err != nil { // User probably has DMs disabled
 		return

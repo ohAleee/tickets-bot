@@ -183,7 +183,6 @@ func (h *AdminDebugServerTicketPermissionsModalSubmitHandler) Execute(ctx *conte
 func checkUserTicketPermissions(ctx *context.ModalContext, worker *w.Context, guildId, ownerId, userId uint64, adminUsers, supportUsers []uint64, panels []database.Panel) string {
 	var lines []string
 
-	// Ticket Permission Level
 	ticketPermLevel := "**Ticket Permission:** None"
 
 	if userId == ownerId {
@@ -310,7 +309,6 @@ func checkUserTicketPermissions(ctx *context.ModalContext, worker *w.Context, gu
 func checkRoleTicketPermissions(ctx *context.ModalContext, worker *w.Context, guildId, roleId uint64, adminRoles, supportRoles []uint64, panels []database.Panel) string {
 	var lines []string
 
-	// Get role name
 	guildRoles, err := worker.GetGuildRoles(guildId)
 	roleName := "Unknown Role"
 	if err == nil {
@@ -322,7 +320,6 @@ func checkRoleTicketPermissions(ctx *context.ModalContext, worker *w.Context, gu
 		}
 	}
 
-	// Ticket Permission Level
 	ticketPermLevel := "**Ticket Permission:** None"
 
 	if utils.Contains(adminRoles, roleId) {

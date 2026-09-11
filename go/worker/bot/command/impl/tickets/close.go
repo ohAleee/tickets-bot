@@ -45,7 +45,6 @@ func (CloseCommand) AutoCompleteHandler(data interaction.ApplicationCommandAutoC
 	var reasons []string
 	var err error
 
-	// Get ticket
 	ticket, e := dbclient.Client.Tickets.GetByChannelAndGuild(context.Background(), data.ChannelId, data.GuildId.Value)
 	if e != nil {
 		sentry.Error(e) // TODO: Context

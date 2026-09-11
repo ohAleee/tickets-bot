@@ -34,7 +34,6 @@ func (h *EditLabelsButtonHandler) Properties() registry.Properties {
 }
 
 func (h *EditLabelsButtonHandler) Execute(ctx *context.ButtonContext) {
-	// Get ticket
 	ticket, err := dbclient.Client.Tickets.GetByChannelAndGuild(ctx, ctx.ChannelId(), ctx.GuildId())
 	if err != nil {
 		ctx.HandleError(err)

@@ -870,7 +870,6 @@ func (p *PanelTable) DisableSome(ctx context.Context, guildId uint64, freeLimit 
 			toDisable = append(toDisable, panelId)
 		}
 
-		// Disable panels
 		if len(toDisable) > 0 {
 			query := `UPDATE panels SET "force_disabled" = true WHERE "panel_id" = ANY($1) AND "guild_id" = $2;`
 

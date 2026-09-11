@@ -44,7 +44,6 @@ func (h *JoinThreadHandler) Execute(ctx *context.ButtonContext) {
 	// Errors are impossible
 	ticketId, _ := strconv.Atoi(groups[1])
 
-	// Get ticket
 	ticket, err := dbclient.Client.Tickets.Get(ctx, ticketId, ctx.GuildId())
 	if err != nil {
 		ctx.HandleError(err)

@@ -10,7 +10,6 @@ type CachedUser struct {
 }
 
 func (u *CachedUser) ToUser(userId uint64) User {
-	// unmarshal avatar
 	avatar := Avatar{}
 	_ = avatar.UnmarshalJSON([]byte(fmt.Sprintf(`"%s"`, u.Avatar))) // this is quite hacky
 

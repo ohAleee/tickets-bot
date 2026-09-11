@@ -47,7 +47,6 @@ func MultiPanelResend(ctx *gin.Context) {
 		return
 	}
 
-	// get bot context
 	botContext, err := botcontext.ContextForGuild(guildId)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Unable to connect to Discord. Please try again later."))
@@ -64,7 +63,6 @@ func MultiPanelResend(ctx *gin.Context) {
 		}
 	}
 
-	// get premium status
 	premiumTier, err := rpc.PremiumClient.GetTierByGuildId(ctx, guildId, true, botContext.Token, botContext.RateLimiter)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Unable to verify premium status. Please try again."))
@@ -77,7 +75,6 @@ func MultiPanelResend(ctx *gin.Context) {
 		return
 	}
 
-	// send new message
 	messageData := multiPanelIntoMessageData(multiPanel, premiumTier > premium.None)
 	messageId, err := messageData.send(botContext, panels)
 	if err != nil {

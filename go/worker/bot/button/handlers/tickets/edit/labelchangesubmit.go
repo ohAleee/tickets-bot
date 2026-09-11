@@ -41,7 +41,6 @@ func (h *LabelChangeSubmitHandler) Execute(ctx *commandcontext.ModalContext) {
 		return
 	}
 
-	// Get ticket
 	ticket, err := dbclient.Client.Tickets.GetByChannelAndGuild(ctx, ctx.ChannelId(), ctx.GuildId())
 	if err != nil {
 		ctx.HandleError(err)

@@ -36,7 +36,6 @@ func ListenAutoClose(logger *zap.Logger) {
 				zap.Uint64("guild_id", acTicket.GuildId),
 			)
 
-			// get ticket
 			ticket, err := dbclient.Client.Tickets.Get(ctx, acTicket.TicketId, acTicket.GuildId)
 			if err != nil {
 				logger.Error("Failed to fetch ticket for autoclose",
@@ -48,7 +47,6 @@ func ListenAutoClose(logger *zap.Logger) {
 				return
 			}
 
-			// get worker
 			worker, err := buildContext(ctx, ticket, cache.Client)
 			if err != nil {
 				logger.Error("Failed to build worker context for autoclose",

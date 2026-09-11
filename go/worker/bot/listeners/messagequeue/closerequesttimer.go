@@ -35,7 +35,6 @@ func ListenCloseRequestTimer(logger *zap.Logger) {
 				zap.Uint64("user_id", request.UserId),
 			)
 
-			// get ticket
 			ticket, err := dbclient.Client.Tickets.Get(ctx, request.TicketId, request.GuildId)
 			if err != nil {
 				logger.Error("Failed to fetch ticket",
@@ -47,7 +46,6 @@ func ListenCloseRequestTimer(logger *zap.Logger) {
 				return
 			}
 
-			// get worker
 			worker, err := buildContext(ctx, ticket, cache.Client)
 			if err != nil {
 				logger.Error("Failed to build worker context",

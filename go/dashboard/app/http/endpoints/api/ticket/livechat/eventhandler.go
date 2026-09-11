@@ -68,7 +68,6 @@ func (c *Client) handleAuthEvent(data AuthData) error {
 		return api.NewErrorWithMessage(http.StatusUnauthorized, err, "Invalid token data")
 	}
 
-	// Get the ticket
 	ticket, err := dbclient.Client.Tickets.Get(context.Background(), c.TicketId, c.GuildId)
 	if err != nil {
 		return api.NewErrorWithMessage(http.StatusInternalServerError, err, "Unable to load ticket. Please try again.")

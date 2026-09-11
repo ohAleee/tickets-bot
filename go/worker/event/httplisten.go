@@ -51,7 +51,6 @@ var successResponse = response{
 func HttpListen(redis *redis.Client, cache *cache.PgCache) {
 	router := gin.New()
 
-	// Middleware
 	router.Use(gin.Recovery())
 	router.Use(metricsMiddleware)
 

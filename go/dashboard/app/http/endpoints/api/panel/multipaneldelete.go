@@ -26,7 +26,6 @@ func MultiPanelDelete(c *gin.Context) {
 		return
 	}
 
-	// get bot context
 	botContext, err := botcontext.ContextForGuild(guildId)
 	if err != nil {
 		_ = c.AbortWithError(http.StatusInternalServerError, app.NewError(err, "Unable to connect to Discord. Please try again later."))

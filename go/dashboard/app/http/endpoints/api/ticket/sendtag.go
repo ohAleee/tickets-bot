@@ -35,7 +35,6 @@ func SendTag(ctx *gin.Context) {
 		return
 	}
 
-	// Get ticket ID
 	ticketId, err := strconv.Atoi(ctx.Param("ticketId"))
 	if err != nil {
 		ctx.JSON(400, utils.ErrorStr("Invalid ticket ID provided: %s", ctx.Param("ticketId")))
@@ -60,7 +59,6 @@ func SendTag(ctx *gin.Context) {
 		return
 	}
 
-	// Get ticket
 	ticket, err := dbclient.Client.Tickets.Get(ctx, ticketId, guildId)
 
 	// Verify the ticket exists
@@ -75,7 +73,6 @@ func SendTag(ctx *gin.Context) {
 		return
 	}
 
-	// Get tag
 	tag, ok, err := dbclient.Client.Tag.Get(ctx, guildId, body.TagId)
 	if err != nil {
 		ctx.JSON(500, utils.ErrorStr("Failed to fetch tag '%s' from database for guild %d", body.TagId, guildId))

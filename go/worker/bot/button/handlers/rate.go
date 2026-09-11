@@ -66,7 +66,6 @@ func (h *RateHandler) Execute(ctx *cmdcontext.ButtonContext) {
 
 	rating := uint8(ratingRaw)
 
-	// Get ticket
 	ticket, err := dbclient.Client.Tickets.Get(ctx, ticketId, guildId)
 	if err != nil {
 		ctx.HandleError(err)

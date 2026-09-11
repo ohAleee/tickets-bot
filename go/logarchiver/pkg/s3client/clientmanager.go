@@ -54,7 +54,6 @@ func (s *ShardedClientManager) Load(ctx context.Context) error {
 	s.clients = make(map[uuid.UUID]*S3Client)
 
 	for _, bucket := range buckets {
-		// Extract host from endpoint URL
 		host, err := extractHost(bucket.EndpointUrl)
 		if err != nil {
 			return err

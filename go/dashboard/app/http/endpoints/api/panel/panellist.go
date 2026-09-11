@@ -70,7 +70,6 @@ func ListPanels(c *gin.Context) {
 				mentions = append(mentions, "user")
 			}
 
-			// get if we should mention @here
 			shouldHereMention, err := dbclient.Client.PanelHereMention.ShouldMentionHere(c, p.PanelId)
 			if err != nil {
 				return err
@@ -80,7 +79,6 @@ func ListPanels(c *gin.Context) {
 				mentions = append(mentions, "here")
 			}
 
-			// get role mentions
 			roles, err := dbclient.Client.PanelRoleMentions.GetRoles(c, p.PanelId)
 			if err != nil {
 				return err

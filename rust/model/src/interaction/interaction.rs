@@ -47,20 +47,12 @@ impl TryFrom<u64> for InteractionType {
     }
 }
 
-// ============================================================================
-// Ping Interaction
-// ============================================================================
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PingInteraction {
     pub id: Snowflake,
     pub application_id: Snowflake,
     pub r#type: InteractionType,
 }
-
-// ============================================================================
-// Application Command Interaction
-// ============================================================================
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ApplicationCommandInteraction {
@@ -76,10 +68,6 @@ pub struct ApplicationCommandInteraction {
     pub version: u8,
     pub app_permissions: Option<PermissionBitSet>,
 }
-
-// ============================================================================
-// Message Component Interaction
-// ============================================================================
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MessageComponentInteraction {
@@ -101,10 +89,6 @@ pub struct MessageComponentInteractionData {
     pub component_type: ComponentType,
 }
 
-// ============================================================================
-// Auto Complete Interaction
-// ============================================================================
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ApplicationCommandAutoCompleteInteraction {
     pub id: Snowflake,
@@ -125,10 +109,6 @@ pub struct ApplicationCommandAutoCompleteInteractionData {
     pub options: Vec<ApplicationCommandInteractionDataOption>,
     pub r#type: ApplicationCommandType,
 }
-
-// ============================================================================
-// Modal Submit Interaction
-// ============================================================================
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ModalSubmitInteraction {

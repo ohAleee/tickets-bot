@@ -78,7 +78,6 @@ func ListenTicketClose() {
 				}
 			}
 
-			// Create worker context
 			workerCtx := &worker.Context{
 				Token:        token,
 				IsWhitelabel: botId != 0,

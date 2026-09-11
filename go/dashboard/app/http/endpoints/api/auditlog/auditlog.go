@@ -110,7 +110,6 @@ func GetAuditLogs(ctx *gin.Context) {
 		totalPages = 1
 	}
 
-	// Resolve usernames for all entries
 	usernames := resolveUsernames(ctx, entries)
 
 	responseEntries := make([]auditLogResponse, len(entries))

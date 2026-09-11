@@ -109,7 +109,6 @@ func (AutoSetupCommand) Execute(ctx registry.CommandContext) {
 		shouldEdit = false
 	}
 
-	// create category
 	categoryData := rest.CreateChannelData{
 		Name: "Tickets",
 		Type: channel.ChannelTypeGuildCategory,

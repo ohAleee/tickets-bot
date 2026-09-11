@@ -39,14 +39,12 @@
     let panels = [];
     let selectedPanel;
 
-    // Labels
     let labels = [];
     let selectedLabelIds = [];
     let showLabelManageModal = false;
     let showLabelEditor = false;
     let labelAssignDropdownTicketId = null;
 
-    // Permission level
     let isAdmin = false;
     $: {
         if ($permissionLevelCache[guildId]) {

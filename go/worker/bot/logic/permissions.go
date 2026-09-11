@@ -36,7 +36,6 @@ func HasPermissionForTicket(ctx context.Context, worker *worker.Context, ticket 
 		return IsAdminForGuild(ctx, worker, ticket.GuildId, userId)
 	}
 
-	// Get panel for ticket
 	var panel *database.Panel
 	if ticket.PanelId != nil {
 		tmp, err := dbclient.Client.Panel.GetById(ctx, *ticket.PanelId)

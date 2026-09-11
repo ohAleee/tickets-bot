@@ -208,7 +208,6 @@ RETURNING "id";
 		return 0, err
 	}
 
-	// Create fields
 	for _, field := range fields {
 		query := `
 INSERT INTO embed_fields(

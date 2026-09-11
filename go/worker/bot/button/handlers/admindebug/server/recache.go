@@ -80,7 +80,6 @@ func (h *AdminDebugServerRecacheHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	// Set the recache cooldown
 	if err := redis.SetRecacheCooldown(guildId, time.Second*30); err != nil {
 		ctx.HandleError(err)
 		return

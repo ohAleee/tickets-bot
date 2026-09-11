@@ -57,7 +57,6 @@ func (ClaimCommand) Execute(ctx registry.CommandContext) {
 		return
 	}
 
-	// Update the welcome message claim button
 	if err := logic.UpdateWelcomeMessageClaimButton(ctx, ctx.Worker(), ctx, ticket, true); err != nil {
 		ctx.HandleWarning(err)
 	}

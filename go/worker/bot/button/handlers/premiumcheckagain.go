@@ -31,7 +31,6 @@ func (h *PremiumCheckAgain) Properties() registry.Properties {
 }
 
 func (h *PremiumCheckAgain) Execute(ctx *context.ButtonContext) {
-	// Get permission level
 	permissionLevel, err := ctx.UserPermissionLevel(ctx)
 	if err != nil {
 		ctx.HandleError(err)

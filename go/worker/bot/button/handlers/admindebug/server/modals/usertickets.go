@@ -100,7 +100,6 @@ func (h *AdminDebugServerUserTicketsModalSubmitHandler) Execute(ctx *context.Mod
 		return
 	}
 
-	// Get all open tickets for the guild
 	allOpenTickets, err := dbclient.Client.Tickets.GetGuildOpenTickets(ctx, guildId)
 	if err != nil {
 		ctx.HandleError(err)

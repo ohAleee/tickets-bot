@@ -35,7 +35,6 @@ func (h *UnclaimHandler) Properties() registry.Properties {
 }
 
 func (h *UnclaimHandler) Execute(ctx *context.ButtonContext) {
-	// Get permission level
 	permissionLevel, err := ctx.UserPermissionLevel(ctx)
 	if err != nil {
 		ctx.HandleError(err)
@@ -66,7 +65,6 @@ func (h *UnclaimHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	// Get who claimed
 	whoClaimed, err := dbclient.Client.TicketClaims.Get(ctx, ctx.GuildId(), ticket.Id)
 	if err != nil {
 		ctx.HandleError(err)
@@ -90,7 +88,6 @@ func (h *UnclaimHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	// Get panel
 	var panel *database.Panel
 	if ticket.PanelId != nil {
 		tmp, err := dbclient.Client.Panel.GetById(ctx, *ticket.PanelId)
@@ -162,7 +159,6 @@ func (h *UnclaimHandler) Execute(ctx *context.ButtonContext) {
 		}
 	}
 
-	// Generate new channel name
 	newChannelName, err := logic.GenerateChannelName(ctx.Context, ctx.Worker(), panel, ticket.GuildId, ticket.Id, ticket.UserId, nil)
 	if err != nil {
 		ctx.HandleError(err)
@@ -196,7 +192,6 @@ func (h *UnclaimHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	// Update the welcome message claim button
 	if err := logic.UpdateWelcomeMessageClaimButton(ctx.Context, ctx.Worker(), ctx, ticket, false); err != nil {
 		ctx.HandleWarning(err)
 	}

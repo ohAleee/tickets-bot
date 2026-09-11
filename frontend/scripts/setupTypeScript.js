@@ -35,7 +35,6 @@ packageJSON.scripts = Object.assign(packageJSON.scripts, {
   "validate": "svelte-check"
 })
 
-// Write the package JSON
 fs.writeFileSync(path.join(projectRoot, "package.json"), JSON.stringify(packageJSON, null, "  "))
 
 // mv src/main.js to main.ts - note, we need to edit rollup.config.js for this too

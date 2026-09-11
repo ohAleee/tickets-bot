@@ -33,7 +33,6 @@ func ClaimTicket(ctx context.Context, cmd registry.CommandContext, ticket databa
 		return nil
 	}
 
-	// Get panel
 	var panel *database.Panel
 	if ticket.PanelId != nil {
 		tmp, err := dbclient.Client.Panel.GetById(ctx, *ticket.PanelId)
@@ -56,7 +55,6 @@ func ClaimTicket(ctx context.Context, cmd registry.CommandContext, ticket databa
 		return err
 	}
 
-	// Generate new channel name
 	newChannelName, err := GenerateChannelName(ctx, cmd.Worker(), panel, ticket.GuildId, ticket.Id, ticket.UserId, &userId)
 	if err != nil {
 		return err
@@ -103,7 +101,6 @@ func ClaimTicket(ctx context.Context, cmd registry.CommandContext, ticket databa
 
 // GenerateClaimedOverwrites If support reps can still view and type, returns (nil, nil)
 func GenerateClaimedOverwrites(ctx context.Context, worker *worker.Context, ticket database.Ticket, claimer uint64) ([]channel.PermissionOverwrite, error) {
-	// Get claim settings for guild
 	claimSettings, err := dbclient.Client.ClaimSettings.Get(ctx, ticket.GuildId)
 	if err != nil {
 		return nil, err
@@ -183,7 +180,6 @@ func GenerateClaimedOverwrites(ctx context.Context, worker *worker.Context, tick
 		return overwritesCantType(claimer, worker.BotId, ticket.UserId, ticket.GuildId, supportUsers, supportRoles, adminUsers, adminRoles, integrationRoleId, additionalPermissions), nil
 	}
 
-	// Unreachable
 	return nil, fmt.Errorf("unreachable code reached")
 }
 
@@ -333,7 +329,6 @@ func UpdateWelcomeMessageClaimButton(ctx context.Context, worker *worker.Context
 		return nil
 	}
 
-	// Get the welcome message
 	msg, err := worker.GetChannelMessage(*ticket.ChannelId, *ticket.WelcomeMessageId)
 	if err != nil {
 		return nil

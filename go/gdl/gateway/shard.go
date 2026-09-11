@@ -123,7 +123,6 @@ func (s *Shard) Connect() error {
 
 	s.WebSocket = conn
 
-	// Read hello
 	if err := s.read(); err != nil {
 		logrus.Warnf("shard %d: Error whilst reading Hello: %s", s.ShardId, err.Error())
 		s.Kill()
@@ -152,7 +151,6 @@ func (s *Shard) Connect() error {
 				break
 			}
 
-			// Read
 			if err := s.read(); err != nil {
 				logrus.Warnf("shard %d: Error whilst reading payload: %s", s.ShardId, err.Error())
 
@@ -187,7 +185,6 @@ func (s *Shard) identify() {
 		s.ShardManager.ShardOptions.Intents...,
 	)
 
-	// wait for ratelimit
 	if err := s.ShardManager.RateLimiter.IdentifyWait(s.ShardId); err != nil {
 		logrus.Warnf("shard %d: Error whilst waiting on identify ratelimit: %s", s.ShardId, err.Error())
 	}

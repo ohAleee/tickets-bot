@@ -163,7 +163,6 @@ func formatMembers(guildId uint64, userIds, roleIds []uint64) ([]entity, error) 
 		return nil, err
 	}
 
-	// sort
 	sort.Slice(data, func(i, j int) bool {
 		if data[i].Type == data[j].Type {
 			return data[i].Id < data[j].Id

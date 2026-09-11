@@ -164,7 +164,6 @@
     function hexToInt(hex) { return hex ? parseInt(hex.replace("#", ""), 16) : null; }
     function intToHex(n) { return "#" + ((n ?? 0) & 0xffffff).toString(16).padStart(6, "0"); }
 
-    // ---- new blocks ----
     function makeLeaf(type) {
         switch (type) {
             case "text": return { _id: newId(), type: "text", content: "" };
@@ -295,7 +294,6 @@
         if (enabled) data.components = blocks.map(toWire);
     }
 
-    // ---- import / export ----
     let ioText = "";
     let ioMsg = "";
     let ioErr = false;

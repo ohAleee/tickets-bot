@@ -241,7 +241,6 @@ func fetchCustomIntegrationPlaceholders(
 	ticket database.Ticket,
 	formAnswers map[string]*string,
 ) (map[string]string, error) {
-	// Custom integrations
 	guildIntegrations, err := dbclient.Client.CustomIntegrationGuilds.GetGuildIntegrations(ctx, ticket.GuildId)
 	if err != nil {
 		return nil, err
@@ -418,7 +417,6 @@ func doParameterizedSubstitutions(
 	worker *worker.Context,
 	ticket database.Ticket,
 ) string {
-	// Find all parameterized placeholder matches
 	matches := parameterizedPlaceholderRegex.FindAllStringSubmatchIndex(message, -1)
 	if len(matches) == 0 {
 		return message

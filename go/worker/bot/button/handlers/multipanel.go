@@ -46,7 +46,6 @@ func (h *MultiPanelHandler) Execute(ctx *context.SelectMenuContext) {
 			return
 		}
 
-		// Validate panel access
 		canProceed, outOfHoursTitle, outOfHoursWarning, outOfHoursColour, err := logic.ValidatePanelAccess(ctx, panel)
 		if err != nil {
 			ctx.HandleError(err)
